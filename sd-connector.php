@@ -40,8 +40,14 @@ defined( 'ABSPATH' ) or die ('not allowed to access this file');
 
 class SdConnector{
     function __construct() {
-        // generate a CPT
+
+    }
+
+    function register() {
+        // generate CPT for events
         add_action( 'init', array( $this, 'custom_post_type' ) );
+        // enqueue assets
+        add_action('wp_enqueue_scripts', array ( $this, 'enqueue'));
     }
 
     function activate(){
@@ -56,19 +62,21 @@ class SdConnector{
         flush_rewrite_rules();
     }
 
-    function uninstall(){
-        // delete CPT
-        // delete all the plugin data from the DB
-    }
-
     function custom_post_type() {
         register_post_type( 'sd_event', ['public' => true, 'label' => 'SD Events'] );
+    }
+
+    function enqueue(){
+        // enqueue scripts
+        wp_enqueue_style( 'sdstyle', plugins_url( '/assets/mystyle.css', __FILE__ ));
+        wp_enqueue_script( 'sdscript', plugins_url( '/assets/myscript.js', __FILE__ ));
     }
 }
 
 // check if class exists and create optject
 if (class_exists( 'SdConnector') ) {
     $sdPlugin = new SdConnector();
+    $sdPlugin->register();
 }
 
 // hooks
@@ -77,5 +85,3 @@ register_activation_hook(__FILE__, array( $sdPlugin, 'activate' ) );
 
 // deactivation hook for plugin
 register_deactivation_hook(__FILE__, array( $sdPlugin, 'deactivate' ) );
-
-// uninstall hook for plugin
