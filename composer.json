@@ -1,0 +1,20 @@
+{
+    "name": "seminardesk/sd-connector",
+    "description": "WordPress Plugin that brings SeminarDesk to Wordpress",
+    "type": "project",
+    "license": "GPLv2",
+    "authors": [
+        {
+            "name": "SeminarDesk",
+            "email": "info@seminardesk.de"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {"Inc\\": "./inc"}
+    },
+    "require-dev": {
+        "php-stubs/wordpress-stubs": "dev-master"
+    }
+}
