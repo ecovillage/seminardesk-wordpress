@@ -1,12 +1,13 @@
 <?php
+
 /**
- * @package SDCP
+ * @package SeminardeskPlugin
  */
 
 /*
-Plugin Name: SeminarDesk for Wordpress
-Plugin URI: https://www.seminardesk.com/sd-connector
-Description: First Prototyp of the SeminarDesk Connector Plugin
+Plugin Name: SeminarDesk for WordPress
+Plugin URI: https://www.seminardesk.com/wordpress
+Description: First Prototype of the SeminarDesk Connector Plugin
 Version: 1.0.0
 Author: SeminarDesk – Danker, Smaluhn & Tammen GbR
 Author URI: https://www.seminardesk.com/
@@ -15,7 +16,7 @@ Text Domain: seminardesk-connector
 */
 
 /*
-*Copyright 2020 by SeminarDesk and the contributors
+* Copyright 2020 by SeminarDesk and the contributors
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
@@ -32,56 +33,32 @@ Text Domain: seminardesk-connector
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-// security check if plugin trickered by wordpress
+// TODO: security checks to handel errors and return error messages
+
+// security check if plugin tricked by WordPress
 defined( 'ABSPATH' ) or die ('not allowed to access this file');
 
-// custom variables
-//define( 'SD_CONNECTOR_FILE', __FILE__ );
-
-class SdConnector{
-    function __construct() {
-
-    }
-
-    function register() {
-        // generate CPT for events
-        add_action( 'init', array( $this, 'custom_post_type' ) );
-        // enqueue assets
-        add_action('wp_enqueue_scripts', array ( $this, 'enqueue'));
-    }
-
-    function activate(){
-        // generate a CPT
-        $this->custom_post_type();
-        // flush rewrite rules
-        flush_rewrite_rules();
-    }
-
-    function deactivate(){
-        // flush  rewite rules
-        flush_rewrite_rules();
-    }
-
-    function custom_post_type() {
-        register_post_type( 'sd_event', ['public' => true, 'label' => 'SD Events'] );
-    }
-
-    function enqueue(){
-        // enqueue scripts
-        wp_enqueue_style( 'sdstyle', plugins_url( '/assets/mystyle.css', __FILE__ ));
-        wp_enqueue_script( 'sdscript', plugins_url( '/assets/myscript.js', __FILE__ ));
-    }
+// init composer autoload
+if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php') ) {
+    require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 }
 
-// check if class exists and create optject
-if (class_exists( 'SdConnector') ) {
-    $sdPlugin = new SdConnector();
-    $sdPlugin->register();
-}
+// global constant variables
+define( 'SD_PLUGIN_FILE', __FILE__ );
+define( 'SD_PLUGIN_PATH', plugin_dir_path( SD_PLUGIN_FILE ) );
+define( 'SD_PLUGIN_URL', plugin_dir_url( SD_PLUGIN_FILE ) );
+define( 'SD_PLUGIN', plugin_basename( SD_PLUGIN_FILE ) );
 
-// hooks
 // activation hook for plugin
-register_activation_hook(__FILE__, array( $sdPlugin, 'activate' ) );
+register_activation_hook( SD_PLUGIN_FILE, array( 'Inc\Base\Activate', 'activate' ) );
 
 // deactivation hook for plugin
-register_deactivation_hook(__FILE__, array( $sdPlugin, 'deactivate' ) );
+register_deactivation_hook( SD_PLUGIN_FILE, array( 'Inc\Base\Deactivate', 'deactivate' ) );
+
+// register services utilizing the init class
+if ( class_exists ( 'Inc\\Init' ) ) {
+    $services = new Inc\Init();
+    $services->register_services();
+    // alternative method to register services
+    // Inc\Init::register_services();
+}

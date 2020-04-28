@@ -3,7 +3,7 @@
 /**
 * Run this on Plugin uninstall
 *
-* @package SDCP
+* @package SeminardeskPlugin
 */
 
 // security check if unistall is trickered by wordpress
