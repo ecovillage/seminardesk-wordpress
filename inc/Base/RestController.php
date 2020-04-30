@@ -9,8 +9,6 @@ namespace Inc\Base;
 // TODO: review includes
 use WP_REST_Controller;
 use WP_REST_Server;
-use WP_Error;
-use WP_REST_Response;
 use Inc\Api\Callbacks\RestCallbacks;
 
 // TODO: error handling, implementation of WP_Error
@@ -28,19 +26,13 @@ use Inc\Api\Callbacks\RestCallbacks;
  */
 class RestController extends WP_REST_Controller
 {
-    /**
-     * namespace to build the routes
-     *
-     * @var string
-     */
-    protected $namespace = '';
 
     /**
      * base name to build a route
      *
      * @var string
      */
-    protected $base_webhook = '', $base_event = '', $base_date = '', $base_facilitator = '';
+    protected $base_webhook, $base_event, $base_date, $base_facilitator;
     
     function __construct()
     {

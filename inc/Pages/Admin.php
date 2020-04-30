@@ -43,7 +43,6 @@ class Admin
         
 		$this->settings->addPages( $this->pages )->withSubPage( 'General' )->addSubPages( $this->subpages )->register();
 		// $this->settings->addPages( $this->pages )->withSubPage( 'General' )->register();
-
     }
 
     /**

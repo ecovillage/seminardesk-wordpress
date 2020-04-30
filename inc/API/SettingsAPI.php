@@ -3,7 +3,7 @@
  * @package SeminardeskPlugin
  */
 
-namespace inc\API;
+namespace Inc\API;
 
 class SettingsAPI
 {
