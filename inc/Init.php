@@ -11,12 +11,6 @@ namespace Inc;
  */
 final class Init
 {
-
-    public function __construct(){
-        // register services utilizing the init class
-        // $this->register_services();
-    }
-
     /**
      * Store all the classes inside an array
      *
@@ -25,15 +19,15 @@ final class Init
     public static function get_services() 
     {
         return [
-            Pages\Admin::class,
-            Base\Enqueue::class,
-            Base\SettingsLinks::class,
-            Base\RestController::class,
-            Base\CustomFields::class,
-            Base\TemplateHandler::class,
-            CPT\CptEvents::class,
-            CPT\CptDates::class,
-            CPT\CptFacilitators::class,
+            new Pages\Admin(),
+            new Base\SettingsLinks(),
+            new Base\RestController(),
+            new Base\Enqueue(),
+            new Base\CustomFields(),
+            new Base\TemplateHandler(),
+            new CPT\CptEvents(),
+            new CPT\CptDates(),
+            new CPT\CptFacilitators(),
         ];
     }
 
@@ -45,24 +39,10 @@ final class Init
      */
     public static function register_services() 
     {
-         foreach (self::get_services() as $class) {
-             $service = self::instantiate( $class );
-             if ( method_exists( $service, 'register') ) {
-                 $service->register();
-             }
-         }
-    }
-
-    /**
-     * Initialize the class
-     *
-     * @param class $class      class from the services array
-     * @return class instance   new instance of the class
-     */
-    private static function instantiate( $class ) 
-    {
-        $service = new $class();
-        
-        return $service;
+        foreach (self::get_services() as $service) {
+            if ( method_exists( $service, 'register') ) {
+                $service->register();
+            }
+        }
     }
  }
