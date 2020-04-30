@@ -12,9 +12,9 @@ namespace Inc;
 final class Init
 {
     /**
-     * Store all the classes inside an array
+     * Store all the service classes inside an array
      *
-     * @return array    full list of classes
+     * @return array    full list of classes as a service
      */
     public static function get_services() 
     {

@@ -10,20 +10,28 @@ use Inc\CPT;
 final class Activate
 {
     /**
+     * Store all cpt classes inside an array
+     *
+     * @return array    full list of all CPTs
+     */
+    public static function get_cpts()
+    {
+        return [
+            new CPT\CptEvents(),
+            new CPT\CptDates(),
+            new CPT\CptFacilitators(),
+        ];
+    }
+
+    /**
      * code that runs during plugin activation
      *
      * @return void
      */
      public static function activate() 
      {
-        // Store all cpt classes inside an array
-        $cpts = [
-            new CPT\CptEvents(),
-            new CPT\CptDates(),
-            new CPT\CptFacilitators(),
-        ];
-
-        foreach ( $cpts as $cpt ){
+        // rewrites rules/premalinks on activation to include CPTs and its slugs
+        foreach ( self::get_cpts() as $cpt ){
             if ( method_exists( $cpt, 'create_cpt') ){
                 $cpt->create_cpt();
             }
