@@ -2,7 +2,7 @@
 /**
  * @package SeminardeskPlugin
  */
-namespace Inc\Api\Callbacks;
+namespace Inc\Base;
 
 use WP_Error;
 use WP_REST_Response;
@@ -10,7 +10,7 @@ use WP_REST_Response;
 /**
  * Callbacks for webhook actions
  */
-class WebhookCallbacks
+class WebhookHandler
 {
     /**
      * Create event via webhook from SeminarDesk

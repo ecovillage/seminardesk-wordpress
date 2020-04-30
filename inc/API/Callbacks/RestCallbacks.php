@@ -7,7 +7,7 @@ namespace Inc\Api\Callbacks;
 // TODO: review includes
 use WP_Error;
 use WP_REST_Response;
-use Inc\Api\Callbacks\WebhookCallbacks;
+use Inc\Base\WebhookHandler;
 
 /**
  * Callbacks for Rest API
@@ -135,7 +135,7 @@ class RestCallbacks{
      */
     public function create_webhooks($request)
     {
-        $action = new WebhookCallbacks;
+        $action = new WebhookHandler;
         $request_json = (array)$request->get_json_params(); // complete JSON data of the request#
         switch ($request_json['action']) {
             case 'event.create':
