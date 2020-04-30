@@ -6,7 +6,7 @@
 
 namespace Inc\Base;
 
-class TemplateController
+class TemplateHandler
 {
     public function register()
     {

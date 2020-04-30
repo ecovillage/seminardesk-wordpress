@@ -30,10 +30,10 @@ final class Init
             Base\SettingsLinks::class,
             Base\RestController::class,
             Base\CustomFields::class,
-            Base\TemplateController::class,
-            CPT\Events::class,
-            CPT\Dates::class,
-            CPT\Facilitators::class,
+            Base\TemplateHandler::class,
+            CPT\CptEvents::class,
+            CPT\CptDates::class,
+            CPT\CptFacilitators::class,
         ];
     }
 

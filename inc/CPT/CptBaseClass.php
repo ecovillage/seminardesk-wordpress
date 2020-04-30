@@ -3,12 +3,12 @@
  * @package SeminardeskPlugin
  */
 
-namespace Inc\Base;
+namespace Inc\CPT;
 
-// TODO: create modular cpt manager class (CPT API) to handel different CPTs (event, calender, facilitators)
+// TODO: 
 // TODO: implement and utilize shortcode [] to generate posts
 
-class CptController 
+abstract class CptBaseClass 
 {
     public $attr = [
         'name',
@@ -19,11 +19,22 @@ class CptController
     public $names;
     public $menu_position;
 
+    /**
+     * Define dynamic parameters of the unique custom post type
+     *
+     * @return void
+     */
+    abstract function set_parameters();
+
+    public function __construct()
+    {
+        $this->set_parameters();
+    }
+
     public function register()
     {
         $this->name = ucfirst($this->name);
         $this->names = ucfirst($this->names);
-        
 
         // register cpt in WordPress
         add_action( 'init', array( $this, 'create_cpt' ) );

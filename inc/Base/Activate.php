@@ -18,9 +18,9 @@ final class Activate
      {
         // Store all cpt classes inside an array
         $cpts = [
-            new CPT\Events(),
-            new CPT\Dates(),
-            new CPT\Facilitators(),
+            new CPT\CptEvents(),
+            new CPT\CptDates(),
+            new CPT\CptFacilitators(),
         ];
 
         foreach ( $cpts as $cpt ){

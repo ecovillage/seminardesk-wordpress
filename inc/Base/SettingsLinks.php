@@ -25,7 +25,7 @@ class SettingsLinks
      */
     public function settings_link( $links ) {
         $settings_link = '<a href="admin.php?page=seminardesk_plugin">Settings</a>';
-        array_push( $links, $settings_link );
+        array_unshift( $links, $settings_link );
         return $links;
     }
  }

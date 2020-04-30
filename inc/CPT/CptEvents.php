@@ -5,12 +5,10 @@
 
 namespace Inc\CPT;
 
-use Inc\Base\CptController;
-
-class Events extends CptController
+class CptEvents extends CptBaseClass
 {
     //define parameters of the custom post type
-    public function __construct()
+    public function set_parameters()
     {
         $this->name = 'Event';
         $this->names = 'Events';

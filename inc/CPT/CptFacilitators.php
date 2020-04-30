@@ -5,12 +5,10 @@
 
 namespace Inc\CPT;
 
-use Inc\Base\CptController;
-
-class Facilitators extends CptController
+class CptFacilitators extends CptBaseClass
 {
     //define parameters of the custom post type
-    public function __construct()
+    public function set_parameters()
     {
         $this->name = 'Facilitator';
         $this->names = 'Facilitators';

@@ -5,12 +5,9 @@
 
 namespace Inc\CPT;
 
-use Inc\Base\CptController;
-
-class Dates extends CptController
+class CptDates extends CptBaseClass
 {
-    //define parameters of the custom post type
-    public function __construct()
+    public function set_parameters()
     {
         $this->name = 'Date';
         $this->names = 'Dates';
