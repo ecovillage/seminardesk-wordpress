@@ -5,6 +5,7 @@
 namespace Inc\Api\Callbacks;
 
 use WP_Error;
+use WP_REST_Response;
 
 /**
  * Callbacks for webhook actions
@@ -168,7 +169,76 @@ class WebhookCallbacks
      */
     public function event_date_create($request_json)
     {   
-        return new WP_Error('not_implemented', 'action ' . $request_json['action'] . ' not implemented yet', array('status' => 404));
+        $payload = (array)$request_json['payload'];
+
+        // check if associated event exists
+        $posts = get_posts([
+            'numberposts' => -1, // all events
+            'post_type' => 'sd_event',
+            'post_status' => 'any',
+        ],);
+        foreach ($posts as $current) {
+            if ( $current->event_id == $payload['eventId']){
+                $event = $current;
+                // return new WP_REST_Response('associated event with the ID ' . $payload['eventId'] . ' exists', 200);
+                break;
+            }
+        }
+        if (!isset($event)){
+            return new WP_Error('not_found' ,'associated event with the ID ' . $payload['eventId'] . ' does not exist', 404);
+        }
+
+         // define metadata of the new sd_event
+         $meta = [
+            'date_id'       => $payload['id'],
+            'event_id'      => $payload['eventId'],
+            'status'        => $payload['status'],
+            'begin_date'    => $payload['beginDate'],
+            'end_date'      => $payload['endDate'],
+            'facilitators'  => [null],
+            'has_board'     => $payload['hasBoard'],
+            'has_lodging'   => $payload['hasLodging'],
+            'has_misc'      => $payload['hasMisc'],
+            'price_info'    => $payload['priceInfo']['0']['value'],
+            'venue'         => $payload['priceInfo']['name'],
+            'json_dump'     => $request_json,
+        ];
+
+        // define attributes of the new sd_event using $payload of the 
+        $event_attr = [
+            'post_type'     => 'sd_date',
+            'post_title'    => $payload['title']['0']['value'],
+            'post_content'  => $event->post_content,
+            'post_excerpt'  => $event->post_excerpt,
+            'post_author'   => get_current_user_id(),
+            'post_status'   => 'publish',
+            'meta_input'    => $meta,
+        ];
+
+        // create new event in the WordPress database
+        $post_id = wp_insert_post(wp_slash($event_attr), true);
+
+        // return error if $post_id is of type WP_Error
+        if (is_wp_error($post_id)){
+            return $post_id;
+        }
+
+        // upload image and set us featured image for the new event#
+        // TODO: create an own class for this
+        require_once(ABSPATH . 'wp-admin/includes/media.php');
+        require_once(ABSPATH . 'wp-admin/includes/file.php');
+        require_once(ABSPATH . 'wp-admin/includes/image.php');
+        $img_url = $payload['teaserPictureUrl']['0']['value'];
+        $img_id = media_handle_sideload(
+            [
+                'name' => basename($img_url),
+                'tmp_name' => download_url( $payload['teaserPictureUrl']['0']['value'] ),
+            ]
+        );
+        set_post_thumbnail($post_id, $img_id);
+        
+        $eventDate = get_post($post_id);
+        return $eventDate;
     }
 
     /**
