@@ -26,7 +26,7 @@ class WebhookHandler
         // $posts = get_posts([
         //     'numberposts' => -1, // all events
         //     'post_type' => 'sd_event',
-        //     'post_status' => 'any',
+        //     'post_status' => 'publish',
         // ],);
         // foreach ($posts as $current) {
         //     if ( $current->event_id == $payload['id']){
@@ -102,7 +102,7 @@ class WebhookHandler
         $events = get_posts([
             'numberposts' => -1, // all events
             'post_type' => 'sd_event',
-            'post_status' => 'any',
+            'post_status' => 'publish',
         ],);
         foreach ($events as $current) {
             if ( $current->event_id == $payload['id']){
@@ -112,7 +112,7 @@ class WebhookHandler
         }
 
         if ( !isset($post_id) ){
-            return new WP_Error('no_event', 'Event not updated. Event ID ' . $payload['id'] . ' does not exists', array('status' => 404));
+            return new WP_Error('no_post', 'Event not updated. Event ID ' . $payload['id'] . ' does not exists', array('status' => 404));
         }
 
         // define metadata of the new sd_event
@@ -121,6 +121,8 @@ class WebhookHandler
             'json_dump' => $request_json,
         ];
 
+        // TODO: update of corresponding event dates if title, content, excerpt ..... is changed!?
+          
         // define attributes of the new sd_event using $payload of the 
         $event_attr = [
             'ID'            => $post_id,
@@ -165,26 +167,25 @@ class WebhookHandler
      * Undocumented function
      *
      * @param Array $request_json
-     * @return WP_REST_Response|WP_Error
+     * @return WP_Post|WP_Error
      */
     public function event_date_create($request_json)
     {   
         $payload = (array)$request_json['payload'];
 
-        // check if associated event exists
+        // check if with event date associated event exists
         $posts = get_posts([
             'numberposts' => -1, // all events
             'post_type' => 'sd_event',
-            'post_status' => 'any',
+            'post_status' => 'publish',
         ],);
         foreach ($posts as $current) {
             if ( $current->event_id == $payload['eventId']){
-                $event = $current;
-                // return new WP_REST_Response('associated event with the ID ' . $payload['eventId'] . ' exists', 200);
+                $event_post_id = $current->ID;
                 break;
             }
         }
-        if (!isset($event)){
+        if (!isset($event_post_id)){
             return new WP_Error('not_found' ,'associated event with the ID ' . $payload['eventId'] . ' does not exist', 404);
         }
 
@@ -192,6 +193,7 @@ class WebhookHandler
          $meta = [
             'date_id'       => $payload['id'],
             'event_id'      => $payload['eventId'],
+            'event_wp_id'   => $event_post_id,
             'status'        => $payload['status'],
             'begin_date'    => $payload['beginDate'],
             'end_date'      => $payload['endDate'],
@@ -200,7 +202,7 @@ class WebhookHandler
             'has_lodging'   => $payload['hasLodging'],
             'has_misc'      => $payload['hasMisc'],
             'price_info'    => $payload['priceInfo']['0']['value'],
-            'venue'         => $payload['priceInfo']['name'],
+            'venue'         => $payload['venue']['name'],
             'json_dump'     => $request_json,
         ];
 
@@ -208,8 +210,8 @@ class WebhookHandler
         $event_attr = [
             'post_type'     => 'sd_date',
             'post_title'    => $payload['title']['0']['value'],
-            'post_content'  => $event->post_content,
-            'post_excerpt'  => $event->post_excerpt,
+            'post_content'  => $payload['description']['0']['value'],
+            'post_excerpt'  => $payload['teaser']['0']['value'],
             'post_author'   => get_current_user_id(),
             'post_status'   => 'publish',
             'meta_input'    => $meta,
@@ -237,8 +239,7 @@ class WebhookHandler
         );
         set_post_thumbnail($post_id, $img_id);
         
-        $eventDate = get_post($post_id);
-        return $eventDate;
+        return new WP_REST_Response( 'Event Data ' . $payload['id'] . ' created', 200);
     }
 
     /**
@@ -249,7 +250,70 @@ class WebhookHandler
      */
     public function event_date_update($request_json)
     {   
-        return new WP_Error('not_implemented', 'action ' . $request_json['action'] . ' not implemented yet', array('status' => 404));
+        $payload = (array)$request_json['payload'];
+
+        // checks if event date exists
+        $dates = get_posts([
+            'numberposts' => -1,
+            'post_type' => 'sd_date',
+            'post_status' => 'publish',
+        ],);
+        foreach ($dates as $current) {
+            if ( $current->date_id == $payload['id']){
+                $dates_post_id = $current->ID;
+                break;
+            }
+        }
+
+        if ( !isset($dates_post_id) ){
+            return new WP_Error('no_post', 'Event date not updated. Event date ID ' . $payload['id'] . ' does not exists', array('status' => 404));
+        }
+
+        // define metadata of the new sd_event
+        $meta = [
+            'date_id'       => $payload['id'],
+            'event_id'      => $payload['eventId'],
+            // 'event_wp_id' // not updated
+            'status'        => $payload['status'],
+            'begin_date'    => $payload['beginDate'],
+            'end_date'      => $payload['endDate'],
+            'facilitators'  => [null],
+            'has_board'     => $payload['hasBoard'],
+            'has_lodging'   => $payload['hasLodging'],
+            'has_misc'      => $payload['hasMisc'],
+            'price_info'    => $payload['priceInfo']['0']['value'],
+            'venue'         => $payload['venue']['name'],
+            'json_dump'     => $request_json,
+        ];
+
+        // define attributes of the new sd_event using $payload of the 
+        $event_attr = [
+            'ID'            => $dates_post_id,
+            'post_type'     => 'sd_date',
+            'post_title'    => $payload['title']['0']['value'],
+            'post_content'  => $payload['description']['0']['value'],
+            'post_excerpt'  => $payload['teaser']['0']['value'],
+            'post_author'   => get_current_user_id(),
+            'post_status'   => 'publish',
+            'meta_input'    => $meta,
+        ];
+
+        // Update event data in the database
+        $dates_post_id = wp_update_post( wp_slash($event_attr), true );
+
+        // return error if $post_id is of type WP_Error
+        if (is_wp_error($dates_post_id)){
+            return $dates_post_id;
+        }
+
+        // get updated event via post id and return it
+        $event = get_post($dates_post_id);
+
+        $response = [
+            'message' => ''
+        ];
+
+        return new WP_REST_Response( 'Event Data ' . $payload['id'] . ' updated', 200);
     }
 
     /**
@@ -260,7 +324,33 @@ class WebhookHandler
      */
     public function event_date_delete($request_json)
     {   
-        return new WP_Error('not_implemented', 'action ' . $request_json['action'] . ' not implemented yet', array('status' => 404));
+        $payload = (array)$request_json['payload'];
+
+        $event_dates = get_posts([
+            'numberposts' => -1, // all events
+            'post_type' => 'sd_date',
+            'post_status' => 'publish',
+        ],);
+        foreach ($event_dates as $current) {
+            if ( $current->date_id == $payload['id']){
+                $date_id = $current->date_id; 
+                $post_id = $current->ID;
+                break;
+            }
+        }
+        if ( !isset($date_id) ){
+            return Err::no_post($payload['id']);
+        }
+        $post_deleted = wp_trash_post($post_id);
+
+        if ( !isset($post_deleted) ){
+            return Err::no_post($payload['id']);
+            // return new WP_Error('no_post', 'Nothing to delete. Event date ID ' . $payload['id'] . ' does not exists', array('status' => 404));
+        }
+
+        // TODO: security if WP_Post/Post_type correct which is returned by wp_trash_post
+        // TODO: add status/action deleted http status code 200 (OK) not 201 (created)
+        return new WP_REST_Response( 'Event Data ' . $payload['id'] . ' moved to trash', 200);
     }
     
     /**
