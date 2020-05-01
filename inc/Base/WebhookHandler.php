@@ -145,9 +145,11 @@ class WebhookHandler
             return $post_id;
         }
 
+        // TODO: Update thumbnail
+
         // get updated event via post id and return it
         $event = get_post($post_id);
-        return $event;
+        return new WP_REST_Response( 'Event ' . $payload['id'] . ' updated', 200);
     }
 
     /**
@@ -158,13 +160,35 @@ class WebhookHandler
      */
     public function event_delete($request_json)
     {
-        // TODO: Instead of delete just deactivate flag to not show in event overview... 
-        // TODO: Delete also all dates associated with this event
-        return new WP_Error('not_implemented', 'Update event method not implemented yet', array('status' => 400));
+        // TODO: Delete also all dates associated with this event???
+        $payload = (array)$request_json['payload'];
+
+        $events = get_posts([
+            'numberposts' => -1, // all events
+            'post_type' => 'sd_event',
+            'post_status' => 'publish',
+        ],);
+        foreach ($events as $current) {
+            if ( $current->event_id == $payload['id']){
+                $date_id = $current->event_id; 
+                $post_id = $current->ID;
+                break;
+            }
+        }
+        if ( !isset($date_id) ){
+            return Err::no_post($payload['id']);
+        }
+        $post_deleted = wp_trash_post($post_id);
+
+        if ( !isset($post_deleted) ){
+            return Err::no_post($payload['id']);
+            // return new WP_Error('no_post', 'Nothing to delete. Event date ID ' . $payload['id'] . ' does not exists', array('status' => 404));
+        }
+        return new WP_REST_Response( 'Event ' . $payload['id'] . ' moved to trash', 200);
     }
 
     /**
-     * Undocumented function
+     * Create event date via webhook from SeminarDesk
      *
      * @param Array $request_json
      * @return WP_Post|WP_Error
@@ -243,7 +267,7 @@ class WebhookHandler
     }
 
     /**
-     * Undocumented function
+     * Update event date via webhook from SeminarDesk
      *
      * @param Array $request_json
      * @return WP_REST_Response|WP_Error
@@ -306,18 +330,16 @@ class WebhookHandler
             return $dates_post_id;
         }
 
+        // TODO: Update thumbnail
+
         // get updated event via post id and return it
         $event = get_post($dates_post_id);
-
-        $response = [
-            'message' => ''
-        ];
 
         return new WP_REST_Response( 'Event Data ' . $payload['id'] . ' updated', 200);
     }
 
     /**
-     * Undocumented function
+     * Delete event date via webhook from SeminarDesk
      *
      * @param Array $request_json
      * @return WP_REST_Response|WP_Error
@@ -354,7 +376,7 @@ class WebhookHandler
     }
     
     /**
-     * Undocumented function
+     * Create facilitator event via webhook from SeminarDesk
      *
      * @param Array $request_json
      * @return WP_REST_Response|WP_Error
@@ -365,7 +387,7 @@ class WebhookHandler
     }
 
     /**
-     * Undocumented function
+     * Update facilitator event via webhook from SeminarDesk
      *
      * @param Array $request_json
      * @return WP_REST_Response|WP_Error
@@ -376,7 +398,7 @@ class WebhookHandler
     }
 
     /**
-     * Undocumented function
+     * Delete facilitator event via webhook from SeminarDesk
      *
      * @param Array $request_json
      * @return WP_REST_Response|WP_Error
