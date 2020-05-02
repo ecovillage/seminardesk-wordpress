@@ -16,7 +16,7 @@ class WebhookHandler
      * Create event via webhook from SeminarDesk
      *
      * @param Array $request_json 
-     * @return WP_Post|WP_Error
+     * @return WP_REST_Response|WP_Error
      */
     public function event_create($request_json)
     {
@@ -61,17 +61,8 @@ class WebhookHandler
             return $post_id;
         }
 
-        // update metadata of CPT sd_event
-        // $event_update = [
-        //   'ID' => $event_id,
-        //   'meta_input' => [
-        //     'xp' => 456,
-        //   ],
-        // ];
-        // wp_update_post($event_update);
-
         // upload image and set us featured image for the new event#
-        // TODO: create an own class for this
+        // TODO: create method or class for this kind
         require_once(ABSPATH . 'wp-admin/includes/media.php');
         require_once(ABSPATH . 'wp-admin/includes/file.php');
         require_once(ABSPATH . 'wp-admin/includes/image.php');
@@ -84,8 +75,7 @@ class WebhookHandler
         );
         set_post_thumbnail($post_id, $img_id);
 
-        $event = get_post($post_id);
-        return $event;
+        return new WP_REST_Response( 'Event ' . $payload['id'] . ' created', 200);
     }
 
     /**
@@ -147,8 +137,6 @@ class WebhookHandler
 
         // TODO: Update thumbnail
 
-        // get updated event via post id and return it
-        $event = get_post($post_id);
         return new WP_REST_Response( 'Event ' . $payload['id'] . ' updated', 200);
     }
 
@@ -199,7 +187,7 @@ class WebhookHandler
 
         // check if with event date associated event exists
         $posts = get_posts([
-            'numberposts' => -1, // all events
+            'numberposts' => -1,
             'post_type' => 'sd_event',
             'post_status' => 'publish',
         ],);
@@ -284,12 +272,12 @@ class WebhookHandler
         ],);
         foreach ($dates as $current) {
             if ( $current->date_id == $payload['id']){
-                $dates_post_id = $current->ID;
+                $post_id = $current->ID;
                 break;
             }
         }
 
-        if ( !isset($dates_post_id) ){
+        if ( !isset($post_id) ){
             return new WP_Error('no_post', 'Event date not updated. Event date ID ' . $payload['id'] . ' does not exists', array('status' => 404));
         }
 
@@ -312,7 +300,7 @@ class WebhookHandler
 
         // define attributes of the new sd_event using $payload of the 
         $event_attr = [
-            'ID'            => $dates_post_id,
+            'ID'            => $post_id,
             'post_type'     => 'sd_date',
             'post_title'    => $payload['title']['0']['value'],
             'post_content'  => $payload['description']['0']['value'],
@@ -323,17 +311,17 @@ class WebhookHandler
         ];
 
         // Update event data in the database
-        $dates_post_id = wp_update_post( wp_slash($event_attr), true );
+        $post_id = wp_update_post( wp_slash($event_attr), true );
 
         // return error if $post_id is of type WP_Error
-        if (is_wp_error($dates_post_id)){
-            return $dates_post_id;
+        if (is_wp_error($post_id)){
+            return $post_id;
         }
 
         // TODO: Update thumbnail
 
         // get updated event via post id and return it
-        $event = get_post($dates_post_id);
+        $event = get_post($post_id);
 
         return new WP_REST_Response( 'Event Data ' . $payload['id'] . ' updated', 200);
     }
@@ -383,7 +371,49 @@ class WebhookHandler
      */
     public function facilitator_create($request_json)
     {
-        return new WP_Error('not_implemented', 'action ' . $request_json['action'] . ' not implemented yet', array('status' => 404));
+        $payload = (array)$request_json['payload'];
+
+        // define metadata of the new sd_facilitator
+        $meta = [
+            'facilitator_id'    =>  $payload['id'],
+            'facilitator_name'  =>  $payload['name'],
+            'json_dump' => $request_json,
+        ];
+
+        
+        // define attributes of the new sd_event using $payload of the 
+        $facilitator_attr = [
+            'post_type'     => 'sd_facilitator',
+            'post_title'    =>  $payload['name'],
+            'post_content'  => $payload['about']['0']['value'],
+            // 'post_excerpt'  => $payload['teaser']['0']['value'],
+            'post_author'   => get_current_user_id(),
+            'post_status'   => 'publish',
+            'meta_input'    => $meta,
+        ];
+
+        $post_id = wp_insert_post(wp_slash($facilitator_attr), true);
+
+        // return error if $post_id is of type WP_Error
+        if (is_wp_error($post_id)){
+            return $post_id;
+        }
+
+        // upload image and set us featured image for the new event#
+        // TODO: create an own class for this
+        require_once(ABSPATH . 'wp-admin/includes/media.php');
+        require_once(ABSPATH . 'wp-admin/includes/file.php');
+        require_once(ABSPATH . 'wp-admin/includes/image.php');
+        $img_url = $payload['teaserPictureUrl']['0']['value'];
+        $img_id = media_handle_sideload(
+            [
+                'name' => basename($img_url),
+                'tmp_name' => download_url( $payload['teaserPictureUrl']['0']['value'] ),
+            ]
+        );
+        set_post_thumbnail($post_id, $img_id);
+
+        return new WP_REST_Response( 'Facilitator ' . $payload['id'] . ' created', 200);
     }
 
     /**
@@ -394,7 +424,55 @@ class WebhookHandler
      */
     public function facilitator_update($request_json)
     {
-        return new WP_Error('not_implemented', 'action ' . $request_json['action'] . ' not implemented yet', array('status' => 404));
+        $payload = (array)$request_json['payload'];
+        
+        $facilitator = get_posts([
+            'numberposts' => -1, // all events
+            'post_type' => 'sd_facilitator',
+            'post_status' => 'publish',
+        ],);
+        foreach ($facilitator as $current) {
+            if ( $current->facilitator_id == $payload['id']){
+                $post_id = $current->ID;
+                break;
+            }
+        }
+
+        if ( !isset($post_id) ){
+            return new WP_Error('no_post', 'Facilitator not updated. Facilitator ID ' . $payload['id'] . ' does not exists', array('status' => 404));
+        }
+
+         // define metadata of the new sd_facilitator
+         $meta = [
+            'facilitator_id'    =>  $payload['id'],
+            'facilitator_name'  =>  $payload['name'],
+            'json_dump' => $request_json,
+        ];
+
+        
+        // define attributes of the new sd_event using $payload of the 
+        $facilitator_attr = [
+            'ID'            => $post_id,
+            'date_id'       => $payload['id'],
+            'post_title'    =>  $payload['name'],
+            'post_content'  => $payload['about']['0']['value'],
+            // 'post_excerpt'  => $payload['teaser']['0']['value'],
+            'post_author'   => get_current_user_id(),
+            'post_status'   => 'publish',
+            'meta_input'    => $meta,
+        ];
+
+         // Update event data in the database
+         $post_id = wp_update_post( wp_slash($facilitator_attr), true );
+
+         // return error if $post_id is of type WP_Error
+         if (is_wp_error($post_id)){
+             return $post_id;
+         }
+
+        // TODO: Update thumbnail
+
+        return new WP_REST_Response( 'Facilitator ' . $payload['id'] . ' updated', 200);
     }
 
     /**
@@ -405,6 +483,32 @@ class WebhookHandler
      */
     public function facilitator_delete($request_json)
     {
-        return new WP_Error('not_implemented', 'action ' . $request_json['action'] . ' not implemented yet', array('status' => 404));
+        $payload = (array)$request_json['payload'];
+
+        $facilitator = get_posts([
+            'numberposts' => -1, // all events
+            'post_type' => 'sd_facilitator',
+            'post_status' => 'publish',
+        ],);
+        foreach ($facilitator as $current) {
+            if ( $current->facilitator_id == $payload['id']){
+                $date_id = $current->facilitator_id; 
+                $post_id = $current->ID;
+                break;
+            }
+        }
+        if ( !isset($date_id) ){
+            return Err::no_post($payload['id']);
+        }
+        $post_deleted = wp_trash_post($post_id);
+
+        if ( !isset($post_deleted) ){
+            return Err::no_post($payload['id']);
+            // return new WP_Error('no_post', 'Nothing to delete. Event date ID ' . $payload['id'] . ' does not exists', array('status' => 404));
+        }
+
+        return new WP_REST_Response( 'Facilitator ' . $payload['id'] . ' moved to trash', 200);
+
+        // return new WP_Error('not_implemented', 'action ' . $request_json['action'] . ' not implemented yet', array('status' => 404));
     }
 }
