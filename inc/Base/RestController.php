@@ -13,8 +13,6 @@ use Inc\Api\Callbacks\RestCallbacks;
 
 // TODO: error handling, implementation of WP_Error
 //         - return client error 400, if payload doesn't include required fields
-// TODO: POST endpoint
-//        - define required fields 
 // TODO: permission check
 // TODO: handle scheme and it's callbacks proper
 // TODO: guaranty unique IDs ... evaluate ids before executing POST, update and delete request request_id, event_id, date_id, facilitator_id
@@ -80,11 +78,51 @@ class RestController extends WP_REST_Controller
             ),
         ),);
 
-        // Event ID route registration to get specific event
-        register_rest_route($this->namespace, '/' . $this->base_event . '/(?P<event_id>[a-z0-9]+)', array(
+        // Event route registration to get specific event
+        register_rest_route($this->namespace, '/' . $this->base_event . '/(?P<event_id>[0-9]+)', array(
             array(
                 'methods'             => WP_REST_Server::READABLE,
                 'callback'            => array($rest, 'get_event'),
+                'permission_callback' => array($rest, 'check_permissions'),
+                // 'args'                => $this->get_endpoint_args_for_item_schema( true ),
+            ),
+        ),);
+
+        // Event date route registration to get all event dates
+        register_rest_route($this->namespace, '/' . $this->base_date, array(
+            array(
+                'methods'             => WP_REST_Server::READABLE,
+                'callback'            => array($rest, 'get_dates'),
+                'permission_callback' => array($rest, 'check_permissions'),
+                // 'args'                => array(),
+            ),
+        ),);
+
+        // Event date route registration to get specific event date
+        register_rest_route($this->namespace, '/' . $this->base_date . '/(?P<date_id>[0-9]+)', array(
+            array(
+                'methods'             => WP_REST_Server::READABLE,
+                'callback'            => array($rest, 'get_date'),
+                'permission_callback' => array($rest, 'check_permissions'),
+                // 'args'                => $this->get_endpoint_args_for_item_schema( true ),
+            ),
+        ),);
+
+        // Facilitator route registration to get all facilitators
+        register_rest_route($this->namespace, '/' . $this->base_facilitator, array(
+            array(
+                'methods'             => WP_REST_Server::READABLE,
+                'callback'            => array($rest, 'get_facilitators'),
+                'permission_callback' => array($rest, 'check_permissions'),
+                // 'args'                => array(),
+            ),
+        ),);
+
+        // Facilitator route registration to get specific facilitator
+        register_rest_route($this->namespace, '/' . $this->base_facilitator . '/(?P<facilitator_id>[a-z0-9]+)', array(
+            array(
+                'methods'             => WP_REST_Server::READABLE,
+                'callback'            => array($rest, 'get_facilitator'),
                 'permission_callback' => array($rest, 'check_permissions'),
                 // 'args'                => $this->get_endpoint_args_for_item_schema( true ),
             ),

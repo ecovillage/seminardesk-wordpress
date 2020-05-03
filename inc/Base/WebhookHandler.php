@@ -171,7 +171,7 @@ class WebhookHandler
             return new WP_Error('not_found' ,'associated event with the ID ' . $payload['eventId'] . ' does not exist', 404);
         }
 
-         // define metadata of the new sd_event
+         // define metadata of the new sd_event_date
          $meta = [
             'date_id'       => $payload['id'],
             'event_id'      => $payload['eventId'],
@@ -188,7 +188,7 @@ class WebhookHandler
             'json_dump'     => $request_json,
         ];
 
-        // define attributes of the new sd_event using $payload of the 
+        // define attributes of the new sd_event_date using $payload of the 
         $event_attr = [
             'post_type'     => 'sd_date',
             'post_title'    => $payload['title']['0']['value'],

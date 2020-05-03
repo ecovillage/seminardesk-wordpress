@@ -31,56 +31,46 @@ class RestCallbacks{
     }
 
     /**
-     * Get event via event id
+     * Get specific post of a custom post type via sd_id
      *
      * @param WP_REST_Request $request
      * @return WP_REST_Response|WP_Error
      */
-    public function get_event($request)
-    {
-        // invalid ID format returns WP_Error
-        $requested_event_id = strtolower($request['event_id']);
-        if ( strlen( $requested_event_id ) != 32 ){
-            return new WP_Error('invalid_format', 'The requested event ID ' . $requested_event_id . 'does not consists of 32 characters', array('status' => 400));
-        }
-
-        // get event with requested event id 
-        $events = get_posts([
-            'numberposts' => -1, // all events
-            'post_type' => 'sd_event',
-            'post_status' => 'any',
+    public function get_custom_post($post_type, $sd_id)
+    { 
+        $posts = get_posts([
+            'numberposts' => -1,
+            'post_type' => $post_type,
+            'post_status' => 'publish',
         ],);
-        foreach ($events as $current) {
-            $current_event_id = $current->event_id;
-            if ( $current_event_id == $requested_event_id){
-                $event = $current;
+        $sd_id_mth = str_replace('sd_', '', $post_type) . '_id';
+        foreach ($posts as $current) {
+            $current_id = $current->$sd_id_mth;
+            if ( $current_id == $sd_id){
+                $post = $current;
                 break;
             }
         }
  
-        // no event with event id found, return WP_Error
-        if ( empty( $event ) ) {
-            return new WP_Error('no_event', 'Requested event ID ' .$requested_event_id . ' does not exist', array('status' => 404));
+        if ( empty( $post ) ) {
+            return new WP_Error('no_post', 'Requested ID ' .$sd_id . ' does not exist', array('status' => 404));
         }
 
-        // create response data for the event
-        $response = $this->get_event_attr($event);
-
-        // return event response data.
+        $response = $this->get_custom_post_attr($post);
         return rest_ensure_response($response);
     }
-
+    
     /**
-    * Get all events
+    * Get all posts of a custom post type
     *
     * @param WP_REST_Request $request
     * @return WP_REST_Response|WP_Error
     */
-    public function get_events($request)
+    public function get_custom_posts($post_type)
     {
         $args = [
             'numberposts' => -1, // all events
-            'post_type' => 'sd_event',
+            'post_type' => $post_type,
             'post_status' => 'any',
         ];
 
@@ -95,35 +85,90 @@ class RestCallbacks{
         foreach ( $posts as $current ) {
             // get event attributes and add to $response of the endpoint
             // TODO: get_event review
-            $event_attr = $this->get_event_attr( $current );
-            array_push( $response, $event_attr );
+            $post_attr = $this->get_custom_post_attr( $current );
+            array_push( $response, $post_attr );
         }
         return rest_ensure_response( $response );
     }
 
-    public function get_event_attr($post)
+    /**
+     * get post attributes of corresponding custom post type
+     * 
+     * @param WP_Post $post
+     * @return Array|Null post attributes
+     */
+    public function get_custom_post_attr($post)
     {
-        $event_attr = [
-            'post_id'           => $post->ID,
-            'event_id'          => $post->event_id,
-            'title'             => $post->post_title,
-            'content'           => $post->post_content,
-            'excerpt'           => $post->post_excerpt,
-            'name'              => $post->post_name,
-            'slug'              => $post->post_name,
-            'link'              => get_post_permalink($post->ID),
-            'status'            => $post->post_status,
-            'type'              => $post->post_type,
-            'author'            => get_the_author_meta( 'display_name', $post->post_author),
-            'parent'            => $post->post_parent,
-            'featured_image'    => [
-                'thumbnail' => get_the_post_thumbnail_url($post->ID, 'thumbnail'),
-                'medium'    => get_the_post_thumbnail_url($post->ID, 'medium'),
-                'large'     => get_the_post_thumbnail_url($post->ID, 'large'),
-            ],
-            'json_dump'         => $post->json_dump, // get metadata 'json_dump'
-        ];
-        // return response for a single event
+        switch ($post->post_type) {
+            case 'sd_event':
+                $event_attr = [
+                    'post_id'           => $post->ID,
+                    'event_id'          => $post->event_id,
+                    'title'             => $post->post_title,
+                    'content'           => $post->post_content,
+                    'excerpt'           => $post->post_excerpt,
+                    'slug'              => $post->post_name,
+                    'link'              => get_post_permalink($post->ID),
+                    'status'            => $post->post_status,
+                    'author'            => get_the_author_meta( 'display_name', $post->post_author),
+                    'featured_image'    => [
+                        'thumbnail' => get_the_post_thumbnail_url($post->ID, 'thumbnail'),
+                        'medium'    => get_the_post_thumbnail_url($post->ID, 'medium'),
+                        'large'     => get_the_post_thumbnail_url($post->ID, 'large'),
+                    ],
+                    'json_dump'         => $post->json_dump, // get metadata 'json_dump'
+                ];
+                break;
+            case 'sd_date':
+                $event_attr = [
+                    'post_id'           => $post->ID,
+                    'date_id'           => $post->date_id,
+                    'event_id'          => $post->event_id,
+                    'title'             => $post->post_title,
+                    'content'           => $post->post_content,
+                    'excerpt'           => $post->post_excerpt,
+                    'slug'              => $post->post_name,
+                    'link'              => get_post_permalink($post->ID),
+                    'status'            => $post->post_status,
+                    'featured_image'    => [
+                        'thumbnail' => get_the_post_thumbnail_url($post->ID, 'thumbnail'),
+                        'medium'    => get_the_post_thumbnail_url($post->ID, 'medium'),
+                        'large'     => get_the_post_thumbnail_url($post->ID, 'large'),
+                    ],
+                    'begin_date'        => $post->begin_date,
+                    'end_date'          => $post->end_date,
+                    'facilitators'      => $post->facilitators,
+                    'has_board'         => $post->has_board,
+                    'has_lodging'       => $post->has_lodging,
+                    'has_misc'          => $post->has_misc,
+                    'price_info'        => $post->price_info,
+                    'venue'             => $post->venue, 
+                    'json_dump'         => $post->json_dump,
+                ];
+                break;
+            case 'sd_facilitator':
+                $event_attr = [
+                    'post_id'           => $post->ID,
+                    'facilitator_id'    => $post->facilitator_id,
+                    'title'             => $post->post_title,
+                    'content'           => $post->post_content,
+                    'slug'              => $post->post_name,
+                    'link'              => get_post_permalink($post->ID),
+                    'status'            => $post->post_status,
+                    'featured_image'    => [
+                        'thumbnail' => get_the_post_thumbnail_url($post->ID, 'thumbnail'),
+                        'medium'    => get_the_post_thumbnail_url($post->ID, 'medium'),
+                        'large'     => get_the_post_thumbnail_url($post->ID, 'large'),
+                    ],
+                    'facilitator_name'  => $post->facilitator_name,
+                    'json_dump'         => $post->json_dump,
+                ];
+                break;
+            default:
+                $event_attr = null;
+        }
+
+        // get response for a single post
         return $event_attr;
     }
 
@@ -177,4 +222,89 @@ class RestCallbacks{
         return new WP_REST_Response($response);
     }
 
+    /**
+    * Get list of all events
+    *
+    * @param WP_REST_Request $request
+    * @return WP_REST_Response|WP_Error
+    */
+    public function get_events($request)
+    {
+        $response = $this->get_custom_posts('sd_event');
+        return rest_ensure_response( $response );
+    }
+
+    /**
+    * Get list of all event dates
+    *
+    * @param WP_REST_Request $request
+    * @return WP_REST_Response|WP_Error
+    */
+    public function get_dates($request)
+    {
+        $response = $this->get_custom_posts('sd_date');
+        return rest_ensure_response( $response );
+    }
+
+    /**
+    * Get list of all facilitators
+    *
+    * @param WP_REST_Request $request
+    * @return WP_REST_Response|WP_Error
+    */
+    public function get_facilitators($request)
+    {
+        $response = $this->get_custom_posts('sd_facilitator');
+        return rest_ensure_response( $response );
+    }
+
+    /**
+     * Get specific event via event id
+     *
+     * @param WP_REST_Request $request
+     * @return WP_REST_Response|WP_Error
+     */
+    public function get_event($request)
+    {
+        // invalid ID format returns WP_Error
+        $requested_event_id = strtolower($request['event_id']);
+        if ( strlen( $requested_event_id ) != 32 ){
+            return new WP_Error('invalid_format', 'The requested event ID ' . $requested_event_id . 'does not consists of 32 characters', array('status' => 400));
+        }
+
+        $response = $this->get_custom_post('sd_event', $requested_event_id);
+
+        return rest_ensure_response($response);
+    }
+
+    /**
+     * Get specific event date via event date id
+     *
+     * @param WP_REST_Request $request
+     * @return WP_REST_Response|WP_Error
+     */
+    public function get_date($request)
+    {
+        $requested_date_id = strtolower($request['date_id']);
+
+        $response = $this->get_custom_post('sd_date', $requested_date_id);
+
+        return rest_ensure_response($response);
+    }
+
+    /**
+     * Get specific facilitator via facilitator id
+     *
+     * @param WP_REST_Request $request
+     * @return WP_REST_Response|WP_Error
+     */
+    public function get_facilitator($request)
+    {
+        // invalid ID format returns WP_Error
+        $requested_facilitator_id = strtolower($request['facilitator_id']);
+
+        $response = $this->get_custom_post('sd_facilitator', $requested_facilitator_id);
+
+        return rest_ensure_response($response);
+    }
 }
