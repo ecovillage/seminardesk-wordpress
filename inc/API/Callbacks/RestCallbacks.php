@@ -135,35 +135,34 @@ class RestCallbacks{
      */
     public function create_webhooks($request)
     {
-        $action = new WebhookHandler;
         $request_json = (array)$request->get_json_params(); // complete JSON data of the request#
         switch ($request_json['action']) {
             case 'event.create':
-                $response = $action->event_create($request_json);
+                $response = WebhookHandler::create_event($request_json);
                 break;
             case 'event.update':
-                $response = $action->event_update($request_json);
+                $response = WebhookHandler::update_event($request_json);
                 break;
             case 'event.delete':
-                $response = $action->event_delete($request_json);
+                $response = WebhookHandler::delete_event($request_json);
                 break;
             case 'eventDate.create':
-                $response = $action->event_date_create($request_json);
+                $response = WebhookHandler::create_event_date($request_json);
                 break;
             case 'eventDate.update':
-                $response = $action->event_date_update($request_json);
+                $response = WebhookHandler::update_event_date($request_json);
                 break;
             case 'eventDate.delete':
-                $response = $action->event_date_delete($request_json);
+                $response = WebhookHandler::delete_event_date($request_json);
                 break;
             case 'facilitator.create':
-                $response = $action->facilitator_create($request_json);
+                $response = WebhookHandler::create_facilitator($request_json);
                 break;
             case 'facilitator.update':
-                $response = $action->facilitator_update($request_json);
+                $response = WebhookHandler::update_facilitator($request_json);
                 break;
             case 'facilitator.delete':
-                $response = $action->facilitator_delete($request_json);
+                $response = WebhookHandler::delete_facilitator($request_json);
                 break;
             default:  
                 $response = new WP_Error('not_supported', 'action ' . $request_json['action'] . ' not supported', array('status' => 400));
@@ -174,8 +173,8 @@ class RestCallbacks{
         {
             return $response;
         }
-        
-        return new WP_REST_Response($response, 201);
+
+        return new WP_REST_Response($response);
     }
 
 }

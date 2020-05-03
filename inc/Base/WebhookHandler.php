@@ -18,7 +18,7 @@ class WebhookHandler
      * @param Array $request_json 
      * @return WP_REST_Response|WP_Error
      */
-    public function event_create($request_json)
+    public static function create_event($request_json)
     {
         $payload = (array)$request_json['payload']; // payload of the request in JSON
 
@@ -61,20 +61,11 @@ class WebhookHandler
             return $post_id;
         }
 
-        // upload image and set us featured image for the new event#
-        // TODO: create method or class for this kind
-        require_once(ABSPATH . 'wp-admin/includes/media.php');
-        require_once(ABSPATH . 'wp-admin/includes/file.php');
-        require_once(ABSPATH . 'wp-admin/includes/image.php');
-        $img_url = $payload['teaserPictureUrl']['0']['value'];
-        $img_id = media_handle_sideload(
-            [
-                'name' => basename($img_url),
-                'tmp_name' => download_url( $payload['teaserPictureUrl']['0']['value'] ),
-            ]
-        );
-        set_post_thumbnail($post_id, $img_id);
-
+        if (isset($payload['teaserPictureUrl']))
+        {
+            self::set_thumbnail($post_id, $payload['teaserPictureUrl']['0']['value']);
+        }
+        
         return new WP_REST_Response( 'Event ' . $payload['id'] . ' created', 200);
     }
 
@@ -84,7 +75,7 @@ class WebhookHandler
      * @param Array $request_json
      * @return WP_Post|WP_Error
      */
-    public function event_update($request_json)
+    public static function update_event($request_json)
     {
         $payload = (array)$request_json['payload']; // payload of the request in JSON
         
@@ -135,7 +126,7 @@ class WebhookHandler
             return $post_id;
         }
 
-        // TODO: Update thumbnail
+        self::set_thumbnail($post_id, $payload['teaserPictureUrl']['0']['value']);
 
         return new WP_REST_Response( 'Event ' . $payload['id'] . ' updated', 200);
     }
@@ -146,42 +137,21 @@ class WebhookHandler
      * @param Array $request_json
      * @return WP_REST_Response|WP_Error
      */
-    public function event_delete($request_json)
+    public static function delete_event($request_json)
     {
         // TODO: Delete also all dates associated with this event???
         $payload = (array)$request_json['payload'];
-
-        $events = get_posts([
-            'numberposts' => -1, // all events
-            'post_type' => 'sd_event',
-            'post_status' => 'publish',
-        ],);
-        foreach ($events as $current) {
-            if ( $current->event_id == $payload['id']){
-                $date_id = $current->event_id; 
-                $post_id = $current->ID;
-                break;
-            }
-        }
-        if ( !isset($date_id) ){
-            return Err::no_post($payload['id']);
-        }
-        $post_deleted = wp_trash_post($post_id);
-
-        if ( !isset($post_deleted) ){
-            return Err::no_post($payload['id']);
-            // return new WP_Error('no_post', 'Nothing to delete. Event date ID ' . $payload['id'] . ' does not exists', array('status' => 404));
-        }
-        return new WP_REST_Response( 'Event ' . $payload['id'] . ' moved to trash', 200);
+        $response = self::delete_custom_post('sd_event', $payload);
+        return $response;
     }
 
     /**
      * Create event date via webhook from SeminarDesk
      *
      * @param Array $request_json
-     * @return WP_Post|WP_Error
+     * @return WP_REST_Response|WP_Error
      */
-    public function event_date_create($request_json)
+    public static function create_event_date($request_json)
     {   
         $payload = (array)$request_json['payload'];
 
@@ -237,19 +207,7 @@ class WebhookHandler
             return $post_id;
         }
 
-        // upload image and set us featured image for the new event#
-        // TODO: create an own class for this
-        require_once(ABSPATH . 'wp-admin/includes/media.php');
-        require_once(ABSPATH . 'wp-admin/includes/file.php');
-        require_once(ABSPATH . 'wp-admin/includes/image.php');
-        $img_url = $payload['teaserPictureUrl']['0']['value'];
-        $img_id = media_handle_sideload(
-            [
-                'name' => basename($img_url),
-                'tmp_name' => download_url( $payload['teaserPictureUrl']['0']['value'] ),
-            ]
-        );
-        set_post_thumbnail($post_id, $img_id);
+        self::set_thumbnail($post_id, $payload['teaserPictureUrl']['0']['value']);
         
         return new WP_REST_Response( 'Event Data ' . $payload['id'] . ' created', 200);
     }
@@ -260,7 +218,7 @@ class WebhookHandler
      * @param Array $request_json
      * @return WP_REST_Response|WP_Error
      */
-    public function event_date_update($request_json)
+    public static function update_event_date($request_json)
     {   
         $payload = (array)$request_json['payload'];
 
@@ -318,7 +276,7 @@ class WebhookHandler
             return $post_id;
         }
 
-        // TODO: Update thumbnail
+        self::set_thumbnail($post_id, $payload['teaserPictureUrl']['0']['value']);
 
         // get updated event via post id and return it
         $event = get_post($post_id);
@@ -332,7 +290,7 @@ class WebhookHandler
      * @param Array $request_json
      * @return WP_REST_Response|WP_Error
      */
-    public function event_date_delete($request_json)
+    public static function delete_event_date($request_json)
     {   
         $payload = (array)$request_json['payload'];
 
@@ -369,7 +327,7 @@ class WebhookHandler
      * @param Array $request_json
      * @return WP_REST_Response|WP_Error
      */
-    public function facilitator_create($request_json)
+    public static function create_facilitator($request_json)
     {
         $payload = (array)$request_json['payload'];
 
@@ -399,19 +357,7 @@ class WebhookHandler
             return $post_id;
         }
 
-        // upload image and set us featured image for the new event#
-        // TODO: create an own class for this
-        require_once(ABSPATH . 'wp-admin/includes/media.php');
-        require_once(ABSPATH . 'wp-admin/includes/file.php');
-        require_once(ABSPATH . 'wp-admin/includes/image.php');
-        $img_url = $payload['teaserPictureUrl']['0']['value'];
-        $img_id = media_handle_sideload(
-            [
-                'name' => basename($img_url),
-                'tmp_name' => download_url( $payload['teaserPictureUrl']['0']['value'] ),
-            ]
-        );
-        set_post_thumbnail($post_id, $img_id);
+        self::set_thumbnail($post_id, $payload['pictureUrl']);
 
         return new WP_REST_Response( 'Facilitator ' . $payload['id'] . ' created', 200);
     }
@@ -422,7 +368,7 @@ class WebhookHandler
      * @param Array $request_json
      * @return WP_REST_Response|WP_Error
      */
-    public function facilitator_update($request_json)
+    public static function update_facilitator($request_json)
     {
         $payload = (array)$request_json['payload'];
         
@@ -470,7 +416,7 @@ class WebhookHandler
              return $post_id;
          }
 
-        // TODO: Update thumbnail
+        self::set_thumbnail($post_id, $payload['pictureUrl']);
 
         return new WP_REST_Response( 'Facilitator ' . $payload['id'] . ' updated', 200);
     }
@@ -481,7 +427,7 @@ class WebhookHandler
      * @param Array $request_json
      * @return WP_REST_Response|WP_Error
      */
-    public function facilitator_delete($request_json)
+    public static function delete_facilitator($request_json)
     {
         $payload = (array)$request_json['payload'];
 
@@ -510,5 +456,60 @@ class WebhookHandler
         return new WP_REST_Response( 'Facilitator ' . $payload['id'] . ' moved to trash', 200);
 
         // return new WP_Error('not_implemented', 'action ' . $request_json['action'] . ' not implemented yet', array('status' => 404));
+    }
+
+    /**
+     * move custom post to trash
+     * 
+     * @param Int   $post_id
+     * @param Array $payload
+     */
+    public static function delete_custom_post($post_type, $payload)
+    {
+        $post = get_posts([
+            'numberposts' => -1, // all events
+            'post_type' => $post_type,
+            'post_status' => 'publish',
+        ],);
+        $sd_id_mth = str_replace('sd_', '', $post_type) . '_id';
+        foreach ($post as $current) {
+            if ( $current->$sd_id_mth == $payload['id']){
+                $sd_id = $current->$sd_id_mth;
+                $post_id = $current->ID;
+                break;
+            }
+        }
+        if ( !isset($sd_id) ){
+            return Err::no_post($payload['id']);
+        }
+        $post_deleted = wp_trash_post($post_id);
+
+        if ( !isset($post_deleted) ){
+            return new WP_Error('no_post', 'Nothing to delete. Event date ID ' . $payload['id'] . ' does not exists', array('status' => 404));
+        }
+        return new WP_REST_Response( $post_type . ' ' . $payload['id'] . ' moved to trash', 200);
+    }
+
+    /**
+     * upload image and set us featured image for custom post
+     *
+     * @param Int   $post_id
+     * @param Array $payload
+     */
+    public static function set_thumbnail($post_id, $img_url){
+        // validate image url https://www.w3schools.com/php/php_form_url_email.asp
+        if (preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$img_url))
+        {
+            require_once(ABSPATH . 'wp-admin/includes/media.php');
+            require_once(ABSPATH . 'wp-admin/includes/file.php');
+            require_once(ABSPATH . 'wp-admin/includes/image.php');
+            $img_id = media_handle_sideload(
+                [
+                    'name' => basename($img_url),
+                    'tmp_name' => download_url($img_url),
+                ]
+            );
+            set_post_thumbnail($post_id, $img_id);
+        }
     }
 }
