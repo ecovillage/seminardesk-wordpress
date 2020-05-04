@@ -11,12 +11,11 @@ class TemplateHandler
     public function register()
     {
         // loads custom template for given post, if exists
-        add_filter('single_template', [ $this, 'custom_template' ]);
+        add_filter('single_template', [ $this, 'custom_template']);
     }
 
     public function custom_template( $single )
     {
-        // TODO: allow individual custom templates for each slug of CPT sd_ ... checks for custom template for current post by given post type and slug
         // post object for the current (custom) post
         global $post;
 

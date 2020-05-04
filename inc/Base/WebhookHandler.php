@@ -471,10 +471,10 @@ class WebhookHandler
             'post_type' => $post_type,
             'post_status' => 'publish',
         ],);
-        $sd_id_mth = str_replace('sd_', '', $post_type) . '_id';
+        $get_sd_id = str_replace('sd_', '', $post_type) . '_id'; // variable variable names
         foreach ($post as $current) {
-            if ( $current->$sd_id_mth == $payload['id']){
-                $sd_id = $current->$sd_id_mth;
+            if ( $current->$get_sd_id == $payload['id']){
+                $sd_id = $current->$get_sd_id;
                 $post_id = $current->ID;
                 break;
             }
@@ -487,7 +487,7 @@ class WebhookHandler
         if ( !isset($post_deleted) ){
             return new WP_Error('no_post', 'Nothing to delete. Event date ID ' . $payload['id'] . ' does not exists', array('status' => 404));
         }
-        return new WP_REST_Response( $post_type . ' ' . $payload['id'] . ' moved to trash', 200);
+        return new WP_REST_Response( $post_type . ' ' . $payload['id'] . ' moved to trash', 204);
     }
 
     /**

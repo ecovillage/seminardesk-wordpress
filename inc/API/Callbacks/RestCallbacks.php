@@ -43,9 +43,9 @@ class RestCallbacks{
             'post_type' => $post_type,
             'post_status' => 'publish',
         ],);
-        $sd_id_mth = str_replace('sd_', '', $post_type) . '_id';
+        $get_sd_id = str_replace('sd_', '', $post_type) . '_id'; // variable variable names
         foreach ($posts as $current) {
-            $current_id = $current->$sd_id_mth;
+            $current_id = $current->$get_sd_id;
             if ( $current_id == $sd_id){
                 $post = $current;
                 break;
