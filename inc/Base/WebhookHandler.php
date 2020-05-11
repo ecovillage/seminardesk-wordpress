@@ -6,6 +6,7 @@ namespace Inc\Base;
 
 use WP_Error;
 use WP_REST_Response;
+use WP_Query;
 
 /**
  * Callbacks for webhook actions
@@ -36,7 +37,7 @@ class WebhookHandler
 
         // define metadata of the new sd_event
         $meta = [
-            'event_id' =>  $payload['id'],
+            'event_id'  => $payload['id'],
             'json_dump' => $request_json,
         ];
 
@@ -66,30 +67,28 @@ class WebhookHandler
             self::set_thumbnail($post_id, $payload['teaserPictureUrl']['0']['value']);
         }
         
-        return new WP_REST_Response( 'Event ' . $payload['id'] . ' created', 200);
+        return new WP_REST_Response( 'Event ' . $payload['id'] . ' created', 201);
     }
 
     /**
      * Update event via webhook from SeminarDesk
      *
      * @param Array $request_json
-     * @return WP_Post|WP_Error
+     * @return WP_REST_Response|WP_Error
      */
     public static function update_event($request_json)
     {
         $payload = (array)$request_json['payload']; // payload of the request in JSON
         
-        // checks if event_id exists and get post id in WordPress
-        $events = get_posts([
-            'numberposts' => -1, // all events
-            'post_type' => 'sd_event',
-            'post_status' => 'publish',
-        ],);
-        foreach ($events as $current) {
-            if ( $current->event_id == $payload['id']){
-                $post_id = $current->ID;
-                break;
-            }
+        // TODO: possible to get corresponding post_id from event_id directly with out parsing all posts
+        // checks if event_id exists and get post_id
+        $query = self::get_query_by_meta( 'sd_event', 'event_id', $payload['id']);
+        $post_id = $query->post->ID;
+        if ($query->post_count > 1) {
+            $unique = false;
+        }
+        else{
+            $unique = true;
         }
 
         if ( !isset($post_id) ){
@@ -128,7 +127,14 @@ class WebhookHandler
 
         self::set_thumbnail($post_id, $payload['teaserPictureUrl']['0']['value']);
 
-        return new WP_REST_Response( 'Event ' . $payload['id'] . ' updated', 200);
+        return new WP_REST_Response( [
+            'message'       => 'Event updated',
+            'requestId'     => $request_json['requestId'],
+            'action'        => $request_json['action'],
+            'postId'        => $post_id,
+            'eventId'       => $payload['id'],
+            'eventUnique'   => $unique,
+        ], 200);
     }
 
     /**
@@ -141,7 +147,7 @@ class WebhookHandler
     {
         // TODO: Delete also all dates associated with this event???
         $payload = (array)$request_json['payload'];
-        $response = self::delete_custom_post('sd_event', $payload);
+        $response = self::trash_post_by_meta('sd_event', 'event_id', $payload['id']);
         return $response;
     }
 
@@ -156,19 +162,17 @@ class WebhookHandler
         $payload = (array)$request_json['payload'];
 
         // check if with event date associated event exists
-        $posts = get_posts([
-            'numberposts' => -1,
-            'post_type' => 'sd_event',
-            'post_status' => 'publish',
-        ],);
-        foreach ($posts as $current) {
-            if ( $current->event_id == $payload['eventId']){
-                $event_post_id = $current->ID;
-                break;
-            }
-        }
+        $query = self::get_query_by_meta( 'sd_event', 'event_id', $payload['eventId']);
+        $event_post_id = $query->post->ID;
+
         if (!isset($event_post_id)){
-            return new WP_Error('not_found' ,'associated event with the ID ' . $payload['eventId'] . ' does not exist', 404);
+            return new WP_Error('not_found' ,'associated event with the ID ' . $payload['eventId'] . ' does not exist', [ 
+                'status' => 404,
+                'requestId' => $request_json['requestId'],
+                'action'    => $request_json['action'],
+                'eventDateId' => $payload['id'],
+                'eventId' => $payload['eventId'],
+                ]);
         }
 
          // define metadata of the new sd_event_date
@@ -209,7 +213,15 @@ class WebhookHandler
 
         self::set_thumbnail($post_id, $payload['teaserPictureUrl']['0']['value']);
         
-        return new WP_REST_Response( 'Event Data ' . $payload['id'] . ' created', 200);
+        return new WP_REST_Response( [
+            'message'       => 'Event Date created',
+            'requestId'     => $request_json['requestId'],
+            'action'        => $request_json['action'],
+            'postId'        => $post_id,
+            'eventDateId'   => $payload['id'],
+            'eventPostId'   => $event_post_id,
+            'eventId'       => $payload['eventId'],
+        ], 200);
     }
 
     /**
@@ -223,17 +235,8 @@ class WebhookHandler
         $payload = (array)$request_json['payload'];
 
         // checks if event date exists
-        $dates = get_posts([
-            'numberposts' => -1,
-            'post_type' => 'sd_date',
-            'post_status' => 'publish',
-        ],);
-        foreach ($dates as $current) {
-            if ( $current->date_id == $payload['id']){
-                $post_id = $current->ID;
-                break;
-            }
-        }
+        $query = self::get_query_by_meta( 'sd_date', 'date_id', $payload['id']);
+        $post_id = $query->post->ID;
 
         if ( !isset($post_id) ){
             return new WP_Error('no_post', 'Event date not updated. Event date ID ' . $payload['id'] . ' does not exists', array('status' => 404));
@@ -292,33 +295,11 @@ class WebhookHandler
      */
     public static function delete_event_date($request_json)
     {   
-        $payload = (array)$request_json['payload'];
-
-        $event_dates = get_posts([
-            'numberposts' => -1, // all events
-            'post_type' => 'sd_date',
-            'post_status' => 'publish',
-        ],);
-        foreach ($event_dates as $current) {
-            if ( $current->date_id == $payload['id']){
-                $date_id = $current->date_id; 
-                $post_id = $current->ID;
-                break;
-            }
-        }
-        if ( !isset($date_id) ){
-            return Err::no_post($payload['id']);
-        }
-        $post_deleted = wp_trash_post($post_id);
-
-        if ( !isset($post_deleted) ){
-            return Err::no_post($payload['id']);
-            // return new WP_Error('no_post', 'Nothing to delete. Event date ID ' . $payload['id'] . ' does not exists', array('status' => 404));
-        }
-
         // TODO: security if WP_Post/Post_type correct which is returned by wp_trash_post
         // TODO: add status/action deleted http status code 200 (OK) not 201 (created)
-        return new WP_REST_Response( 'Event Data ' . $payload['id'] . ' moved to trash', 200);
+        $payload = (array)$request_json['payload'];
+        $response = self::trash_post_by_meta('sd_date', 'date_id', $payload['id']);
+        return $response;
     }
     
     /**
@@ -372,17 +353,21 @@ class WebhookHandler
     {
         $payload = (array)$request_json['payload'];
         
-        $facilitator = get_posts([
-            'numberposts' => -1, // all events
-            'post_type' => 'sd_facilitator',
-            'post_status' => 'publish',
-        ],);
-        foreach ($facilitator as $current) {
-            if ( $current->facilitator_id == $payload['id']){
-                $post_id = $current->ID;
-                break;
-            }
-        }
+        $query = new WP_Query(
+            array(
+                'post_type'     => 'sd_facilitator',
+                'post_status'   => 'publish',
+                'meta_query'    => array(
+                    array(
+                        'key'       => 'facilitator_id',
+                        'value'     => $payload['id'],
+                        'compare'   => '=',
+                        'type'      => 'CHAR',
+                    ),
+                ),
+            ),
+        );
+        $post_id = $query->post->ID;
 
         if ( !isset($post_id) ){
             return new WP_Error('no_post', 'Facilitator not updated. Facilitator ID ' . $payload['id'] . ' does not exists', array('status' => 404));
@@ -430,32 +415,36 @@ class WebhookHandler
     public static function delete_facilitator($request_json)
     {
         $payload = (array)$request_json['payload'];
+        $response = self::trash_post_by_meta('sd_facilitator', 'facilitator_id', $payload['id']);
+        return $response;
+    }
 
-        $facilitator = get_posts([
-            'numberposts' => -1, // all events
-            'post_type' => 'sd_facilitator',
-            'post_status' => 'publish',
-        ],);
-        foreach ($facilitator as $current) {
-            if ( $current->facilitator_id == $payload['id']){
-                $date_id = $current->facilitator_id; 
-                $post_id = $current->ID;
-                break;
-            }
-        }
-        if ( !isset($date_id) ){
-            return Err::no_post($payload['id']);
-        }
-        $post_deleted = wp_trash_post($post_id);
+    /**
+     * Retrieves query data by given meta key and its requested value.
+     *
+     * @param string $post_type
+     * @param string $meta_key
+     * @param string $meta_value
+     * @return WP_Query
+     */
+    public static function get_query_by_meta( $post_type, $meta_key, $meta_value )
+    {
+        $query = new WP_Query(
+            array(
+                'post_type'     => $post_type,
+                'post_status'   => 'publish',
+                'meta_query'    => array(
+                    array(
+                        'key'       => $meta_key,
+                        'value'     => $meta_value,
+                        'compare'   => '=',
+                        'type'      => 'CHAR',
+                    ),
+                ),
+            ),
+        );
 
-        if ( !isset($post_deleted) ){
-            return Err::no_post($payload['id']);
-            // return new WP_Error('no_post', 'Nothing to delete. Event date ID ' . $payload['id'] . ' does not exists', array('status' => 404));
-        }
-
-        return new WP_REST_Response( 'Facilitator ' . $payload['id'] . ' moved to trash', 200);
-
-        // return new WP_Error('not_implemented', 'action ' . $request_json['action'] . ' not implemented yet', array('status' => 404));
+        return $query;
     }
 
     /**
@@ -464,30 +453,21 @@ class WebhookHandler
      * @param Int   $post_id
      * @param Array $payload
      */
-    public static function delete_custom_post($post_type, $payload)
+    public static function trash_post_by_meta($post_type, $meta_key, $meta_value)
     {
-        $post = get_posts([
-            'numberposts' => -1, // all events
-            'post_type' => $post_type,
-            'post_status' => 'publish',
-        ],);
-        $get_sd_id = str_replace('sd_', '', $post_type) . '_id'; // variable variable names
-        foreach ($post as $current) {
-            if ( $current->$get_sd_id == $payload['id']){
-                $sd_id = $current->$get_sd_id;
-                $post_id = $current->ID;
-                break;
-            }
-        }
+        //$get_sd_id = str_replace('sd_', '', $post_type) . '_id'; // variable variable names
+        $query = self::get_query_by_meta( $post_type, $meta_key, $meta_value);
+        $sd_id = $query->post->$meta_value;
+        $post_id = $query->post->ID;
         if ( !isset($sd_id) ){
-            return Err::no_post($payload['id']);
+            return Err::no_post($meta_value);
         }
         $post_deleted = wp_trash_post($post_id);
 
         if ( !isset($post_deleted) ){
-            return new WP_Error('no_post', 'Nothing to delete. Event date ID ' . $payload['id'] . ' does not exists', array('status' => 404));
+            return new WP_Error('no_post', 'Nothing to delete. Event date ID ' . $meta_value . ' does not exists', array('status' => 404));
         }
-        return new WP_REST_Response( $post_type . ' ' . $payload['id'] . ' moved to trash', 204);
+        return new WP_REST_Response( $post_type . ' ' . $meta_value . ' moved to trash', 204);
     }
 
     /**
@@ -496,6 +476,7 @@ class WebhookHandler
      * @param Int   $post_id
      * @param Array $payload
      */
+    // TODO: image already exists in media lib?
     public static function set_thumbnail($post_id, $img_url){
         // validate image url https://www.w3schools.com/php/php_form_url_email.asp
         if (preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$img_url))

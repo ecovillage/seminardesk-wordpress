@@ -13,10 +13,6 @@ use Inc\Base\WebhookHandler;
  * Callbacks for Rest API
  */
 class RestCallbacks{
-    
-    function __construct()
-    {
-    }
 
     /**
      * Check if a given request has access to interact with endpoint
@@ -26,7 +22,7 @@ class RestCallbacks{
      */
     public function check_permissions($request)
     {
-        // return current_user_can( 'edit_posts' );
+        //  return current_user_can( 'edit_posts' );
         return true;
     }
 

@@ -8,6 +8,8 @@ use WP_Error;
 
 class Err
 {
+    // TODO: Create own error message library 
+
     /**
      * Undocumented function
      *

@@ -17,6 +17,13 @@
             "program": "${file}",
             "cwd": "${fileDirname}",
             "port": 9000
-        }
+        },
+        {
+            "type": "firefox",
+            "request": "launch",
+            "name": "Launch Firefox against localhost",
+            "url": "http://localhost:80/wpsdp",
+            "webRoot": "${workspaceFolder}"        
+        },
     ]
 }
