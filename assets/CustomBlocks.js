@@ -3,7 +3,7 @@
 
 const { createElement } = wp.element;
 
-wp.blocks.registerBlockType('seminardesk/test-block', {
+wp.blocks.registerBlockType('seminardesk/test', {
 
     //build-in attributes
     title: 'Test',
