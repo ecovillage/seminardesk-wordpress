@@ -1,6 +1,15 @@
 // test script execution
 // alert('customblock script enqueued')
 
+// .babelrc.js
+// module.exports = {
+//   plugins: [
+//       '@wordpress/babel-plugin-import-jsx-pragma',
+//       '@babel/plugin-transform-react-jsx',
+//   ],
+// };
+
+const { apiFetch } = wp.apiFetch;
 const { createElement } = wp.element;
 
 wp.blocks.registerBlockType('seminardesk/test', {
@@ -9,7 +18,7 @@ wp.blocks.registerBlockType('seminardesk/test', {
     title: 'Test',
     description: "This a Test Block for SeminarDesk", 
     icon: 'smiley',
-    category: 'common',
+    category: 'seminardesk',
     // keywords: [
     //   __( 'SeminarDesk' ),
     //   __( 'Events' ),
@@ -36,6 +45,10 @@ wp.blocks.registerBlockType('seminardesk/test', {
      * @param {*} props 
      */
     edit: function(props) {
+      // GET
+      wp.apiFetch( { path: '/wp/v2/posts' } ).then( sd_event => {
+        console.log( sd_event );
+      } )
       return createElement(
         'p', 
         null, 
