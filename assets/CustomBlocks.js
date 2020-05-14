@@ -1,18 +1,16 @@
+
 // test script execution
 // alert('customblock script enqueued')
 
-// .babelrc.js
-// module.exports = {
-//   plugins: [
-//       '@wordpress/babel-plugin-import-jsx-pragma',
-//       '@babel/plugin-transform-react-jsx',
-//   ],
-// };
+// ES5 code
 
-const { apiFetch } = wp.apiFetch;
-const { createElement } = wp.element;
+var BlockName = 'seminardesk/test', // defining namespace and name of the block
+    createElement = wp.element.createElement,
+    registerBlockType = wp.blocks.registerBlockType,
+    apiFetch = wp.apiFetch,
+    ServerSideRender = wp.serverSideRender
 
-wp.blocks.registerBlockType('seminardesk/test', {
+registerBlockType (BlockName, {
 
     //build-in attributes
     title: 'Test',
@@ -28,9 +26,9 @@ wp.blocks.registerBlockType('seminardesk/test', {
     // custom attributes
     attribute: {
         author: {
-          type: 'string',
-          source: 'meta',
-          meta: 'author',
+            type: 'string',
+             source: 'meta',
+            meta: 'author',
         },
         text: {type: 'string'},
     },
@@ -44,20 +42,19 @@ wp.blocks.registerBlockType('seminardesk/test', {
      * 
      * @param {*} props 
      */
-    edit: function(props) {
-      // GET
-      wp.apiFetch( { path: '/wp/v2/posts' } ).then( sd_event => {
+    edit: function ( props ) {
+        // GET
+        apiFetch( { path: '/wp/v2/posts' } ).then( sd_event => {
         console.log( sd_event );
-      } )
-      return createElement(
-        'p', 
-        null, 
-        createElement(
-          "strong", 
-          null,
-          'Space Holder - SeminarDesk Test Block - Space Holder',
-      ));
-      }, 
+        } )
+        return (
+            // getting dynamic block content from php and viewing it in block editor
+            createElement( ServerSideRender, {
+                block: BlockName,
+                attributes: props.attributes,
+            } )
+        );
+    },
     
     /**
      * block viewer/frontend code
@@ -65,5 +62,5 @@ wp.blocks.registerBlockType('seminardesk/test', {
      * 
      * @param {*} props 
      */
-    save: function(props) {return null}, // implanting dynamic blocks with php code
+    save: function(props) {return null}, // using dynamic blocks in php
 })

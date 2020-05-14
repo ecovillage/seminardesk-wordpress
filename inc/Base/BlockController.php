@@ -25,7 +25,15 @@ class BlockController
 
     public function enqueue_block_assets()
     {
-        wp_register_script( 'customBlock', SD_PLUGIN_URL . 'assets/CustomBlocks.js', array('wp-blocks', 'wp-i18n', 'wp-editor', 'wp-api-fetch', 'react') );
+        $dependencies = array(
+            'wp-blocks',
+            'wp-i18n',
+            'wp-editor',
+            'wp-api-fetch',
+            'react',
+        );
+
+        wp_register_script( 'customBlock', SD_PLUGIN_URL . 'assets/CustomBlocks.js', $dependencies );
         // wp_enqueue_script( 'customBlock', SD_PLUGIN_URL . 'assets/CustomBlocks.js', array('wp-blocks', 'wp-i18n', 'wp-editor') );
         $block = new BlockCallbacks;
         register_block_type( 'seminardesk/test' , [
