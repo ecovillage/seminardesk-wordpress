@@ -12,9 +12,11 @@ class BlockCallbacks{
         // $body = json_decode(wp_remote_retrieve_body( $response ));
         // $id = $body->id;
 
-        $content= '
-            <h3>Test Block</h3>
-            ';
+        // $content= '
+        //     <h3>Test Block</h3>
+        //     ';
+
+        $content = require_once( SD_PLUGIN_PATH . '/templates/blocktest.php' );
 
         return $content;
     }

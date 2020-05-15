@@ -28,6 +28,7 @@ class CustomFields
 
         ];
 
+        // sd_event meta data
         register_post_meta(
             'sd_event',
             'event_id',
@@ -63,6 +64,35 @@ class CustomFields
                 'show_in_rest'  => true,
                 'type'          => 'object',
                 'description'   => 'holds the plain JSON data of the last POST request',
+                'auth_callback' => function(){
+                    // return current_user_can( 'edit_posts' );
+                    return false;
+                }
+            ]
+        );
+
+        // sd_dates meta data
+        register_post_meta(
+            'sd_date',
+            'begin_date',
+            [
+                'show_in_rest'  => true,
+                'type'          => 'integer',
+                'description'   => 'Start of the event date as a timestamp',
+                'auth_callback' => function(){
+                    // return current_user_can( 'edit_posts' );
+                    return false;
+                }
+            ]
+        );
+
+        register_post_meta(
+            'sd_date',
+            'end_date',
+            [
+                'show_in_rest'  => true,
+                'type'          => 'integer',
+                'description'   => 'End of the event date as a timestamp',
                 'auth_callback' => function(){
                     // return current_user_can( 'edit_posts' );
                     return false;

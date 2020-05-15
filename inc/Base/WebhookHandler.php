@@ -181,8 +181,8 @@ class WebhookHandler
             'event_id'      => $payload['eventId'],
             'event_wp_id'   => $event_post_id,
             'status'        => $payload['status'],
-            'begin_date'    => $payload['beginDate'],
-            'end_date'      => $payload['endDate'],
+            'begin_date'    => (int)$payload['beginDate'],
+            'end_date'      => (int)$payload['endDate'],
             'facilitators'  => [null],
             'has_board'     => $payload['hasBoard'],
             'has_lodging'   => $payload['hasLodging'],
@@ -248,8 +248,8 @@ class WebhookHandler
             'event_id'      => $payload['eventId'],
             // 'event_wp_id' // not updated
             'status'        => $payload['status'],
-            'begin_date'    => $payload['beginDate'],
-            'end_date'      => $payload['endDate'],
+            'begin_date'    => (int)$payload['beginDate'],
+            'end_date'      => (int)$payload['endDate'],
             'facilitators'  => [null],
             'has_board'     => $payload['hasBoard'],
             'has_lodging'   => $payload['hasLodging'],
@@ -352,21 +352,7 @@ class WebhookHandler
     public static function update_facilitator($request_json)
     {
         $payload = (array)$request_json['payload'];
-        
-        $query = new WP_Query(
-            array(
-                'post_type'     => 'sd_facilitator',
-                'post_status'   => 'publish',
-                'meta_query'    => array(
-                    array(
-                        'key'       => 'facilitator_id',
-                        'value'     => $payload['id'],
-                        'compare'   => '=',
-                        'type'      => 'CHAR',
-                    ),
-                ),
-            ),
-        );
+        $query = self::get_query_by_meta( 'sd_facilitator', 'facilitator_id', $payload['id'] );
         $post_id = $query->post->ID;
 
         if ( !isset($post_id) ){
