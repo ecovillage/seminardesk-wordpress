@@ -5,7 +5,6 @@
 
 namespace Inc\CPT;
 
-// TODO: 
 // TODO: implement and utilize shortcode [] to generate posts
 
 abstract class CptBaseClass 
@@ -41,6 +40,11 @@ abstract class CptBaseClass
         
     }
   
+    /**
+     * Create a custom post type using a template and register it
+     *
+     * @return void
+     */
     public function create_cpt()
     {
         $this->name_lower = strtolower($this->name);
