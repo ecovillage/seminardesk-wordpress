@@ -38,6 +38,7 @@ class CptController
     public function set_cpts( $cpts = array() )
     {
         $this->cpts = $cpts;
+        return $this->cpts;
     }
 
     /**

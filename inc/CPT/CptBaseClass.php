@@ -14,8 +14,10 @@ abstract class CptBaseClass
         'names',
         'menu_position',
     ];
-    public $name;
-    public $names;
+    public $name; 
+    public $name_lower;
+    public $names; 
+    public $names_lower;
     public $menu_position;
 
     /**
@@ -117,8 +119,9 @@ abstract class CptBaseClass
             'menu_position'     => $this->menu_position,
             // 'hierarchical'      => true, // hierarchical must be true for parent option
             'supports'          => $supports,
-            'capability_type'     => 'page',
+            'capability_type'     => 'post',
             'rewrite'           => $rewrite,
+            //'taxonomies' => array( 'category', 'post_tag' ),
         ];
 
         register_post_type( 'sd_' . $this->name_lower, $cptOptions ); 

@@ -31,6 +31,7 @@ final class Init
                 new CPT\CptDates(),
                 new CPT\CptFacilitators(),
             )),
+            new Base\TaxonomyController(),
         ];
     }
 
