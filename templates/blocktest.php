@@ -13,8 +13,8 @@
                 array(
                     'key'       => 'begin_date',
                     'value'     => array(
-                        strtotime('2020-01-01')*1000,
-                        strtotime('2021-12-31')*1000,
+                        strtotime('01.01.2020')*1000,
+                        strtotime('31.12.2020')*1000,
                     ),
                     'type'      => 'numeric',
                     'compare'   => 'BETWEEN',

@@ -16,6 +16,7 @@ class BlockCallbacks{
         //     <h3>Test Block</h3>
         //     ';
 
+        // content can not loaded into editor ... gives an error.
         $content = require_once( SD_PLUGIN_PATH . '/templates/blocktest.php' );
 
         return $content;

@@ -7,7 +7,7 @@
 var BlockName = 'seminardesk/test', // defining namespace and name of the block
     createElement = wp.element.createElement,
     registerBlockType = wp.blocks.registerBlockType,
-    apiFetch = wp.apiFetch,
+    // apiFetch = wp.apiFetch,
     ServerSideRender = wp.serverSideRender
 
 registerBlockType (BlockName, {
@@ -44,9 +44,9 @@ registerBlockType (BlockName, {
      */
     edit: function ( props ) {
         // GET
-        apiFetch( { path: '/wp/v2/posts' } ).then( sd_event => {
-        console.log( sd_event );
-        } )
+        // apiFetch( { path: '/wp/v2/posts' } ).then( sd_event => {
+        // console.log( sd_event );
+        // } )
         return (
             // getting dynamic block content from php and viewing it in block editor
             createElement( ServerSideRender, {
