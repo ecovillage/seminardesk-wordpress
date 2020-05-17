@@ -175,8 +175,37 @@ class WebhookHandler
                 ]);
         }
 
+        // taxonomy stuff
+        $txn = 'dates';
+        $year = date('Y', $payload['beginDate']/1000);
+        $month = date('m', $payload['beginDate']/1000);
+        // get term ID and create if not existing including children (months of the year)
+        $term_year = term_exists($year, $txn); 
+        if (!isset($term_year)){
+            $term_year = wp_insert_term($year, $txn, array(
+                'description' => __('Dates of ' . $year, 'seminardesk'),
+                'slug' => $year,
+            ));
+            for ($m = 1; $m <= 12; $m++){
+                $m_padded = sprintf('%02s', $m);
+                wp_insert_term($m_padded . '/' . $year, $txn, array(
+                    // 'alias_of'      => $year,
+                    'description'   => __('Dates of ' . $m_padded . '/' . $year, 'seminardesk'),
+                    'parent'        => $term_year['term_taxonomy_id'],
+                    'slug'          => $m_padded,
+                ));
+            }
+        }
+        // define taxonomies of the new sd_event_date
+        // user to create new sd_event_date needs capability to work with a taxonomy
+        $term_month = term_exists($month, $txn);
+        $terms = array($term_year['term_taxonomy_id'], $term_month['term_taxonomy_id']);
+        $txn_input = array(
+            $txn => $terms,
+        );
+
          // define metadata of the new sd_event_date
-         $meta = [
+         $meta_input = [
             'date_id'       => $payload['id'],
             'event_id'      => $payload['eventId'],
             'event_wp_id'   => $event_post_id,
@@ -200,12 +229,13 @@ class WebhookHandler
             'post_excerpt'  => $payload['teaser']['0']['value'],
             'post_author'   => get_current_user_id(),
             'post_status'   => 'publish',
-            'meta_input'    => $meta,
+            'meta_input'    => $meta_input,
+            'tax_input'     => $txn_input,
         ];
 
-        // create new event in the WordPress database
+        // create new event date in the WordPress database
         $post_id = wp_insert_post(wp_slash($event_attr), true);
-
+        
         // return error if $post_id is of type WP_Error
         if (is_wp_error($post_id)){
             return $post_id;

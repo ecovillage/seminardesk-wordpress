@@ -14,6 +14,7 @@ class TaxonomyController
     public $name_lower;
     public $names = 'Dates';
     public $names_lower;
+    // public $slug = 'schedule';
 
     // public $taxonomy = array(
     //     'names' => 'Dates',
@@ -53,9 +54,11 @@ class TaxonomyController
             'show_ui'           => true,
             'show_admin_column' => true,
             'query_var'         => true,
+            'show_in_rest'      => true, // http://localhost/wpsdp/wp-json/wp/v2/dates
+            //'rest_base'         => 'txn',
             'rewrite'           => array( 
                 'slug' => $this->names_lower, 
-                // 'with_front' => true, 
+                'with_front' => false, 
             ),
         );
     
