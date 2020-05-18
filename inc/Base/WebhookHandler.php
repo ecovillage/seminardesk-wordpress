@@ -140,7 +140,7 @@ class WebhookHandler
     /**
      * Delete event via event id
      *
-     * @param Array $request_json
+     * @param array $request_json
      * @return WP_REST_Response|WP_Error
      */
     public static function delete_event($request_json)
@@ -154,74 +154,29 @@ class WebhookHandler
     /**
      * Create event date via webhook from SeminarDesk
      *
-     * @param Array $request_json
+     * @param array $request_json
      * @return WP_REST_Response|WP_Error
      */
     public static function create_event_date($request_json)
     {   
         $payload = (array)$request_json['payload'];
 
-        // check if with event date associated event exists
+        // check if with event date associated event exists and get its WordPress ID
         $query = self::get_query_by_meta( 'sd_event', 'event_id', $payload['eventId']);
         $event_post_id = $query->post->ID;
-
         if (!isset($event_post_id)){
-            return new WP_Error('not_found' ,'associated event with the ID ' . $payload['eventId'] . ' does not exist', [ 
+            return new WP_Error('not_found' ,'Event date not created. Associated event with the ID ' . $payload['eventId'] . ' does not exist', array( 
                 'status' => 404,
                 'requestId' => $request_json['requestId'],
                 'action'    => $request_json['action'],
                 'eventDateId' => $payload['id'],
                 'eventId' => $payload['eventId'],
-                ]);
-        }
-
-        // taxonomy stuff
-        $txn = 'dates';
-        $year = date('Y', $payload['beginDate']/1000);
-        $month = date('m', $payload['beginDate']/1000);
-        // get term ID and create if not existing including children (months of the year)
-        $term_year = term_exists($year, $txn); 
-        if (!isset($term_year)){
-            $term_year = wp_insert_term($year, $txn, array(
-                'description' => __('Dates of ' . $year, 'seminardesk'),
-                'slug' => $year,
             ));
-            for ($m = 1; $m <= 12; $m++){
-                $m_padded = sprintf('%02s', $m);
-                wp_insert_term($m_padded . '/' . $year, $txn, array(
-                    // 'alias_of'      => $year,
-                    'description'   => __('Dates of ' . $m_padded . '/' . $year, 'seminardesk'),
-                    'parent'        => $term_year['term_taxonomy_id'],
-                    'slug'          => $m_padded,
-                ));
-            }
         }
-        // define taxonomies of the new sd_event_date
-        // user to create new sd_event_date needs capability to work with a taxonomy
-        $term_month = term_exists($month, $txn);
-        $terms = array($term_year['term_taxonomy_id'], $term_month['term_taxonomy_id']);
-        $txn_input = array(
-            $txn => $terms,
-        );
 
-         // define metadata of the new sd_event_date
-         $meta_input = [
-            'date_id'       => $payload['id'],
-            'event_id'      => $payload['eventId'],
-            'event_wp_id'   => $event_post_id,
-            'status'        => $payload['status'],
-            'begin_date'    => (int)$payload['beginDate'],
-            'end_date'      => (int)$payload['endDate'],
-            'facilitators'  => [null],
-            'has_board'     => $payload['hasBoard'],
-            'has_lodging'   => $payload['hasLodging'],
-            'has_misc'      => $payload['hasMisc'],
-            'price_info'    => $payload['priceInfo']['0']['value'],
-            'venue'         => $payload['venue']['name'],
-            'json_dump'     => $request_json,
-        ];
-
-        // define attributes of the new sd_event_date using $payload of the 
+        // define attributes of the new sd_event_date using request data of the webhook
+        $txn_input = self::set_event_date_taxonomy($payload);
+        $meta_input = self::set_event_date_meta( $request_json, $event_post_id );
         $event_attr = [
             'post_type'     => 'sd_date',
             'post_title'    => $payload['title']['0']['value'],
@@ -267,29 +222,22 @@ class WebhookHandler
         // checks if event date exists
         $query = self::get_query_by_meta( 'sd_date', 'date_id', $payload['id']);
         $post_id = $query->post->ID;
-
         if ( !isset($post_id) ){
-            return new WP_Error('no_post', 'Event date not updated. Event date ID ' . $payload['id'] . ' does not exists', array('status' => 404));
+            return new WP_Error('not_found', 'Event date not updated. Event date ID ' . $payload['id'] . ' does not exists', array(
+                'status'        => 404,
+                'requestId'     => $request_json['requestId'],
+                'action'        => $request_json['action'],
+                'eventDateId'   => $payload['id'],
+                'eventId'       => $payload['eventId'],
+            ));
         }
 
-        // define metadata of the new sd_event
-        $meta = [
-            'date_id'       => $payload['id'],
-            'event_id'      => $payload['eventId'],
-            // 'event_wp_id' // not updated
-            'status'        => $payload['status'],
-            'begin_date'    => (int)$payload['beginDate'],
-            'end_date'      => (int)$payload['endDate'],
-            'facilitators'  => [null],
-            'has_board'     => $payload['hasBoard'],
-            'has_lodging'   => $payload['hasLodging'],
-            'has_misc'      => $payload['hasMisc'],
-            'price_info'    => $payload['priceInfo']['0']['value'],
-            'venue'         => $payload['venue']['name'],
-            'json_dump'     => $request_json,
-        ];
+        // get corresponding WordPress ID for the corresponding event post
+        $event_post_id = $query->post->event_wp_id;
 
-        // define attributes of the new sd_event using $payload of the 
+        // define attributes of the new sd_event_date using request data of the webhook 
+        $txn_input = self::set_event_date_taxonomy($payload);
+        $meta_input = self::set_event_date_meta( $request_json, $event_post_id );
         $event_attr = [
             'ID'            => $post_id,
             'post_type'     => 'sd_date',
@@ -298,7 +246,8 @@ class WebhookHandler
             'post_excerpt'  => $payload['teaser']['0']['value'],
             'post_author'   => get_current_user_id(),
             'post_status'   => 'publish',
-            'meta_input'    => $meta,
+            'meta_input'    => $meta_input,
+            'tax_input'     => $txn_input,
         ];
 
         // Update event data in the database
@@ -314,13 +263,23 @@ class WebhookHandler
         // get updated event via post id and return it
         $event = get_post($post_id);
 
-        return new WP_REST_Response( 'Event Data ' . $payload['id'] . ' updated', 200);
+        // return new WP_REST_Response( 'Event Data ' . $payload['id'] . ' updated', 200);
+
+        return new WP_REST_Response( [
+            'message'       => 'Event Date updated',
+            'requestId'     => $request_json['requestId'],
+            'action'        => $request_json['action'],
+            'postId'        => $post_id,
+            'eventDateId'   => $payload['id'],
+            'eventPostId'   => $event_post_id,
+            'eventId'       => $payload['eventId'],
+        ], 200);
     }
 
     /**
      * Delete event date via webhook from SeminarDesk
      *
-     * @param Array $request_json
+     * @param array $request_json
      * @return WP_REST_Response|WP_Error
      */
     public static function delete_event_date($request_json)
@@ -335,7 +294,7 @@ class WebhookHandler
     /**
      * Create facilitator event via webhook from SeminarDesk
      *
-     * @param Array $request_json
+     * @param array $request_json
      * @return WP_REST_Response|WP_Error
      */
     public static function create_facilitator($request_json)
@@ -376,7 +335,7 @@ class WebhookHandler
     /**
      * Update facilitator event via webhook from SeminarDesk
      *
-     * @param Array $request_json
+     * @param array $request_json
      * @return WP_REST_Response|WP_Error
      */
     public static function update_facilitator($request_json)
@@ -425,7 +384,7 @@ class WebhookHandler
     /**
      * Delete facilitator event via webhook from SeminarDesk
      *
-     * @param Array $request_json
+     * @param array $request_json
      * @return WP_REST_Response|WP_Error
      */
     public static function delete_facilitator($request_json)
@@ -466,8 +425,8 @@ class WebhookHandler
     /**
      * move custom post to trash
      * 
-     * @param Int   $post_id
-     * @param Array $payload
+     * @param int   $post_id
+     * @param array $payload
      */
     public static function trash_post_by_meta($post_type, $meta_key, $meta_value)
     {
@@ -489,8 +448,8 @@ class WebhookHandler
     /**
      * upload image and set us featured image for custom post
      *
-     * @param Int   $post_id
-     * @param Array $payload
+     * @param int   $post_id
+     * @param array $payload
      */
     // TODO: image already exists in media lib?
     public static function set_thumbnail($post_id, $img_url){
@@ -508,5 +467,73 @@ class WebhookHandler
             );
             set_post_thumbnail($post_id, $img_id);
         }
+    }
+
+    /**
+     * define taxonomy 'dates' for the event date and create terms if not exists
+     *
+     * @param array $payload payload send form seminardesk via webhook
+     * @return array custom taxonomy for the event date
+     */
+    public static function set_event_date_taxonomy($payload)
+    {
+        $txn = 'dates';
+        $year = date('Y', $payload['beginDate']/1000);
+        $month = date('m', $payload['beginDate']/1000);
+        // get term ID and create if not existing including children (months of the year)
+        $term_year = term_exists($year, $txn); 
+        if (!isset($term_year)){
+            $term_year = wp_insert_term($year, $txn, array(
+                'description' => __('Dates of ' . $year, 'seminardesk'),
+                'slug' => $year,
+            ));
+            for ($m = 1; $m <= 12; $m++){
+                $m_padded = sprintf('%02s', $m);
+                wp_insert_term($m_padded . '/' . $year, $txn, array(
+                    // 'alias_of'      => $year,
+                    'description'   => __('Dates of ' . $m_padded . '/' . $year, 'seminardesk'),
+                    'parent'        => $term_year['term_taxonomy_id'],
+                    'slug'          => $m_padded,
+                ));
+            }
+        }
+        // define taxonomies of the new sd_event_date
+        // user to create new sd_event_date needs capability to work with a taxonomy
+        $term_month = term_exists($month, $txn);
+        $terms = array($term_year['term_taxonomy_id'], $term_month['term_taxonomy_id']);
+        $txn_input = array(
+            $txn => $terms,
+        );
+
+        return $txn_input;
+    }
+
+    /**
+     * Define metadata for the event date
+     *
+     * @param array $request_json request sent from seminardesk via webhook
+     * @param int $event_post_id WordPress ID of corresponding event
+     * @return array metadata for the event date
+     */
+    public static function set_event_date_meta( $request_json, $event_post_id )
+    {
+        $payload = (array)$request_json['payload'];
+        // define metadata of the new sd_event_date
+        $meta_input = [
+            'date_id'       => $payload['id'],
+            'event_id'      => $payload['eventId'],
+            'event_wp_id'   => $event_post_id,
+            'status'        => $payload['status'],
+            'begin_date'    => (int)$payload['beginDate'],
+            'end_date'      => (int)$payload['endDate'],
+            'facilitators'  => [null],
+            'has_board'     => $payload['hasBoard'],
+            'has_lodging'   => $payload['hasLodging'],
+            'has_misc'      => $payload['hasMisc'],
+            'price_info'    => $payload['priceInfo']['0']['value'],
+            'venue'         => $payload['venue']['name'],
+            'json_dump'     => $request_json,
+        ];
+        return $meta_input;
     }
 }

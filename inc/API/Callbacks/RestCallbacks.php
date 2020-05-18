@@ -208,14 +208,7 @@ class RestCallbacks{
             default:  
                 $response = new WP_Error('not_supported', 'action ' . $request_json['action'] . ' not supported', array('status' => 400));
         }
-
-        // return error if $response is of type WP_Error
-        if ( is_wp_error($response) )
-        {
-            return $response;
-        }
-
-        return new WP_REST_Response($response);
+        return rest_ensure_response($response);
     }
 
     /**
