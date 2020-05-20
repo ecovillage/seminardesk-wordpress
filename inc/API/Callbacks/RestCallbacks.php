@@ -133,7 +133,7 @@ class RestCallbacks{
                     ],
                     'begin_date'        => (int)$post->begin_date,
                     'end_date'          => (int)$post->end_date,
-                    'facilitators'      => $post->facilitators,
+                    'facilitator_ids'      => $post->facilitator_ids,
                     'has_board'         => $post->has_board,
                     'has_lodging'       => $post->has_lodging,
                     'has_misc'          => $post->has_misc,

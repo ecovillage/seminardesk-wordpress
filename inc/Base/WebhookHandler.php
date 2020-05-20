@@ -484,14 +484,14 @@ class WebhookHandler
         $term_year = term_exists($year, $txn); 
         if (!isset($term_year)){
             $term_year = wp_insert_term($year, $txn, array(
-                'description' => __('Dates of ' . $year, 'seminardesk'),
+                'description' => __('Seminare in ' . $year, 'seminardesk'),
                 'slug' => $year,
             ));
             for ($m = 1; $m <= 12; $m++){
                 $m_padded = sprintf('%02s', $m);
                 wp_insert_term($m_padded . '/' . $year, $txn, array(
                     // 'alias_of'      => $year,
-                    'description'   => __('Dates of ' . $m_padded . '/' . $year, 'seminardesk'),
+                    'description'   => __('Event Dates of the month ' . $m_padded . '/' . $year, 'seminardesk'),
                     'parent'        => $term_year['term_taxonomy_id'],
                     'slug'          => $m_padded,
                 ));
@@ -520,19 +520,19 @@ class WebhookHandler
         $payload = (array)$request_json['payload'];
         // define metadata of the new sd_event_date
         $meta_input = [
-            'date_id'       => $payload['id'],
-            'event_id'      => $payload['eventId'],
-            'event_wp_id'   => $event_post_id,
-            'status'        => $payload['status'],
-            'begin_date'    => (int)$payload['beginDate'],
-            'end_date'      => (int)$payload['endDate'],
-            'facilitators'  => [null],
-            'has_board'     => $payload['hasBoard'],
-            'has_lodging'   => $payload['hasLodging'],
-            'has_misc'      => $payload['hasMisc'],
-            'price_info'    => $payload['priceInfo']['0']['value'],
-            'venue'         => $payload['venue']['name'],
-            'json_dump'     => $request_json,
+            'date_id'           => $payload['id'],
+            'event_id'          => $payload['eventId'],
+            'event_wp_id'       => $event_post_id,
+            'status'            => $payload['status'],
+            'begin_date'        => (int)$payload['beginDate'],
+            'end_date'          => (int)$payload['endDate'],
+            'facilitator_ids'    => $payload['facilitators'],
+            'has_lodging'       => $payload['hasLodging'],
+            'has_misc'          => $payload['hasMisc'],
+            'has_board'         => $payload['hasBoard'],
+            'price_info'        => $payload['priceInfo']['0']['value'],
+            'venue'             => $payload['venue']['name'],
+            'json_dump'         => $request_json,
         ];
         return $meta_input;
     }

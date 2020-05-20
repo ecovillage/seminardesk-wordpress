@@ -25,7 +25,7 @@ if (have_posts()) :
         // echo '</header>';
     endwhile;
 else :
-    _e('<strong>Sorry, no posts matched your criteria.</strong>', 'textdomain');
+    _e('<strong>Sorry, no posts matched your criteria.</strong>', 'seminardesk');
 endif;
 
 //get_sidebar();

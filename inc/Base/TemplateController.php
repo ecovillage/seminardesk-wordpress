@@ -17,14 +17,13 @@ class TemplateController
 
     public function custom_post_template( $single )
     {
-        // post object for the current (custom) post
-        global $post;
+        $post_type = get_post_type();
 
         // checks for custom template by given (custom) post type if $single not defined
-        if ( empty( $single ) && strpos($post->post_type, 'sd_' ) !== false)
+        if ( empty( $single ) && strpos($post_type, 'sd_' ) !== false)
         {
-            if ( file_exists( SD_PLUGIN_PATH . 'templates/single-' . $post->post_type . '.php' ) ) {
-                return SD_PLUGIN_PATH . 'templates/single-' . $post->post_type . '.php';
+            if ( file_exists( SD_PLUGIN_PATH . 'templates/single-' . $post_type . '.php' ) ) {
+                return SD_PLUGIN_PATH . 'templates/single-' . $post_type . '.php';
             }
             return SD_PLUGIN_PATH . 'templates/singular.php';
         }
