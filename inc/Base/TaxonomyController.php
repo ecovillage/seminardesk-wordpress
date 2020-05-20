@@ -24,6 +24,17 @@ class TaxonomyController
     public function register()
     {
         add_action( 'init', array($this, 'create_taxonomy_dates') );
+        add_action('pre_get_posts', array( $this, 'posts_orderby_begin_date'));
+    }
+
+    public function posts_orderby_begin_date( $query ) {
+
+        if ( $query->is_tax() && array_key_exists('dates', $query->query) &&$query->is_main_query() ) {
+            //set some additional query parameters
+            $query->set( 'meta_key', 'begin_date' );
+            $query->set( 'orderby', 'meta_value_num' );
+            $query->set( 'order', 'DESC' );
+        }
     }
 
     public function create_taxonomy_dates()
