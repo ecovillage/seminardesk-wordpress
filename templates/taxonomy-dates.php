@@ -79,7 +79,7 @@ function sd_get_facilitators( $before = '', $after = '' , $echo = true )
         foreach ( $ids as $key => $value){
             foreach ( $facilitator_posts as $facilitator_post){
                 if ( $facilitator_post->facilitator_id == $value['id']){
-                    $facilitator_html = '<a href="' . get_permalink($facilitator_post->ID) . '">' . get_the_title($facilitator_post) . '</a>';
+                    $facilitator_html = '<a href="' . esc_url(get_permalink($facilitator_post->ID)) . '">' . get_the_title($facilitator_post) . '</a>';
                     array_push($facilitators, $facilitator_html);
                 }
             }
@@ -170,7 +170,7 @@ get_header();
                 the_excerpt();
                 ?>
                 <a href="<?php echo esc_url(get_permalink($post->event_wp_id)); ?>">
-                    More ...
+                    <?php esc_html_e('More ...', 'seminardesk')?>
                 </a>
             </div>
             <?php
