@@ -175,7 +175,11 @@ get_header();
             </div>
             <?php
             
-		}
+        }?>
+        <div class="has-text-align-center">
+            <br><p><?php echo get_posts_nav_link();?></p>
+        </div>
+        <?php
 	} else {
         ?>
         <div class="entry-header-inner section-inner small has-text-align-center">
@@ -189,6 +193,8 @@ get_header();
         <?php
 
     }
+    // TODO: reset query necessary ... better use wp_reset_postdata()?
+    wp_reset_query();
 	?>
 
 </main><!-- #site-content -->
