@@ -180,7 +180,7 @@ class WebhookHandler
         $event_attr = [
             'post_type'     => 'sd_date',
             'post_title'    => $payload['title']['0']['value'],
-            'post_content'  => $payload['description']['0']['value'],
+            //'post_content'  => $payload['description']['0']['value'],
             'post_excerpt'  => $payload['teaser']['0']['value'],
             'post_author'   => get_current_user_id(),
             'post_status'   => 'publish',
@@ -520,19 +520,20 @@ class WebhookHandler
         $payload = (array)$request_json['payload'];
         // define metadata of the new sd_event_date
         $meta_input = [
-            'date_id'           => $payload['id'],
-            'event_id'          => $payload['eventId'],
-            'event_wp_id'       => $event_post_id,
-            'status'            => $payload['status'],
-            'begin_date'        => (int)$payload['beginDate'],
-            'end_date'          => (int)$payload['endDate'],
-            'facilitator_ids'    => $payload['facilitators'],
-            'has_lodging'       => $payload['hasLodging'],
-            'has_misc'          => $payload['hasMisc'],
-            'has_board'         => $payload['hasBoard'],
-            'price_info'        => $payload['priceInfo']['0']['value'],
-            'venue'             => $payload['venue']['name'],
-            'json_dump'         => $request_json,
+            'date_id'               => $payload['id'],
+            'event_id'              => $payload['eventId'],
+            'event_wp_id'           => $event_post_id,
+            'status'                => $payload['status'],
+            'begin_date'            => (int)$payload['beginDate'],
+            'end_date'              => (int)$payload['endDate'],
+            'facilitator_ids'       => $payload['facilitators'],
+            'has_lodging'           => $payload['hasLodging'],
+            'has_misc'              => $payload['hasMisc'],
+            'has_board'             => $payload['hasBoard'],
+            'teaser_picture_url'    => $payload['teaserPictureUrl']['0']['value'],
+            'price_info'            => $payload['priceInfo']['0']['value'],
+            'venue'                 => $payload['venue']['name'],
+            'json_dump'             => $request_json,
         ];
         return $meta_input;
     }

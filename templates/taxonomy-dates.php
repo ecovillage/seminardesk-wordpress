@@ -13,6 +13,7 @@
  * @param boolean $echo
  * @return string
  */
+
 function sd_get_date( $before = '', $after = '', $echo = true )
 {
     global $post;
@@ -20,12 +21,43 @@ function sd_get_date( $before = '', $after = '', $echo = true )
         'begin' => date_i18n('l d.m.Y', $post->begin_date/1000),
         'end'  => date_i18n('l d.m.Y', $post->end_date/1000),
     );
-    $response = $before . $date['begin'] . ' - ' . $date['end'] . $after;
+
+    $response = $before . __('<strong>Date: </strong>', 'seminardesk') . $date['begin'] . ' - ' . $date['end'] . $after;
+    if ( $echo ){
+        echo $response;
+    }
+    return $response;
+}
+
+function sd_get_price( $before = '', $after = '' , $echo = true )
+{
+    global $post;
+    $price = $post->price_info;
+    if ( !empty($price) ){
+        $response = $before . __('<strong>Price Info: </strong>', 'seminardesk') . $price . $after;
+    }else{
+        $response = null;
+    }
 
     if ( $echo ){
         echo $response;
     }
+    return $response;
+}
 
+function sd_get_venue( $before = '', $after = '' , $echo = true )
+{
+    global $post;
+    $venue = $post->venue;
+    if ( !empty($venue) ){
+        $response = $before . __('<strong>Venue: </strong>', 'seminardesk') . $venue . $after;
+    }else{
+        $response = null;
+    }
+
+    if ( $echo ){
+        echo $response;
+    }
     return $response;
 }
 
@@ -46,9 +78,9 @@ function sd_get_facilitators( $before = '', $after = '' , $echo = true )
     if (is_array($ids)){
         foreach ( $ids as $key => $value){
             foreach ( $facilitator_posts as $facilitator_post){
-                $test_id = $facilitator_post->facilitator_id;
                 if ( $facilitator_post->facilitator_id == $value['id']){
-                    array_push($facilitators, get_the_title($facilitator_post));
+                    $facilitator_html = '<a href="' . get_permalink($facilitator_post->ID) . '">' . get_the_title($facilitator_post) . '</a>';
+                    array_push($facilitators, $facilitator_html);
                 }
             }
         }
@@ -57,15 +89,28 @@ function sd_get_facilitators( $before = '', $after = '' , $echo = true )
     sort($facilitators);
 
     if ( !empty($facilitators) ){
-        $response = $before . __('Facilitators: ', 'seminardesk'). implode(" | ",$facilitators) . $after;
+        $response = $before . __('<strong>Facilitators: </strong>', 'seminardesk'). implode(" | ",$facilitators) . $after;
     }else{
         $response = null;
     }
-
     if ( $echo ){
         echo $response;
     }
+    return $response;
+}
 
+function sd_get_img_remote( $url, $width = '', $height = '', $alt = "remote image load failed", $before = '', $after = '', $echo = true )
+{
+    global $post;
+    // $url = $post->teaser_picture_url;
+    if ( $url ){
+        $response = $before . '<img src="' . $post->teaser_picture_url . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '"/>' . $after;
+    }else{
+        $response = null;
+    }
+    if ( $echo ){
+        echo $response;
+    }
     return $response;
 }
 
@@ -106,18 +151,27 @@ get_header();
             the_post();
             ?>
             <div class="entry-header-inner section-inner small">
+                <a href="<?php echo esc_url(get_permalink($post->event_wp_id)); ?>">
+                    <?php the_title('<h4>', '</h4>'); ?>
+                </a>
                 <?php
-                the_title('<h4>', '</h4>');
-                sd_get_date( '<p>', '</p>');
-                sd_get_facilitators( '<p>', '</p>');
+                // echo get_permalink( $post->event_wp_id );
+                sd_get_date('<p>', '</p>');
+                sd_get_facilitators('<p>', '</p>');
+                sd_get_price('<p>', '</p>');
+                sd_get_venue('<p>', '</p>');
+                sd_get_img_remote( $post->teaser_picture_url, '300', '', $alt = "remote image load failed", '<p>', '</p>' );
                 // check if the post or page has a Featured Image assigned to it.
                 if ( has_post_thumbnail() ) {
-                    add_image_size( 'event_thumb_100', 300, 300, true);
-                    the_post_thumbnail('event_thumb_100');
+                    add_image_size( 'event_thumb_300', 300, 300, true);
+                    the_post_thumbnail('event_thumb_300');
                     echo '<p></p>';
                 }
                 the_excerpt();
                 ?>
+                <a href="<?php echo esc_url(get_permalink($post->event_wp_id)); ?>">
+                    More ...
+                </a>
             </div>
             <?php
             
