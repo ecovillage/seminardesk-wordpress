@@ -1,9 +1,30 @@
 <?php
 /**
- * The template for taxonomy dates
+ * The template for taxonomy dates with upcoming event dates
  * 
  * @package SeminardeskPlugin
  */
+
+global $wp_query;
+
+$timestamp_today = strtotime(wp_date('Y-m-d'));
+// $timestamp_today = strtotime('2020-04-01');
+// TODO: use set() and register custom query vars... 
+$wp_query = new WP_Query(
+     array(
+         'post_type'    => 'sd_date',
+         'post_status'  => 'publish',
+         'meta_key'     => 'begin_date',
+         'orderby'      => 'meta_value_num',
+         'order'        => 'DESC',
+         'meta_query'   => array(
+            'key'       => 'begin_date',
+            'value'     => $timestamp_today*1000, //in ms
+            'type'      => 'numeric',
+            'compare'   => '>=',
+         ),
+     )
+);
 
 /**
  * Get start and end date of the event
@@ -200,3 +221,5 @@ get_header();
 
 <?php
 get_footer();
+
+

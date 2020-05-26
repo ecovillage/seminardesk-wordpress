@@ -478,10 +478,11 @@ class WebhookHandler
     public static function set_event_date_taxonomy($payload)
     {
         $txn = 'dates';
-        $year = date('Y', $payload['beginDate']/1000);
-        $month = date('m', $payload['beginDate']/1000);
+        $year = wp_date('Y', $payload['beginDate']/1000);
+        $month = wp_date('m', $payload['beginDate']/1000);
         // get term ID and create if not existing including children (months of the year)
         $term_year = term_exists($year, $txn); 
+
         if (!isset($term_year)){
             $term_year = wp_insert_term($year, $txn, array(
                 'description' => __('Seminare in ' . $year, 'seminardesk'),

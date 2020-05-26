@@ -20,6 +20,7 @@ if (have_posts()) :
                     echo '<p></p>';
                 }
                 the_content();
+                // next_post_link();
             echo '</div>';
         echo '</div>';
         // echo '</header>';

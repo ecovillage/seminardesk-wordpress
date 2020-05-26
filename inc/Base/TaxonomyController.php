@@ -24,24 +24,15 @@ class TaxonomyController
     public function register()
     {
         add_action( 'init', array($this, 'create_taxonomy_dates') );
-        add_action('pre_get_posts', array( $this, 'posts_orderby_begin_date'));
-        add_action('pre_get_posts', array( $this, 'posts_per_page'));
+        add_action('pre_get_posts', array( $this, 'taxonomy_query_modification'));
     }
-
-    public function posts_orderby_begin_date( $query ) {
-
+    
+    public function taxonomy_query_modification( $query ) {
         if ( $query->is_tax() && array_key_exists('dates', $query->query) &&$query->is_main_query() ) {
             //set some additional query parameters
             $query->set( 'meta_key', 'begin_date' );
             $query->set( 'orderby', 'meta_value_num' );
             $query->set( 'order', 'DESC' );
-        }
-    }
-
-    public function posts_per_page( $query ) {
-
-        if ( $query->is_tax() && array_key_exists('dates', $query->query) &&$query->is_main_query() ) {
-            //set some additional query parameters
             $query->set( 'posts_per_page', '3' );
         }
     }
