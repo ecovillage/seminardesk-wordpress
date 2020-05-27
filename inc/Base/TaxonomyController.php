@@ -24,10 +24,11 @@ class TaxonomyController
     public function register()
     {
         add_action( 'init', array($this, 'create_taxonomy_dates') );
-        add_action('pre_get_posts', array( $this, 'taxonomy_query_modification'));
+        add_action('pre_get_posts', array( $this, 'set_taxonomy_queries'));
     }
     
-    public function taxonomy_query_modification( $query ) {
+    public function set_taxonomy_queries( $query ) {
+        // modify query of taxonomy dates
         if ( $query->is_tax() && array_key_exists('dates', $query->query) &&$query->is_main_query() ) {
             //set some additional query parameters
             $query->set( 'meta_key', 'begin_date' );
