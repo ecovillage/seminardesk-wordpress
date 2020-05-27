@@ -41,8 +41,8 @@ class Admin
 		$this->setSections();
         $this->setFields();
         
-		// $this->settings->addPages( $this->pages )->withSubPage( 'General' )->addSubPages( $this->subpages )->register();
-		$this->settings->addPages( $this->pages )->withSubPage( 'General' )->register();
+		$this->settings->addPages( $this->pages )->withSubPage( 'General' )->addSubPages( $this->subpages )->register();
+		// $this->settings->addPages( $this->pages )->withSubPage( 'General' )->register();
     }
 
     /**
@@ -76,6 +76,15 @@ class Admin
 				'menu_slug' => 'seminardesk_event_list', 
 				'callback' => array( $this->callbacks, 'adminEventList' ),
 				'position' => 2,
+			),
+			array(
+				'parent_slug' => 'seminardesk_plugin', 
+				'page_title' => 'Taxonomy for Event Dates', 
+				'menu_title' => 'Date Taxonomy', 
+				'capability' => 'manage_options', 
+				'menu_slug' => 'edit-tags.php?taxonomy=dates', 
+				'callback' => NULL,
+				'position' => 4,
 			),
 		);
     }

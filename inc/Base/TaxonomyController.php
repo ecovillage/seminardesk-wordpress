@@ -64,7 +64,8 @@ class TaxonomyController
             'hierarchical'      => true,
             'labels'            => $labels,
             'show_ui'           => true,
-            'show_admin_column' => true,
+            'show_in_menu'      => false,
+            'show_admin_column' => false,
             'query_var'         => true,
             'show_in_rest'      => true, // http://localhost/wpsdp/wp-json/wp/v2/dates
             //'rest_base'         => 'txn',
