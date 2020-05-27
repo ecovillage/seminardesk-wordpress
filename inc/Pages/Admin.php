@@ -41,8 +41,8 @@ class Admin
 		$this->setSections();
         $this->setFields();
         
-		$this->settings->addPages( $this->pages )->withSubPage( 'General' )->addSubPages( $this->subpages )->register();
-		// $this->settings->addPages( $this->pages )->withSubPage( 'General' )->register();
+		// $this->settings->addPages( $this->pages )->withSubPage( 'General' )->addSubPages( $this->subpages )->register();
+		$this->settings->addPages( $this->pages )->withSubPage( 'General' )->register();
     }
 
     /**
@@ -77,33 +77,6 @@ class Admin
 				'callback' => array( $this->callbacks, 'adminEventList' ),
 				'position' => 2,
 			),
-			array(
-				'parent_slug' => 'seminardesk_plugin', 
-				'page_title' => 'Custom Post Types', 
-				'menu_title' => 'CPT', 
-				'capability' => 'manage_options', 
-				'menu_slug' => 'seminardesk_cpt', 
-				'callback' => array( $this->callbacks, 'adminCpt' ),
-				'position' => 11,
-			),
-			array(
-				'parent_slug' => 'seminardesk_plugin', 
-				'page_title' => 'Custom Taxonomies', 
-				'menu_title' => 'Taxonomies', 
-				'capability' => 'manage_options', 
-				'menu_slug' => 'seminardesk_taxonomies', 
-				'callback' => array( $this->callbacks, 'adminTaxonomy' ),
-				'position' => 12,
-			),
-			array(
-				'parent_slug' => 'seminardesk_plugin', 
-				'page_title' => 'Custom Widgets', 
-				'menu_title' => 'Widgets', 
-				'capability' => 'manage_options', 
-				'menu_slug' => 'seminardesk_widgets', 
-				'callback' => array( $this->callbacks, 'adminWidget' ),
-				'position' => 13,
-			)
 		);
     }
     

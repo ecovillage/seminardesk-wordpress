@@ -72,7 +72,7 @@ class TemplateController
             if ( file_exists(SD_PLUGIN_PATH . 'templates/taxonomy-' . get_query_var( 'taxonomy' ) . '.php')){
                 return SD_PLUGIN_PATH . 'templates/taxonomy-' . get_query_var( 'taxonomy' ) . '.php';
             }
-            return SD_PLUGIN_PATH . 'templates/taxonomy.php';
+            // return SD_PLUGIN_PATH . 'templates/taxonomy.php';
         }
         return $template;
     }
