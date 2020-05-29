@@ -16,7 +16,7 @@ class WebhookHandler
     /**
      * Create event via webhook from SeminarDesk
      *
-     * @param Array $request_json 
+     * @param array $request_json 
      * @return WP_REST_Response|WP_Error
      */
     public static function create_event($request_json)
@@ -36,22 +36,19 @@ class WebhookHandler
         // }
 
         // define metadata of the new sd_event
-        $meta = [
-            'event_id'  => $payload['id'],
-            'json_dump' => $request_json,
-        ];
+        $meta_input = self::set_event_meta( $request_json );
 
         // define attributes of the new sd_event using $payload of the 
         $event_attr = [
             'post_type'     => 'sd_event',
             'post_title'    =>  $payload['title']['0']['value'],
             //'post_title'    =>  wp_strip_all_tags($payload['title']['0']['value']), // remove HTML, JavaScript, or PHP tags from the title of the post
-            'post_content'  => $payload['description']['0']['value'],
+            // 'post_content'  => $payload['description']['0']['value'],
             // 'post_content'  => wp_strip_all_tags($payload['description']['0']['value']),
-            'post_excerpt'  => $payload['teaser']['0']['value'],
+            // 'post_excerpt'  => $payload['teaser']['0']['value'],
             'post_author'   => get_current_user_id(),
             'post_status'   => 'publish',
-            'meta_input'    => $meta,
+            'meta_input'    => $meta_input,
         ];
 
         // create new event in the WordPress database
@@ -67,13 +64,19 @@ class WebhookHandler
             self::set_thumbnail($post_id, $payload['teaserPictureUrl']['0']['value']);
         }
         
-        return new WP_REST_Response( 'Event ' . $payload['id'] . ' created', 201);
+        return new WP_REST_Response( [
+            'message'       => 'Event created',
+            'requestId'     => $request_json['requestId'],
+            'action'        => $request_json['action'],
+            'postId'        => $post_id,
+            'eventId'       => $payload['id'],
+        ], 201);
     }
 
     /**
      * Update event via webhook from SeminarDesk
      *
-     * @param Array $request_json
+     * @param array $request_json
      * @return WP_REST_Response|WP_Error
      */
     public static function update_event($request_json)
@@ -92,14 +95,16 @@ class WebhookHandler
         }
 
         if ( !isset($post_id) ){
-            return new WP_Error('no_post', 'Event not updated. Event ID ' . $payload['id'] . ' does not exists', array('status' => 404));
+            return new WP_Error('not_found', 'Event not updated. Event ID ' . $payload['id'] . ' does not exist', array(
+                'status'        => 404,
+                'requestId'     => $request_json['requestId'],
+                'action'        => $request_json['action'],
+                'eventId'   => $payload['id'],
+            ));
         }
 
         // define metadata of the new sd_event
-        $meta = [
-            'event_id' =>  $payload['id'],
-            'json_dump' => $request_json,
-        ];
+        $meta_input = self::set_event_meta( $request_json );
 
         // TODO: update of corresponding event dates if title, content, excerpt ..... is changed!?
           
@@ -109,12 +114,12 @@ class WebhookHandler
             'post_type'     => 'sd_event',
             'post_title'    =>  $payload['title']['0']['value'],
             //'post_title'    =>  wp_strip_all_tags($payload['title']['0']['value']), // remove HTML, JavaScript, or PHP tags from the title of the post
-            'post_content'  => $payload['description']['0']['value'],
+            // 'post_content'  => $payload['description']['0']['value'],
             // 'post_content'  => wp_strip_all_tags($payload['description']['0']['value']),
-            'post_excerpt'  => $payload['teaser']['0']['value'],
+            // 'post_excerpt'  => $payload['teaser']['0']['value'],
             'post_author'   => get_current_user_id(),
             'post_status'   => 'publish',
-            'meta_input'    => $meta,
+            'meta_input'    => $meta_input,
         ];
 
         // Update event data in the database
@@ -147,8 +152,22 @@ class WebhookHandler
     {
         // TODO: Delete also all dates associated with this event???
         $payload = (array)$request_json['payload'];
-        $response = self::trash_post_by_meta('sd_event', 'event_id', $payload['id']);
-        return $response;
+        $post_deleted = self::trash_post_by_meta('sd_event', 'event_id', $payload['id']);
+        if ( !isset($post_deleted) ){
+            return new WP_Error('not_found', 'Nothing to delete. Event date ID ' . $payload['id'] . ' does not exists', array(
+                'status'        => 404,
+                'requestId'     => $request_json['requestId'],
+                'action'        => $request_json['action'],
+                'eventDateId'   => $payload['id'],
+            ));
+        }
+        return new WP_REST_Response( [
+            'message'       => 'Facilitator deleted',
+            'requestId'     => $request_json['requestId'],
+            'action'        => $request_json['action'],
+            'postId'        => $post_deleted->ID,
+            'facilitatorId' => $payload['id'],
+        ], 200);
     }
 
     /**
@@ -212,7 +231,7 @@ class WebhookHandler
     /**
      * Update event date via webhook from SeminarDesk
      *
-     * @param Array $request_json
+     * @param array $request_json
      * @return WP_REST_Response|WP_Error
      */
     public static function update_event_date($request_json)
@@ -263,8 +282,6 @@ class WebhookHandler
         // get updated event via post id and return it
         $event = get_post($post_id);
 
-        // return new WP_REST_Response( 'Event Data ' . $payload['id'] . ' updated', 200);
-
         return new WP_REST_Response( [
             'message'       => 'Event Date updated',
             'requestId'     => $request_json['requestId'],
@@ -287,8 +304,23 @@ class WebhookHandler
         // TODO: security if WP_Post/Post_type correct which is returned by wp_trash_post
         // TODO: add status/action deleted http status code 200 (OK) not 201 (created)
         $payload = (array)$request_json['payload'];
-        $response = self::trash_post_by_meta('sd_date', 'date_id', $payload['id']);
-        return $response;
+        $post_deleted = self::trash_post_by_meta('sd_date', 'date_id', $payload['id']);
+        
+        if ( !isset($post_deleted) ){
+            return new WP_Error('not_found', 'Nothing to delete. Event date ID ' . $payload['id'] . ' does not exists', array(
+                'status'        => 404,
+                'requestId'     => $request_json['requestId'],
+                'action'        => $request_json['action'],
+                'eventDateId'   => $payload['id'],
+            ));
+        }
+        return new WP_REST_Response( [
+            'message'       => 'Facilitator deleted',
+            'requestId'     => $request_json['requestId'],
+            'action'        => $request_json['action'],
+            'postId'        => $post_deleted->ID,
+            'facilitatorId' => $payload['id'],
+        ], 200);
     }
     
     /**
@@ -329,7 +361,13 @@ class WebhookHandler
 
         self::set_thumbnail($post_id, $payload['pictureUrl']);
 
-        return new WP_REST_Response( 'Facilitator ' . $payload['id'] . ' created', 200);
+        return new WP_REST_Response( [
+            'message'       => 'Facilitator created',
+            'requestId'     => $request_json['requestId'],
+            'action'        => $request_json['action'],
+            'postId'        => $post_id,
+            'facilitatorId' => $payload['id'],
+        ], 200);
     }
 
     /**
@@ -345,7 +383,12 @@ class WebhookHandler
         $post_id = $query->post->ID;
 
         if ( !isset($post_id) ){
-            return new WP_Error('no_post', 'Facilitator not updated. Facilitator ID ' . $payload['id'] . ' does not exists', array('status' => 404));
+            return new WP_Error('not_found', 'Nothing to update. Facilitator ID ' . $payload['id'] . ' does not exists', array(
+                'status'        => 404,
+                'requestId'     => $request_json['requestId'],
+                'action'        => $request_json['action'],
+                'eventDateId'   => $payload['id'],
+            ));
         }
 
          // define metadata of the new sd_facilitator
@@ -373,12 +416,18 @@ class WebhookHandler
 
          // return error if $post_id is of type WP_Error
          if (is_wp_error($post_id)){
-             return $post_id;
+            return $post_id;
          }
 
         self::set_thumbnail($post_id, $payload['pictureUrl']);
 
-        return new WP_REST_Response( 'Facilitator ' . $payload['id'] . ' updated', 200);
+        return new WP_REST_Response( [
+            'message'       => 'Facilitator updated',
+            'requestId'     => $request_json['requestId'],
+            'action'        => $request_json['action'],
+            'postId'        => $post_id,
+            'facilitatorId' => $payload['id'],
+        ], 200);
     }
 
     /**
@@ -390,8 +439,23 @@ class WebhookHandler
     public static function delete_facilitator($request_json)
     {
         $payload = (array)$request_json['payload'];
-        $response = self::trash_post_by_meta('sd_facilitator', 'facilitator_id', $payload['id']);
-        return $response;
+        $post_deleted = self::trash_post_by_meta('sd_facilitator', 'facilitator_id', $payload['id']);
+
+        if ( !isset($post_deleted) ){
+            return new WP_Error('not_found', 'Nothing to delete. Facilitator ID ' . $payload['id'] . ' does not exists', array(
+                'status'        => 404,
+                'requestId'     => $request_json['requestId'],
+                'action'        => $request_json['action'],
+                'eventDateId'   => $payload['id'],
+            ));
+        }
+        return new WP_REST_Response( [
+            'message'       => 'Facilitator deleted',
+            'requestId'     => $request_json['requestId'],
+            'action'        => $request_json['action'],
+            'postId'        => $post_deleted->ID,
+            'facilitatorId' => $payload['id'],
+        ], 200);
     }
 
     /**
@@ -425,24 +489,23 @@ class WebhookHandler
     /**
      * move custom post to trash
      * 
-     * @param int   $post_id
-     * @param array $payload
+     * @param int   $post_type
+     * @param string $meta_key
+     * @param string $meta_value
+     * @return bool status of deletion
      */
     public static function trash_post_by_meta($post_type, $meta_key, $meta_value)
     {
         //$get_sd_id = str_replace('sd_', '', $post_type) . '_id'; // variable variable names
         $query = self::get_query_by_meta( $post_type, $meta_key, $meta_value);
-        $sd_id = $query->post->$meta_value;
         $post_id = $query->post->ID;
+        $sd_id = $query->post->$meta_value;
         if ( !isset($sd_id) ){
-            return Err::no_post($meta_value);
+            return null;
         }
         $post_deleted = wp_trash_post($post_id);
 
-        if ( !isset($post_deleted) ){
-            return new WP_Error('no_post', 'Nothing to delete. Event date ID ' . $meta_value . ' does not exists', array('status' => 404));
-        }
-        return new WP_REST_Response( $post_type . ' ' . $meta_value . ' moved to trash', 204);
+        return $post_deleted;
     }
 
     /**
@@ -535,6 +598,23 @@ class WebhookHandler
             'price_info'            => $payload['priceInfo']['0']['value'],
             'venue'                 => $payload['venue']['name'],
             'json_dump'             => $request_json,
+        ];
+        return $meta_input;
+    }
+    /**
+     * Define metadata for the event
+     *
+     * @param array $request_json request sent from seminardesk via webhook
+     * @return array metadata for the event
+     */
+    public static function set_event_meta( $request_json )
+    {
+        $payload = (array)$request_json['payload'];
+        // define metadata of the new sd_event_date
+        $meta_input = [
+            'event_id'  => $payload['id'],
+            'data'      => $payload,
+            'json_dump' => $request_json,
         ];
         return $meta_input;
     }

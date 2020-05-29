@@ -112,6 +112,7 @@ class RestCallbacks{
                         'medium'    => get_the_post_thumbnail_url($post->ID, 'medium'),
                         'large'     => get_the_post_thumbnail_url($post->ID, 'large'),
                     ],
+                    'data'              => $post->data,
                     'json_dump'         => $post->json_dump, // get metadata 'json_dump'
                 ];
                 break;
