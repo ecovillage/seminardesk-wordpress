@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * The template for taxonomy dates with past event dates
+ * 
  * @package SeminardeskPlugin
  */
 

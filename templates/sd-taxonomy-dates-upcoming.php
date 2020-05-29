@@ -1,30 +1,37 @@
 <?php
 /**
- * The template for taxonomy dates
+ * The template for taxonomy dates with upcoming event dates
  * 
  * @package SeminardeskPlugin
  */
 
 use Inc\Base\TaxonomyDatesWrapper;
 
+global $wp_query;
+
+$title = __( 'Upcoming Event Dates', 'seminardesk');
+$timestamp_today = strtotime(wp_date('Y-m-d'));
+// $timestamp_today = strtotime('2020-04-01');
+
+$wp_query = new WP_Query(
+     array(
+         'post_type'    => 'sd_date',
+         'post_status'  => 'publish',
+         'meta_key'     => 'begin_date',
+         'orderby'      => 'meta_value_num',
+         'order'        => 'ASC',
+         'meta_query'   => array(
+            'key'       => 'begin_date',
+            'value'     => $timestamp_today*1000, //in ms
+            'type'      => 'numeric',
+            'compare'   => '>=',
+         ),
+     )
+);
+
 get_header();
 ?>
-
 <main id="site-content" role="main">
-
-    <?php
-
-	// $archive_title    = get_the_archive_title();
-    // $term_title = get_the_archive_description();
-    // $test = single_term_title( '', false );
-    // $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
-    // $is_tax = is_tax();
-    // $is_archive = is_archive();
-    // $term1 = get_term(131);
-
-    $txn = get_taxonomy(get_query_var( 'taxonomy' ));
-    $title = ucfirst($txn->rewrite['slug']) . ': '. get_queried_object()->name;
-    ?>
     
     <header class="archive-header has-text-align-center header-footer-group">
 
@@ -37,9 +44,8 @@ get_header();
         </div><!-- .archive-header-inner -->
 
     </header><!-- .archive-header -->
-
+                
     <?php
-    // TODO: include template part for repeating code
 	if ( have_posts() ) {
 		while ( have_posts() ) {
             the_post();
@@ -62,7 +68,7 @@ get_header();
                     echo '<p></p>';
                 }
                 the_excerpt();
-                ?><p><?php esc_html_e( 'Meta information for this post:', 'textdomain' ); ?></p>
+                ?>
                 <a href="<?php echo esc_url(get_permalink($post->event_wp_id)); ?>">
                     <?php esc_html_e('More ...', 'seminardesk')?>
                 </a>
@@ -95,3 +101,5 @@ get_header();
 
 <?php
 get_footer();
+
+

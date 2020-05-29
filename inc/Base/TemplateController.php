@@ -17,6 +17,12 @@ class TemplateController
         add_filter('template_include', array( $this, 'custom_template_schedule'));
     }
 
+    public function enqueue_taxonomy_assets()
+    {
+        wp_enqueue_style( 'sdstyle', SD_PLUGIN_URL . 'assets/sd-taxonomy-style.css' );
+        // wp_enqueue_script( 'sdscript', SD_PLUGIN_URL . 'assets/sd-taxonomy-script.js' );
+    }
+
     public function modify_request_schedule( $vars )
     {
         if ( isset($vars['name']) && $vars['name'] === 'schedule' ){
@@ -34,13 +40,13 @@ class TemplateController
     public function custom_template_schedule( $template )
     {
         if ( get_query_var('upcoming') == true) {
-            if ( file_exists(SD_PLUGIN_PATH . 'templates/taxonomy-dates-upcoming.php') ){
-                return SD_PLUGIN_PATH . 'templates/taxonomy-dates-upcoming.php';
+            if ( file_exists(SD_PLUGIN_PATH . 'templates/sd-taxonomy-dates-upcoming.php') ){
+                return SD_PLUGIN_PATH . 'templates/sd-taxonomy-dates-upcoming.php';
             }
         }
         if ( get_query_var('past') == true ) {
-            if ( file_exists(SD_PLUGIN_PATH . 'templates/taxonomy-dates-past.php') ){
-                return SD_PLUGIN_PATH . 'templates/taxonomy-dates-past.php';
+            if ( file_exists(SD_PLUGIN_PATH . 'templates/sd-taxonomy-dates-past.php') ){
+                return SD_PLUGIN_PATH . 'templates/sd-taxonomy-dates-past.php';
             }
         }
         return $template;
@@ -49,7 +55,6 @@ class TemplateController
     public function custom_template_post( $template )
     {
         $post_type = get_post_type();
-
         // checks for custom template by given (custom) post type if $single not defined
         if ( empty( $template ) && strpos($post_type, 'sd_' ) !== false)
         {
@@ -63,18 +68,18 @@ class TemplateController
 
     public function custom_template_taxonomy( $template )
     {
+        add_action('wp_enqueue_scripts', array($this, 'enqueue_taxonomy_assets'));
         // global $wp_query;
         // if ( empty($taxonomy) && $wp_query->queried_object->taxonomy === 'dates'){
         if ( empty($template) && is_tax()){
-            if (file_exists(SD_PLUGIN_PATH . 'templates/taxonomy-' . get_query_var( 'taxonomy' ) . '-' . get_query_var( 'dates' ) .  '.php')){
-                return SD_PLUGIN_PATH . 'templates/taxonomy-' . get_query_var( 'taxonomy' ) . '-' . get_query_var( 'dates' ) .  '.php';
+            if (file_exists(SD_PLUGIN_PATH . 'templates/sd-taxonomy-' . get_query_var( 'taxonomy' ) . '-' . get_query_var( 'dates' ) .  '.php')){
+                return SD_PLUGIN_PATH . 'templates/sd-taxonomy-' . get_query_var( 'taxonomy' ) . '-' . get_query_var( 'dates' ) .  '.php';
             }
-            if ( file_exists(SD_PLUGIN_PATH . 'templates/taxonomy-' . get_query_var( 'taxonomy' ) . '.php')){
-                return SD_PLUGIN_PATH . 'templates/taxonomy-' . get_query_var( 'taxonomy' ) . '.php';
+            if ( file_exists(SD_PLUGIN_PATH . 'templates/sd-taxonomy-' . get_query_var( 'taxonomy' ) . '.php')){
+                return SD_PLUGIN_PATH . 'templates/sd-taxonomy-' . get_query_var( 'taxonomy' ) . '.php';
             }
-            // return SD_PLUGIN_PATH . 'templates/taxonomy.php';
+            // return SD_PLUGIN_PATH . 'templates/sd-taxonomy.php';
         }
         return $template;
     }
-
 }

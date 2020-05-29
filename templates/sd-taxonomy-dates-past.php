@@ -1,52 +1,43 @@
 <?php
 /**
- * The template for taxonomy dates with upcoming event dates
+ * The template for taxonomy dates
  * 
  * @package SeminardeskPlugin
  */
 
 use Inc\Base\TaxonomyDatesWrapper;
 
-global $wp_query;
-
-$title = __( 'Upcoming Event Dates', 'seminardesk');
+$title = __( 'Past Events Dates', 'seminardesk');
 $timestamp_today = strtotime(wp_date('Y-m-d'));
-// $timestamp_today = strtotime('2020-04-01');
-
 $wp_query = new WP_Query(
-     array(
-         'post_type'    => 'sd_date',
-         'post_status'  => 'publish',
-         'meta_key'     => 'begin_date',
-         'orderby'      => 'meta_value_num',
-         'order'        => 'ASC',
-         'meta_query'   => array(
-            'key'       => 'begin_date',
-            'value'     => $timestamp_today*1000, //in ms
-            'type'      => 'numeric',
-            'compare'   => '>=',
-         ),
-     )
+    array(
+        'post_type'    => 'sd_date',
+        'post_status'  => 'publish',
+        'meta_key'     => 'begin_date',
+        'orderby'      => 'meta_value_num',
+        'order'        => 'DESC',
+        'meta_query'   => array(
+           'key'       => 'begin_date',
+           'value'     => $timestamp_today*1000, //in ms
+           'type'      => 'numeric',
+           'compare'   => '<',
+        ),
+    )
 );
 
 get_header();
 ?>
 <main id="site-content" role="main">
-    
     <header class="archive-header has-text-align-center header-footer-group">
-
         <div class="archive-header-inner section-inner medium">
-
             <?php if ( $title ) { ?>
                 <h1 class="archive-title"><?php echo wp_kses_post( $title ); ?></h1>
             <?php } ?>
-
-        </div><!-- .archive-header-inner -->
-
+            </div><!-- .archive-header-inner -->
     </header><!-- .archive-header -->
-                
+    
     <?php
-	if ( have_posts() ) {
+    if ( have_posts() ) {
 		while ( have_posts() ) {
             the_post();
             ?>
@@ -68,7 +59,7 @@ get_header();
                     echo '<p></p>';
                 }
                 the_excerpt();
-                ?><p><?php esc_html_e( 'Meta information for this post:', 'textdomain' ); ?></p>
+                ?>
                 <a href="<?php echo esc_url(get_permalink($post->event_wp_id)); ?>">
                     <?php esc_html_e('More ...', 'seminardesk')?>
                 </a>
@@ -101,5 +92,4 @@ get_header();
 
 <?php
 get_footer();
-
 

@@ -1,0 +1,65 @@
+/* style for taxonomy dates */
+.sd-event {
+	/* -webkit-box-shadow: 0px 2px 2px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    0px 2px 2px 0px rgba(50, 50, 50, 0.75);
+	box-shadow:         0px 2px 2px 0px rgba(50, 50, 50, 0.75); */
+	margin: 2.5em 0 0 0;
+	/* padding: 40px 0 0 0; */
+}
+.sd-event h3{
+	/* border-bottom: 1px solid #999; */
+	font-size: 1.5em;
+	font-weight: 600;
+	margin: 0 0 0.5em;
+	padding-bottom: 15px;
+}
+.sd-event-date {
+	margin: 0.5em 1em 0.5em 1em;
+}
+.sd-event-facilitators {
+	margin: 0.5em 1em 0.5em 1em;
+}
+.sd-event-price {
+	margin: 0.5em 1em 0.5em 1em;
+}
+.sd-event-venue {
+	margin: 0.5em 1em 0.5em 1em;
+}
+.sd-event-container {
+	/* border: 3px solid rgb(255, 167, 214); */
+	margin: 1.5em 1em 0.5em 1.5em;
+	/* padding: 20px 40px 40px; */
+	/* max-width: 600px; */
+}
+.sd-event-container img {
+	width: 250px;
+	margin: 0.5em 1.5em 0 0.5em;
+	float: left;
+	box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;
+	/* box-shadow: 0px 10px 16px 0px rgba(50, 50, 50, 0.75); */
+}
+.sd-event-container-text{
+	display: inline;
+}
+.sd-event-image img {
+	border-radius: 0;
+}
+.sd-event-more-link {
+
+	/* background-color: #24890d; */
+	/* border: 0 none; */
+	/* border-radius: 0; */
+	/* color: #fff; */
+	/* display: inline-block; */
+	font-size: 12px;
+	/* font-weight: 600; */
+	/* line-height: normal; */
+	padding: 10px 30px 11px;
+	margin: 0 0 0 2em;
+	/* text-transform: uppercase; */
+	/* vertical-align: bottom */
+}
+.sd-event-more-link:hover {
+	color: #000;
+	text-decoration: none;
+  }
