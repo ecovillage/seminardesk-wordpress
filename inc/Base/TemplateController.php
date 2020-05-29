@@ -58,10 +58,12 @@ class TemplateController
         // checks for custom template by given (custom) post type if $single not defined
         if ( empty( $template ) && strpos($post_type, 'sd_' ) !== false)
         {
-            if ( file_exists( SD_PLUGIN_PATH . 'templates/single-' . $post_type . '.php' ) ) {
-                return SD_PLUGIN_PATH . 'templates/single-' . $post_type . '.php';
+            if ( file_exists( SD_PLUGIN_PATH . 'templates/sd-single-' . $post_type . '.php' ) ) {
+                return SD_PLUGIN_PATH . 'templates/sd-single-' . $post_type . '.php';
             }
-            return SD_PLUGIN_PATH . 'templates/singular.php';
+            if ( file_exists( SD_PLUGIN_PATH . 'templates/sd-single.php') ) {
+                return SD_PLUGIN_PATH . 'templates/sd-single.php';
+            }
         }
         return $template;
     }

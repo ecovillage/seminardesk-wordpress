@@ -1,9 +1,9 @@
 <?php
 /**
+ * The fallback template for single post
+ * used when specific single post template for CPT doesn't exist.
+ * 
  * @package SeminardeskPlugin
- * singular post template is used, when no specific post template for CPT is found.
- * simple template for CPT sd_event
- * source: https://developer.wordpress.org/themes/basics/the-loop/#the-loop-in-detail
  */
 
 get_header();

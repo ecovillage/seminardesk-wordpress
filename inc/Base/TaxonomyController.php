@@ -36,7 +36,7 @@ class TaxonomyController
             $query->set( 'meta_key', 'begin_date' );
             $query->set( 'orderby', 'meta_value_num' );
             $query->set( 'order', 'DESC' );
-            $query->set( 'posts_per_page', '3' );
+            $query->set( 'posts_per_page', '5' );
         }
     }
 
