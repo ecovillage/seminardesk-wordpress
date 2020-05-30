@@ -5,7 +5,7 @@
  * @package SeminardeskPlugin
  */
 
-use Inc\Base\TaxonomyDatesWrapper;
+use Inc\Base\TemplateTaxonomyDates;
 
 global $wp_query;
 
@@ -56,11 +56,11 @@ get_header();
                 </a>
                 <?php
                 // echo get_permalink( $post->event_wp_id );
-                TaxonomyDatesWrapper::get_date('<p>', '</p>');
-                TaxonomyDatesWrapper::get_facilitators('<p>', '</p>');
-                TaxonomyDatesWrapper::get_price('<p>', '</p>');
-                TaxonomyDatesWrapper::get_venue('<p>', '</p>');
-                TaxonomyDatesWrapper::get_img_remote( $post->teaser_picture_url, '300', '', $alt = "remote image load failed", '<p>', '</p>' );
+                TemplateTaxonomyDates::get_date('<p>', '</p>');
+                TemplateTaxonomyDates::get_facilitators('<p>', '</p>');
+                TemplateTaxonomyDates::get_price('<p>', '</p>');
+                TemplateTaxonomyDates::get_venue('<p>', '</p>');
+                TemplateTaxonomyDates::get_img_remote( $post->teaser_picture_url, '300', '', $alt = "remote image load failed", '<p>', '</p>' );
                 // check if the post or page has a Featured Image assigned to it.
                 if ( has_post_thumbnail() ) {
                     add_image_size( 'event_thumb_300', 300, 300, true);

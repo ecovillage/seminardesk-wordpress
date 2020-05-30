@@ -5,7 +5,7 @@
  * @package SeminardeskPlugin
  */
 
-use Inc\Base\TaxonomyDatesWrapper;
+use Inc\Base\TemplateTaxonomyDates;
 
 get_header();
 ?>
@@ -51,14 +51,14 @@ get_header();
                     </a>
                     <?php
                     // echo get_permalink( $post->event_wp_id );
-                    TaxonomyDatesWrapper::get_date('<div class="sd-event-date">', '</div>');
-                    TaxonomyDatesWrapper::get_facilitators('<div class="sd-event-facilitators">', '</div>');
-                    TaxonomyDatesWrapper::get_price('<div class="sd-event-price">', '</div>');
-                    TaxonomyDatesWrapper::get_venue('<div class="sd-event-venue">', '</div>');
+                    TemplateTaxonomyDates::get_date('<div class="sd-event-date">', '</div>');
+                    TemplateTaxonomyDates::get_facilitators('<div class="sd-event-facilitators">', '</div>');
+                    TemplateTaxonomyDates::get_price('<div class="sd-event-price">', '</div>');
+                    TemplateTaxonomyDates::get_venue('<div class="sd-event-venue">', '</div>');
                     ?>
                     <div class="sd-event-container">
                         <?php
-                        TaxonomyDatesWrapper::get_img_remote( $post->teaser_picture_url, '300', '', $alt = "remote image load failed");
+                        TemplateTaxonomyDates::get_img_remote( $post->teaser_picture_url, '300', '', $alt = __('remote image failed', 'seminardesk'));
                         ?>
                         <div class=sd-event-container-text>
                         <?php the_excerpt(); ?>

@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for taxonomy dates
+ * The template tools for taxonomy dates
  * 
  * @package SeminardeskPlugin
  */
@@ -9,7 +9,7 @@ namespace Inc\Base;
 
 use WP_Query;
 
-class TaxonomyDatesWrapper
+class TemplateTaxonomyDates
 {
     /**
      * Get start and end date of the event
@@ -104,12 +104,11 @@ class TaxonomyDatesWrapper
         return $response;
     }
 
-    public static function get_img_remote( $url, $width = '', $height = '', $alt = "remote image load failed", $before = '', $after = '', $echo = true )
+    public static function get_img_remote( $url, $width = '', $height = '', $alt = "remote image failed", $before = '', $after = '', $echo = true )
     {
-        global $post;
-        // $url = $post->teaser_picture_url;
+        // $url = 'https://schloss-tempelhof.seminardesk.de/Content/Extern/2fail.jpg';
         if ( $url ){
-            $response = $before . '<img src="' . $post->teaser_picture_url . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '"/>' . $after;
+            $response = $before . '<img src="' . $url . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '"/>' . $after;
         }else{
             $response = null;
         }
