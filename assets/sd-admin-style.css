@@ -1,3 +1,9 @@
+/* 
+css styles for admin page of the seminardesk plugin
+
+@package SeminardeskPlugin
+ */
+
 .nav-tabs {
 	float: left;
 	width: 100%;

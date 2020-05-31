@@ -148,7 +148,7 @@ class WebhookHandler
      * @param array $request_json
      * @return WP_REST_Response|WP_Error
      */
-    public static function delete_event($request_json)
+    public static function delete_event($request_json) 
     {
         // TODO: Delete also all dates associated with this event???
         $payload = (array)$request_json['payload'];
@@ -492,7 +492,7 @@ class WebhookHandler
      * @param int   $post_type
      * @param string $meta_key
      * @param string $meta_value
-     * @return bool status of deletion
+     * @return WP_post|false
      */
     public static function trash_post_by_meta($post_type, $meta_key, $meta_value)
     {
@@ -646,7 +646,7 @@ class WebhookHandler
      * @param bool $remove_breaks Optional. Whether to remove left over line breaks and white space chars
      * @return string localized and striped (kses) value of the field
      */
-    public static function strip_get_value_by_language( $field, $lang_tag = 'DE', $remove_breaks = \false )
+    public static function strip_get_value_by_language( $field, $lang_tag = 'DE', $remove_breaks = false )
     {
         $key = array_search(strtoupper($lang_tag), array_column($field, 'language'));
         if ( $key === false){
@@ -684,7 +684,7 @@ class WebhookHandler
      * @param array $allowed_protocols 
      * @return array recursively modified array
      */
-    public static function strip_array_values( $array, $remove_breaks = \false)
+    public static function strip_array_values( $array, $remove_breaks = false)
     {
         // $array_old = $array;
         $custom_data = array(

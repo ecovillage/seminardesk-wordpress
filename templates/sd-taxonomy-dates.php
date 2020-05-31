@@ -65,8 +65,8 @@ get_header();
                         </div>
                     </div>
                     <a class="button sd-event-more-link" href="<?php echo esc_url(get_permalink($post->event_wp_id)); ?>" class="sd-event-more">
-                                    <?php esc_html_e('More', 'seminardesk')?>
-                                </a>
+                        <?php esc_html_e('More', 'seminardesk')?>
+                    </a>
                 </div>
             </div>
             <?php

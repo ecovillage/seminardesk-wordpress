@@ -1,3 +1,9 @@
+/**
+ * JavaScript for admin page of the seminardesk plugin
+ * 
+ * @package SeminardeskPlugin
+ */
+
 window.addEventListener("load", function() {
 
 	// store tabs variables

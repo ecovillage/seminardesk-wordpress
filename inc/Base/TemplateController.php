@@ -19,8 +19,14 @@ class TemplateController
 
     public function enqueue_taxonomy_assets()
     {
-        wp_enqueue_style( 'sdstyle', SD_PLUGIN_URL . 'assets/sd-taxonomy-style.css' );
-        // wp_enqueue_script( 'sdscript', SD_PLUGIN_URL . 'assets/sd-taxonomy-script.js' );
+        wp_enqueue_style( 'sd-taxonomy-script', SD_PLUGIN_URL . 'assets/sd-taxonomy.css' );
+        // wp_enqueue_script( 'sd-taxonomy-script', SD_PLUGIN_URL . 'assets/sd-taxonomy-script.js' );
+    
+    }
+    public function enqueue_single_assets()
+    {
+        wp_enqueue_style( 'sd-single-style', SD_PLUGIN_URL . 'assets/sd-single.css' );
+        wp_enqueue_script( 'sd-single-script', SD_PLUGIN_URL . 'assets/sd-single.js', array( 'jquery' ), '1.0.0', true );
     }
 
     public function modify_request_schedule( $vars )
@@ -54,6 +60,8 @@ class TemplateController
     
     public function custom_template_post( $template )
     {
+        add_action('wp_enqueue_scripts', array($this, 'enqueue_single_assets'));
+
         $post_type = get_post_type();
         // checks for custom template by given (custom) post type if $single not defined
         if ( empty( $template ) && strpos($post_type, 'sd_' ) !== false)
