@@ -81,7 +81,7 @@ get_header();
         <div class="entry-header-inner section-inner small has-text-align-center">
             <h5>
                 <?php
-                _e('<strong>Sorry, no events for this date.</strong>', 'seminardesk');
+                _e('Sorry, no events for this date.', 'seminardesk');
                 ?>
             </h5>
             <br>
