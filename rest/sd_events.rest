@@ -1,0 +1,477 @@
+@host = http://localhost
+@path = /wpsdp/wp-json/seminardesk/v1/webhooks HTTP/1.1
+@url = {{host}}{{path}}
+@auth = Basic c2VtaW5hcmRlc2s6XlQ0cWVNNHYkTjhuRWRVVWRGbTJUdjRj
+@content = application/json
+@timestamp = "{{$timestamp}}"
+@guid = "{{$guid}}"
+
+### 927cd29a247a4cfdba3fad6b3335a430: Market Garden System - Nachhaltig & Regenerativ
+
+{
+    "action": "event.create",
+    "timestamp": {{timestamp}},
+    "requestId": {{guid}},
+    "payload": {
+        "tenant": {
+            "id": "schloss-tempelhof",
+            "name": [
+                {
+                    "language": "DE",
+                    "value": "Schloss Tempelhof"
+                }
+            ],
+            "logoUrl": [
+                {
+                    "language": "DE",
+                    "value": "https://schloss-tempelhof.seminardesk.de/Content/Extern/logo_140.jpg"
+                }
+            ],
+            "affiliateCode": "SHTE",
+            "termsAndConditionsUrl": [
+                {
+                    "language": "DE",
+                    "value": "https://www.schloss-tempelhof.de/veranstaltungen/teilnahmebedingungen-agb"
+                }
+            ],
+            "legalNoticeUrl": [
+                {
+                    "language": "DE",
+                    "value": "https://www.schloss-tempelhof.de/service/impressum/"
+                }
+            ],
+            "privacyUrl": [
+                {
+                    "language": "DE",
+                    "value": "https://www.schloss-tempelhof.de/service/datenschutz"
+                }
+            ],
+            "websiteUrl": [
+                {
+                    "language": "DE",
+                    "value": "https://www.schloss-tempelhof.de"
+                }
+            ],
+            "pricesInfo": {
+                "currency": {
+                    "code": "EUR",
+                    "symbol": "€",
+                    "name": "Euro"
+                }
+            },
+            "languages": {
+                "available": [
+                    "DE"
+                ],
+                "defaultFallback": "DE"
+            }
+        },
+        "id": "927cd29a247a4cfdba3fad6b3335a430",
+        "settings": {
+            "childrenAllowed": false,
+            "datesAreCoherent": false,
+            "registrationAvailable": true,
+            "showAttendanceFees": true,
+            "showTotalPrices": true,
+            "onlyBoardAndLodging": false,
+            "allowBookingForMultipleDates": false,
+            "showExtras": true,
+            "showFacilitators": true,
+            "showNewsletterCheckbox": true,
+            "allowVoucher": false,
+            "mandatoryFieldsBooker": {
+                "gender": true,
+                "birthdate": false,
+                "address": false,
+                "phone": false,
+                "guestType": true
+            },
+            "mandatoryFieldsAdult": {
+                "gender": true,
+                "birthdate": false,
+                "email": false,
+                "guestType": true
+            },
+            "mandatoryFieldsChild": {
+                "gender": true,
+                "birthdate": false,
+                "guestType": false
+            }
+        },
+        "title": [
+            {
+                "language": "DE",
+                "value": "Market Garden System - Nachhaltig & Regenerativ"
+            }
+        ],
+        "titleSlug": [
+            {
+                "language": "DE",
+                "value": "market-garden-system---nachhaltig--regenerativ"
+            }
+        ],
+        "subtitle": [
+            {
+                "language": "DE",
+                "value": "3-Tages-Kurs mit einzeln buchbaren Modulen"
+            }
+        ],
+        "teaser": [
+            {
+                "language": "DE",
+                "value": "Kann Market Gardening (MG) als intensives System dennoch nachhaltig und regenerativ sein? <br /><br />Wir  sind der Meinung: grundsätzlich ja! Jedoch braucht es dazu ein  Verständnis über die Zusammenhänge im Boden und geeignete Methoden bzw.  Werkzeuge, um die Bodenfruchtbarkeit zu erhalten und zu verbessern. Am  Freitag werden wir diese Grundlagen legen, auf die dann in den folgenden  Tagen die eher technischen Details des MG aufbauen.<br />"
+            }
+        ],
+        "description": [
+            {
+                "language": "DE",
+                "value": "<img src=\"https://schloss-tempelhof.seminardesk.de/Content/Extern/feld2.jpg\" alt=\"\" width=\"100%\"/>\r\n<div class=\"card\">\r\n<div class=\"card-header\"><h3>Teil 1: Grundlagen des regenerativen Gemüsebaus</h3>\r\n</div>\r\n<div class=\"card-block\">\r\n<div class=\"card-body text-justify\"><p>Gemüsebau ist ein sehr intensives System. Viel Bodenbewegung und schneller Fruchtwechsel machen den Humusaufbau in vielen Gemüsebaubetrieben zu einer Herausforderung. Kann er trotzdem gelingen?</p><p>Wenn unser Anspruch ist, gesundes, nahrhaftes Gemüse anzubauen, brauchen wir einen fruchtbaren Boden. Market Gardening wird nur dann eine nachhaltige Alternative zu klassischen Systemen, wenn es gelingt, bei voller Produktion Boden aufzubauen, sprich: die Bodenfruchtbarkeit zu steigern, statt auf ihre Kosten Ertrag zu erzeugen. Wir arbeiten mit einem lebenden System, Bodenbiologie und Bodenstruktur sind maßgeblich für seinen Erfolg verantwortlich. </p><p>Wie dieser gelingen kann und die dafür notwendigen Grundlagen werden am Freitag behandelt.</p><p>In diesem Teil geht es um Grundlagenwissen, um erfolgreich Gemüse anzubauen und gleichzeitig die Produktionsgrundlage Boden zu verbessern.</p><p>Wir behandeln die Zusammenhänge zwischen Bodenphysik, Bodenchemie, der Bodenbiologie und die Rolle der Pflanzen in diesem Zusammenspiel.</p><ul><li>Wie funktionieren Nährstoffkreisläufe im Boden und welche Nährstoffpools gibt es?</li><li>Was kann ich tun, um den Gehalt an organischer Substanz in meinem Boden dauerhaft zu erhöhen?</li><li>Was ist bei der Bodenchemie zu beachten?</li></ul><p>Nach dem wir die theoretischen Grundlagen gelegt haben, lernt Ihr einfache Werkzeuge, um Euren Boden zu beurteilen und dadurch für Euren Betrieb geeignete Handlungsstrategien abzuleiten. Zusätzlich werden Hilfsmittel wie Fermente, Komposttee, Zwischenfrüchte und Mulch behandelt. </p>\r\n<table class=\"table\" style=\"border-width: 0px; border-color: #000000; border-collapse: collapse;\" cellspacing=\"0\" cellpadding=\"0\" align=\"left\"><tbody>\r\n<tr><td style=\"border-color: #000000;\"><h4>Kursleiter:</h4></td><td style=\"border-color: #000000; text-align: left;\"><strong>Urs Mauk</strong><br /></td></tr></tbody></table></div></div></div><br />\r\n<div class=\"card\"><div class=\"card-header\"><h3>Teil 2: Das Market Garden System - Umstellung, Aufbau & Betrieb</h3></div></div><div class=\"card\">\r\n<div class=\"card-block\">\r\n<div class=\"card-body text-justify\">\r\n<p>Um einen nachhaltigen Wandel in unserer Lebensmittelproduktion voran zu treiben, brauchen wir dezentrale und regionale Strukturen im Anbau, um frische Lebensmittel in hoher Qualität für eine gesunde Ernährung zu anzubauen.</p><p>Die Ressourcenverschwendung unserer derzeitigen zentralisierten, industriellen und transportintensiven Systeme lässt sich nicht ignorieren und es braucht einen Wandel.</p><p>Wir haben die Vision eines Netzwerks von regenerativen & produktiven Kleinst-Gärtnereien für eine regionale und saisonale Lebensmittelversorgung.</p><p>Als kompaktes, traktorloses Anbausystem mit der Ausrichtung auf hohe Erträge auf kleiner Fläche, konsequenten Komposteinsatz, hoher Bodenschonung und geringer Startinvestition, sehen wir im Market Garden System das Potential, zentraler Baustein dieses Wandels zu sein.</p><p>Seit 4 Jahren sammeln wir daher praktische Erfahrungen und Erfolge mit dem Aufbau des Market Garden der Gärtnerei Schloss Tempelhof.<br /></p><p>Begleite uns für zwei intensive Tage durch Theorie und Praxis und erfahre mehr über den Aufbau und den Betrieb dieses kompakten und effizienten Anbausystems. Lerne über Anbau, Flächenplanung, die Möglichkeiten des Bodenschutzes & -aufbaus, uvm.</p><p>In diesem Kurs bekommt ihr einen Überblick, über die notwendigen Werkzeuge & Techniken, die einen erfolgreichen Market Garden ausmachen:</p><ul>\r\n<li>Aufbau eines Market Garden </li><li>Anbauplanung & Fruchtfolge</li><li>Notwendige & sinnvolle Infrastruktur </li><li>Geräte & Werkzeuge</li><li>Vorbereitung permanenter Beete & Bodenpflege</li><li>Intelligentes Beikrautmanagement</li><li>Geschützter Anbau & Anzucht</li><li>Werkzeuge des regenerativen Gemüsebaus:<ul>\r\n<li>Grüne Brücken, Mulch, Mischkultur, Untersaaten</li><li>Fermente und Komposttees</li></ul>\r\n</li></ul><p>Für mehr Informationen & weitere Veranstaltungen: <a href=\"http://www.diezukunftsbauern.de\">www.diezukunftsbauern.de</a> <br /></p><table class=\"table\" style=\"border-width: 0px; border-color: #000000; border-collapse: collapse;\" cellspacing=\"0\" cellpadding=\"0\" align=\"left\"><tbody>\r\n<tr><td style=\"border-color: #000000;\"><h4>Kursleiter:</h4></td><td style=\"border-color: #000000; text-align: left;\"><strong>Sebastian Heilmann & Maya Heilmann</strong></td></tr>\r\n</tbody></table></div></div></div><br />"
+            }
+        ],
+        "headerPictureUrl": [
+            {
+                "language": "DE",
+                "value": "https://schloss-tempelhof.seminardesk.de/Content/Extern/DSC00235-638x300[1].jpg"
+            }
+        ],
+        "teaserPictureUrl": [
+            {
+                "language": "DE",
+                "value": "https://schloss-tempelhof.seminardesk.de/Content/Extern/DSC00235-638x300[1].jpg"
+            }
+        ],
+        "infoDatesPrices": [
+            {
+                "language": "DE",
+                "value": ""
+            }
+        ],
+        "infoBoardLodging": [
+            {
+                "language": "DE",
+                "value": "Unser Gästehaus ist ein schöner Altbau mit hohen Räumen und großen  Fenstern mit Blick auf die Felder oder den Schloss-Innenhof. Zur Auswahl  stehen 50 Betten in Einzel-, Doppel- und Mehrbettzimmern in individuell  eingerichteten Zimmern. Gemeinschaftsbäder und Toiletten sind auf jeder  Etage, in einigen Zimmern sind Waschbecken vorhanden. Drei weitere  Zimmer befinden sich im angrenzenden Fachwerkhaus. Bettzeug und  Handtücher werden gestellt (außer im Schlafsaal und im Campingbereich).<p>Haustiere können, aus Rücksicht auf Gäste, die an Allergien leiden, leider nicht mitgebracht werden.</p>Wir  bieten unseren Seminargästen vegetarische, saisonale Gerichte,  liebevoll zubereitet von unserem Küchenteam. Die Lebensmittel stammen  überwiegend aus unserer eigenen solidarischen Landwirtschaft, mit viel  Handarbeit und Boden schonend produziert, hochwertig und garantiert  frisch. Darüber hinaus kaufen wir biologisch und möglichst regional,  bzw. aus fairem Handel ein. Unser Küchenteam verarbeitet die  Lebensmittel zu eigenen Brotaufstrichen und Pestos. Das Brot wird  überwiegend selbst gebacken. <br /><p>Die Vollverpflegung beinhaltet  Frühstück, Mittagessen und Abendessen, sowie Pausensnacks (frisches Obst  und Gebäck, Wasser, Tee und Kaffee). </p><p>Besondere Diätwünsche (z.B.  vegan, glutenfrei, laktosefrei) können wir auf Wunsch zu einem kleinen  Aufpreis (5€/ Tag) erfüllen. Bitte tragen Sie Ihren Wunsch entsprechend  bei der Anmeldung ein. <br /></p><p>Wenn nichts anderes vereinbart ist,  sind die üblichen Zeiten für Frühstück von 8.00 - 9.00 Uhr, Mittagessen  12.30 - 13.30 Uhr (sonntags 13.00 - 14.00 Uhr), Abendessen 18:30 - 19.30  Uhr.</p><p>Die untenstehenden Preise beziehen sich jeweils auf Unterkunft und Verpflegung für den gesamten Veranstaltungszeitraum. </p><p>Die  Kategorie \"Übernachtung außerhalb\" beinhaltet die Vollpension inkl.  Gästepauschale für die Infrastrukturnutzung. Eine Unterkunft muss  selbständig außerhalb gebucht werden.</p><p> </p>"
+            }
+        ],
+        "infoMisc": [
+            {
+                "language": "DE",
+                "value": ""
+            }
+        ],
+        "facilitators": [
+            123,
+            124,
+            125
+        ],
+        "contactInfo": "// Kontaktinfos - zur Zeit noch immer leer"
+    }
+}
+
+### 50c7db655df54e0d8c03c851eb9a5ca8: Kennenlernwochenende für Gemeinschaftsinteressierte
+
+{
+    "action": "event.create",
+    "timestamp": {{timestamp}},
+    "requestId": {{guid}},
+    "payload": {
+        "id": "50c7db655df54e0d8c03c851eb9a5ca8",
+        "settings": {
+            "childrenAllowed": true,
+            "datesAreCoherent": false,
+            "registrationAvailable": true,
+            "showAttendanceFees": true,
+            "showTotalPrices": true,
+            "onlyBoardAndLodging": false,
+            "allowBookingForMultipleDates": false,
+            "showExtras": true,
+            "showFacilitators": true,
+            "showNewsletterCheckbox": true,
+            "allowVoucher": false,
+            "showPriceAsTotal": false,
+            "showBoardAndLodgingAndMiscSummarized": false,
+            "mandatoryFieldsBooker": {
+                "gender": true,
+                "birthdate": false,
+                "address": false,
+                "phone": false,
+                "guestType": true
+            },
+            "mandatoryFieldsAdult": {
+                "gender": true,
+                "birthdate": false,
+                "email": false,
+                "guestType": true
+            },
+            "mandatoryFieldsChild": {
+                "gender": true,
+                "birthdate": false,
+                "guestType": false
+            }
+        },
+        "title": [
+            {
+                "language": "DE",
+                "value": "Kennenlernwochenende für Gemeinschaftsinteressierte"
+            }
+        ],
+        "titleSlug": [
+            {
+                "language": "DE",
+                "value": "kennenlernwochenende-fur-gemeinschaftsinteressierte"
+            }
+        ],
+        "subtitle": [
+            {
+                "language": "DE",
+                "value": "Veranstalter: Schloss Tempelhof eG mit verschiedenen Begleitern aus der Gemeinschaft"
+            }
+        ],
+        "teaser": [
+            {
+                "language": "DE",
+                "value": "<div id=\"Teaser\"><p helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" font-size:=\"\" 14px;=\"\" background-color:=\"\" #ffffff;=\"\" text-decoration-style:=\"\" initial;=\"\" text-decoration-color:=\"\" initial;\"=\"\" style=\"color: #333333;\">Über  Projektinfos, Workshops, Vorstellung unserer Werte und Visionen, sowie  über die praktische Mitarbeit in kleinen Arbeitsgruppen können die  TeilnehmerInnen unsere Gemeinschaft kennenlernen. Themen wie  Gemeinschaftsbildung, Transformation der Ökonomie, Kommunikationskultur,  Konsensentscheidungen werden vorgestellt und im Gruppenprozess erlebt</p></div><br />"
+            }
+        ],
+        "description": [
+            {
+                "language": "DE",
+                "value": "<p>Über Projektinfos, Workshops, Vorstellung unserer Werte und Visionen,  sowie die praktische Mitarbeit in verschiedenen Arbeitsgruppen können  die TeilnehmerInnen unsere Gemeinschaft Schloss Tempelhof in diesen  Tagen kennen lernen.<br /> Themen wie Gemeinschaftsbildung, Transformation  der Ökonomie, Kommunikationskultur, Konsensentscheidungen werden  vorgestellt und im Gruppenprozess erlebt. Am Samstagabend werden wir  zusammen singen und feiern und freuen uns über Beiträge von Euch.<br />  Das Seminar wendet sich an Menschen, die erkunden wollen, ob diese Art  des Zusammenlebens für sie in Frage kommt und die eventuell selbst eine  Gemeinschaft aufbauen wollen.</p> <p><strong>Obwohl wir langfristig am  Tempelhof noch anwachsen wollen, können wir aktuell nur wenige Menschen  aufnehmen, da wir erst wieder neuen Wohnraum schaffen und  gemeinschaftlich zusammenwachsen müssen.</strong></p><p>Für Kinder im  Alter von drei bis 14 Jahren gibt es eine Kinderbetreuung. Die Kosten  hierfür sind 50€ für das erste Kind / 25€ für das Zweite / ab dem 3.  Kind frei. Bitte gebt im Bemerkungsfeld die Anmeldung dazu an. <br /></p>"
+            }
+        ],
+        "headerPictureUrl": [
+            {
+                "language": "DE",
+                "value": "https://schloss-tempelhof.seminardesk.de/Content/Extern/DSC00235-638x300[1].jpg"
+            }
+        ],
+        "infoDatesPrices": [
+            {
+                "language": "DE",
+                "value": ""
+            }
+        ],
+        "infoBoardLodging": [
+            {
+                "language": "DE",
+                "value": "Unser Gästehaus ist ein schöner Altbau mit hohen Räumen und großen  Fenstern mit Blick auf die Felder oder den Schloss-Innenhof. Zur Auswahl  stehen 50 Betten in Einzel-, Doppel- und Mehrbettzimmern in individuell  eingerichteten Zimmern. Gemeinschaftsbäder und Toiletten sind auf jeder  Etage, in einigen Zimmern sind Waschbecken vorhanden. Drei weitere  Zimmer befinden sich im angrenzenden Fachwerkhaus. Bettzeug und  Handtücher werden gestellt (außer im Schlafsaal und im Campingbereich).<p>Haustiere können, aus Rücksicht auf Gäste, die an Allergien leiden, leider nicht mitgebracht werden.</p>Wir  bieten unseren Seminargästen vegetarische, saisonale Gerichte,  liebevoll zubereitet von unserem Küchenteam. Die Lebensmittel stammen  überwiegend aus unserer eigenen solidarischen Landwirtschaft, mit viel  Handarbeit und Boden schonend produziert, hochwertig und garantiert  frisch. Darüber hinaus kaufen wir biologisch und möglichst regional,  bzw. aus fairem Handel ein. Unser Küchenteam verarbeitet die  Lebensmittel zu eigenen Brotaufstrichen und Pestos. Das Brot wird  überwiegend selbst gebacken. <br /><p>Die Vollverpflegung beinhaltet  Frühstück, Mittagessen und Abendessen, sowie Pausensnacks (frisches Obst  und Gebäck, Wasser, Tee und Kaffee). </p><p>Besondere Diätwünsche (z.B.  vegan, glutenfrei, laktosefrei) können wir auf Wunsch zu einem kleinen  Aufpreis (5€/ Tag) erfüllen. Bitte tragen Sie Ihren Wunsch entsprechend  bei der Anmeldung ein. <br /></p><p>Wenn nichts anderes vereinbart ist,  sind die üblichen Zeiten für Frühstück von 8.00 - 9.00 Uhr, Mittagessen  12.30 - 13.30 Uhr (sonntags 13.00 - 14.00 Uhr), Abendessen 18:30 - 19.30  Uhr.</p><p>Die untenstehenden Preise beziehen sich jeweils auf Unterkunft und Verpflegung für den gesamten Veranstaltungszeitraum.Die Preise für die Kinder sind gestaffelt und werden bei Bestätigung der Anmeldung detailliert aufgeschlüsselt.<br /></p><p>Die  Kategorie \"Übernachtung außerhalb\" beinhaltet die Vollpension inkl.  Gästepauschale für die Infrastrukturnutzung. Eine Unterkunft muss  selbständig außerhalb gebucht werden.</p><p> </p>"
+            }
+        ],
+        "infoMisc": [
+            {
+                "language": "DE",
+                "value": "<p><span style=\"color: #333333; font-family: \">Für Kinderbetreuung sind die Kosten 50 Euro für das erste Kind; 25 Euro für das zweite Kind. Bitte gebt im Bemerkungsfeld die Anmeldung dazu an.</span></p><p>Die Verpflegungs-/ und Unterbringungskosten pro Tag für Kinder:</p>\r\n<div class=\"card-deck\">\r\n<div class=\"card\">\r\n<div class=\"card-body\">\r\n<table class=\"table table-sm\">\r\n<thead class=\"thead-light\"><tr>\r\n<th scope=\"col\" style=\"text-align: left;\">Alter</th>\r\n<th scope=\"col\">Tages-Verpflegung</th></tr></thead>\r\n<tbody><tr>\r\n<td>ab 5 Jahre</td><td>9 €</td></tr>\r\n<tr><td>ab 10 Jahre</td><td>17 €</td></tr>\r\n<tr><td>ab 16 Jahre</td><td>34 €</td></tr></tbody></table></div></div>\r\n<div class=\"card\">\r\n<div class=\"card-body\">\r\n<table class=\"table table-sm\">\r\n<thead class=\"thead-light\"><tr>\r\n<th scope=\"col\" style=\"text-align: left;\">Alter</th>\r\n<th scope=\"col\">Unterbringung</th><th scope=\"col\">Preis</th></tr></thead>\r\n<tbody><tr>\r\n<td>unabhängig<br /></td><td>im Bett der Eltern</td><td>frei</td></tr>\r\n<tr><td>unabhängig<br /></td><td>zusätzliche Matratze/ Bettwäsche</td><td>10 €</td></tr>\r\n<tr><td>ab 14 Jahre</td><td>Zelt / Bus</td><td>5 €</td></tr></tbody></table></div>\r\n</div></div><br />"
+            }
+        ],
+        "facilitators": [
+            111,
+            112,
+            113
+        ],
+        "contactInfo": "// Kontaktinfos - zur Zeit noch immer leer",
+        "tenant": {
+            "name": [
+                {
+                    "language": "DE",
+                    "value": "Schloss Tempelhof"
+                }
+            ],
+            "logoUrl": [
+                {
+                    "language": "DE",
+                    "value": "https://schloss-tempelhof.seminardesk.de/Content/Extern/logo_140.jpg"
+                }
+            ],
+            "affiliateCode": "SHTE",
+            "termsAndConditionsUrl": [
+                {
+                    "language": "DE",
+                    "value": "https://www.schloss-tempelhof.de/veranstaltungen/teilnahmebedingungen-agb"
+                }
+            ],
+            "legalNoticeUrl": [
+                {
+                    "language": "DE",
+                    "value": "https://www.schloss-tempelhof.de/service/impressum/"
+                }
+            ],
+            "privacyUrl": [
+                {
+                    "language": "DE",
+                    "value": "https://www.schloss-tempelhof.de/service/datenschutz"
+                }
+            ],
+            "websiteUrl": [
+                {
+                    "language": "DE",
+                    "value": "https://www.schloss-tempelhof.de"
+                }
+            ],
+            "pricesInfo": {
+                "currency": {
+                    "code": "EUR",
+                    "symbol": "€",
+                    "name": "Euro"
+                }
+            },
+            "languages": {
+                "available": [
+                    "DE"
+                ],
+                "defaultFallback": "DE"
+            }
+        }
+    }
+}
+
+### a15ec74c662b48458677dd7ad0b830f1: Helfender Gast: Mitleben, mitwirken und mitwerkeln am Tempelhof
+
+{
+    "action": "event.create",
+    "timestamp": 1583509807000,
+    "requestId": "5b27fe327ae240bf838a3fb6693e9fed",
+    "payload": {
+        "id": "a15ec74c662b48458677dd7ad0b830f1",
+        "settings": {
+            "childrenAllowed": false,
+            "datesAreCoherent": false,
+            "registrationAvailable": true,
+            "showAttendanceFees": false,
+            "showTotalPrices": true,
+            "onlyBoardAndLodging": true,
+            "allowBookingForMultipleDates": false,
+            "showExtras": true,
+            "showFacilitators": true,
+            "showNewsletterCheckbox": true,
+            "allowVoucher": false,
+            "showPriceAsTotal": false,
+            "showBoardAndLodgingAndMiscSummarized": false,
+            "mandatoryFieldsBooker": {
+                "gender": true,
+                "birthdate": false,
+                "address": false,
+                "phone": false,
+                "guestType": true
+            },
+            "mandatoryFieldsAdult": {
+                "gender": true,
+                "birthdate": false,
+                "email": false,
+                "guestType": true
+            },
+            "mandatoryFieldsChild": {
+                "gender": true,
+                "birthdate": false,
+                "guestType": true
+            }
+        },
+        "title": [
+            {
+                "language": "DE",
+                "value": "Helfender Gast: Mitleben, mitwirken und mitwerkeln am Tempelhof"
+            }
+        ],
+        "titleSlug": [
+            {
+                "language": "DE",
+                "value": "helfender-gast-mitleben-mitwirken-und-mitwerkeln-am-tempelhof"
+            }
+        ],
+        "subtitle": [
+            {
+                "language": "DE",
+                "value": "Anmeldung als helfender Gast"
+            }
+        ],
+        "teaser": [
+            {
+                "language": "DE",
+                "value": "Wir laden herzlich dazu ein, durch einen zeitweisen Aufenthalt als  helfender Gast am Tempelhof unser Gemeinschaftsleben zu erfahren. In den  verschiedenen Projekten, Arbeitsbereichen, beim Essen und weiteren  Aktionen begegnen sich die Menschen der Gemeinschaft und die  UnterstützerInnen und BesucherInnen – der Tempelhof wird so zur sozialen  Zukunftswerkstatt.<br />"
+            }
+        ],
+        "description": [
+            {
+                "language": "DE",
+                "value": "<p>Liebe Unterstützungswillige und am Tempelhofleben Interessierte!</p> <p>Unsere Gemeinschaft wächst und gedeiht. Etwa 100 Erwachsene und 50 Kinder leben schon am Platz. Das Zusammenarbeiten in verschiedenen Projekten, das miteinander Wohnen, die Gemeinschaftsstunden, der Einstieg in eine gemeinsame Ökonomie, WIR-Prozesse, Sozialplenen, Männer- und Frauenrunden, Elternkreis und Kinderforum, gemeinsames Feiern, Kunstaktionen – dies alles fördert und fordert unseren gemeinsamen sozialen Prozess.</p> <p>Wir laden herzlich dazu ein, durch einen zeitweisen Aufenthalt als helfender Gast am Tempelhof dieses Gemeinschaftsleben zu erfahren. In den verschiedenen Projekten, Arbeitsbereichen, beim Essen und weiteren Aktionen begegnen sich die Menschen der Gemeinschaft und die UnterstützerInnen und BesucherInnen – der Tempelhof wird so zur sozialen Zukunftswerkstatt.</p> <p>Vieles, was am Tempelhof schon gediehen ist, wäre ohne die zahlreichen helfenden Gäste nicht möglich gewesen. Wir sind dankbar für jede tatkräftige Unterstützung unserer Vision und unsererseits bereit, soweit wie möglich, Einblicke in unser Gemeinschaftsleben zu geben.</p><p>Wir freuen uns auf euch - Euer Helfende-Gäste-Team: Alexandra, Erdmute, Gabriele und Illo<br></p>\r\n<div class=\"card border-0\"> <div class=\"card-header text-left\"> <h4>Arbeitsfelder</h4></div>\r\n<div id=\"text\" class=\"card-body text-justify\"><div class=\"card-text\">\r\n<p>Wir versuchen euch in der Woche möglichst unterschiedliche Einblicke zu gewähren und sowohl in der Küche, Landwirtschaft als auch in anderen Arbeitsbereichen mitarbeiten zu lassen.<br></p> <ul><li><strong>Landwirtschaft/Gärtnerei</strong><br>Unser Landbau- und Gärtnerteam sorgt dafür, dass wir richtig gut und gesund essen können. Die Aufgabenfelder erstrecken sich von der Bodenbelebung, Aufziehen von Jungpflanzen, Ackerpflege, Ernte bis hin zur Einlagerung, Landschaftspflege und kleineren Baumaßnahmen.</li><li><strong>Küche</strong><br>Die Küchencrew verwandelt die guten Zutaten der Felder in schmackhafte Gerichte. Tag für Tag. Hier ist der Kontakt zu hier lebenden Menschen leicht möglich. Wir haben Profi-Köche. Helfer unterstützen beim Gemüseschnippeln, Salat waschen, Töpfe spülen und Reinigen der Küche und Einmachen. Es braucht also keine Kochkenntnisse in diesem Arbeitsfeld. Und: das Essen für 100 – 200 Leute soll immer um 12:15 Uhr fertig sein, da entsteht auch schon mal eine stressige Atmosphäre. Außerdem veredelt die Küche die Früchte unserer Pflanzen und Sträucher in allerlei Leckereien. Dazu gehört auch das Haltbarmachen für die Wintermonate.</li><li><strong>Veranstaltungsorganisation/Catering:</strong><br>Unserem Veranstaltungskalender könnt ihr entnehmen, dass häufiger große, auch öffentliche Veranstaltungen stattfinden, wie z.B. der 1. Mai, Symposien etc. Hier können wir immer wieder „tempelhofvertraute“ HelferInnen brauchen, die uns beim Auf- und Abbau, Catering, bei der Kinderbetreuung usw. unterstützen.</li><li><strong>Handwerk und Bau, Hausmeisterei, Geländepflege</strong><br>Wir haben keine festen Einsatzstellen in diesem Bereich, manchmal kann sich auch hier Mitarbeit ergeben.</li><li><strong>Themenwochen<br>Bitte achtet bei den Terminen auf die Themenwochen. Gelegentlich können die Projekte bereits vorausplanen, wann sie bestimmte Aktionen durchführen wollen. Diese Wochen - wie Einmachwochen oder Baumpflanzaktionen werden dann extra ausgeschrieben. In den Wochen ist auch die normale Teilnahme als Helfender Gast möglich.<br></strong></li></ul></div></div> </div><p>\r\n</p>\r\n<div class=\"card-columns\">\r\n<div class=\"card border-0\">\r\n<div class=\"card-header\"><h4>Helfende Gäste-Besuche praktisch - in Kürze<br></h4></div>\r\n<div class=\"card-body text-justify\">\r\n<p class=\"card-text\">\r\nAus den Erfahrungen der ersten Jahre haben wir gemeinsam mit den helfenden Gästen gelernt, wie diese Zeit gut zu gestalten ist. Daraus hat sich Folgendes ergeben: </p>\r\n<p>Der Aufenthalt dauert eine Woche. Eine Verlängerung ist nach Absprache mit den entsprechenden Projekten möglich. Die Kosten für die Woche sind 175 € für Unterkunft und Vollverpflegung.<br></p>\r\n<p>Die Anreise ist jeweils am Sonntag, der Empfang ist von 18:00 bis 18:30 Uhr im SchlossFoyer. (Das SchlossCafé ist ab 13:00 Uhr geöffnet.)</p><p>Abreise ist dann am Wochenende - Der Sonntag steht zur freien Verfügung. Ihr könnt selbst entscheiden, wann der beste Abreisetermin für euch ist. Ab und zu gibt es auch am Samstag-Vormittag ein Angebot zum Mithelfen.<br></p> <p>\r\n<a href=\"https://www.schloss-tempelhof.de/veranstaltungen/lage-anfahrt/\" class=\"btn btn-primary\">Infos zur Anreise und Mitfahrbörse</a> </p>\r\n</div>\r\n</div>\r\n<div class=\"card border-0\">\r\n<div class=\"card-header\"><h4> Angebote für Familien</h4> </div>\r\n<div class=\"card-body text-justify\">\r\n<p class=\"card-text\">\r\nWir freuen uns über den Besuch von Familien mit Kindern und haben bewusst ein geeignetes Angebot in Form von Familiengasthelferwochen geschaffen, damit die kleinen Gäste hier einen klaren Raum vorfinden. Diese spezielle Woche bieten wir einmal im Jahr an. <strong>Voraussetzung hierfür ist die vorherige Teilnahme an einem Kennenlernwochenende. </strong>Auch dort dürfen Kinder gerne mitgebracht werden und es gibt eine altersgerechte Betreuung. Desweiteren bietet sich für Familien der Besuch des Sommercamps sowie des FamilienKreativCamps an.</p>\r\n<p><a href=\"https://schloss-tempelhof.seminardesk.de/Veranstaltungen/Details/7c689d3e3ef644dbb4f92d134ca14602/familienhelferwoche\" class=\"btn btn-primary\">Zur Familienhelferwoche 2020<br></a></p>\r\n<p><a href=\"https://schloss-tempelhof.seminardesk.de/Veranstaltungen/Details/50c7db655df54e0d8c03c851eb9a5ca8/kennenlernwochenende-fur-gemeinschaftsinteressierte\" class=\"btn btn-primary\">Zum Kennenlernwochenende 2020<br></a></p>\r\n</div></div>\r\n<div class=\"card border-0\">\r\n<div class=\"card-header\"><h4> Unterkunft, Verpflegung und Infos</h4></div>\r\n<div class=\"card-body text-justify\">\r\n<p class=\"card-text\">\r\nFür helfende Gäste bieten wir ab 2019 die Unterkunft im <strong>Schlafsaal</strong> des Ebenezers unter dem Dach an (Bringt bitte Hausschuhe, Schlafsack/ Kissen und Handtücher mit.) Sofern verfügbar, ist es möglich, zu einem Aufpreis im <strong>Gästehaus</strong> zu übernachten.\r\n</p><p> Der <strong>Campingbereich </strong> ist von Frühjahr bis Oktober geöffnet. In der Zeit könnt Ihr auch gern ein Zelt mitbringen oder mit Campingwagen kommen. Bitte sorgt dann für euer Equipment.</p><p> Gegessen wird gemeinsam mit der Gemeinschaft. Getränke (Wasser, Kaffee, Tee) sind immer zugänglich. Im <strong>Hofladen </strong>können alle weiteren überlebens-notwendigen Dinge wie Schokolade, Chips oder Zahnpasta gekauft werden.</p>\r\n<p> Bitte bringt an das Wetter angepasste Kleidung mit. <strong>Arbeitskleidung und festes Schuhwerk</strong> für die Mithilfe in der Landwirtschaft sind sinnvoll.<br>\r\nIm Waschhaus kann Wäsche gewaschen werden.<br>\r\nHelfende Gäste reinigen ihre Räume inkl. Sanitärräume selbst. Putzzeug dafür steht bereit. </p><p><strong>Hunde/ Katzen</strong> können nicht mitgebracht werden. Bitte versucht nicht, für eure Lieben Ausnahmen zu erwirken. </p> <p><strong>Haftungsfragen<br> </strong>Bisher ist es noch nie vorgekommen, dass ein Malheur passiert ist, aber für alle Fälle möchten wir sagen: Wir können für Unfälle oder andere Schadensfälle keine Haftung übernehmen. Ihr seid auf eigenes Risiko hier am Platz.</p>Wer vom <strong>JobCenter oder der Agentur für Arbeit</strong> einen Zuschuss zu den Reise- und Aufenthaltskosten erhalten will, der muss dies mit seinem Amt vorab klären und uns das Formular dazu vorlegen.\r\n</div>\r\n</div>\r\n<div class=\"card border-0\">\r\n<div class=\"card-header\"><h4>Angebote speziell für helfende Gäste</h4></div>\r\n<div class=\"card-body text-justify\"> <p class=\"card-text\">\r\nMontags gibt es eine Einführungsrunde mit Führung über das Gelände und Tipps zum Dasein. Mittwochs findet eine begleitete Reflexionsrunde für helfende Gäste statt. Tempelhof ist ein Feld, das unweigerlich auch innere Prozesse in Gang setzt. In den Gesprächsrunden ist Raum und Zeit für alle Fragen und Erfahrungen.</p>\r\n<p> Freitags findet eine Abschlussgesprächsrunde statt, wo Erfahrungen ausgewertet werden. Wir sind immer auch an einem Feedback interessiert.</p>\r\n<p> Viele reguläre und spontane Tempelhoftermine sind auch den Gästen zugänglich. Dennoch bitten wir um Verständnis dafür, dass Gemeinschaft auch immer wieder geschützte Räume braucht.</p>\r\n<p>Regelmäßige Termine zur Zeit sind Yoga, Impulsvorträge, Chor, Morgen-Meditation, Bewohner*Innenplenum und Dorfplenum.</p>\r\n<p> Wir unterstützen euch gerne dabei, eigene Ideen umzusetzen z.B. Lagerfeuer etc.</p>\r\n<p> Außerdem haben wir verschiedene Therapeuten am Platz, deren Angebote ihr auch nutzen könnt, tolle Massagen zum Beispiel und auch eine Friseurin. </p>\r\n<p> Eine <strong>Bibliothek</strong> befindet sich im Seminarhaus und ist immer zugänglich. Dort gibt es auch einen Gäste-PC. Internetanschlüsse gibt es auch an verschiedenen Stellen, hierfür solltet ihr ein Netzwerkkabel dabei haben. <strong>Das Dorf ist WLAN-frei.</strong></p>\r\n</div>\r\n</div></div>"
+            }
+        ],
+        "headerPictureUrl": [
+            {
+                "language": "DE",
+                "value": "https://schloss-tempelhof.seminardesk.de/Content/Extern/Gasthelfer2.jpg"
+            }
+        ],
+        "infoDatesPrices": [
+            {
+                "language": "DE",
+                "value": "<p><strong>Ob die Termine ab dem 19. April zu realisieren sind, hängt an der aktuellen Entwicklung um Corona.<br /></strong></p><p><strong><br /></strong></p><p><strong>Aufenthaltskosten<br /> </strong></p>Die Bezahlung erfolgt per Überweisung vorab – nach Bestätigung des Aufenthaltes. Da es öfter dazu kommt, dass angemeldete Menschen nicht erscheinen, bitten wir um Verständnis, dass die Anmeldung erst durch Eingang des Betrages verbindlich wird<br /> <p>Wer einen Sponsorenpreis zahlen möchte, bezahlt 200 € für die Woche um einem jungen Menschen eine Kostenermäßigung zu finanzieren (Jugendfonds).</p> <p>Wir werden manchmal gefragt, wieso wir nicht generell die Kosten für Kost und Logis übernehmen. Dazu mehr unter <a title=\"Wieso zahlen GasthelferInnen\" href=\"https://www.schloss-tempelhof.de/gemeinschaft/kennen-lernen/wieso-zahlen-gasthelferinnen/\">„Wieso zahlen GasthelferInnen ….?“</a></p>"
+            }
+        ],
+        "infoBoardLodging": [
+            {
+                "language": "DE",
+                "value": "<p>Wir kochen für Sie vegetarische und auf Wunsch vegane Vollwertkost, jahreszeitlich orientiert, reichhaltig und aus überwiegend regionalem Bio-Anbau. Wenn nichts anderes vereinbart ist, sind die gängigen Zeiten für Frühstück ab 7:30 Uhr, Mittagessen 12:30 Uhr, Abendessen 18:30 Uhr.</p>"
+            }
+        ],
+        "infoMisc": [
+            {
+                "language": "DE",
+                "value": ""
+            }
+        ],
+        "facilitators": [],
+        "contactInfo": "// Kontaktinfos - zur Zeit noch immer leer",
+        "tenant": {
+            "name": [
+                {
+                    "language": "DE",
+                    "value": "Schloss Tempelhof"
+                }
+            ],
+            "logoUrl": [
+                {
+                    "language": "DE",
+                    "value": "https://schloss-tempelhof.seminardesk.de/Content/Extern/logo_140.jpg"
+                }
+            ],
+            "affiliateCode": "SHTE",
+            "termsAndConditionsUrl": [
+                {
+                    "language": "DE",
+                    "value": "https://www.schloss-tempelhof.de/veranstaltungen/teilnahmebedingungen-agb"
+                }
+            ],
+            "legalNoticeUrl": [
+                {
+                    "language": "DE",
+                    "value": "https://www.schloss-tempelhof.de/service/impressum/"
+                }
+            ],
+            "privacyUrl": [
+                {
+                    "language": "DE",
+                    "value": "https://www.schloss-tempelhof.de/service/datenschutz"
+                }
+            ],
+            "websiteUrl": [
+                {
+                    "language": "DE",
+                    "value": "https://www.schloss-tempelhof.de"
+                }
+            ],
+            "pricesInfo": {
+                "currency": {
+                    "code": "EUR",
+                    "symbol": "€",
+                    "name": "Euro"
+                }
+            },
+            "languages": {
+                "available": [
+                    "DE"
+                ],
+                "defaultFallback": "DE"
+            }
+        }
+    }
+}
+	
