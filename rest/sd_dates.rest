@@ -7,6 +7,9 @@
 @guid = "{{$guid}}"
 
 ### 721 - 927cd29a247a4cfdba3fad6b3335a430 - Market Garden System - Nachhaltig & Regenerativ
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
 
 {
     "action": "eventDate.create",
@@ -70,6 +73,9 @@
 }
 
 ### 722 - 927cd29a247a4cfdba3fad6b3335a430 - Market Garden System - Nachhaltig & Regenerativ
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
 
 {
     "action": "eventDate.create",
@@ -134,6 +140,10 @@
 
 ### 723 - 927cd29a247a4cfdba3fad6b3335a430 - Market Garden System - Nachhaltig & Regenerativ
 
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
 {
     "action": "eventDate.create",
     "timestamp": 1583509808000,
@@ -196,6 +206,10 @@
 }
 
 ### 726 - 927cd29a247a4cfdba3fad6b3335a430 - Market Garden System - Nachhaltig & Regenerativ
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
 
 {
     "action": "eventDate.create",
@@ -260,6 +274,10 @@
 
 ### 727 - 927cd29a247a4cfdba3fad6b3335a430 - Market Garden System - Nachhaltig & Regenerativ
 
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
 {
     "action": "eventDate.create",
     "timestamp": 1583509808000,
@@ -322,6 +340,10 @@
 }
 
 ### 728 - 927cd29a247a4cfdba3fad6b3335a430 - Market Garden System - Nachhaltig & Regenerativ
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
 
 {
     "action": "eventDate.create",
@@ -386,6 +408,10 @@
 
 ### 922 - 50c7db655df54e0d8c03c851eb9a5ca8 - Kennenlernwochenende für Gemeinschaftsinteressierte
 
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
 {
     "action": "eventDate.create",
     "timestamp": 1583509808000,
@@ -448,6 +474,10 @@
 }
 
 ### 595 - 50c7db655df54e0d8c03c851eb9a5ca8 - Kennenlernwochenende für Gemeinschaftsinteressierte
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
 
 {
     "action": "eventDate.create",
@@ -512,6 +542,10 @@
 
 ### 596 - 50c7db655df54e0d8c03c851eb9a5ca8 - Kennenlernwochenende für Gemeinschaftsinteressierte
 
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
 {
     "action": "eventDate.create",
     "timestamp": 1583509808000,
@@ -575,6 +609,10 @@
 
 ### 792 - a15ec74c662b48458677dd7ad0b830f1 - Helfender Gast: Mitleben, mitwirken und mitwerkeln am Tempelhof
 
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
 {
     "action": "eventDate.create",
     "timestamp": 1583509808000,
@@ -628,6 +666,10 @@
 }
 
 ### 793 - a15ec74c662b48458677dd7ad0b830f1 - Helfender Gast: Mitleben, mitwirken und mitwerkeln am Tempelhof
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
 
 {
     "action": "eventDate.create",
@@ -683,6 +725,10 @@
 
 ### 794 - a15ec74c662b48458677dd7ad0b830f1 - Helfender Gast: Mitleben, mitwirken und mitwerkeln am Tempelhof
 
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
 {
     "action": "eventDate.create",
     "timestamp": 1583509808000,
@@ -736,6 +782,10 @@
 }
 
 ### 795 - a15ec74c662b48458677dd7ad0b830f1 - Helfender Gast: Mitleben, mitwirken und mitwerkeln am Tempelhof
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
 
 {
     "action": "eventDate.create",
@@ -791,6 +841,10 @@
 
 ### 796 - a15ec74c662b48458677dd7ad0b830f1 - Helfender Gast: Mitleben, mitwirken und mitwerkeln am Tempelhof
 
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
 {
     "action": "eventDate.create",
     "timestamp": 1583509808000,
@@ -844,6 +898,10 @@
 }
 
 ### 797 - a15ec74c662b48458677dd7ad0b830f1 - Helfender Gast: Mitleben, mitwirken und mitwerkeln am Tempelhof
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
 
 {
     "action": "eventDate.create",
@@ -899,6 +957,10 @@
 
 ### 798 - a15ec74c662b48458677dd7ad0b830f1 - Helfender Gast: Mitleben, mitwirken und mitwerkeln am Tempelhof
 
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
 {
     "action": "eventDate.create",
     "timestamp": 1583509808000,
@@ -952,6 +1014,10 @@
 }
 
 ### 799 - a15ec74c662b48458677dd7ad0b830f1 - Helfender Gast: Mitleben, mitwirken und mitwerkeln am Tempelhof
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
 
 {
     "action": "eventDate.create",
@@ -1007,6 +1073,10 @@
 
 ### 800 - a15ec74c662b48458677dd7ad0b830f1 - Helfender Gast: Mitleben, mitwirken und mitwerkeln am Tempelhof
 
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
 {
     "action": "eventDate.create",
     "timestamp": 1583509808000,
@@ -1060,6 +1130,10 @@
 }
 
 ### 801 - a15ec74c662b48458677dd7ad0b830f1 - Helfender Gast: Mitleben, mitwirken und mitwerkeln am Tempelhof
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
 
 {
     "action": "eventDate.create",
@@ -1115,6 +1189,10 @@
 
 ### 802 - a15ec74c662b48458677dd7ad0b830f1 - Helfender Gast: Mitleben, mitwirken und mitwerkeln am Tempelhof
 
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
 {
     "action": "eventDate.create",
     "timestamp": 1583509808000,
@@ -1168,6 +1246,10 @@
 }
 
 ### 803 - a15ec74c662b48458677dd7ad0b830f1 - Helfender Gast: Mitleben, mitwirken und mitwerkeln am Tempelhof
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
 
 {
     "action": "eventDate.create",
@@ -1223,6 +1305,10 @@
 
 ### 804 - a15ec74c662b48458677dd7ad0b830f1 - Helfender Gast: Mitleben, mitwirken und mitwerkeln am Tempelhof
 
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
 {
     "action": "eventDate.create",
     "timestamp": 1583509808000,
@@ -1277,6 +1363,10 @@
 
 ### 805 - a15ec74c662b48458677dd7ad0b830f1 - Helfender Gast: Mitleben, mitwirken und mitwerkeln am Tempelhof
 
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
 {
     "action": "eventDate.create",
     "timestamp": 1583509808000,
@@ -1330,6 +1420,10 @@
 }
 
 ### 805 - a15ec74c662b48458677dd7ad0b830f1 - Helfender Gast: Mitleben, mitwirken und mitwerkeln am Tempelhof
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
 
 {
     "action": "eventDate.create",

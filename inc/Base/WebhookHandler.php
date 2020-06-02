@@ -613,7 +613,8 @@ class WebhookHandler
         // define metadata of the new sd_event_date
         $meta_input = [
             'event_id'  => $payload['id'],
-            'data'      => self::strip_array_values($payload),
+            'data'      => self::kses_array_values($payload),
+            // 'data'      => self::strip_array_values($payload),
             'json_dump' => $request_json,
         ];
         return $meta_input;

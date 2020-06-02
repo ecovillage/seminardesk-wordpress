@@ -158,7 +158,7 @@ class TemplateCptEvents
                 $end_date = date_i18n( 'D, d.m.Y', $date_post->end_date/1000 );
                 $title = $date_post->post_title;
                 $price = $date_post->price_info;
-                $status = $date_post->dates_status;
+                $status = $date_post->status;
                 $venue = $date_post->venue;
                 $date_html = '<li>' . $title . ': ' . $begin_date . ' - ' . $end_date . ', ' . $price . ', ' . $status . ', ' . $venue . '</li>';
                 array_push($dates, $date_html);

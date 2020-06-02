@@ -8,10 +8,14 @@
 
 ### 927cd29a247a4cfdba3fad6b3335a430: Market Garden System - Nachhaltig & Regenerativ
 
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
 {
     "action": "event.create",
-    "timestamp": {{timestamp}},
-    "requestId": {{guid}},
+    "timestamp": 1583509807000,
+    "requestId": "3b27fe327ae240bf838a3fb6693e9feb",
     "payload": {
         "tenant": {
             "id": "schloss-tempelhof",
@@ -169,10 +173,14 @@
 
 ### 50c7db655df54e0d8c03c851eb9a5ca8: Kennenlernwochenende für Gemeinschaftsinteressierte
 
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
 {
     "action": "event.create",
-    "timestamp": {{timestamp}},
-    "requestId": {{guid}},
+    "timestamp": 1583509807000,
+    "requestId": "3b27fe327ae240bf838a3fb6693e9feb",
     "payload": {
         "id": "50c7db655df54e0d8c03c851eb9a5ca8",
         "settings": {
@@ -325,10 +333,14 @@
 
 ### a15ec74c662b48458677dd7ad0b830f1: Helfender Gast: Mitleben, mitwirken und mitwerkeln am Tempelhof
 
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
 {
     "action": "event.create",
     "timestamp": 1583509807000,
-    "requestId": "5b27fe327ae240bf838a3fb6693e9fed",
+    "requestId": "3b27fe327ae240bf838a3fb6693e9feb",
     "payload": {
         "id": "a15ec74c662b48458677dd7ad0b830f1",
         "settings": {

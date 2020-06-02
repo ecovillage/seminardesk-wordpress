@@ -62,11 +62,11 @@ get_header();
                 TemplateTaxonomyDates::get_venue('<p>', '</p>');
                 TemplateTaxonomyDates::get_img_remote( $post->teaser_picture_url, '300', '', $alt = "remote image load failed", '<p>', '</p>' );
                 // check if the post or page has a Featured Image assigned to it.
-                if ( has_post_thumbnail() ) {
-                    add_image_size( 'event_thumb_300', 300, 300, true);
-                    the_post_thumbnail('event_thumb_300');
-                    echo '<p></p>';
-                }
+                // if ( has_post_thumbnail() ) {
+                //     add_image_size( 'event_thumb_300', 300, 300, true);
+                //     the_post_thumbnail('event_thumb_300');
+                //     echo '<p></p>';
+                // }
                 the_excerpt();
                 ?>
                 <a href="<?php echo esc_url(get_permalink($post->event_wp_id)); ?>">

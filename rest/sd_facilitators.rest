@@ -109,7 +109,7 @@ Content-Type: {{content}}
     "timestamp": 1583509807000,
     "requestId": "5b27fe327ae240bf838a3fb6693e9fed",
     "payload": {
-        "id": 112
+        "id": 112,
         "name": "Agnes Schuster",
         "about": [
             {
