@@ -23,11 +23,11 @@ class TemplateTaxonomyDates
     {
         global $post;
         $date = array(
-            'begin' => date_i18n('l d.m.Y', $post->begin_date/1000),
-            'end'  => date_i18n('l d.m.Y', $post->end_date/1000),
+            'begin' => date_i18n('l, d.m.Y', $post->begin_date/1000),
+            'end'  => date_i18n('l, d.m.Y', $post->end_date/1000),
         );
 
-        $response = $before . __('<strong>Date: </strong>', 'seminardesk') . $date['begin'] . ' - ' . $date['end'] . $after;
+        $response = $before . $date['begin'] . ' - ' . $date['end'] . $after;
         if ( $echo ){
             echo $response;
         }

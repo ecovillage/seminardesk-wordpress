@@ -51,7 +51,7 @@ get_header();
                     </a>
                     <?php
                     // echo get_permalink( $post->event_wp_id );
-                    TemplateTaxonomyDates::get_date('<div class="sd-event-date">', '</div>');
+                    TemplateTaxonomyDates::get_date('<div class="sd-event-date">' . __('<strong>Date: </strong>', 'seminardesk'), '</div>');
                     TemplateTaxonomyDates::get_facilitators('<div class="sd-event-facilitators">', '</div>');
                     TemplateTaxonomyDates::get_price('<div class="sd-event-price">', '</div>');
                     TemplateTaxonomyDates::get_venue('<div class="sd-event-venue">', '</div>');

@@ -32,7 +32,8 @@ css styles for single template of CPT sd_event
     margin-bottom: -2em;
 }
 .sd-modal-more{
-    display: none; /* Hidden by default */
+    /* display: none; Hidden by default */
+    visibility: hidden;
     z-index: -1;
     position: absolute;
     top: 50%;
@@ -41,9 +42,11 @@ css styles for single template of CPT sd_event
     height: 100%;
     width: 100%;
     overflow: auto;
+
 }
 .sd-modal-booking{
-    display: none; /* Hidden by default */
+    /* display: none; Hidden by default */
+    visibility: hidden;
     z-index: -1;
     position: absolute;
     top: 50%;
@@ -53,6 +56,7 @@ css styles for single template of CPT sd_event
     width: 100%;
     overflow: auto;
     border: none;
+
 }
 .sd-iframe{
     z-index: -1;
@@ -66,9 +70,6 @@ css styles for single template of CPT sd_event
     width: 2rem;
     line-height: 2rem;
     margin: 0.2em 0.2em 1em 0;
-    /* margin-bottom: 1em;
-    margin-top: 0.2em;
-    margin-right: 0.2em; */
     text-align: center;
     cursor: pointer;
     border-radius: 0.25rem;
@@ -80,7 +81,10 @@ css styles for single template of CPT sd_event
 .sd-modal-show {
     opacity: 1;
     visibility: visible;
-    transform: scale(1.0);
+    transform: scale(1);
     transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+.sd-modal-frame {
+
 }
 /* END modal popup */

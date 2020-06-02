@@ -21,14 +21,18 @@ function sdToggleModal() {
 // show description content
 function sdModalShowMore() {
     sdToggleModal();
-    contentBooking.style.display = "none";
-    contentMore.style.display = "block";
+    contentBooking.style.visibility = "visible";
+    contentMore.style.visibility = "hidden";
+    // contentBooking.style.display = "none";
+    // contentMore.style.display = "block";
 }
 // show booking content
 function sdModalShowBooking() {
     sdToggleModal();
-    contentMore.style.display = "none";
-    contentBooking.style.display = "block";
+    contentBooking.style.visibility = "hidden";
+    contentMore.style.visibility = "visible";
+    // contentMore.style.display = "none";
+    // contentBooking.style.display = "block";
 }
 
 function windowOnClick(event) {

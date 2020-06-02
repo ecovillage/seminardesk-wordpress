@@ -30,11 +30,13 @@ get_header();
                 <p>
                     <strong>
                     <?php
-                    _e('<strong>Facilitators: </strong>', 'seminardesk');
-                    ?>
-                    </strong>
-                    <?php
-                    echo TemplateCptEvents::get_facilitators($post->data['facilitators']);
+                    $facilitators = TemplateCptEvents::get_facilitators($post->data['facilitators']);
+                    if ($facilitators) {
+                        echo '<strong>';
+                        _e('Facilitators: ', 'seminardesk');
+                        echo '</strong>';
+                        echo $facilitators;
+                    }
                     ?>
                 </p>
                 <p>
@@ -84,7 +86,6 @@ get_header();
                     </div>
                     <div>
                         <!-- TODO: only load booking page, when pressing button to show booking content?  -->
-                        <!-- <iframe class="sd-modal-booking" src="https://booking.seminardesk.de/en/schloss-tempelhof/927cd29a247a4cfdba3fad6b3335a430/market-garden-system---nachhaltig--regenerativ/embed" title="Seminardesk Booking">Booking Offline</iframe> -->
                         <iframe class="sd-modal-booking" src="https://booking.seminardesk.de/en/schloss-tempelhof/<?php echo $post->data['id']; ?>/<?php echo $post->data['titleSlug']; ?>/embed" title="Seminardesk Booking">Booking Offline</iframe>
                     </div>
                 </div>

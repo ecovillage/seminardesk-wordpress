@@ -31,6 +31,7 @@ class TemplateController
 
     public function modify_request_schedule( $vars )
     {
+        // FIXME: page nav for schedule slug
         if ( isset($vars['name']) && $vars['name'] === 'schedule' ){
             $vars += [ 'upcoming' => true ];
         }
