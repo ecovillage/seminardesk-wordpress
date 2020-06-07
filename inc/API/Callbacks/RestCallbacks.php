@@ -107,11 +107,6 @@ class RestCallbacks{
                     'link'              => get_post_permalink($post->ID),
                     'status'            => $post->post_status,
                     'author'            => get_the_author_meta( 'display_name', $post->post_author),
-                    'featured_image'    => [
-                        'thumbnail' => get_the_post_thumbnail_url($post->ID, 'thumbnail'),
-                        'medium'    => get_the_post_thumbnail_url($post->ID, 'medium'),
-                        'large'     => get_the_post_thumbnail_url($post->ID, 'large'),
-                    ],
                     'data'              => $post->data,
                     'json_dump'         => $post->json_dump, // get metadata 'json_dump'
                 ];
@@ -127,11 +122,6 @@ class RestCallbacks{
                     'slug'              => $post->post_name,
                     'link'              => get_post_permalink($post->ID),
                     'status'            => $post->post_status,
-                    'featured_image'    => [
-                        'thumbnail' => get_the_post_thumbnail_url($post->ID, 'thumbnail'),
-                        'medium'    => get_the_post_thumbnail_url($post->ID, 'medium'),
-                        'large'     => get_the_post_thumbnail_url($post->ID, 'large'),
-                    ],
                     'begin_date'        => (int)$post->begin_date,
                     'end_date'          => (int)$post->end_date,
                     'facilitator_ids'      => $post->facilitator_ids,
@@ -152,11 +142,6 @@ class RestCallbacks{
                     'slug'              => $post->post_name,
                     'link'              => get_post_permalink($post->ID),
                     'status'            => $post->post_status,
-                    'featured_image'    => [
-                        'thumbnail' => get_the_post_thumbnail_url($post->ID, 'thumbnail'),
-                        'medium'    => get_the_post_thumbnail_url($post->ID, 'medium'),
-                        'large'     => get_the_post_thumbnail_url($post->ID, 'large'),
-                    ],
                     'facilitator_name'  => $post->facilitator_name,
                     'json_dump'         => $post->json_dump,
                 ];

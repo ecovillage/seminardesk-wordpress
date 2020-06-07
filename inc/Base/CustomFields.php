@@ -45,20 +45,6 @@ class CustomFields
 
         register_post_meta(
             'sd_event',
-            'featured_img',
-            [
-                'show_in_rest'  => true,
-                'type'          => 'string',
-                'description'   => 'featured image',
-                'auth_callback' => function(){
-                    // return current_user_can( 'edit_posts' );
-                    return false;
-                }
-            ]
-        );
-
-        register_post_meta(
-            'sd_event',
             'json_dump',
             [
                 'show_in_rest'  => true,

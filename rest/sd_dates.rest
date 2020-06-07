@@ -6,6 +6,72 @@
 @timestamp = "{{$timestamp}}"
 @guid = "{{$guid}}"
 
+### 709 - 927cd29a247a4cfdba3fad6b3335a430 - Market Garden System - Nachhaltig & Regenerativ
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
+{
+    "action": "eventDate.create",
+    "timestamp": 1583509808000,
+    "requestId": "3b27fe327ae240bf838a3fb6693e9feb",
+    "payload": {
+        "id": 709,
+        "eventId": "927cd29a247a4cfdba3fad6b3335a430",
+        "status": "wait_list",
+        "registrationAvailable": true,
+        "detailpageAvailable": true,
+        "beginDate": "1599755400000",
+        "endDate": "1599998400000",
+        "title": [
+            {
+                "language": "DE",
+                "value": "Market Garden System - Nachhaltig & Regenerativ"
+            }
+        ],
+        "titleSlug": [
+            {
+                "language": "DE",
+                "value": "market-garden-system---nachhaltig--regenerativ"
+            }
+        ],
+        "subtitle": [
+            {
+                "language": "DE",
+                "value": "3-Tages-Kurs mit einzeln buchbaren Modulen, Veranstalter: Sebastian Heilmann, Maya Lukoff und Urs Mauk"
+            }
+        ],
+        "teaser": [
+            {
+                "language": "DE",
+                "value": "Kann Market Gardening (MG) als intensives System dennoch nachhaltig und regenerativ sein? <br /><br />Wir  sind der Meinung: grundsätzlich ja! Jedoch braucht es dazu ein  Verständnis über die Zusammenhänge im Boden und geeignete Methoden bzw.  Werkzeuge, um die Bodenfruchtbarkeit zu erhalten und zu verbessern. Am  Freitag werden wir diese Grundlagen legen, auf die dann in den folgenden  Tagen die eher technischen Details des MG aufbauen.<br />"
+            }
+        ],
+        "teaserPictureUrl": [
+            {
+                "language": "DE",
+                "value": "https://schloss-tempelhof.seminardesk.de/Content/Extern/MarketGarden32.jpg"
+            }
+        ],
+        "priceInfo": [
+            {
+                "language": "DE",
+                "value": "Ab 18 Jahren 320 Euro\r\n"
+            }
+        ],
+        "facilitators": [
+            123,
+            124,
+            125
+        ],
+        "venue": null,
+        "contactInfo": null,
+        "eventType": "",
+        "eventTopic": "Ökologie",
+        "showAttendanceFees": true
+    }
+}
+
 ### 721 - 927cd29a247a4cfdba3fad6b3335a430 - Market Garden System - Nachhaltig & Regenerativ
 POST {{url}}
 Authorization: {{auth}}

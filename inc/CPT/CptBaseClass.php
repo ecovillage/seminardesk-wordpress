@@ -92,7 +92,7 @@ abstract class CptBaseClass
             'title', 
             'editor', 
             'author', 
-            'thumbnail', 
+            //'thumbnail', 
             'excerpt', 
             'revisions', 
             'custom-fields', // enable support of Meta API

@@ -1,0 +1,37 @@
+@host = http://localhost
+@path = /wpsdp/wp-json/seminardesk/v1/webhooks HTTP/1.1
+@url = {{host}}{{path}}
+@auth = Basic c2VtaW5hcmRlc2s6XlQ0cWVNNHYkTjhuRWRVVWRGbTJUdjRj
+@content = application/json
+@timestamp = "{{$timestamp}}"
+@guid = "{{$guid}}"
+
+### 50c7db655df54e0d8c03c851eb9a5ca8: Kennenlernwochenende für Gemeinschaftsinteressierte
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
+{
+    "action": "event.delete",
+    "timestamp": 1583509808000,
+    "requestId": "c537378965274f62be0cf56d976b83f3",
+    "payload": {
+        "id": "50c7db655df54e0d8c03c851eb9a5ca8"
+    }
+}
+
+### 89f6560ac535450188b5da3b529f9493: Historische Fahrzeuge
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
+{
+    "action": "event.delete",
+    "timestamp": 1583509808000,
+    "requestId": "c537378965274f62be0cf56d976b83f3",
+    "payload": {
+        "id": "89f6560ac535450188b5da3b529f9493"
+    }
+}

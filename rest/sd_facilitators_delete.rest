@@ -1,0 +1,22 @@
+@host = http://localhost
+@path = /wpsdp/wp-json/seminardesk/v1/webhooks HTTP/1.1
+@url = {{host}}{{path}}
+@auth = Basic c2VtaW5hcmRlc2s6XlQ0cWVNNHYkTjhuRWRVVWRGbTJUdjRj
+@content = application/json
+@timestamp = "{{$timestamp}}"
+@guid = "{{$guid}}"
+
+### 321 - Hans Kurz
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
+{
+    "action": "facilitator.delete",
+    "timestamp": 1683509807000,
+    "requestId": "6b27fe327ae240bf838a3fb6693e9fef",
+    "payload": {
+        "id": "321"
+    }
+}
