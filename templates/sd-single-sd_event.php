@@ -28,7 +28,6 @@ get_header();
             </header>
             <div class="post-meta-wrapper post-meta-single post-meta-single-top">
                 <p>
-                    <strong>
                     <?php
                     $facilitators = TemplateCptEvents::get_facilitators($post->data['facilitators']);
                     if ($facilitators) {
@@ -41,53 +40,44 @@ get_header();
                 </p>
                 <p>
                     <?php
-                    echo TemplateCptEvents::get_value_by_language($post->data['teaser']);
+                    echo TemplateCptEvents::get_value_by_language($post->data['description']);
                     ?>
                 </p>
-                <p><button class="sd-modal-more-btn">
-                    <?php 
-                    _e('More', 'seminardesk');
-                    ?>
-                </button></p>
-                <p><strong>
-                    <?php 
-                    _e('List of available dates:', 'seminardesk');
-                    ?>
-                </strong></p>
-                <p>
-                    <?php
-                    // get list of all dates for this event
-                    echo TemplateCptEvents::get_event_dates_list( $post->data['id'] );
-                    ?>
-                </p>
-                <p><button class="sd-modal-booking-btn">
-                    <?php 
-                    _e('Booking', 'seminardesk');
-                    ?>
-                </button></p>
-
                 <?php
-                // check if the post or page has a Featured Image assigned to it.
-                // if ( has_post_thumbnail() ) {
-                //     add_image_size( 'event_thumb_100', 100, 100, true);
-                //     the_post_thumbnail('event_thumb_100');
-                //     echo '<p></p>';
-                // }
-                ?>
+                    // get list of all dates for this event
+                    $booking_list = TemplateCptEvents::get_event_dates_list( $post->data['id'] );
+                    if ( $booking_list ){
+                        ?>
+                        <h4>
+                            <?php 
+                            _e('List of available dates:', 'seminardesk');
+                            ?>
+                        </h4>
+                        <p>
+                        <?php
+                        echo $booking_list;
+                        ?>
+                        <br><p><button class="sd-modal-booking-btn">
+                            <?php 
+                            _e('Booking', 'seminardesk');
+                            ?>
+                        </button></p>
+                        </p>
+                        <?php
+                    } else {
+                        echo '<h4>';
+                        _e('No dates for this event available :(', 'seminardesk');
+                        echo '</h4>';
+                    }
+                    ?>
             </div>
             <!-- BEGIN modal content -->
             <div class="sd-modal">
                 <div class="sd-modal-content">
-                    <span class="sd-modal-close-btn">×</span>
-                    <div class="sd-modal-more">
-                        <?php 
-                        echo TemplateCptEvents::get_value_by_language($post->data['description']);
-                        ?>
-                    </div>
-                    <div>
-                        <!-- TODO: only load booking page, when pressing button to show booking content?  -->
-                        <iframe class="sd-modal-booking" src="https://booking.seminardesk.de/en/schloss-tempelhof/<?php echo $post->data['id']; ?>/<?php echo $post->data['titleSlug']; ?>/embed" title="Seminardesk Booking">Booking Offline</iframe>
-                    </div>
+                    <span class="sd-modal-close-btn">&times;</span>
+                    <h4 class="sd-modal-title"><?php _e('Booking', 'seminardesk');?></h4>
+                    <!-- TODO: lazy load of iframe active for testing ... experimental. dont use in production code -->
+                    <iframe class="sd-modal-booking" loading="lazy" src="https://booking.seminardesk.de/en/schloss-tempelhof/<?php echo $post->data['id']; ?>/<?php echo $post->data['titleSlug']; ?>/embed" title="Seminardesk Booking"></iframe>
                 </div>
             </div>
             <!-- END modal content -->

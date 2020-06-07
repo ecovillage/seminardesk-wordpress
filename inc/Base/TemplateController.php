@@ -31,10 +31,17 @@ class TemplateController
 
     public function modify_request_schedule( $vars )
     {
-        // FIXME: page nav for schedule slug
         if ( isset($vars['name']) && $vars['name'] === 'schedule' ){
             $vars += [ 'upcoming' => true ];
         }
+        // fixing page nav for slug of txn dates
+        if ( isset($vars['dates']) && strpos($vars['dates'], 'page') !== false ){
+            $vars += [ 'upcoming' => true ];
+            $vars += [ 'page' => trim($vars['dates'], 'page/') ];
+        }
+        if ( isset($vars['dates']) && $vars['dates'] === 'past' ){
+            $vars += [ 'past' => true ];
+        } 
         if ( isset($vars['dates']) && $vars['dates'] === 'past' ){
             $vars += [ 'past' => true ];
         } 

@@ -25,12 +25,16 @@ class TemplateCptEvents
     {
 
         $key = array_search($lang_tag, array_column($array, 'language'));
+        // on failure get default language or first entry of the array
         if ( $key === false){
-            return null;
+            $lang_default = 'DE';
+            $key = array_search($lang_default, array_column($array, 'language'));
+            if ( $key === false ){
+                $key = '0';
+            }
         }
         $value = $array[$key]['value'];
         $response = $before . $value . $after;
-       
         if ( $echo ){
             echo $response;
         }
@@ -112,13 +116,13 @@ class TemplateCptEvents
     }
 
     /**
-     * Get list of all upcoming event dates for this event
+     * Get html list of all upcoming event dates for this event
      * 
      * @param mixed $event_id 
      * @param string $before 
      * @param string $after 
      * @param bool $echo 
-     * @return null 
+     * @return string
      */
     public static function get_event_dates_list( $event_id, $before = '', $after = '' , $echo = false )
     {
@@ -149,24 +153,36 @@ class TemplateCptEvents
                 ),
             )
         );
-
         $date_posts = $custom_query->get_posts();
         $dates = array();
         if ( $custom_query->have_posts() ){
             foreach ( $date_posts as $date_post) {
                 $begin_date = date_i18n( 'D, d.m.Y', $date_post->begin_date/1000 );
                 $end_date = date_i18n( 'D, d.m.Y', $date_post->end_date/1000 );
-                $title = $date_post->post_title;
-                $price = $date_post->price_info;
+                $date = $begin_date . ' - ' . $end_date;
+                // rtrim() or wp_strip_all_tags...
+                $title = wp_strip_all_tags($date_post->post_title) . ': ';
+                $price = wp_strip_all_tags($date_post->price_info);
                 $status = $date_post->status;
+                $status_lib = array(
+                    'available'     => __('Booking Available', 'seminardesk'),
+                    'fully_booked'  => __('Fully Booked', 'seminardesk'),
+                    'limited'       => __('Limited Booking', 'seminardesk'),
+                    'wait_list'     => __('Waiting List', 'seminardesk'),
+                );
+                $status_msg = $status_lib[$status];
                 $venue = $date_post->venue;
-                $date_html = '<li>' . $title . ': ' . $begin_date . ' - ' . $end_date . ', ' . $price . ', ' . $status . ', ' . $venue . '</li>';
+
+                $date_props = array();
+                array_push($date_props, $date, $price, $status_msg, $venue);
+                $date_props = array_filter($date_props); // remove empty values from array
+                $date_html = '<li>' . $title . implode(', ', $date_props) . '</li>';
                 array_push($dates, $date_html);
             }
         }
 
         if ( !empty($dates) ){
-            $response = $before . implode('', $dates) . $after;
+            $response = $before . '<ol>' . implode('', $dates) . '</ol>' . $after;
         }else{
             $response = null;
         }

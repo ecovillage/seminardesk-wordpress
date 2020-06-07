@@ -9,18 +9,31 @@ use Inc\Base\TemplateTaxonomyDates;
 
 $title = __( 'Past Events Dates', 'seminardesk');
 $timestamp_today = strtotime(wp_date('Y-m-d'));
+
+// nav page and pagination for custom query
+if ( get_query_var( 'paged' ) ) {
+	$paged = get_query_var( 'paged' );
+} else if ( get_query_var( 'page' ) ) {
+	// This will occur if on front page.
+	$paged = get_query_var( 'page' );
+} else {
+	$paged = 1;
+}
+
 $wp_query = new WP_Query(
     array(
-        'post_type'    => 'sd_date',
-        'post_status'  => 'publish',
-        'meta_key'     => 'begin_date',
-        'orderby'      => 'meta_value_num',
-        'order'        => 'DESC',
-        'meta_query'   => array(
-           'key'       => 'begin_date',
-           'value'     => $timestamp_today*1000, //in ms
-           'type'      => 'numeric',
-           'compare'   => '<',
+        'post_type'         => 'sd_date',
+        'post_status'       => 'publish',
+        'posts_per_page'    => '5',
+        'paged'             => $paged,
+        'meta_key'          => 'begin_date',
+        'orderby'           => 'meta_value_num',
+        'order'             => 'DESC',
+        'meta_query'        => array(
+           'key'        => 'begin_date',
+           'value'      => $timestamp_today*1000, //in ms
+           'type'       => 'numeric',
+           'compare'    => '<',
         ),
     )
 );
@@ -31,15 +44,15 @@ get_header();
     <header class="archive-header has-text-align-center header-footer-group">
         <div class="archive-header-inner section-inner medium">
             <?php if ( $title ) { ?>
-                <h1 class="archive-title"><?php echo wp_kses_post( $title ); ?></h1>
+                <h1 class="archive-title"><?php echo $title; ?></h1>
             <?php } ?>
-            </div><!-- .archive-header-inner -->
+        </div><!-- .archive-header-inner -->
     </header><!-- .archive-header -->
     
     <?php
-    if ( have_posts() ) {
-		while ( have_posts() ) {
-            the_post();
+    if ( $wp_query->have_posts() ) {
+		while ( $wp_query->have_posts() ) {
+            $wp_query->the_post();
             ?>
             <div class="entry-header-inner section-inner small">
                 <a href="<?php echo esc_url(get_permalink($post->event_wp_id)); ?>">
@@ -68,7 +81,30 @@ get_header();
             
         }?>
         <div class="has-text-align-center">
-            <br><p><?php echo get_posts_nav_link();?></p>
+            <br><p>
+                <?php
+
+                // // post nav for custom query
+                // next_posts_link( __('« Previous events', 'seminardesk'), $wp_query->max_num_pages );  
+                // $next_nav = get_previous_posts_link( __('Next events »', 'seminardesk'), $wp_query->max_num_pages );
+                // $separator = ' — ';
+                // if ( $next_nav ){
+                //     echo $separator;
+                //     echo $next_nav;
+                // }
+                
+                // pagination for custom query
+                $big = 999999999; // need an unlikely integer
+                echo paginate_links( array(
+                    'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+                    'format'    => '?paged=%#%',
+                    'current'   => max( 1, get_query_var('paged') ),
+                    'total'     => $wp_query->max_num_pages,
+                    'prev_text' => __('« Previous', 'seminardesk'),
+                    'next_text' => __('Next »', 'seminardesk'),
+                ) );
+                ?>
+            </p>
         </div>
         <?php
 	} else {
@@ -84,7 +120,7 @@ get_header();
         <?php
 
     }
-    // TODO: reset query necessary ... better use wp_reset_postdata()?
+    // TODO: reset query necessary ... better use wp_reset_postdata()?  
     wp_reset_query();
 	?>
 

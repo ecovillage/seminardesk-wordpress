@@ -486,4 +486,245 @@ Content-Type: {{content}}
         }
     }
 }
-	
+
+### 89f6560ac535450188b5da3b529f9493: Historische Fahrzeuge
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
+{
+    "action": "event.create",
+    "timestamp": 1583509807000,
+    "requestId": "3b27fe327ae240bf838a3fb6693e9feb",
+    "payload": {
+        "id": "89f6560ac535450188b5da3b529f9493",
+        "settings": {
+            "childrenAllowed": false,
+            "datesAreCoherent": false,
+            "registrationAvailable": true,
+            "showAttendanceFees": true,
+            "showTotalPrices": true,
+            "onlyBoardAndLodging": false,
+            "allowBookingForMultipleDates": false,
+            "showExtras": true,
+            "showFacilitators": true,
+            "showNewsletterCheckbox": true,
+            "allowVoucher": true,
+            "showPriceAsTotal": false,
+            "showBoardAndLodgingAndMiscSummarized": false,
+            "mandatoryFieldsBooker": {
+                "gender": true,
+                "birthdate": false,
+                "address": true,
+                "phone": false,
+                "guestType": false
+            },
+            "mandatoryFieldsAdult": {
+                "gender": true,
+                "birthdate": false,
+                "email": false,
+                "guestType": false
+            },
+            "mandatoryFieldsChild": {
+                "gender": true,
+                "birthdate": true,
+                "guestType": false
+            }
+        },
+        "title": [
+            {
+                "language": "DE",
+                "value": "Historische Fahrzeuge"
+            }
+        ],
+        "titleSlug": [
+            {
+                "language": "DE",
+                "value": "historische-fahrzeuge"
+            }
+        ],
+        "subtitle": [
+            {
+                "language": "DE",
+                "value": "Substanzerhaltende Restaurierung, originale Materialien und Patina"
+            }
+        ],
+        "teaser": [
+            {
+                "language": "DE",
+                "value": "<div></div><div><span style=\"font-size: 12pt;\">So genannte „unrestaurierte“ Fahrzeuge in historischem Erhaltungszustand stellen neue Anforderungen an die Gutachter. Hier werden veränderte Herangehensweisen an die Beschreibung und Bewertung wichtig, etwa bei Fragen wie: „Ist das noch Patina, oder nur ein vergammelter Zustand?“ Frau Dr. Gundula Tutt kann’s erläutern und gibt Unterstützung bei der Einordnung, Begutachtung und restaurierungsbegleitenden Betreuung solcher Fälle. </span></div><p style=\"text-align: left; margin: 0pt;\"><span style=\"font-size: 12pt;\"><span style=\"font-family: Arial;\"><span><strong><br /></strong></span></span></span></p><p style=\"text-align: left; margin: 0pt;\"><span style=\"font-size: 12pt;\"><span style=\"font-family: Arial;\"><span><strong>Das Seminar findet im Umfeld der <a href=\"https://bavaria-historic.de/\" target=\"_blank\" title=\"33. ADAC Bavaria Historic\">33. ADAC Bavaria Historic</a> statt. </strong><br /></span></span></span></p><p style=\"text-align: left; margin: 0pt;\"><span style=\"font-family: Arial; font-size: 12pt;\"><span>An diesem Wochenende findet nebenan im Schloß Maxlrain und in Bad Aibling die legendäre Rallye und Oldtimer-Show \"Bavaria Historic\" statt. Wir sind mitten im Geschehen. Unser Seminarhotel liegt direkt an der Strecke.<br /></span></span></p>"
+            }
+        ],
+        "description": [
+            {
+                "language": "DE",
+                "value": "<div><span style=\"font-size: 12pt;\">Der Markt für historische Fahrzeuge entwickelt heute ein gesteigertes Bewusstsein für die originale Substanz und rückt ab von der Vorstellung „besser als neu“.</span></div><p></p><div><span style=\"font-size: 12pt;\">Wird bei der Instandhaltung und Restaurierung original erhaltener Fahrzeuge jedoch „konventionell“ gearbeitet, müssen historische Materialien und Oberflächen meist komplett überarbeitet oder entfernt werden und gehen damit unwiederbringlich verloren. Aktiv genutzte Fahrzeuge mit erhaltener Originalsubstanz stellen also neue Aufgaben an alle, die mit ihnen umgehen.</span></div><div><span style=\"font-size: 12pt;\"></span></div><div><span style=\"font-size: 12pt;\">Für die Sachverständigen bedeutet das vor allem, dass die Beschreibungen, aber auch die Einstufungen des Erhaltungszustands verändert und neu interpretiert werden müssen. Darüber hinaus können bei restaurierungsbegleitenden Gutachten neue Vorgehensweisen und Schwerpunkte wichtig werden. </span></div><div><span style=\"font-size: 12pt;\"></span></div><div><span style=\"font-size: 12pt;\">Das Seminar zeigt an zahlreichen Fallbeispielen, wie Fahrzeuggutachter, Restauratoren und Besitzer in solchen Fällen sinnvoll und verantwortungsbewusst vorgehen können.</span></div><div><span style=\"font-size: 12pt;\"><br /></span></div><div><span style=\"font-size: 12pt;\">Ein Schwerpunkt liegt dabei auf praktischen Konzepten und Bearbeitungsmethoden, mit denen originale Substanz erhalten und konserviert, sowie Schäden an historischen Lacken und Beschichtungen, Leder, Kunstleder, Textilien, Holzoberflächen oder Metallüberzügen behoben werden können. Auf diese Weise ist es möglich, unrestauriert bewahrte Fahrzeuge und ihre Originalität in einem gepflegten historischen Gebrauchszustand, aber gleichzeitig auch in Funktion zu erhalten. Im Seminar kommen außerdem wichtige Fragen rund um die Verfügbarkeit sowie die rechtlichen Grundlagen bei der Verwendung von originalgetreuen Materialien und Arbeitstechniken zur Sprache.</span></div><p></p><div><span style=\"font-size: 12pt;\">Darüber hinaus werden naturwissenschaftliche Analysemethoden vorgestellt, die wichtige und tragfähige Befunde liefern können zu Fragen wie: „handelt es sich hier tatsächlich um Bauteile oder Materialien aus der Herstellungszeit des Fahrzeuges?“ oder „welche Farbe hatte dieser Wagen eigentlich ursprünglich?“.</span></div><p></p><div><span style=\"font-size: 12pt;\">Diese Themen werden mit Beispielen aus der Praxis erläutert, wobei die Seminarteilnehmern gerne auch eigene „Fälle“ mit einbringen können.</span></div><p></p><div><span style=\"font-size: 12pt;\">Das Seminarscript kann nach der Veranstaltung auf meiner <a href=\"https://omnia-online.jimdofree.com/\" target=\"_blank\" title=\"Omnia\">Webseite</a> heruntergeladen werden (Passwortgeschützter Teilnehmerbereich).</span></div><span style=\"font-size: 18pt;\"><br /></span>"
+            }
+        ],
+        "headerPictureUrl": [
+            {
+                "language": "DE",
+                "value": "https://mas-ev.seminardesk.de/Content/Extern/image.jpg"
+            }
+        ],
+        "infoDatesPrices": [
+            {
+                "language": "DE",
+                "value": "<div><span style=\"font-size: 12pt;\">Die Rechnungsstellung erfolgt ohne Mehrwertsteuer. Der MAS e.V. ist auf Grund seiner Gemeinnützigkeit MwSt.-befreit.</span></div><div><span style=\"font-size: 12pt;\"><br /></span></div><div><span style=\"font-size: 18pt;\"><span style=\"font-size: 12pt;\">Hier geht es zur <a href=\"https://www.bo-parkhotel.de/tagungen/tagen-im-parkhotel/index.html\" target=\"_blank\" title=\"Homepage\">Homepage</a> des Veranstaltungsortes und zur <a href=\"https://goo.gl/maps/EvGL898EBmjiZft27\" target=\"_blank\" title=\"Landkarte\">Landkarte</a>.</span></span></div><div><span style=\"font-size: 12pt;\"><br /></span></div><div><p style=\"text-align: left; margin: 0pt;\"><span style=\"font-family: Arial;\"><strong><span style=\"font-size: 12pt;\">Das Seminar findet im Umfeld der <a href=\"https://bavaria-historic.de/\" target=\"_blank\" title=\"33. ADAC Bavaria Historic\">33. ADAC Bavaria Historic</a> statt. </span></strong><span style=\"font-size: 12pt;\"><br /></span></span></p><p style=\"text-align: left; margin: 0pt;\"><span style=\"font-size: 12pt;\"><span style=\"font-family: Arial;\">An diesem Wochenende findet nebenan im Schloß Maxlrain und in Bad Aibling die legendäre Rallye und Oldtimer-Show \"Bavaria Historic\" statt. Wir sind mitten im Geschehen, das Seminarhotel liegt direkt an der Strecke.</span></span></p></div><div><span style=\"font-size: 12pt;\"></span></div><div><span style=\"font-size: 12pt;\"><strong><br /></strong></span></div><div><span style=\"font-size: 12pt;\"><strong>B&O Parkhotel</strong></span><span style=\"font-size: 12pt;\"> </span></div><div><span style=\"font-size: 12pt;\">Dietrich-Bonhoeffer-Str. 31, </span></div><div><span style=\"font-size: 12pt;\">83043 Bad Aibling - OT Mietraching, </span></div><div><span style=\"font-size: 12pt;\">Telefon: +49 (0)8061 38999-0<br /><a href=\"https://www.bo-parkhotel.de/tagungen/tagen-im-parkhotel/index.html\" target=\"_blank\" title=\"Homepage\">Homepage</a><br /><a href=\"https://goo.gl/maps/EvGL898EBmjiZft27\" target=\"_blank\" title=\"Landkarte\">Landkarte</a></span></div><div><span style=\"font-size: 12pt;\"><br /></span></div><div><span style=\"font-size: 12pt;\">Ein Zimmerkontingent ist für die Teilnehmer reserviert. Auf Grund der gleichzeitig stattfindenden <a href=\"https://bavaria-historic.de/\" target=\"_blank\" title=\"ADAC Bavaria Historic\">ADAC Bavaria Historic</a> kann pro Seminar nur eine Übernachtung gebucht werden, Anreise Mittwoch 10.6.2020, Kennwort: MAS Seminar</span></div>"
+            }
+        ],
+        "infoBoardLodging": [
+            {
+                "language": "DE",
+                "value": ""
+            }
+        ],
+        "infoMisc": [
+            {
+                "language": "DE",
+                "value": ""
+            }
+        ],
+        "facilitators": [
+            {
+                "name": "Dr. Gundula Tutt",
+                "about": [
+                    {
+                        "language": "DE",
+                        "value": "<p style=\"text-align: left; margin: 0pt 0pt 8pt; line-height: 1.07917;\"><span style=\"font-family: Arial; font-size: 10pt;\">Diplomrestauratorin und Autorin</span></p>"
+                    }
+                ],
+                "pictureUrl": "https://mas-ev.seminardesk.de/Content/Extern/index.jpg"
+            }
+        ],
+        "contactInfo": "",
+        "dates": [
+            {
+                "id": 20,
+                "status": "available",
+                "beginDate": 1591858800000,
+                "endDate": 1591885800000,
+                "hasBoard": false,
+                "hasLodging": false,
+                "hasMisc": false,
+                "title": [
+                    {
+                        "language": "DE",
+                        "value": "Historische Fahrzeuge"
+                    }
+                ],
+                "priceInfo": [
+                    {
+                        "language": "DE",
+                        "value": "Nicht-Mitglieder 400 Euro\r\n, MAS-Mitglieder 360 Euro\r\n"
+                    }
+                ],
+                "attendanceFees": [
+                    {
+                        "ageFrom": 18,
+                        "earlyBirdDate": 1580598000000,
+                        "priceDefault": 400,
+                        "priceReduced": 0,
+                        "priceEarlyBird": 0,
+                        "priceRangeFrom": 0,
+                        "priceRangeTo": 0,
+                        "isSelfAssessment": false,
+                        "name": [
+                            {
+                                "language": "DE",
+                                "value": "Nicht-Mitglieder"
+                            }
+                        ]
+                    },
+                    {
+                        "ageFrom": 18,
+                        "earlyBirdDate": 1580598000000,
+                        "priceDefault": 360,
+                        "priceReduced": 0,
+                        "priceEarlyBird": 0,
+                        "priceRangeFrom": 0,
+                        "priceRangeTo": 0,
+                        "isSelfAssessment": false,
+                        "name": [
+                            {
+                                "language": "DE",
+                                "value": "MAS-Mitglieder"
+                            }
+                        ]
+                    }
+                ],
+                "availableLodging": [],
+                "availableBoard": [],
+                "availableMisc": [],
+                "availableExtras": [],
+                "venue": {
+                    "name": "B&O Parkhotel",
+                    "street1": "Dietrich-Bonhoeffer-Straße 31",
+                    "street2": "",
+                    "zip": "83043",
+                    "city": "Bad Aibling",
+                    "country": "",
+                    "weblink": "https://www.bo-parkhotel.de/tagungen/tagen-im-parkhotel/index.html"
+                }
+            }
+        ],
+        "additionalQuestions": {
+            "perBooking": [],
+            "perAdult": [],
+            "perChild": []
+        },
+        "tenant": {
+            "name": [
+                {
+                    "language": "DE",
+                    "value": "MAS e.V."
+                }
+            ],
+            "logoUrl": [
+                {
+                    "language": "DE",
+                    "value": "https://mas-ev.seminardesk.de/Content/Extern/logo_140.jpg"
+                }
+            ],
+            "affiliateCode": "MAS",
+            "termsAndConditionsUrl": [
+                {
+                    "language": "DE",
+                    "value": "https://mas-ev.de/MAS-Satzung-2017.pdf"
+                }
+            ],
+            "legalNoticeUrl": [
+                {
+                    "language": "DE",
+                    "value": "https://mas-ev.de/impressum/index.php"
+                }
+            ],
+            "privacyUrl": [
+                {
+                    "language": "DE",
+                    "value": "https://mas-ev.de/datenschutz/index.php"
+                }
+            ],
+            "websiteUrl": [
+                {
+                    "language": "DE",
+                    "value": "https://mas-ev.de/index.php"
+                }
+            ],
+            "pricesInfo": {
+                "currency": {
+                    "code": "EUR",
+                    "symbol": "€",
+                    "name": "Euro"
+                }
+            },
+            "languages": {
+                "available": [
+                    "DE"
+                ],
+                "defaultFallback": "DE"
+            }
+        }
+    }
+}

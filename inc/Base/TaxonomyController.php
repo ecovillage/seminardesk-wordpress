@@ -35,7 +35,7 @@ class TaxonomyController
             //set some additional query parameters
             $query->set( 'meta_key', 'begin_date' );
             $query->set( 'orderby', 'meta_value_num' );
-            $query->set( 'order', 'DESC' );
+            $query->set( 'order', 'ASC' );
             $query->set( 'posts_per_page', '5' );
         }
     }
@@ -72,9 +72,9 @@ class TaxonomyController
             'show_in_rest'      => true, // http://localhost/wpsdp/wp-json/wp/v2/dates
             //'rest_base'         => 'txn',
             'rewrite'           => array( 
-                'slug' => $this->slug, 
-                'hierarchical' => true,
-                'with_front' => false, 
+                'slug'              => $this->slug, 
+                'hierarchical'      => true,
+                'with_front'        => false, 
             ),
         );
     
