@@ -5,7 +5,7 @@
  * @package SeminardeskPlugin
  */
 
-use Inc\Base\TemplateTaxonomyDates;
+use Inc\Base\TemplateUtils as Utils;
 
 $title = __( 'Past Events Dates', 'seminardesk');
 $timestamp_today = strtotime(wp_date('Y-m-d'));
@@ -26,11 +26,11 @@ $wp_query = new WP_Query(
         'post_status'       => 'publish',
         'posts_per_page'    => '5',
         'paged'             => $paged,
-        'meta_key'          => 'begin_date',
+        'meta_key'          => 'sd_date_begin',
         'orderby'           => 'meta_value_num',
         'order'             => 'DESC',
         'meta_query'        => array(
-           'key'        => 'begin_date',
+           'key'        => 'sd_date_begin',
            'value'      => $timestamp_today*1000, //in ms
            'type'       => 'numeric',
            'compare'    => '<',
@@ -50,24 +50,24 @@ get_header();
     </header><!-- .archive-header -->
     
     <?php
-    if ( $wp_query->have_posts() ) {
-		while ( $wp_query->have_posts() ) {
-            $wp_query->the_post();
+    if ( have_posts() ) {
+		while ( have_posts() ) {
+            the_post();
             ?>
             <div class="entry-header-inner section-inner small">
-                <a href="<?php echo esc_url(get_permalink($post->event_wp_id)); ?>">
-                    <?php the_title('<h4>', '</h4>'); ?>
+                <a href="<?php echo esc_url(get_permalink($post->wp_event_id)); ?>">
+                    <?php Utils::get_value_by_language( $post->sd_data['title'], 'DE', '<h4>', '</h4>', true); ?>
                 </a>
                 <?php
                 // echo get_permalink( $post->event_wp_id );
-                TemplateTaxonomyDates::get_date('<p>', '</p>');
-                TemplateTaxonomyDates::get_facilitators('<p>', '</p>');
-                TemplateTaxonomyDates::get_price('<p>', '</p>');
-                TemplateTaxonomyDates::get_venue('<p>', '</p>');
-                TemplateTaxonomyDates::get_img_remote( $post->teaser_picture_url, '300', '', $alt = "remote image load failed", '<p>', '</p>' );
-                the_excerpt();
+                Utils::get_date( $post->sd_data['beginDate'], $post->sd_data['endDate'], '<p><strong>' . __('Date: ', 'seminardesk') . '</strong>', '</p>', true);
+                Utils::get_facilitators( $post->sd_data['facilitators'], '<p><strong>' . __('Facilitator: ', 'seminardesk') . '</strong>', '</p>', true );
+                echo Utils::get_value_by_language( $post->sd_data['priceInfo'], 'DE', '<p><strong>' . __('Price: ', 'seminardesk') . '</strong>', '</p>' );
+                Utils::get_venue( $post->sd_data['venue'], '<p><strong>' . __('Venue: ', 'seminardesk') . '</strong>', '</p>', true);
+                Utils::get_img_remote( Utils::get_value_by_language($post->sd_data['teaserPictureUrl']), '300', '', $alt = "remote image load failed", '<p>', '</p>', true );
+                Utils::get_value_by_language( $post->sd_data['teaser'], 'DE',  '<p>', '</p>', true );
                 ?>
-                <a href="<?php echo esc_url(get_permalink($post->event_wp_id)); ?>">
+                <a href="<?php echo esc_url(get_permalink($post->wp_event_id)); ?>">
                     <?php esc_html_e('More ...', 'seminardesk')?>
                 </a>
             </div>
@@ -113,8 +113,7 @@ get_header();
         </div>
         <?php
 
-    }
-    // TODO: reset query necessary ... better use wp_reset_postdata()?  
+    } 
     wp_reset_query();
 	?>
 

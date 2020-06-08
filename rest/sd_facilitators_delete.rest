@@ -20,3 +20,17 @@ Content-Type: {{content}}
         "id": "321"
     }
 }
+### 220 - Dr. Gundula Tutt
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
+{
+    "action": "facilitator.delete",
+    "timestamp": 1683509807000,
+    "requestId": "6b27fe327ae240bf838a3fb6693e9fef",
+    "payload": {
+        "id": "220"
+    }
+}

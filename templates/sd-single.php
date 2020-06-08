@@ -14,7 +14,6 @@ if (have_posts()) :
             the_title ('<h2>', '</h2>');
             echo '<div class="post-meta-wrapper post-meta-single post-meta-single-top">';
                 the_content();
-                // next_post_link();
             echo '</div>';
         echo '</div>';
         // echo '</header>';
@@ -23,6 +22,5 @@ else :
     _e('<strong>Sorry, no posts matched your criteria.</strong>', 'seminardesk');
 endif;
 
-//get_sidebar();
 get_footer();
 ?>

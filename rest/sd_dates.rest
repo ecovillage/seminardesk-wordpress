@@ -64,7 +64,15 @@ Content-Type: {{content}}
             124,
             125
         ],
-        "venue": null,
+        "venue": {
+            "name": "An der Sonne",
+            "street1": "",
+            "street2": "",
+            "zip": "",
+            "city": "",
+            "country": "",
+            "weblink": "https://www.seminardesk.de"
+        },
         "contactInfo": null,
         "eventType": "",
         "eventTopic": "Ökologie",
@@ -130,7 +138,15 @@ Content-Type: {{content}}
             124,
             125
         ],
-        "venue": null,
+        "venue": {
+            "name": "An der Sonne",
+            "street1": "Sonnenstr. 1",
+            "street2": "",
+            "zip": "01234",
+            "city": "Sonnenland",
+            "country": "",
+            "weblink": "https://www.seminardesk.de"
+        },
         "contactInfo": null,
         "eventType": "",
         "eventTopic": "Ökologie",
@@ -196,7 +212,15 @@ Content-Type: {{content}}
             124,
             125
         ],
-        "venue": null,
+        "venue": {
+            "name": "An der Sonne",
+            "street1": "Sonnenstr. 1",
+            "street2": "",
+            "zip": "01234",
+            "city": "Sonnenstadt",
+            "country": "",
+            "weblink": ""
+        },
         "contactInfo": null,
         "eventType": "",
         "eventTopic": "Ökologie",
@@ -1552,64 +1576,6 @@ Content-Type: {{content}}
     }
 }
 
-### 805 - a15ec74c662b48458677dd7ad0b830f1 - Helfender Gast: Mitleben, mitwirken und mitwerkeln am Tempelhof
-
-POST {{url}}
-Authorization: {{auth}}
-Content-Type: {{content}}
-
-{
-    "action": "eventDate.create",
-    "timestamp": 1583509808000,
-    "requestId": "3b27fe327ae240bf838a3fb6693e9feb",
-    "payload": {
-        "id": 805,
-        "eventId": "a15ec74c662b48458677dd7ad0b830f1",
-        "status": "available",
-        "registrationAvailable": true,
-        "detailpageAvailable": true,
-        "beginDate": "1600012800000",
-        "endDate": "1600599600000",
-        "title": [
-            {
-                "language": "DE",
-                "value": "Helfender Gast: Mitleben, mitwirken und mitwerkeln am Tempelhof"
-            }
-        ],
-        "titleSlug": [
-            {
-                "language": "DE",
-                "value": "helfender-gast-mitleben-mitwirken-und-mitwerkeln-am-tempelhof"
-            }
-        ],
-        "subtitle": [
-            {
-                "language": "DE",
-                "value": "Helfender Gast am Tempelhof"
-            }
-        ],
-        "teaser": [
-            {
-                "language": "DE",
-                "value": "Wir laden herzlich dazu ein, durch einen zeitweisen Aufenthalt als  helfender Gast am Tempelhof unser Gemeinschaftsleben zu erfahren. In den  verschiedenen Projekten, Arbeitsbereichen, beim Essen und weiteren  Aktionen begegnen sich die Menschen der Gemeinschaft und die  UnterstützerInnen und BesucherInnen – der Tempelhof wird so zur sozialen  Zukunftswerkstatt.<br />"
-            }
-        ],
-        "teaserPictureUrl": [
-            {
-                "language": "DE",
-                "value": "https://schloss-tempelhof.seminardesk.de/Content/Extern/Gasthelfer1.jpg"
-            }
-        ],
-        "priceInfo": [],
-        "facilitators": [],
-        "venue": null,
-        "contactInfo": null,
-        "eventType": "Gasthelfer",
-        "eventTopic": "Schloss Tempelhof Kennenlernen",
-        "showAttendanceFees": false
-    }
-}
-
 ### 20 - 89f6560ac535450188b5da3b529f9493 - Historische Fahrzeuge
 
 POST {{url}}
@@ -1665,16 +1631,7 @@ Content-Type: {{content}}
             }
         ],
         "facilitators": [
-            {
-                "name": "Dr. Gundula Tutt",
-                "about": [
-                    {
-                        "language": "DE",
-                        "value": "<p style=\"text-align: left; margin: 0pt 0pt 8pt; line-height: 1.07917;\"><span style=\"font-family: Arial; font-size: 10pt;\">Diplomrestauratorin und Autorin</span></p>"
-                    }
-                ],
-                "pictureUrl": "https://mas-ev.seminardesk.de/Content/Extern/index.jpg"
-            }
+            220
         ],
         "venue": {
             "name": "B&O Parkhotel",

@@ -1,12 +1,11 @@
 <?php
 /**
- * The template for single post of CPT sd_events
+ * The template for single post of CPT sd_event
  * 
  * @package SeminardeskPlugin
  */
 
-use Inc\Base\TemplateCptEvents;
-
+use Inc\Base\TemplateUtils as Utils;
 
 get_header();
 ?>
@@ -19,17 +18,17 @@ get_header();
             <header class="entry-header has-text-align-center<?php echo esc_attr( $entry_header_classes ); ?>">
                 <div class="entry-header-inner section-inner medium">
                     <?php 
-                    the_title( '<h1 class="archive-title">', '</h1>' );
-                    echo TemplateCptEvents::get_value_by_language($post->data['subtitle']); 
-                    $url = TemplateCptEvents::get_value_by_language($post->data['headerPictureUrl']);
-                    echo TemplateCptEvents::get_img_remote( $url, '300', '', $alt = __('remote image failed', 'seminardesk'))
+                    Utils::get_value_by_language( $post->sd_data['title'], 'DE', '<h1 class="archive-title">', '</h1>', true); 
+                    echo Utils::get_value_by_language($post->sd_data['subtitle']); 
+                    $url = Utils::get_value_by_language($post->sd_data['headerPictureUrl']);
+                    echo Utils::get_img_remote( $url, '300', '', $alt = __('remote image failed', 'seminardesk'))
                     ?>
                 </div>
             </header>
             <div class="post-meta-wrapper post-meta-single post-meta-single-top">
                 <p>
                     <?php
-                    $facilitators = TemplateCptEvents::get_facilitators($post->data['facilitators']);
+                    $facilitators = Utils::get_facilitators($post->sd_data['facilitators']);
                     if ($facilitators) {
                         echo '<strong>';
                         _e('Facilitators: ', 'seminardesk');
@@ -40,12 +39,12 @@ get_header();
                 </p>
                 <p>
                     <?php
-                    echo TemplateCptEvents::get_value_by_language($post->data['description']);
+                    echo Utils::get_value_by_language($post->sd_data['description']);
                     ?>
                 </p>
                 <?php
                     // get list of all dates for this event
-                    $booking_list = TemplateCptEvents::get_event_dates_list( $post->data['id'] );
+                    $booking_list = Utils::get_event_dates_list( $post->sd_event_id );
                     if ( $booking_list ){
                         ?>
                         <h4>
@@ -76,8 +75,7 @@ get_header();
                 <div class="sd-modal-content">
                     <span class="sd-modal-close-btn">&times;</span>
                     <h4 class="sd-modal-title"><?php _e('Booking', 'seminardesk');?></h4>
-                    <!-- TODO: lazy load of iframe active for testing ... experimental. dont use in production code -->
-                    <iframe class="sd-modal-booking" loading="lazy" src="https://booking.seminardesk.de/en/schloss-tempelhof/<?php echo $post->data['id']; ?>/<?php echo $post->data['titleSlug']; ?>/embed" title="Seminardesk Booking"></iframe>
+                    <iframe class="sd-modal-booking" src="https://booking.seminardesk.de/de/schloss-tempelhof/<?php echo $post->sd_data['id']; ?>/<?php echo $post->sd_data['titleSlug']; ?>/embed" title="Seminardesk Booking"></iframe>
                 </div>
             </div>
             <!-- END modal content -->

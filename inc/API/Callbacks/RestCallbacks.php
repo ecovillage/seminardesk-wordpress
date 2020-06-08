@@ -98,52 +98,43 @@ class RestCallbacks{
         switch ($post->post_type) {
             case 'sd_event':
                 $event_attr = [
-                    'post_id'           => $post->ID,
-                    'event_id'          => $post->event_id,
+                    'wp_event_id'       => $post->ID,
+                    'sd_event_id'       => $post->sd_event_id,
                     'title'             => $post->post_title,
-                    'content'           => $post->post_content,
-                    'excerpt'           => $post->post_excerpt,
                     'slug'              => $post->post_name,
                     'link'              => get_post_permalink($post->ID),
                     'status'            => $post->post_status,
                     'author'            => get_the_author_meta( 'display_name', $post->post_author),
-                    'data'              => $post->data,
-                    'json_dump'         => $post->json_dump, // get metadata 'json_dump'
+                    'sd_data'              => $post->sd_data,
+                    'sd_dump'         => $post->sd_dump, // get metadata 'json_dump'
                 ];
                 break;
             case 'sd_date':
                 $event_attr = [
-                    'post_id'           => $post->ID,
-                    'date_id'           => $post->date_id,
-                    'event_id'          => $post->event_id,
+                    'wp_date_id'        => $post->ID,
+                    'sd_date_id'        => $post->sd_date_id,
+                    'sd_date_begin'     => $post->sd_date_begin,
+                    'sd_date_end'       => $post->sd_date_end,
+                    'wp_event_id'       => $post->wp_event_id,
+                    'sd_event_id'       => $post->sd_event_id,
                     'title'             => $post->post_title,
-                    'content'           => $post->post_content,
-                    'excerpt'           => $post->post_excerpt,
                     'slug'              => $post->post_name,
                     'link'              => get_post_permalink($post->ID),
                     'status'            => $post->post_status,
-                    'begin_date'        => (int)$post->begin_date,
-                    'end_date'          => (int)$post->end_date,
-                    'facilitator_ids'      => $post->facilitator_ids,
-                    'has_board'         => $post->has_board,
-                    'has_lodging'       => $post->has_lodging,
-                    'has_misc'          => $post->has_misc,
-                    'price_info'        => $post->price_info,
-                    'venue'             => $post->venue, 
-                    'json_dump'         => $post->json_dump,
+                    'sd_data'           => $post->sd_data,
+                    'sd_dump'           => $post->sd_dump,
                 ];
                 break;
             case 'sd_facilitator':
                 $event_attr = [
-                    'post_id'           => $post->ID,
-                    'facilitator_id'    => $post->facilitator_id,
+                    'wp_facilitator_id' => $post->ID,
+                    'sd_facilitator_id' => $post->sd_facilitator_id,
                     'title'             => $post->post_title,
-                    'content'           => $post->post_content,
                     'slug'              => $post->post_name,
                     'link'              => get_post_permalink($post->ID),
                     'status'            => $post->post_status,
-                    'facilitator_name'  => $post->facilitator_name,
-                    'json_dump'         => $post->json_dump,
+                    'sd_data'           => $post->sd_data,
+                    'sd_dump'           => $post->sd_dump,
                 ];
                 break;
             default:

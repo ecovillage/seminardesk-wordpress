@@ -571,7 +571,7 @@ Content-Type: {{content}}
         "infoDatesPrices": [
             {
                 "language": "DE",
-                "value": "<div><span style=\"font-size: 12pt;\">Die Rechnungsstellung erfolgt ohne Mehrwertsteuer. Der MAS e.V. ist auf Grund seiner Gemeinnützigkeit MwSt.-befreit.</span></div><div><span style=\"font-size: 12pt;\"><br /></span></div><div><span style=\"font-size: 18pt;\"><span style=\"font-size: 12pt;\">Hier geht es zur <a href=\"https://www.bo-parkhotel.de/tagungen/tagen-im-parkhotel/index.html\" target=\"_blank\" title=\"Homepage\">Homepage</a> des Veranstaltungsortes und zur <a href=\"https://goo.gl/maps/EvGL898EBmjiZft27\" target=\"_blank\" title=\"Landkarte\">Landkarte</a>.</span></span></div><div><span style=\"font-size: 12pt;\"><br /></span></div><div><p style=\"text-align: left; margin: 0pt;\"><span style=\"font-family: Arial;\"><strong><span style=\"font-size: 12pt;\">Das Seminar findet im Umfeld der <a href=\"https://bavaria-historic.de/\" target=\"_blank\" title=\"33. ADAC Bavaria Historic\">33. ADAC Bavaria Historic</a> statt. </span></strong><span style=\"font-size: 12pt;\"><br /></span></span></p><p style=\"text-align: left; margin: 0pt;\"><span style=\"font-size: 12pt;\"><span style=\"font-family: Arial;\">An diesem Wochenende findet nebenan im Schloß Maxlrain und in Bad Aibling die legendäre Rallye und Oldtimer-Show \"Bavaria Historic\" statt. Wir sind mitten im Geschehen, das Seminarhotel liegt direkt an der Strecke.</span></span></p></div><div><span style=\"font-size: 12pt;\"></span></div><div><span style=\"font-size: 12pt;\"><strong><br /></strong></span></div><div><span style=\"font-size: 12pt;\"><strong>B&O Parkhotel</strong></span><span style=\"font-size: 12pt;\"> </span></div><div><span style=\"font-size: 12pt;\">Dietrich-Bonhoeffer-Str. 31, </span></div><div><span style=\"font-size: 12pt;\">83043 Bad Aibling - OT Mietraching, </span></div><div><span style=\"font-size: 12pt;\">Telefon: +49 (0)8061 38999-0<br /><a href=\"https://www.bo-parkhotel.de/tagungen/tagen-im-parkhotel/index.html\" target=\"_blank\" title=\"Homepage\">Homepage</a><br /><a href=\"https://goo.gl/maps/EvGL898EBmjiZft27\" target=\"_blank\" title=\"Landkarte\">Landkarte</a></span></div><div><span style=\"font-size: 12pt;\"><br /></span></div><div><span style=\"font-size: 12pt;\">Ein Zimmerkontingent ist für die Teilnehmer reserviert. Auf Grund der gleichzeitig stattfindenden <a href=\"https://bavaria-historic.de/\" target=\"_blank\" title=\"ADAC Bavaria Historic\">ADAC Bavaria Historic</a> kann pro Seminar nur eine Übernachtung gebucht werden, Anreise Mittwoch 10.6.2020, Kennwort: MAS Seminar</span></div>"
+                "value": "<div><span style=\"font-size: 12pt;\">Die Rechnungsstellung erfolgt ohne Mehrwertsteuer. Der MAS e.V. ist auf Grund seiner Gemeinnützigkeit MwSt.-befreit.</span></div><div><span style=\"font-size: 12pt;\"><br /></span></div><div><span style=\"font-size: 18pt;\"><span style=\"font-size: 12pt;\">Hier geht es zur <a href=\"https://www.bo-parkhotel.de/tagungen/tagen-im-parkhotel/index.html\" target=\"_blank\" title=\"Homepage\">Homepage</a> des Veranstaltungsortes und zur <a href=\"https://goo.gl/maps/EvGL898EBmjiZft27\" target=\"_blank\" title=\"Landkarte\">Landkarte</a>.</span></span></div><div><span style=\"font-size: 12pt;\"><br /></span></div><div><p style=\"text-align: left; margin: 0pt;\"><span style=\"font-family: Arial;\"><strong><span style=\"font-size: 12pt;\">Das Seminar findet im Umfeld der <a href=\"https://bavaria-historic.de/\" target=\"_blank\" title=\"33. ADAC Bavaria Historic\">33. ADAC Bavaria Historic</a> statt. </span></strong><span style=\"font-size: 12pt;\"><br /></span></span></p><p style=\"text-align: left; margin: 0pt;\"><span style=\"font-size: 12pt;\"><span style=\"font-family: Arial;\">An diesem Wochenende findet nebenan im Schloß Maxlrain und in Bad Aibling die legendäre Rallye und Oldtimer-Show \"Bavaria Historic\" statt. Wir sind mitten im Geschehen, das Seminarhotel liegt direkt an der Strecke.</span></span></p></div><div><span style=\"font-size: 12pt;\"></span></div><div><span style=\"font-size: 12pt;\"><strong><br /></strong></span></div><div><span style=\"font-size: 12pt;\"><strong>B&O Parkhotel</strong></span><span style=\"font-size: 12pt;\"> </span></div><div><span style=\"font-size: 12pt;\">Dietrich-Bonhoeffer-Str. 31, </span></div><div><span style=\"font-size: 12pt;\">83043 Bad Aibling - OT Mietraching, </span></div><div><span style=\"font-size: 12pt;\">Telefon: +49 (0)8061 38999-0<br /><a href=\"https://www.bo-parkhotel.de/tagungen/tagen-im-parkhotel/index.html\" target=\"_blank\" title=\"Homepage\">Homepage</a><br /><a href=\"https://goo.gl/maps/EvGL898EBmjiZft27\" target=\"_blank\" title=\"Landkarte\">Landkarte</a></span></div><div><span style=\"font-size: 12pt;\"><br /></span></div><div><span style=\"font-size: 12pt;\">Ein Zimmerkontingent ist für die Teilnehmer reserviert. Auf Grund der gleichzeitig stk0attfindenden <a href=\"https://bavaria-historic.de/\" target=\"_blank\" title=\"ADAC Bavaria Historic\">ADAC Bavaria Historic</a> kann pro Seminar nur eine Übernachtung gebucht werden, Anreise Mittwoch 10.6.2020, Kennwort: MAS Seminar</span></div>"
             }
         ],
         "infoBoardLodging": [
@@ -587,88 +587,9 @@ Content-Type: {{content}}
             }
         ],
         "facilitators": [
-            {
-                "name": "Dr. Gundula Tutt",
-                "about": [
-                    {
-                        "language": "DE",
-                        "value": "<p style=\"text-align: left; margin: 0pt 0pt 8pt; line-height: 1.07917;\"><span style=\"font-family: Arial; font-size: 10pt;\">Diplomrestauratorin und Autorin</span></p>"
-                    }
-                ],
-                "pictureUrl": "https://mas-ev.seminardesk.de/Content/Extern/index.jpg"
-            }
+            220
         ],
         "contactInfo": "",
-        "dates": [
-            {
-                "id": 20,
-                "status": "available",
-                "beginDate": 1591858800000,
-                "endDate": 1591885800000,
-                "hasBoard": false,
-                "hasLodging": false,
-                "hasMisc": false,
-                "title": [
-                    {
-                        "language": "DE",
-                        "value": "Historische Fahrzeuge"
-                    }
-                ],
-                "priceInfo": [
-                    {
-                        "language": "DE",
-                        "value": "Nicht-Mitglieder 400 Euro\r\n, MAS-Mitglieder 360 Euro\r\n"
-                    }
-                ],
-                "attendanceFees": [
-                    {
-                        "ageFrom": 18,
-                        "earlyBirdDate": 1580598000000,
-                        "priceDefault": 400,
-                        "priceReduced": 0,
-                        "priceEarlyBird": 0,
-                        "priceRangeFrom": 0,
-                        "priceRangeTo": 0,
-                        "isSelfAssessment": false,
-                        "name": [
-                            {
-                                "language": "DE",
-                                "value": "Nicht-Mitglieder"
-                            }
-                        ]
-                    },
-                    {
-                        "ageFrom": 18,
-                        "earlyBirdDate": 1580598000000,
-                        "priceDefault": 360,
-                        "priceReduced": 0,
-                        "priceEarlyBird": 0,
-                        "priceRangeFrom": 0,
-                        "priceRangeTo": 0,
-                        "isSelfAssessment": false,
-                        "name": [
-                            {
-                                "language": "DE",
-                                "value": "MAS-Mitglieder"
-                            }
-                        ]
-                    }
-                ],
-                "availableLodging": [],
-                "availableBoard": [],
-                "availableMisc": [],
-                "availableExtras": [],
-                "venue": {
-                    "name": "B&O Parkhotel",
-                    "street1": "Dietrich-Bonhoeffer-Straße 31",
-                    "street2": "",
-                    "zip": "83043",
-                    "city": "Bad Aibling",
-                    "country": "",
-                    "weblink": "https://www.bo-parkhotel.de/tagungen/tagen-im-parkhotel/index.html"
-                }
-            }
-        ],
         "additionalQuestions": {
             "perBooking": [],
             "perAdult": [],
