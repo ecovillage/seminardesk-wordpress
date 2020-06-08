@@ -31,7 +31,8 @@ class TemplateController
 
     public function modify_request_schedule( $vars )
     {
-        if ( isset($vars['name']) && $vars['name'] === 'schedule' ){
+        $txn_slug = get_option('sd_txn_slug');
+        if ( isset($vars['name']) && $vars['name'] === $txn_slug ){
             $vars += [ 'upcoming' => true ];
         }
         // fixing page nav for slug of txn dates

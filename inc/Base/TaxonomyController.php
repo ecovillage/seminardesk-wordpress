@@ -45,6 +45,10 @@ class TaxonomyController
         $this->name_lower = strtolower($this->name);
         $this->names_lower = strtolower($this->names);
 
+        if ( get_option('sd_txn_slug') ){
+            $this->slug = get_option('sd_txn_slug');
+        }
+
         // Add new taxonomy, make it hierarchical (like categories)
         $labels = array(
             'name'              => _x( $this->names, 'taxonomy general name', 'seminardesk' ),
@@ -77,7 +81,9 @@ class TaxonomyController
                 'with_front'        => false, 
             ),
         );
-    
+
         register_taxonomy( $this->names_lower, array( 'sd_date' ), $args );
+        // TODO: temporary flush rewrite rules ...
+        flush_rewrite_rules();
     }
 }

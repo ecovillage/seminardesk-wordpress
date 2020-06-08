@@ -95,7 +95,7 @@ class Admin
 		$args = array(
 			array(
 				'option_group' => 'seminardesk_plugin_settings',
-				'option_name' => 'text_example',
+				'option_name' => 'sd_txn_slug',
 				'callback' => array( $this->callbacks_mngr, 'seminardeskOptionsGroup' )
 			),
 			array(
@@ -130,13 +130,13 @@ class Admin
 	{
 		$args = array(
 			array(
-				'id' => 'text_example',
-				'title' => 'Text Example',
+				'id' => 'sd_txn_slug',
+				'title' => 'Taxonomy Slug',
 				'callback' => array( $this->callbacks_mngr, 'seminardeskTextExample' ),
 				'page' => 'seminardesk_plugin',
 				'section' => 'seminardesk_admin_index',
 				'args' => array(
-					'label_for' => 'text_example',
+					'label_for' => 'sd_txn_slug',
 					'class' => 'example-class'
 				)
 			),

@@ -8,6 +8,7 @@ namespace Inc\Api\Callbacks;
 
 class ManagerCallbacks
 {
+	// execute when setting saved
     public function seminardeskOptionsGroup( $input )
 	{
 		return $input;
@@ -15,8 +16,8 @@ class ManagerCallbacks
     
     public function seminardeskTextExample()
 	{
-		$value = esc_attr( get_option( 'text_example' ) );
-		echo '<input type="text" class="regular-text" name="text_example" value="' . $value . '" placeholder="Write Something Here!">';
+		$value = esc_attr( get_option( 'sd_txn_slug' ) );
+		echo '<input type="text" class="regular-text" name="sd_txn_slug" value="' . $value . '" placeholder="schedule">';
 	}
 
 	public function seminardeskFirstName()

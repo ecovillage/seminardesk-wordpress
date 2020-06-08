@@ -15,7 +15,7 @@
                 <?php
                 settings_fields('seminardesk_plugin_settings');
                 do_settings_sections('seminardesk_plugin');
-                submit_button('Save Settings');
+                submit_button(__('Save Settings', 'seminardesk'));
                 ?>
             </form>
 
