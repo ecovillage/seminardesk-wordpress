@@ -38,8 +38,10 @@ get_header();
             <div class="sd-event">
                 <div class="entry-header-inner section-inner small">
                     <div class="sd-event-title">
-                        <a href="<?php echo esc_url(get_permalink($post->event_wp_id)); ?>">
-                            <?php the_title('<h3>', '</h3>'); ?>
+                        <a href="<?php echo esc_url(get_permalink($post->wp_event_id)); ?>">
+                            <?php 
+                            Utils::get_value_by_language( $post->sd_data['title'], 'DE', '<h3>', '</h3>', true); 
+                            ?>
                         </a>
                     </div>
                     <div class="sd-event-container">
@@ -60,7 +62,7 @@ get_header();
                             <?php 
                             echo Utils::get_value_by_language($post->sd_data['teaser']) 
                             ?>
-                            <a class="button sd-event-more-link" href="<?php echo esc_url(get_permalink($post->event_wp_id)); ?>" class="sd-event-more">
+                            <a class="button sd-event-more-link" href="<?php echo esc_url(get_permalink($post->wp_event_id)); ?>" class="sd-event-more">
                                 <?php esc_html_e('More', 'seminardesk')?>
                             </a>
                         </div>

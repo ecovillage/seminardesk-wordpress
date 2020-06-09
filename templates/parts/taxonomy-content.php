@@ -10,7 +10,7 @@ if ( have_posts() ) {
       the_post();
       ?>
       <div class="entry-header-inner section-inner small">
-            <a href="<?php echo esc_url(get_permalink($post->event_wp_id)); ?>">
+            <a href="<?php echo esc_url(get_permalink($post->wp_event_id)); ?>">
                   <?php the_title('<h4>', '</h4>'); ?>
             </a>
       </div>

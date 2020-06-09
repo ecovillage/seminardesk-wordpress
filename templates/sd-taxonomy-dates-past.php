@@ -59,7 +59,6 @@ get_header();
                     <?php Utils::get_value_by_language( $post->sd_data['title'], 'DE', '<h4>', '</h4>', true); ?>
                 </a>
                 <?php
-                // echo get_permalink( $post->event_wp_id );
                 Utils::get_date( $post->sd_data['beginDate'], $post->sd_data['endDate'], '<p><strong>' . __('Date: ', 'seminardesk') . '</strong>', '</p>', true);
                 Utils::get_facilitators( $post->sd_data['facilitators'], '<p><strong>' . __('Facilitator: ', 'seminardesk') . '</strong>', '</p>', true );
                 echo Utils::get_value_by_language( $post->sd_data['priceInfo'], 'DE', '<p><strong>' . __('Price: ', 'seminardesk') . '</strong>', '</p>' );
