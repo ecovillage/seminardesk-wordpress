@@ -5,7 +5,7 @@
  * @package SeminardeskPlugin
  */
 
-use Inc\Base\TemplateTaxonomyDates;
+use Inc\Base\TemplateUtils as Utils;
 
 get_header();
 ?>
@@ -13,15 +13,6 @@ get_header();
 <main id="site-content" role="main">
 
     <?php
-
-	// $archive_title    = get_the_archive_title();
-    // $term_title = get_the_archive_description();
-    // $test = single_term_title( '', false );
-    // $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
-    // $is_tax = is_tax();
-    // $is_archive = is_archive();
-    // $term1 = get_term(131);
-
     $txn = get_taxonomy(get_query_var( 'taxonomy' ));
     $title = ucfirst($txn->rewrite['slug']) . ': '. get_queried_object()->name;
     ?>
@@ -46,31 +37,38 @@ get_header();
             ?>
             <div class="sd-event">
                 <div class="entry-header-inner section-inner small">
-                    <a href="<?php echo esc_url(get_permalink($post->event_wp_id)); ?>">
-                        <?php the_title('<h3>', '</h3>'); ?>
-                    </a>
-                    <?php
-                    // echo get_permalink( $post->event_wp_id );
-                    TemplateTaxonomyDates::get_date('<div class="sd-event-date">' . __('<strong>Date: </strong>', 'seminardesk'), '</div>');
-                    TemplateTaxonomyDates::get_facilitators('<div class="sd-event-facilitators">', '</div>');
-                    TemplateTaxonomyDates::get_price('<div class="sd-event-price">', '</div>');
-                    TemplateTaxonomyDates::get_venue('<div class="sd-event-venue">', '</div>');
-                    ?>
+                    <div class="sd-event-title">
+                        <a href="<?php echo esc_url(get_permalink($post->event_wp_id)); ?>">
+                            <?php the_title('<h3>', '</h3>'); ?>
+                        </a>
+                    </div>
                     <div class="sd-event-container">
-                        <?php
-                        TemplateTaxonomyDates::get_img_remote( $post->teaser_picture_url, '300', '', $alt = __('remote image failed', 'seminardesk'));
-                        ?>
-                        <div class=sd-event-container-text>
-                        <?php the_excerpt(); ?>
+                        <div class="sd-event-props">
+                            <?php
+                            Utils::get_date( $post->sd_date_begin, $post->sd_date_end, '<div class="sd-event-date">' . __('<strong>Date: </strong>', 'seminardesk'), '</div>', true);
+                            Utils::get_facilitators($post->sd_data['facilitators'], '<div class="sd-event-facilitators"><strong>' . __('Facilitator: ', 'seminardesk') . '</strong>', '</div>', true);
+                            Utils::get_value_by_language($post->sd_data['priceInfo'], 'DE', '<div class="sd-event-price"><strong>' . __('Price: ', 'seminardesk') . '</strong>', '</div>', true );
+                            Utils::get_venue($post->sd_data['venue'], '<div class="sd-event-venue"><strong>' . __('Venue: ', 'seminardesk') . '</strong>', '</div>', true);
+                            ?>
+                        </div>
+                        <div class=sd-event-image>
+                            <?php
+                            Utils::get_img_remote(  Utils::get_value_by_language($post->sd_data['teaserPictureUrl']), '300', '', $alt = __('remote image failed', 'seminardesk'), '', '', true);
+                            ?>
+                        </div>
+                        <div class=sd-event-teaser>
+                            <?php 
+                            echo Utils::get_value_by_language($post->sd_data['teaser']) 
+                            ?>
+                            <a class="button sd-event-more-link" href="<?php echo esc_url(get_permalink($post->event_wp_id)); ?>" class="sd-event-more">
+                                <?php esc_html_e('More', 'seminardesk')?>
+                            </a>
                         </div>
                     </div>
-                    <a class="button sd-event-more-link" href="<?php echo esc_url(get_permalink($post->event_wp_id)); ?>" class="sd-event-more">
-                        <?php esc_html_e('More', 'seminardesk')?>
-                    </a>
+                    
                 </div>
             </div>
-            <?php
-            
+        <?php
         }?>
         <div class="has-text-align-center">
             <br><p><?php echo get_posts_nav_link();?></p>
@@ -89,8 +87,6 @@ get_header();
         <?php
 
     }
-    // TODO: reset query necessary ... better use wp_reset_postdata()?
-    wp_reset_query();
 	?>
 
 </main><!-- #site-content -->

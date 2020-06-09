@@ -33,7 +33,7 @@ class TaxonomyController
         // modify query of taxonomy dates
         if ( $query->is_tax() && array_key_exists('dates', $query->query) &&$query->is_main_query() ) {
             //set some additional query parameters
-            $query->set( 'meta_key', 'begin_date' );
+            $query->set( 'meta_key', 'sd_date_begin' );
             $query->set( 'orderby', 'meta_value_num' );
             $query->set( 'order', 'ASC' );
             $query->set( 'posts_per_page', '5' );
