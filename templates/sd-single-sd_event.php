@@ -31,7 +31,7 @@ get_header();
                     $facilitators = Utils::get_facilitators($post->sd_data['facilitators']);
                     if ($facilitators) {
                         echo '<strong>';
-                        _e('Facilitators: ', 'seminardesk');
+                        _e('Facilitator: ', 'seminardesk');
                         echo '</strong>';
                         echo $facilitators;
                     }

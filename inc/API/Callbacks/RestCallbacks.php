@@ -105,8 +105,8 @@ class RestCallbacks{
                     'link'              => get_post_permalink($post->ID),
                     'status'            => $post->post_status,
                     'author'            => get_the_author_meta( 'display_name', $post->post_author),
-                    'sd_data'              => $post->sd_data,
-                    'sd_dump'         => $post->sd_dump, // get metadata 'json_dump'
+                    'sd_data'           => $post->sd_data,
+                    'sd_webhook'        => $post->sd_webhook, // get metadata 'json_dump'
                 ];
                 break;
             case 'sd_date':
@@ -122,7 +122,7 @@ class RestCallbacks{
                     'link'              => get_post_permalink($post->ID),
                     'status'            => $post->post_status,
                     'sd_data'           => $post->sd_data,
-                    'sd_dump'           => $post->sd_dump,
+                    'sd_webhook'           => $post->sd_webhook,
                 ];
                 break;
             case 'sd_facilitator':
@@ -134,7 +134,7 @@ class RestCallbacks{
                     'link'              => get_post_permalink($post->ID),
                     'status'            => $post->post_status,
                     'sd_data'           => $post->sd_data,
-                    'sd_dump'           => $post->sd_dump,
+                    'sd_webhook'        => $post->sd_webhook,
                 ];
                 break;
             default:

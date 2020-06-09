@@ -24,7 +24,8 @@ class WebhookHandler
     public static function put_event( $request_json )
     {
         $payload = (array)$request_json['payload']; // payload of the request in JSON
-
+        $sd_webhook = $request_json;
+        unset($sd_webhook['payload']);
         // checks if event_id exists and sets corresponding post_id
         $query = self::get_query_by_meta( 'sd_event', 'sd_event_id', $payload['id']);
         $post_id = $query->post->ID;
@@ -35,7 +36,7 @@ class WebhookHandler
             'sd_event_id'  => $payload['id'],
             'sd_data'      => self::kses_array_values($payload),
             // 'sd_data'      => self::strip_array_values($payload),
-            'sd_dump'    => $request_json,
+            'sd_webhook'    => $sd_webhook,
         ];
 
         // set attributes of the new event
@@ -134,6 +135,9 @@ class WebhookHandler
     {
         $payload = (array)$request_json['payload'];
 
+        $sd_webhook = $request_json;
+        unset($sd_webhook['payload']);
+
         // check if with event date associated event exists and get its WordPress ID
         $event_query = self::get_query_by_meta( 'sd_event', 'sd_event_id', $payload['eventId']);
         $event_post_id = $event_query->post->ID;
@@ -162,7 +166,7 @@ class WebhookHandler
             'sd_event_id'   => $payload['eventId'],
             'wp_event_id'   => $event_post_id,
             'sd_data'       => self::kses_array_values($payload),
-            'sd_dump'       => $request_json,
+            'sd_webhook'       => $sd_webhook,
         ];
         $date_attr = [
             'post_type'     => 'sd_date',
@@ -262,6 +266,9 @@ class WebhookHandler
     {
         $payload = (array)$request_json['payload'];
 
+        $sd_webhook = $request_json;
+        unset($sd_webhook['payload']);
+
         $query = self::get_query_by_meta( 'sd_facilitator', 'sd_facilitator_id', $payload['id'] );
         $post_id = $query->post->ID;
         
@@ -269,7 +276,7 @@ class WebhookHandler
         $meta_input = [
         'sd_facilitator_id' => $payload['id'],
         'sd_data'           => self::kses_array_values($payload),
-        'sd_dump'           => $request_json,
+        'sd_webhook'           => $sd_webhook,
         ];
         // define attributes of the new facilitator using $payload of the 
         $facilitator_attr = [

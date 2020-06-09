@@ -48,11 +48,11 @@ class CustomFields
         );
         register_post_meta(
             'sd_event',
-            'sd_dump',
+            'sd_webhook',
             array(
                 'show_in_rest'  => true,
                 'type'          => 'object',
-                'description'   => 'Dump of the last POST request from SeminarDesk',
+                'description'   => 'Webhook data of the last POST request from SeminarDesk',
                 'auth_callback' => array( $this, 'check_permissions' ),
             ),
         );
@@ -100,11 +100,11 @@ class CustomFields
         );
         register_post_meta(
             'sd_date',
-            'sd_dump',
+            'sd_webhook',
             array(
                 'show_in_rest'  => true,
                 'type'          => 'object',
-                'description'   => 'Dump of the last POST request from SeminarDesk',
+                'description'   => 'Webhook data of the last POST request from SeminarDesk',
                 'auth_callback' => array( $this, 'check_permissions' ),
             ),
         );
@@ -132,11 +132,11 @@ class CustomFields
         );
         register_post_meta(
             'sd_facilitator',
-            'sd_dump',
+            'sd_webhook',
             array(
                 'show_in_rest'  => true,
                 'type'          => 'object',
-                'description'   => 'Dump of the last POST request from SeminarDesk',
+                'description'   => 'Webhook data of the last POST request from SeminarDesk',
                 'auth_callback' => array( $this, 'check_permissions' ),
             )
         );
