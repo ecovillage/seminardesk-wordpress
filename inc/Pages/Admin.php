@@ -44,12 +44,12 @@ class Admin
 		$this->settings->addPages( $this->pages )->withSubPage( 'General' )->addSubPages( $this->subpages )->register();
 		// $this->settings->addPages( $this->pages )->withSubPage( 'General' )->register();
 
-		add_action( 'update_option_sd_slug_cpt_events', array( $this->callbacks_mngr, 'flushRewriteRules' ), 10, 2 );
-		add_action( 'update_option_sd_slug_cpt_facilitators', array( $this->callbacks_mngr, 'flushRewriteRules' ), 10, 2 );
-		add_action( 'update_option_sd_slug_cpt_dates', array( $this->callbacks_mngr, 'flushRewriteRules' ), 10, 2 );
-		add_action( 'update_option_sd_slug_txn_dates', array( $this->callbacks_mngr, 'flushRewriteRules' ), 10, 2 );
-		add_action( 'update_option_sd_slug_txn_dates_upcoming', array( $this->callbacks_mngr, 'flushRewriteRules' ), 10, 2 );
-		add_action( 'update_option_sd_slug_txn_dates_past', array( $this->callbacks_mngr, 'flushRewriteRules' ), 10, 2 );
+		add_action( 'update_option_sd_slug_cpt_events', array( $this->callbacks_mngr, 'flushRewriteCpt' ), 10, 2 );
+		add_action( 'update_option_sd_slug_cpt_facilitators', array( $this->callbacks_mngr, 'flushRewriteCpt' ), 10, 2 );
+		add_action( 'update_option_sd_slug_cpt_dates', array( $this->callbacks_mngr, 'flushRewriteCpt' ), 10, 2 );
+		add_action( 'update_option_sd_slug_txn_dates', array( $this->callbacks_mngr, 'flushRewriteTaxonomies' ), 10, 2 );
+		add_action( 'update_option_sd_slug_txn_dates_upcoming', array( $this->callbacks_mngr, 'flushRewriteTaxonomies' ), 10, 2 );
+		add_action( 'update_option_sd_slug_txn_dates_past', array( $this->callbacks_mngr, 'flushRewriteTaxonomies' ), 10, 2 );
     }
 
     /**

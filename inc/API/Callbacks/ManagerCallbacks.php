@@ -4,6 +4,10 @@
  */
 namespace Inc\Api\Callbacks;
 
+use Inc\CPT;
+use Inc\Base\CptController;
+use Inc\Base\TaxonomyController;
+
 class ManagerCallbacks
 {
 	public function textField( $args )
@@ -23,9 +27,35 @@ class ManagerCallbacks
 		return sanitize_text_field($input);
 	}
 
-	public function flushRewriteRules( $value_old, $value_new )
+	/**
+	 * create CPTs with new slug and rewrite rules 
+	 * 
+	 * @param mixed $value_old 
+	 * @param mixed $value_new 
+	 * @return void 
+	 */
+	public function flushRewriteCpt( $value_old, $value_new )
 	{			
-		$test = get_option('sd_slug_cpt_events');
+        $cpt_ctrl = new CptController(array(
+            new CPT\CptEvents(),
+            new CPT\CptDates(),
+            new CPT\CptFacilitators(),
+        ));
+        $cpt_ctrl->create_cpts();
+		flush_rewrite_rules();
+	}
+
+	/**
+	 * create taxonomies with new slug and rewrite rules 
+	 * 
+	 * @param mixed $value_old 
+	 * @param mixed $value_new 
+	 * @return void 
+	 */
+	public function flushRewriteTaxonomies( $value_old, $value_new )
+	{			
+		$txn_ctrl = new TaxonomyController();
+        $txn_ctrl->create_taxonomy_dates();
 		flush_rewrite_rules();
 	}
 

@@ -9,11 +9,11 @@ namespace Inc\CPT;
 
 abstract class CptBaseClass 
 {
-    public $attr = [
+    public $attr = array(
         'name',
         'names',
         'menu_position',
-    ];
+    );
     public $name; 
     public $name_lower;
     public $names; 
