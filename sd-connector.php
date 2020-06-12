@@ -7,12 +7,12 @@
 /*
 Plugin Name: SeminarDesk for WordPress
 Plugin URI: https://www.seminardesk.com/wordpress
-Description: First Prototype of the SeminarDesk Connector Plugin
+Description: First Prototype of the SeminarDesk Plugin
 Version: 1.0.0
 Author: SeminarDesk – Danker, Smaluhn & Tammen GbR
 Author URI: https://www.seminardesk.com/
 License: GPLv2 or later
-Text Domain: seminardesk-connector
+Text Domain: seminardesk
 */
 
 /*
@@ -48,6 +48,21 @@ define( 'SD_PLUGIN_FILE', __FILE__ );
 define( 'SD_PLUGIN_PATH', plugin_dir_path( SD_PLUGIN_FILE ) );
 define( 'SD_PLUGIN_URL', plugin_dir_url( SD_PLUGIN_FILE ) );
 define( 'SD_PLUGIN', plugin_basename( SD_PLUGIN_FILE ) );
+// constant variables for default slugs
+// define( 'SD_SLUGS', array(
+//     'cpt_events'            => 'events',
+// 	'cpt_dates'             => 'dates',
+// 	'cpt_facilitators'      => 'facilitator',
+// 	'txn_dates'             => 'schedule',
+// 	'txn_dates_upcoming'    => 'upcoming',
+//     'txn_dates_past'        => 'past',
+// ));
+define( 'SD_SLUG_CPT_EVENTS', 'events' );
+define( 'SD_SLUG_CPT_DATES', 'dates' );
+define( 'SD_SLUG_CPT_FACILITATORS', 'facilitators' );
+define( 'SD_SLUG_TXN_DATES', 'schedule' );
+define( 'SD_SLUG_TXN_DATES_UPCOMING', 'upcoming' );
+define( 'SD_SLUG_TXN_DATES_PAST', 'past' );
 
 // activation hook for plugin
 register_activation_hook( SD_PLUGIN_FILE, array( 'Inc\Base\Activate', 'activate' ) );

@@ -8,6 +8,8 @@
 
 namespace Inc\Base;
 
+use Inc\Base\OptionUtils;
+
 // Show/Edit Taxonomy:
 // http://localhost/wpsdp/wp-admin/edit-tags.php?taxonomy=dates
 class TaxonomyController
@@ -16,7 +18,7 @@ class TaxonomyController
     public $name_lower;
     public $names = 'Dates';
     public $names_lower;
-    public $slug = 'schedule';
+    public $slug;
 
     // public $taxonomy = array(
     //     'names' => 'Dates',
@@ -45,9 +47,7 @@ class TaxonomyController
         $this->name_lower = strtolower($this->name);
         $this->names_lower = strtolower($this->names);
 
-        if ( get_option('sd_txn_slug') ){
-            $this->slug = get_option('sd_txn_slug');
-        }
+        $this->slug = OptionUtils::get_option_or_default( 'sd_slug_txn_dates', SD_SLUG_TXN_DATES );
 
         // Add new taxonomy, make it hierarchical (like categories)
         $labels = array(
@@ -84,6 +84,6 @@ class TaxonomyController
 
         register_taxonomy( $this->names_lower, array( 'sd_date' ), $args );
         // TODO: temporary flush rewrite rules ...
-        flush_rewrite_rules();
+        //flush_rewrite_rules();
     }
 }

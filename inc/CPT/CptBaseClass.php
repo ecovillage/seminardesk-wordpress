@@ -19,6 +19,7 @@ abstract class CptBaseClass
     public $names; 
     public $names_lower;
     public $menu_position;
+    public $slug;
 
     /**
      * Define dynamic parameters of the unique custom post type
@@ -34,12 +35,12 @@ abstract class CptBaseClass
 
     public function register()
     {
+        $this->set_parameters();
         $this->name = ucfirst($this->name);
         $this->names = ucfirst($this->names);
 
         // register cpt in WordPress
         add_action( 'init', array( $this, 'create_cpt' ) );
-        
     }
   
     /**
@@ -56,33 +57,33 @@ abstract class CptBaseClass
          * array to configure labels for the CPT 
          */
         $labels = [
-            'name'                  => _x( $this->names, 'post type general name', 'seminardesk-connector' ),
-            'singular_name'         => _x( $this->name, 'post type singular name', 'seminardesk-connector'),
-            'name_admin_bar'        => _x( $this->name, 'add new on admin bar', 'seminardesk-connector' ),
-            'add_new'               => _x( 'Add New', 'event', 'seminardesk-connector' ),
-            'add_new_item'          => __( 'Add New ' . $this->name, 'seminardesk-connector' ),
-            'new_item'              => __( 'New ' . $this->name, 'seminardesk-connector' ),
-            'edit_item'             => __( 'Edit ' . $this->name, 'seminardesk-connector' ),
-            'view_item'             => __( 'View ' . $this->name, 'seminardesk-connector' ),
-            'view_items'            => __( 'View ' . $this->names, 'seminardesk-connector' ),
-            // 'all_items'          => __( 'All ' . $this->name_plural, 'seminardesk-connector' ),
-            'all_items'             => __( $this->name . ' Editor', 'seminardesk-connector' ),
-            'search_items'          => __( 'Search ' . $this->names, 'seminardesk-connector' ),
-            'parent_item_colon'     => __( 'Parent ' . $this->names . ':', 'seminardesk-connector' ),
-            'not_found'             => __( 'No ' . $this->names_lower . ' found.', 'seminardesk-connector' ),
-            'not_found_in_trash'    => __( 'No ' . $this->names_lower . ' found in Trash.', 'seminardesk-connector' ),
-            'parent_item_colon'     => __( 'Parent ' . $this->name, 'seminardesk-connector' ),
-            'archives'              => __( $this->name . ' Archives', 'seminardesk-connector' ),
-            'attributes'            => __( $this->name . ' Attributes', 'seminardesk-connector' ),
-            'insert_into_item'      => __( 'Insert into ' . $this->name_lower, 'seminardesk-connector' ),
-            'uploaded_to_this_item' => __( 'Uploaded to this ' . $this->name_lower, 'seminardesk-connector' ),
+            'name'                  => _x( $this->names, 'post type general name', 'seminardesk' ),
+            'singular_name'         => _x( $this->name, 'post type singular name', 'seminardesk'),
+            'name_admin_bar'        => _x( $this->name, 'add new on admin bar', 'seminardesk' ),
+            'add_new'               => _x( 'Add New', 'event', 'seminardesk' ),
+            'add_new_item'          => __( 'Add New ' . $this->name, 'seminardesk' ),
+            'new_item'              => __( 'New ' . $this->name, 'seminardesk' ),
+            'edit_item'             => __( 'Edit ' . $this->name, 'seminardesk' ),
+            'view_item'             => __( 'View ' . $this->name, 'seminardesk' ),
+            'view_items'            => __( 'View ' . $this->names, 'seminardesk' ),
+            // 'all_items'          => __( 'All ' . $this->name_plural, 'seminardesk' ),
+            'all_items'             => __( $this->name . ' Editor', 'seminardesk' ),
+            'search_items'          => __( 'Search ' . $this->names, 'seminardesk' ),
+            'parent_item_colon'     => __( 'Parent ' . $this->names . ':', 'seminardesk' ),
+            'not_found'             => __( 'No ' . $this->names_lower . ' found.', 'seminardesk' ),
+            'not_found_in_trash'    => __( 'No ' . $this->names_lower . ' found in Trash.', 'seminardesk' ),
+            'parent_item_colon'     => __( 'Parent ' . $this->name, 'seminardesk' ),
+            'archives'              => __( $this->name . ' Archives', 'seminardesk' ),
+            'attributes'            => __( $this->name . ' Attributes', 'seminardesk' ),
+            'insert_into_item'      => __( 'Insert into ' . $this->name_lower, 'seminardesk' ),
+            'uploaded_to_this_item' => __( 'Uploaded to this ' . $this->name_lower, 'seminardesk' ),
         ];
 
         /**
          * array to set rewrite rules for the CPT (sub CPT option)
          */
         $rewrite = [
-            'slug' => 'sd_' . $this->names_lower,
+            'slug' => $this->slug, // 'sd_' . $this->names_lower,
         ];
 
         /**
@@ -109,8 +110,8 @@ abstract class CptBaseClass
         // FIXME: load RestController class directly as rest_controller_class breaks the WordPress editor
         $cptOptions =  [
             'labels'            => $labels,
-            'description'       => __( $this->name . ' post type for SeminarDesk.', 'seminardesk-connector' ),
-            'has_archive'       => true,
+            'description'       => __( $this->name . ' post type for SeminarDesk.', 'seminardesk' ),
+            'has_archive'       => true, // false,
             'show_in_rest'      => true,  //enable rest api
             'rest_base'         => 'sd_' . $this->names_lower,
             // 'rest_controller_class' => 'Inc\Base\RestController', // use custom WP_REST_Controller for custom post type ... CPT will not be within the wp/v2 namespace
@@ -119,7 +120,7 @@ abstract class CptBaseClass
             'menu_position'     => $this->menu_position,
             // 'hierarchical'      => true, // hierarchical must be true for parent option
             'supports'          => $supports,
-            'capability_type'     => 'post',
+            'capability_type'   => 'post',
             'rewrite'           => $rewrite,
             //'taxonomies' => array( 'category', 'post_tag' ),
         ];
@@ -127,6 +128,6 @@ abstract class CptBaseClass
         register_post_type( 'sd_' . $this->name_lower, $cptOptions ); 
 
         // for debugging custom post type features... expensive operation. should usually only be called when activate and deactivate the plugin
-        // flush_rewrite_rules();
+        //flush_rewrite_rules();
     }
 }

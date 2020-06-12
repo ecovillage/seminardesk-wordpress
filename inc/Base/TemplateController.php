@@ -6,6 +6,8 @@
 
 namespace Inc\Base;
 
+use Inc\Base\OptionUtils;
+
 class TemplateController
 {
     public function register()
@@ -31,8 +33,10 @@ class TemplateController
 
     public function modify_request_schedule( $vars )
     {
-        $txn_slug = get_option('sd_txn_slug');
-        if ( isset($vars['name']) && $vars['name'] === $txn_slug ){
+        $slug_txn_dates = OptionUtils::get_option_or_default( 'sd_slug_txn_dates', SD_SLUG_TXN_DATES );
+        $slug_txn_dates_upcoming = OptionUtils::get_option_or_default( 'sd_slug_txn_dates_upcoming', SD_SLUG_TXN_DATES_UPCOMING );
+        $slug_txn_dates_past = OptionUtils::get_option_or_default( 'sd_slug_txn_dates_past', SD_SLUG_TXN_DATES_PAST );
+        if ( isset($vars['name']) && $vars['name'] === $slug_txn_dates ){
             $vars += [ 'upcoming' => true ];
         }
         // fixing page nav for slug of txn dates
@@ -40,13 +44,10 @@ class TemplateController
             $vars += [ 'upcoming' => true ];
             $vars += [ 'page' => trim($vars['dates'], 'page/') ];
         }
-        if ( isset($vars['dates']) && $vars['dates'] === 'past' ){
+        if ( isset($vars['dates']) && $vars['dates'] === $slug_txn_dates_past ){
             $vars += [ 'past' => true ];
-        } 
-        if ( isset($vars['dates']) && $vars['dates'] === 'past' ){
-            $vars += [ 'past' => true ];
-        } 
-        if ( isset($vars['dates']) && $vars['dates'] === 'upcoming' ){
+        }
+        if ( isset($vars['dates']) && $vars['dates'] === $slug_txn_dates_upcoming ){
             $vars += [ 'upcoming' => true ];
         } 
         return $vars;

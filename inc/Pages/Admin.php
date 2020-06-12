@@ -43,6 +43,13 @@ class Admin
         
 		$this->settings->addPages( $this->pages )->withSubPage( 'General' )->addSubPages( $this->subpages )->register();
 		// $this->settings->addPages( $this->pages )->withSubPage( 'General' )->register();
+
+		add_action( 'update_option_sd_slug_cpt_events', array( $this->callbacks_mngr, 'flushRewriteRules' ), 10, 2 );
+		add_action( 'update_option_sd_slug_cpt_facilitators', array( $this->callbacks_mngr, 'flushRewriteRules' ), 10, 2 );
+		add_action( 'update_option_sd_slug_cpt_dates', array( $this->callbacks_mngr, 'flushRewriteRules' ), 10, 2 );
+		add_action( 'update_option_sd_slug_txn_dates', array( $this->callbacks_mngr, 'flushRewriteRules' ), 10, 2 );
+		add_action( 'update_option_sd_slug_txn_dates_upcoming', array( $this->callbacks_mngr, 'flushRewriteRules' ), 10, 2 );
+		add_action( 'update_option_sd_slug_txn_dates_past', array( $this->callbacks_mngr, 'flushRewriteRules' ), 10, 2 );
     }
 
     /**
@@ -95,16 +102,36 @@ class Admin
 		$args = array(
 			array(
 				'option_group' => 'seminardesk_plugin_settings',
-				'option_name' => 'sd_txn_slug',
-				'callback' => array( $this->callbacks_mngr, 'seminardeskOptionsGroup' )
+				'option_name' => 'sd_slug_cpt_events',
+				// 'callback' => array( $this->callbacks_mngr, 'slugSanitize' ),
 			),
 			array(
 				'option_group' => 'seminardesk_plugin_settings',
-				'option_name' => 'first_name'
+				'option_name' => 'sd_slug_cpt_dates',
 			),
 			array(
 				'option_group' => 'seminardesk_plugin_settings',
-				'option_name' => 'cpt_manager',
+				'option_name' => 'sd_slug_cpt_facilitators',
+			),
+			array(
+				'option_group' => 'seminardesk_plugin_settings',
+				'option_name' => 'sd_slug_cpt_dates',
+			),
+			array(
+				'option_group' => 'seminardesk_plugin_settings',
+				'option_name' => 'sd_slug_txn_dates',
+			),
+			array(
+				'option_group' => 'seminardesk_plugin_settings',
+				'option_name' => 'sd_slug_txn_dates_upcoming',
+			),
+			array(
+				'option_group' => 'seminardesk_plugin_settings',
+				'option_name' => 'sd_slug_txn_dates_past',
+			),
+			array(
+				'option_group' => 'seminardesk_plugin_settings',
+				'option_name' => 'sd_debug',
 				'callback' => array( $this->callbacks_mngr, 'checkboxSanitize' )
 			),
 		);
@@ -116,11 +143,17 @@ class Admin
 	{
 		$args = array(
 			array(
-				'id' => 'seminardesk_admin_index',
-				'title' => 'Settings',
-				'callback' => array( $this->callbacks_mngr, 'seminardeskAdminSection' ),
+				'id' => 'sd_admin_slugs',
+				'title' => __('Slugs', 'seminardesk'),
+				'callback' => array( $this->callbacks_mngr, 'adminSectionSlugs' ),
 				'page' => 'seminardesk_plugin'
-			)
+			),
+			array(
+				'id' => 'sd_admin_debug',
+				'title' => __('Developing', 'seminardesk'),
+				'callback' => array( $this->callbacks_mngr, 'adminSectionDebug' ),
+				'page' => 'seminardesk_plugin'
+			),
 		);
 
 		$this->settings->setSections( $args );
@@ -130,35 +163,85 @@ class Admin
 	{
 		$args = array(
 			array(
-				'id' => 'sd_txn_slug',
-				'title' => 'Taxonomy Slug',
-				'callback' => array( $this->callbacks_mngr, 'seminardeskTextExample' ),
-				'page' => 'seminardesk_plugin',
-				'section' => 'seminardesk_admin_index',
-				'args' => array(
-					'label_for' => 'sd_txn_slug',
-					'class' => 'example-class'
+				'id' 		=> 'sd_slug_cpt_events',
+				'title' 	=> __('CPT Events:', 'seminardesk'),
+				'callback' 	=> array( $this->callbacks_mngr, 'textField' ),
+				'page' 		=> 'seminardesk_plugin',
+				'section' 	=> 'sd_admin_slugs',
+				'args' 		=> array(
+					'name' 			=> 'sd_slug_cpt_events',
+					'class' 		=> 'regular-text',
+					'placeholder' 	=> SD_SLUG_CPT_EVENTS,
 				)
 			),
 			array(
-				'id' => 'first_name',
-				'title' => 'First Name',
-				'callback' => array( $this->callbacks_mngr, 'seminardeskFirstName' ),
-				'page' => 'seminardesk_plugin',
-				'section' => 'seminardesk_admin_index',
-				'args' => array(
-					'label_for' => 'first_name',
-					'class' => 'example-class'
+				'id' 		=> 'sd_slug_cpt_dates',
+				'title' 	=> __('CPT Dates:', 'seminardesk'),
+				'callback' 	=> array( $this->callbacks_mngr, 'textField' ),
+				'page' 		=> 'seminardesk_plugin',
+				'section' 	=> 'sd_admin_slugs',
+				'args' 		=> array(
+					'name' 			=> 'sd_slug_cpt_dates',
+					'class' 		=> 'regular-text',
+					'placeholder' 	=> SD_SLUG_CPT_DATES,
 				)
 			),
 			array(
-				'id' => 'cpt_manager',
-				'title' => 'Activate CPT Manager',
+				'id' 		=> 'sd_slug_cpt_facilitators',
+				'title' 	=> __('CPT Facilitators:', 'seminardesk'),
+				'callback' 	=> array( $this->callbacks_mngr, 'textField' ),
+				'page' 		=> 'seminardesk_plugin',
+				'section' 	=> 'sd_admin_slugs',
+				'args' 		=> array(
+					'name' 			=> 'sd_slug_cpt_facilitators',
+					'class' 		=> 'regular-text',
+					'placeholder' 	=> SD_SLUG_CPT_FACILITATORS,
+				)
+			),
+			array(
+				'id' 		=> 'sd_slug_txn_dates',
+				'title' 	=> __('Taxonomy Dates:', 'seminardesk'),
+				'callback' 	=> array( $this->callbacks_mngr, 'textField' ),
+				'page' 		=> 'seminardesk_plugin',
+				'section' 	=> 'sd_admin_slugs',
+				'args' 		=> array(
+					'name' 			=> 'sd_slug_txn_dates',
+					'class' 		=> 'regular-text',
+					'placeholder' 	=> SD_SLUG_TXN_DATES,
+				)
+			),
+			array(
+				'id' 		=> 'sd_slug_txn_dates_upcoming',
+				'title' 	=> __('Taxonomy Dates Upcoming:', 'seminardesk'),
+				'callback' 	=> array( $this->callbacks_mngr, 'textField' ),
+				'page' 		=> 'seminardesk_plugin',
+				'section' 	=> 'sd_admin_slugs',
+				'args' 		=> array(
+					'name' 			=> 'sd_slug_txn_dates_upcoming',
+					'class' 		=> 'regular-text',
+					'placeholder' 	=> SD_SLUG_TXN_DATES_UPCOMING,
+				)
+			),
+			array(
+				'id' 		=> 'sd_slug_txn_dates_past',
+				'title' 	=> __('Taxonomy Dates Past:', 'seminardesk'),
+				'callback' 	=> array( $this->callbacks_mngr, 'textField' ),
+				'page' 		=> 'seminardesk_plugin',
+				'section' 	=> 'sd_admin_slugs',
+				'args' 		=> array(
+					'name' 			=> 'sd_slug_txn_dates_past',
+					'class' 		=> 'regular-text',
+					'placeholder' 	=> SD_SLUG_TXN_DATES_PAST,
+				)
+			),
+			array(
+				'id' => 'sd_debug',
+				'title' => __('Debug:', 'seminardesk'),
 				'callback' => array( $this->callbacks_mngr, 'checkboxField' ),
 				'page' => 'seminardesk_plugin',
-				'section' => 'seminardesk_admin_index',
+				'section' => 'sd_admin_debug',
 				'args' => array(
-					'label_for' => 'cpt_manager',
+					'name' => 'sd_debug',
 					'class' => 'ui-toggle'
 				)
 			)

@@ -17,7 +17,6 @@ final class Activate
      */
      public static function activate() 
      {
-        global $t1;
         // create and register CPTs and Taxonomies for rewrite rules/permalinks to include CPTs slugs
         $cpt_ctrl = new CptController(array(
             new CPT\CptEvents(),

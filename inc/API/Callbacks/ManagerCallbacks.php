@@ -4,26 +4,29 @@
  */
 namespace Inc\Api\Callbacks;
 
-
-
 class ManagerCallbacks
 {
-	// execute when setting saved
-    public function seminardeskOptionsGroup( $input )
+	public function textField( $args )
 	{
-		return $input;
-	}
-    
-    public function seminardeskTextExample()
-	{
-		$value = esc_attr( get_option( 'sd_txn_slug' ) );
-		echo '<input type="text" class="regular-text" name="sd_txn_slug" value="' . $value . '" placeholder="schedule">';
+		$value = esc_attr( get_option( $args['name'] ) );
+		echo '<input type="text" class="' . $args['class'] . '" name="' . $args['name'] . '" value="' . $value . '" placeholder="' . $args['placeholder'] . '">';
 	}
 
-	public function seminardeskFirstName()
+	public function checkboxField( $args )
 	{
-		$value = esc_attr( get_option( 'first_name' ) );
-		echo '<input type="text" class="regular-text" name="first_name" value="' . $value . '" placeholder="Write your First Name">';
+		$checkbox = get_option( $args['name'] );
+		echo '<input type="checkbox" name="' . $args['name'] . '" value="1" class="' . $args['class'] . '" ' . ($checkbox ? 'checked' : '') . '>';
+	}
+
+	public function slugSanitize( $input )
+	{
+		return sanitize_text_field($input);
+	}
+
+	public function flushRewriteRules( $value_old, $value_new )
+	{			
+		$test = get_option('sd_slug_cpt_events');
+		flush_rewrite_rules();
 	}
 
     public function checkboxSanitize( $input )
@@ -32,16 +35,14 @@ class ManagerCallbacks
 		return ( isset($input) ? true : false );
 	}
 
-	public function seminardeskAdminSection()
+	public function adminSectionSlugs()
 	{
-		echo 'Manage the settings of this plugin in this section.';
+		_e('Customize the slugs of this plugin. Use with caution, might have unintended effects on a deployed WordPress instance.', 'seminardesk');
 	}
 
-	public function checkboxField( $args )
+	public function adminSectionDebug()
 	{
-		$name = $args['label_for'];
-		$classes = $args['class'];
-		$checkbox = get_option( $name );
-		echo '<input type="checkbox" name="' . $name . '" value="1" class="' . $classes . '" ' . ($checkbox ? 'checked' : '') . '>';
+		_e('Manage the settings for development.', 'seminardesk');
+	
 	}
 }
