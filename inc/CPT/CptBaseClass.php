@@ -5,6 +5,8 @@
 
 namespace Inc\CPT;
 
+use Inc\Base\OptionUtils;
+
 // TODO: implement and utilize shortcode [] to generate posts
 
 abstract class CptBaseClass 
@@ -20,6 +22,7 @@ abstract class CptBaseClass
     public $names_lower;
     public $menu_position;
     public $slug;
+    public $public;
 
     /**
      * Define dynamic parameters of the unique custom post type
@@ -31,11 +34,13 @@ abstract class CptBaseClass
     public function __construct()
     {
         $this->set_parameters();
+        $this->public = OptionUtils::get_option_or_default('sd_debug', false);
     }
 
     public function register()
     {
         $this->set_parameters();
+        $this->public = OptionUtils::get_option_or_default('sd_debug', false);
         $this->name = ucfirst($this->name);
         $this->names = ucfirst($this->names);
 
@@ -115,14 +120,14 @@ abstract class CptBaseClass
             'show_in_rest'      => true,  //enable rest api
             'rest_base'         => 'sd_' . $this->names_lower,
             // 'rest_controller_class' => 'Inc\Base\RestController', // use custom WP_REST_Controller for custom post type ... CPT will not be within the wp/v2 namespace
-            'public'            => true,
+            'public'            => $this->public,
             'show_in_menu'      => 'seminardesk_plugin', // add post type to the seminardesk menu
             'menu_position'     => $this->menu_position,
             // 'hierarchical'      => true, // hierarchical must be true for parent option
             'supports'          => $supports,
             'capability_type'   => 'post',
             'rewrite'           => $rewrite,
-            //'taxonomies' => array( 'category', 'post_tag' ),
+            'taxonomies'        => array( 'dates' ),
         ];
 
         register_post_type( 'sd_' . $this->name_lower, $cptOptions ); 

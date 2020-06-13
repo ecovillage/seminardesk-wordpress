@@ -8,6 +8,7 @@ namespace Inc\Pages;
 use Inc\Api\SettingsApi;
 use Inc\Api\Callbacks\AdminCallbacks;
 use Inc\Api\Callbacks\ManagerCallbacks;
+use Inc\Base\OptionUtils;
 
 /**
  * Define admin pages and sub pages
@@ -44,13 +45,36 @@ class Admin
 		$this->settings->addPages( $this->pages )->withSubPage( 'General' )->addSubPages( $this->subpages )->register();
 		// $this->settings->addPages( $this->pages )->withSubPage( 'General' )->register();
 
+		add_filter( 'parent_file', array( $this, 'set_current_menu' ) );
+
+		// rewrite rule for slug when add or update option
+		add_action( 'add_option_sd_slug_cpt_events', array( $this->callbacks_mngr, 'flushRewriteCpt' ), 10, 2 );
+		add_action( 'add_option_sd_slug_cpt_facilitators', array( $this->callbacks_mngr, 'flushRewriteCpt' ), 10, 2 );
+		add_action( 'add_option_sd_slug_cpt_dates', array( $this->callbacks_mngr, 'flushRewriteCpt' ), 10, 2 );
+		add_action( 'add_option_sd_slug_txn_dates', array( $this->callbacks_mngr, 'flushRewriteTaxonomies' ), 10, 2 );
+		add_action( 'add_option_sd_slug_txn_dates_upcoming', array( $this->callbacks_mngr, 'flushRewriteTaxonomies' ), 10, 2 );
+		add_action( 'add_option_sd_slug_txn_dates_past', array( $this->callbacks_mngr, 'flushRewriteTaxonomies' ), 10, 2 );
 		add_action( 'update_option_sd_slug_cpt_events', array( $this->callbacks_mngr, 'flushRewriteCpt' ), 10, 2 );
 		add_action( 'update_option_sd_slug_cpt_facilitators', array( $this->callbacks_mngr, 'flushRewriteCpt' ), 10, 2 );
 		add_action( 'update_option_sd_slug_cpt_dates', array( $this->callbacks_mngr, 'flushRewriteCpt' ), 10, 2 );
 		add_action( 'update_option_sd_slug_txn_dates', array( $this->callbacks_mngr, 'flushRewriteTaxonomies' ), 10, 2 );
 		add_action( 'update_option_sd_slug_txn_dates_upcoming', array( $this->callbacks_mngr, 'flushRewriteTaxonomies' ), 10, 2 );
 		add_action( 'update_option_sd_slug_txn_dates_past', array( $this->callbacks_mngr, 'flushRewriteTaxonomies' ), 10, 2 );
+		
     }
+
+	/**
+	 * Set current menu to seminardesk_plugin to correctly highlight your submenu items with your custom parent menu/page.
+	 * 
+	 * @param string $parent_file 
+	 * @return string 
+	 */
+	public function set_current_menu( $parent_file )
+	{
+		//global $submenu_file, $current_screen, $pagenow;
+		$parent_file = 'seminardesk_plugin';
+		return $parent_file;
+	}
 
     /**
      * Add SeminarDesk to the admin pages.
@@ -74,26 +98,28 @@ class Admin
 
     public function setAdminSubpages()
 	{
-		$this->subpages = array(
-			array(
-				'parent_slug' => 'seminardesk_plugin', 
-				'page_title' => 'Show all events in one list', 
-				'menu_title' => 'Event List', 
-				'capability' => 'manage_options', 
-				'menu_slug' => 'seminardesk_event_list', 
-				'callback' => array( $this->callbacks, 'adminEventList' ),
-				'position' => 2,
-			),
-			array(
-				'parent_slug' => 'seminardesk_plugin', 
-				'page_title' => 'Taxonomy for Event Dates', 
-				'menu_title' => 'Date Taxonomy', 
-				'capability' => 'manage_options', 
-				'menu_slug' => 'edit-tags.php?taxonomy=dates', 
-				'callback' => NULL,
-				'position' => 4,
-			),
-		);
+		if ( OptionUtils::get_option_or_default('sd_debug', false) !== false ){
+			$this->subpages = array(
+				// array(
+				// 	'parent_slug' => 'seminardesk_plugin', 
+				// 	'page_title' => 'Show all events in one list', 
+				// 	'menu_title' => 'Event List', 
+				// 	'capability' => 'manage_options', 
+				// 	'menu_slug' => 'seminardesk_event_list', 
+				// 	'callback' => array( $this->callbacks, 'adminEventList' ),
+				// 	'position' => 2,
+				// ),
+				array(
+					'parent_slug' => 'seminardesk_plugin', 
+					'page_title' => 'Taxonomy for Event Dates', 
+					'menu_title' => 'Date Taxonomy', 
+					'capability' => 'manage_options', 
+					'menu_slug' => 'edit-tags.php?taxonomy=dates', 
+					'callback' => null,
+					'position' => 4,
+				),
+			);
+		}
     }
     
     public function setSettings()

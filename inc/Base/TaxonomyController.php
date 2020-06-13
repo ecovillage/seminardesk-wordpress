@@ -19,6 +19,7 @@ class TaxonomyController
     public $names = 'Dates';
     public $names_lower;
     public $slug;
+    public $public;
 
     // public $taxonomy = array(
     //     'names' => 'Dates',
@@ -27,6 +28,7 @@ class TaxonomyController
 
     public function register()
     {
+        $this->public = OptionUtils::get_option_or_default('sd_debug', false);
         add_action( 'init', array($this, 'create_taxonomy_dates') );
         add_action('pre_get_posts', array( $this, 'set_taxonomy_queries'));
     }
@@ -69,12 +71,12 @@ class TaxonomyController
         $args = array(
             'hierarchical'      => true,
             'labels'            => $labels,
-            'show_ui'           => true,
-            'show_in_menu'      => false,
-            'show_admin_column' => false,
+            'public'            => $this->public,
+            'show_admin_column' => true,
             'query_var'         => true,
             'show_in_rest'      => true, // http://localhost/wpsdp/wp-json/wp/v2/dates
             //'rest_base'         => 'txn',
+            'hierarchical'      => true,
             'rewrite'           => array( 
                 'slug'              => $this->slug, 
                 'hierarchical'      => true,
@@ -83,7 +85,5 @@ class TaxonomyController
         );
 
         register_taxonomy( $this->names_lower, array( 'sd_date' ), $args );
-        // TODO: temporary flush rewrite rules ...
-        //flush_rewrite_rules();
     }
 }
