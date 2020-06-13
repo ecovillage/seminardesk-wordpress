@@ -36,11 +36,7 @@ class ManagerCallbacks
 	 */
 	public function flushRewriteCpt( $value_old, $value_new )
 	{			
-        $cpt_ctrl = new CptController(array(
-            new CPT\CptEvents(),
-            new CPT\CptDates(),
-            new CPT\CptFacilitators(),
-        ));
+        $cpt_ctrl = new CptController();
         $cpt_ctrl->create_cpts();
 		flush_rewrite_rules();
 	}

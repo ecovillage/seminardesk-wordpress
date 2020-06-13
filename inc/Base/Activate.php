@@ -18,11 +18,7 @@ final class Activate
      public static function activate() 
      {
         // create CPTs, Taxonomies and rewrite rules/permalinks to include their slugs
-        $cpt_ctrl = new CptController(array(
-            new CPT\CptEvents(),
-            new CPT\CptDates(),
-            new CPT\CptFacilitators(),
-        ));
+        $cpt_ctrl = new CptController();
         $cpt_ctrl->create_cpts();
         $txn_ctrl = new TaxonomyController();
         $txn_ctrl->create_taxonomy_dates();

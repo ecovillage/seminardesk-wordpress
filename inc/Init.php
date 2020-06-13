@@ -26,11 +26,7 @@ final class Init
             new Base\CustomFields(),
             new Base\TemplateController(),
             new Base\BlockController(),
-            new Base\CptController(array(
-                new CPT\CptEvents(),
-                new CPT\CptDates(),
-                new CPT\CptFacilitators(),
-            )),
+            new Base\CptController(),
             new Base\TaxonomyController(),
         ];
     }
