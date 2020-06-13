@@ -35,15 +35,15 @@ class Admin
 		$this->callbacks = new AdminCallbacks();
 		$this->callbacks_mngr = new ManagerCallbacks();
         
-        $this->setAdminPages();
-        $this->setAdminSubpages();
+        $this->set_admin_pages();
+        $this->set_admin_subpages();
         
-        $this->setSettings();
-		$this->setSections();
-        $this->setFields();
+        $this->set_settings();
+		$this->set_sections();
+        $this->set_fields();
         
-		$this->settings->addPages( $this->pages )->withSubPage( 'General' )->addSubPages( $this->subpages )->register();
-		// $this->settings->addPages( $this->pages )->withSubPage( 'General' )->register();
+		$this->settings->add_pages( $this->pages )->with_sub_page( 'General' )->add_sub_pages( $this->subpages )->register();
+		// $this->settings->add_pages( $this->pages )->with_sub_page( 'General' )->register();
 
 		add_filter( 'parent_file', array( $this, 'set_current_menu' ) );
 
@@ -81,7 +81,7 @@ class Admin
      *
      * @return void
      */
-    public function setAdminPages() {
+    public function set_admin_pages() {
         // add SeminarDesk to the Admin pages 
         $this->pages = array(
 			array(
@@ -96,7 +96,7 @@ class Admin
 		);
     }
 
-    public function setAdminSubpages()
+    public function set_admin_subpages()
 	{
 		if ( OptionUtils::get_option_or_default('sd_debug', false) !== false ){
 			$this->subpages = array(
@@ -122,7 +122,7 @@ class Admin
 		}
     }
     
-    public function setSettings()
+    public function set_settings()
 	{
 		// TODO: optimize database entries - serialized array to speed up database and not blow it up 
 		$args = array(
@@ -162,10 +162,10 @@ class Admin
 			),
 		);
 
-		$this->settings->setSettings( $args );
+		$this->settings->set_settings( $args );
 	}
 
-	public function setSections()
+	public function set_sections()
 	{
 		$args = array(
 			array(
@@ -182,10 +182,10 @@ class Admin
 			),
 		);
 
-		$this->settings->setSections( $args );
+		$this->settings->set_sections( $args );
 	}
 
-	public function setFields()
+	public function set_fields()
 	{
 		$args = array(
 			array(
@@ -273,6 +273,6 @@ class Admin
 			)
 		);
 
-		$this->settings->setFields( $args );
+		$this->settings->set_fields( $args );
 	}
 }

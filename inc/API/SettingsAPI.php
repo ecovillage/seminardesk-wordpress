@@ -20,22 +20,22 @@ class SettingsAPI
     public function register() 
     {
         if ( ! empty($this->admin_pages ) ) {
-			add_action( 'admin_menu', array ( $this, 'addAdminMenu' ) );
+			add_action( 'admin_menu', array ( $this, 'add_admin_menu' ) );
 		}
 		
 		if ( !empty($this->settings) ) {
-			add_action( 'admin_init', array( $this, 'registerCustomFields' ) );
+			add_action( 'admin_init', array( $this, 'register_custom_fields' ) );
 		}
     }
 
-    public function addPages( array $pages ) 
+    public function add_pages( array $pages ) 
     {
         $this->admin_pages = $pages;
         
         return $this;
     }
 
-    public function withSubPage( string $title = null ) 
+    public function with_sub_page( string $title = null ) 
 	{
 		if ( empty($this->admin_pages) ) {
 			return $this;
@@ -60,14 +60,14 @@ class SettingsAPI
 		return $this;
     }
     
-    public function addSubPages( array $pages )
+    public function add_sub_pages( array $pages )
 	{
 		$this->admin_subpages = array_merge( $this->admin_subpages, $pages );
 
 		return $this;
 	}
 
-	public function addAdminMenu()
+	public function add_admin_menu()
 	{
 		foreach ( $this->admin_pages as $page ) {
 			add_menu_page( $page['page_title'], $page['menu_title'], $page['capability'], $page['menu_slug'], $page['callback'], $page['icon_url'], $page['position'] );
@@ -78,28 +78,28 @@ class SettingsAPI
 		}
 	}
 
-	public function setSettings( array $settings )
+	public function set_settings( array $settings )
 	{
 		$this->settings = $settings;
 
 		return $this;
 	}
 
-	public function setSections( array $sections )
+	public function set_sections( array $sections )
 	{
 		$this->sections = $sections;
 
 		return $this;
 	}
 
-	public function setFields( array $fields )
+	public function set_fields( array $fields )
 	{
 		$this->fields = $fields;
 
 		return $this;
 	}
 
-	public function registerCustomFields()
+	public function register_custom_fields()
 	{
 		// register setting
 		foreach ( $this->settings as $setting ) {
