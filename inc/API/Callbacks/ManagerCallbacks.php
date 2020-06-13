@@ -51,7 +51,7 @@ class ManagerCallbacks
 	public function flushRewriteTaxonomies( $value_old, $value_new )
 	{			
 		$txn_ctrl = new TaxonomyController();
-        $txn_ctrl->create_taxonomy_dates();
+        $txn_ctrl->create_taxonomies();
 		flush_rewrite_rules();
 	}
 

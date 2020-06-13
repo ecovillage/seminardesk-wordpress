@@ -11,7 +11,7 @@ use Inc\Api\Callbacks\BlockCallbacks;
 class BlockController
 {
     /**
-     * Register Bock service
+     * Register Bock via controller
      *
      * @return void
      */

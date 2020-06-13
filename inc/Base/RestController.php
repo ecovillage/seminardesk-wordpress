@@ -37,6 +37,11 @@ class RestController extends WP_REST_Controller
         $this->register();
     }
 
+    /**
+     * Register rest via controller
+     * 
+     * @return void 
+     */
     public function register()
     {
         $this->namespace = 'seminardesk/v1';
@@ -46,7 +51,7 @@ class RestController extends WP_REST_Controller
         $this->base_facilitator = 'facilitators';
 
         // add custom REST API for sd_events
-        add_action('rest_api_init', array($this, 'register_routes'));
+        add_action('rest_api_init', array($this, 'create_routes'));
     }
 
     /**
@@ -54,7 +59,7 @@ class RestController extends WP_REST_Controller
      * /wp-json/seminardesk/v1/events
      * @return void
      */
-    public function register_routes()
+    public function create_routes()
     {
         $rest = new RestCallbacks;
 

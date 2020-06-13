@@ -3,7 +3,7 @@
  * @package SeminardeskPlugin
  */
 
-namespace Inc\Pages;
+namespace Inc\Base;
 
 use Inc\Api\SettingsApi;
 use Inc\Api\Callbacks\AdminCallbacks;
@@ -13,7 +13,7 @@ use Inc\Base\OptionUtils;
 /**
  * Define admin pages and sub pages
  */
-class Admin
+class AdminController
 {
 
     public $settings;
@@ -25,7 +25,7 @@ class Admin
 	public $subpages = array();
 
     /**
-     * Register service admin pages
+     * Register admin page via controller
      *
      * @return void
      */
@@ -112,7 +112,7 @@ class Admin
 				array(
 					'parent_slug' => 'seminardesk_plugin', 
 					'page_title' => 'Taxonomy for Event Dates', 
-					'menu_title' => 'Date Taxonomy', 
+					'menu_title' => 'Txn Date', 
 					'capability' => 'manage_options', 
 					'menu_slug' => 'edit-tags.php?taxonomy=dates', 
 					'callback' => null,

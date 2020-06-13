@@ -10,6 +10,11 @@ use Inc\Base\OptionUtils;
 
 class TemplateController
 {
+    /**
+     * Register templates via controller
+     * 
+     * @return void 
+     */
     public function register()
     {
         // register a custom templates

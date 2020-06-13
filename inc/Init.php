@@ -19,7 +19,7 @@ final class Init
     public static function get_services() 
     {
         return [
-            new Pages\Admin(),
+            new Base\AdminController(),
             new Base\SettingsLinks(),
             new Base\RestController(),
             new Base\Enqueue(),

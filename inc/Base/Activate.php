@@ -21,7 +21,7 @@ final class Activate
         $cpt_ctrl = new CptController();
         $cpt_ctrl->create_cpts();
         $txn_ctrl = new TaxonomyController();
-        $txn_ctrl->create_taxonomy_dates();
+        $txn_ctrl->create_taxonomies();
         flush_rewrite_rules();
     }
 }

@@ -16,7 +16,7 @@ class CptController
     public $cpts = array();
 
     /**
-     * Register custom post types
+     * Register cpts via controller
      *
      * @return void
      */
@@ -27,9 +27,9 @@ class CptController
     }
 
     /**
-     * create custom post types form provided arguments
+     * create custom post types for SeminarDesk
      * 
-     * @return array 
+     * @return void 
      */
     public function create_cpts( )
     {
@@ -78,7 +78,7 @@ class CptController
                 'view_item'             => __( 'View ' . $name, 'seminardesk' ),
                 'view_items'            => __( 'View ' . $names, 'seminardesk' ),
                 // 'all_items'          => __( 'All ' . $names, 'seminardesk' ),
-                'all_items'             => __( $name . ' Editor', 'seminardesk' ),
+                'all_items'             => __( 'CPT ' . $name, 'seminardesk' ),
                 'search_items'          => __( 'Search ' . $names, 'seminardesk' ),
                 'parent_item_colon'     => __( 'Parent ' . $names . ':', 'seminardesk' ),
                 'not_found'             => __( 'No ' . $names_lower . ' found.', 'seminardesk' ),
