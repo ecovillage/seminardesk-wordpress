@@ -27,7 +27,6 @@ final class Init
             new \Inc\Controllers\EnqueueController(),
             new \Inc\Controllers\CustomFieldsController(),
             new \Inc\Controllers\TemplateController(),
-            new \Inc\Controllers\BlockController(),
             new \Inc\Controllers\CptController(),
             new \Inc\Controllers\TaxonomyController(),
         ];
