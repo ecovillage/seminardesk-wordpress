@@ -5,7 +5,7 @@
  * @package SeminardeskPlugin
  */
 
-use Inc\Base\TemplateUtils as Utils;
+use Inc\Utils\TemplateUtils as Utils;
 
 $title = __( 'Upcoming Event Dates', 'seminardesk');
 $timestamp_today = strtotime(wp_date('Y-m-d'));

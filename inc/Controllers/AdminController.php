@@ -3,12 +3,12 @@
  * @package SeminardeskPlugin
  */
 
-namespace Inc\Base;
+namespace Inc\Controllers;
 
 use Inc\Api\SettingsApi;
-use Inc\Api\Callbacks\AdminCallbacks;
-use Inc\Api\Callbacks\ManagerCallbacks;
-use Inc\Base\OptionUtils;
+use Inc\Callbacks\AdminCallbacks;
+use Inc\Callbacks\ManagerCallbacks;
+use Inc\Utils\OptionUtils;
 
 /**
  * Define admin pages and sub pages

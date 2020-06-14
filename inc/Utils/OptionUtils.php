@@ -4,7 +4,7 @@
  * @package SeminardeskPlugin
  */
 
-namespace Inc\Base;
+namespace Inc\Utils;
 
 /**
  * Set of utilities to extend the option API

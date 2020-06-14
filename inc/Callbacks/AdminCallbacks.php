@@ -2,7 +2,7 @@
 /**
  * @package SeminardeskPlugin
  */
-namespace Inc\Api\Callbacks;
+namespace Inc\Callbacks;
 
 /**
  * Callbacks require once content for admin pages

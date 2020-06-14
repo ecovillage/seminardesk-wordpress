@@ -3,19 +3,19 @@
  * @package SeminardeskPlugin
  */
 
-namespace Inc\Base;
+namespace Inc\Controllers;
 
 // TODO: create modular custom fields manager class (CF API) to handel different custom fields with the Meta API (event, calender, facilitators)
 
 /**
  * Handel custom fields for custom post types utilizing Meta API of WordPress for
  */
-class CustomFields
+class CustomFieldsController
 {
     public function register ()
     {
         // TODO: register custom fields for native WordPress REST API necessary??? For now deactivated
-        // $this->register_custom_fields();
+        // $this->create_custom_fields();
     }
 
     /**
@@ -23,7 +23,7 @@ class CustomFields
      *
      * @return void
      */
-    public function register_custom_fields()
+    public function create_custom_fields()
     {
         // sd_event meta data
         register_post_meta(

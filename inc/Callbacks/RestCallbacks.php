@@ -2,12 +2,12 @@
 /**
  * @package SeminardeskPlugin
  */
-namespace Inc\Api\Callbacks;
+namespace Inc\Callbacks;
 
 // TODO: review includes
 use WP_Error;
 use WP_REST_Response;
-use Inc\Base\WebhookHandler;
+use Inc\Utils\WebhookHandler;
 
 /**
  * Callbacks for Rest API

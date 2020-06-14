@@ -71,8 +71,8 @@ register_activation_hook( SD_PLUGIN_FILE, array( 'Inc\Base\Activate', 'activate'
 register_deactivation_hook( SD_PLUGIN_FILE, array( 'Inc\Base\Deactivate', 'deactivate' ) );
 
 // register services utilizing the init class
-if ( class_exists ( 'Inc\\Init' ) ) {
-    $services = new Inc\Init();
+if ( class_exists ( 'Inc\\Base\\Init' ) ) {
+    $services = new Inc\Base\Init();
     $services->register_services();
     // alternative method to register services
     // Inc\Init::register_services();

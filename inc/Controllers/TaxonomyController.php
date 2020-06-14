@@ -6,9 +6,9 @@
  * @package SeminardeskPlugin
  */
 
-namespace Inc\Base;
+namespace Inc\Controllers;
 
-use Inc\Base\OptionUtils;
+use Inc\Utils\OptionUtils;
 
 // Show/Edit Taxonomy:
 // http://localhost/wpsdp/wp-admin/edit-tags.php?taxonomy=dates

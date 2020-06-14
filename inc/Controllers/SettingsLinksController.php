@@ -3,9 +3,9 @@
  * @package SeminardeskPlugin
  */
 
-namespace Inc\Base;
+namespace Inc\Controllers;
 
-class SettingsLinks
+class SettingsLinksController
 {
     /**
      * Register service SettingsLinks
@@ -14,7 +14,7 @@ class SettingsLinks
      */
     public function register() {
         // add settings link to the plugin menu
-        add_filter( "plugin_action_links_" . SD_PLUGIN, array( $this, 'settings_link'));
+        add_filter( "plugin_action_links_" . SD_PLUGIN, array( $this, 'create_settings_link'));
      }
 
     /**
@@ -23,7 +23,7 @@ class SettingsLinks
      * @param array  $links
      * @return array $links list of links
      */
-    public function settings_link( $links ) {
+    public function create_settings_link( $links ) {
         $settings_link = '<a href="admin.php?page=seminardesk_plugin">Settings</a>';
         array_unshift( $links, $settings_link );
         return $links;

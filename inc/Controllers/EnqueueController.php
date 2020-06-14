@@ -3,11 +3,11 @@
  * @package SeminardeskPlugin
  */
 
-namespace Inc\Base;
+namespace Inc\Controllers;
 
 
 
-class Enqueue
+class EnqueueController
 {
     /**
      * Register service Enqueue

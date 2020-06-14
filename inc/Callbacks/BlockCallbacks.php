@@ -2,7 +2,7 @@
 /**
  * @package SeminardeskPlugin
  */
-namespace Inc\Api\Callbacks;
+namespace Inc\Callbacks;
 
 class BlockCallbacks{
 

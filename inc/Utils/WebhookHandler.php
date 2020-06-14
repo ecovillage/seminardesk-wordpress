@@ -2,7 +2,7 @@
 /**
  * @package SeminardeskPlugin
  */
-namespace Inc\Base;
+namespace Inc\Utils;
 
 use WP_Error;
 use WP_REST_Response;

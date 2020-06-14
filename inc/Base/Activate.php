@@ -5,9 +5,8 @@
 
 namespace Inc\Base;
 
-use Inc\CPT;
-use Inc\Base\CptController;
-use Inc\Base\TaxonomyController;
+use Inc\Controllers\CptController;
+use Inc\Controllers\TaxonomyController;
 final class Activate
 {
     /**

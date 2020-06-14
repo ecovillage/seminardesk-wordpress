@@ -4,12 +4,12 @@
  * @package SeminardeskPlugin
  */
 
-namespace Inc\Base;
+namespace Inc\Controllers;
 
 // TODO: review includes
 use WP_REST_Controller;
 use WP_REST_Server;
-use Inc\Api\Callbacks\RestCallbacks;
+use Inc\Callbacks\RestCallbacks;
 
 // TODO: error handling, implementation of WP_Error
 //         - return client error 400, if payload doesn't include required fields

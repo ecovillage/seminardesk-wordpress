@@ -4,10 +4,10 @@
  * @package SeminardeskPlugin
  */
 
-namespace Inc\Base;
+namespace Inc\Utils;
 
 use WP_Query;
-use Inc\Base\TemplateUtils as Utils;
+use Inc\Utils\TemplateUtils as Utils;
 
 /**
  * Set of utilities for data used in the templates of the plugin

@@ -2,11 +2,10 @@
 /**
  * @package SeminardeskPlugin
  */
-namespace Inc\Api\Callbacks;
+namespace Inc\Callbacks;
 
-use Inc\CPT;
-use Inc\Base\CptController;
-use Inc\Base\TaxonomyController;
+use Inc\Controllers\CptController;
+use Inc\Controllers\TaxonomyController;
 
 class ManagerCallbacks
 {

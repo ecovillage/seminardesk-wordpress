@@ -4,9 +4,9 @@
  * @package SeminardeskPlugin
  */
 
-namespace Inc\Base;
+namespace Inc\Controllers;
 
-use Inc\Base\OptionUtils;
+use Inc\Utils\OptionUtils;
 
 class TemplateController
 {

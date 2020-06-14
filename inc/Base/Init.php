@@ -3,7 +3,9 @@
  * @package SeminardeskPlugin
  */
 
-namespace Inc;
+namespace Inc\Base;
+
+use Inc\Controllers;
 
 // thread class es as service
 /**
@@ -19,15 +21,15 @@ final class Init
     public static function get_services() 
     {
         return [
-            new Base\AdminController(),
-            new Base\SettingsLinks(),
-            new Base\RestController(),
-            new Base\Enqueue(),
-            new Base\CustomFields(),
-            new Base\TemplateController(),
-            new Base\BlockController(),
-            new Base\CptController(),
-            new Base\TaxonomyController(),
+            new \Inc\Controllers\AdminController(),
+            new \Inc\Controllers\SettingsLinksController(),
+            new \Inc\Controllers\RestController(),
+            new \Inc\Controllers\EnqueueController(),
+            new \Inc\Controllers\CustomFieldsController(),
+            new \Inc\Controllers\TemplateController(),
+            new \Inc\Controllers\BlockController(),
+            new \Inc\Controllers\CptController(),
+            new \Inc\Controllers\TaxonomyController(),
         ];
     }
 

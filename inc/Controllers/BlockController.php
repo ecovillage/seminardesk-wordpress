@@ -4,9 +4,9 @@
  * @package SeminardeskPlugin
  */
 
-namespace Inc\Base;
+namespace Inc\Controllers;
 
-use Inc\Api\Callbacks\BlockCallbacks;
+use Inc\Callbacks\BlockCallbacks;
 
 class BlockController
 {
@@ -46,7 +46,7 @@ class BlockController
     {
         // Plugin’s block category title and slug.
         $block_category = array( 
-            'title' => esc_html__( 'SeminarDesk', 'text-domain' ), // Required
+            'title' => esc_html__( 'SeminarDesk', 'seminardesk' ), // Required
             'slug'  => 'seminardesk', // Required
             // 'icon'  => 'wordpress', 
          );

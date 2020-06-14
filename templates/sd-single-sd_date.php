@@ -5,7 +5,7 @@
  * @package SeminardeskPlugin
  */
 
-use Inc\Base\TemplateUtils as Utils;
+use Inc\Utils\TemplateUtils as Utils;
 
 get_header();
 if (have_posts()) {
