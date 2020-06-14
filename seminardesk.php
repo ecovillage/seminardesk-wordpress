@@ -75,5 +75,5 @@ if ( class_exists ( 'Inc\\Base\\Init' ) ) {
     $services = new Inc\Base\Init();
     $services->register_services();
     // alternative method to register services
-    // Inc\Init::register_services();
+    // Inc\Base\Init::register_services();
 }
