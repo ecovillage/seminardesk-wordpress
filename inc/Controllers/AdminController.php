@@ -136,12 +136,12 @@ class AdminController
 			array(
 				'option_group'	=> 'seminardesk_plugin_settings',
 				'option_name' 	=> SD_OPTION['slugs'],
-				// 'callback' 	=> array( $this->callbacks_mngr, 'slugSanitize' ),
+				// 'callback' 	=> array( $this->callbacks_mngr, 'sanitize_slug' ),
 			),
 			array(
 				'option_group' 	=> 'seminardesk_plugin_settings',
 				'option_name' 	=> SD_OPTION['debug'],
-			'callback' 			=> array( $this->callbacks_mngr, 'checkboxSanitize' )
+			'callback' 			=> array( $this->callbacks_mngr, 'sanitize_checkbox' )
 			),
 
 		);
@@ -155,13 +155,13 @@ class AdminController
 			array(
 				'id' 		=> 'sd_admin_slugs',
 			'title' 		=> __('Slugs', 'seminardesk'),
-				'callback'	=> array( $this->callbacks_mngr, 'adminSectionSlugs' ),
+				'callback'	=> array( $this->callbacks_mngr, 'admin_section_slugs' ),
 				'page' 		=> 'seminardesk_plugin'
 			),
 			array(
 				'id' 		=> 'sd_admin_debug',
 				'title' 	=> __('Developing', 'seminardesk'),
-				'callback' 	=> array( $this->callbacks_mngr, 'adminSectionDebug' ),
+				'callback' 	=> array( $this->callbacks_mngr, 'admin_section_debug' ),
 				'page' 		=> 'seminardesk_plugin'
 			),
 		);
@@ -175,7 +175,7 @@ class AdminController
 			array(
 				'id' 		=> SD_OPTION['debug'],
 				'title' 	=> __('Debug:', 'seminardesk'),
-				'callback' 	=> array( $this->callbacks_mngr, 'checkboxField' ),
+				'callback' 	=> array( $this->callbacks_mngr, 'checkbox_field' ),
 				'page' 		=> 'seminardesk_plugin',
 				'section' 	=> 'sd_admin_debug',
 				'args' 		=> array(
@@ -190,7 +190,7 @@ class AdminController
 			$args[] = array(
 				'id' 		=> $type['slug_option_key'],
 				'title' 	=> __( $type['title'] . ':', 'seminardesk'),
-				'callback' 	=> array( $this->callbacks_mngr, 'textField' ),
+				'callback' 	=> array( $this->callbacks_mngr, 'text_field' ),
 				'page' 		=> 'seminardesk_plugin',
 				'section' 	=> 'sd_admin_slugs',
 				'args' 		=> array(

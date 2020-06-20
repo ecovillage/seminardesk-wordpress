@@ -10,20 +10,20 @@ use Inc\Utils\OptionUtils;
 
 class ManagerCallbacks
 {
-	public function textField( $args )
+	public function text_field( $args )
 	{
 		$name = $args['option']  . '[' . $args['key'] . ']';
 		$value = OptionUtils::get_option_or_default( $args['option'], '',  $args['key']);
 		echo '<input type="text" class="' . $args['class'] . '" name="' . $name . '" value="' . $value . '" placeholder="' . $args['placeholder'] . '">';
 	}
 
-	public function checkboxField( $args )
+	public function checkbox_field( $args )
 	{
 		$checkbox = get_option( $args['option'] );
 		echo '<input type="checkbox" name="' . $args['option'] . '" value="1" class="' . $args['class'] . '" ' . ($checkbox ? 'checked' : '') . '>';
 	}
 
-	public function slugSanitize( $input )
+	public function sanitize_slug( $input )
 	{
 		return sanitize_text_field($input);
 	}
@@ -46,18 +46,18 @@ class ManagerCallbacks
 		flush_rewrite_rules();
 	}
 
-    public function checkboxSanitize( $input )
+    public function sanitize_checkbox( $input )
 	{
 		// return filter_var($input, FILTER_SANITIZE_NUMBER_INT);
 		return ( isset($input) ? true : false );
 	}
 
-	public function adminSectionSlugs()
+	public function admin_section_slugs()
 	{
 		_e('Customize the slugs of this plugin. Use with caution, might have unintended effects on a deployed WordPress instance.', 'seminardesk');
 	}
 
-	public function adminSectionDebug()
+	public function admin_section_debug()
 	{
 		_e('Manage the settings for development.', 'seminardesk');
 	
