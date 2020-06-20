@@ -8,13 +8,13 @@ namespace Inc\Controllers;
 class SettingsLinksController
 {
     /**
-     * Register service SettingsLinks
+     * Register SettingsLinks via controller class
      *
      * @return void
      */
     public function register() {
         // add settings link to the plugin menu
-        add_filter( "plugin_action_links_" . SD_PLUGIN, array( $this, 'create_settings_link'));
+        add_filter( "plugin_action_links_" . SD_DIR['base'], array( $this, 'create_settings_link'));
      }
 
     /**

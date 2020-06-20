@@ -1,5 +1,5 @@
 /**
- * JavaScript for single template of CPT sd_event
+ * JavaScript for single template of CPT sd_cpt_event
  * 
  * @package SeminardeskPlugin
  */

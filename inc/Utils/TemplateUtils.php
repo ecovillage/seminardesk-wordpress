@@ -36,10 +36,9 @@ class TemplateUtils
                 $key = '0';
             }
         }
-        $value = $array[$key]['value'];
-        if (!empty($value)){
-            $response = $before . $value . $after;
-        }
+
+        $response = !empty($array[$key]['value']) ? $before . $array[$key]['value'] . $after : null;
+        
         if ( $echo ){
             echo $response;
         }
@@ -90,7 +89,7 @@ class TemplateUtils
             // query facilitator by id from the database
             $custom_query = new WP_Query(
                 array(
-                    'post_type'     => 'sd_facilitator',
+                    'post_type'     => 'sd_cpt_facilitator',
                     'post_status'   => 'publish',
                     'meta_key'      => 'sd_facilitator_id',
                     'meta_query'    => array(
@@ -143,7 +142,7 @@ class TemplateUtils
         // $timestamp_today = strtotime('2020-04-01');
         $custom_query = new WP_Query(
             array(
-                'post_type'     => 'sd_date',
+                'post_type'     => 'sd_cpt_date',
                 'post_status'   => 'publish',
                 'meta_key'      => 'sd_date_begin',
                 'orderby'       => 'meta_value_num',

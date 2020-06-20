@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for single post of CPT sd_facilitator
+ * The template for single post of CPT sd_cpt_facilitator
  * 
  * @package SeminardeskPlugin
  */

@@ -96,7 +96,7 @@ class RestCallbacks{
     public function get_custom_post_attr($post)
     {
         switch ($post->post_type) {
-            case 'sd_event':
+            case 'sd_cpt_event':
                 $event_attr = [
                     'wp_event_id'       => $post->ID,
                     'sd_event_id'       => $post->sd_event_id,
@@ -109,7 +109,7 @@ class RestCallbacks{
                     'sd_webhook'        => $post->sd_webhook, // get metadata 'json_dump'
                 ];
                 break;
-            case 'sd_date':
+            case 'sd_cpt_date':
                 $event_attr = [
                     'wp_date_id'        => $post->ID,
                     'sd_date_id'        => $post->sd_date_id,
@@ -125,7 +125,7 @@ class RestCallbacks{
                     'sd_webhook'           => $post->sd_webhook,
                 ];
                 break;
-            case 'sd_facilitator':
+            case 'sd_cpt_facilitator':
                 $event_attr = [
                     'wp_facilitator_id' => $post->ID,
                     'sd_facilitator_id' => $post->sd_facilitator_id,
@@ -194,9 +194,9 @@ class RestCallbacks{
     * @param WP_REST_Request $request
     * @return WP_REST_Response|WP_Error
     */
-    public function get_events($request)
+    public function get_cpt_events($request)
     {
-        $response = $this->get_custom_posts('sd_event');
+        $response = $this->get_custom_posts('sd_cpt_event');
         return rest_ensure_response( $response );
     }
 
@@ -206,9 +206,9 @@ class RestCallbacks{
     * @param WP_REST_Request $request
     * @return WP_REST_Response|WP_Error
     */
-    public function get_dates($request)
+    public function get_cpt_dates($request)
     {
-        $response = $this->get_custom_posts('sd_date');
+        $response = $this->get_custom_posts('sd_cpt_date');
         return rest_ensure_response( $response );
     }
 
@@ -218,9 +218,9 @@ class RestCallbacks{
     * @param WP_REST_Request $request
     * @return WP_REST_Response|WP_Error
     */
-    public function get_facilitators($request)
+    public function get_cpt_facilitators($request)
     {
-        $response = $this->get_custom_posts('sd_facilitator');
+        $response = $this->get_custom_posts('sd_cpt_facilitator');
         return rest_ensure_response( $response );
     }
 
@@ -230,7 +230,7 @@ class RestCallbacks{
      * @param WP_REST_Request $request
      * @return WP_REST_Response|WP_Error
      */
-    public function get_event($request)
+    public function get_cpt_event($request)
     {
         // invalid ID format returns WP_Error
         $requested_event_id = strtolower($request['event_id']);
@@ -238,7 +238,7 @@ class RestCallbacks{
             return new WP_Error('invalid_format', 'The requested event ID ' . $requested_event_id . 'does not consists of 32 characters', array('status' => 400));
         }
 
-        $response = $this->get_custom_post('sd_event', $requested_event_id);
+        $response = $this->get_custom_post('sd_cpt_event', $requested_event_id);
 
         return rest_ensure_response($response);
     }
@@ -249,11 +249,11 @@ class RestCallbacks{
      * @param WP_REST_Request $request
      * @return WP_REST_Response|WP_Error
      */
-    public function get_date($request)
+    public function get_cpt_date($request)
     {
         $requested_date_id = strtolower($request['date_id']);
 
-        $response = $this->get_custom_post('sd_date', $requested_date_id);
+        $response = $this->get_custom_post('sd_cpt_date', $requested_date_id);
 
         return rest_ensure_response($response);
     }
@@ -264,12 +264,12 @@ class RestCallbacks{
      * @param WP_REST_Request $request
      * @return WP_REST_Response|WP_Error
      */
-    public function get_facilitator($request)
+    public function get_cpt_facilitator($request)
     {
         // invalid ID format returns WP_Error
         $requested_facilitator_id = strtolower($request['facilitator_id']);
 
-        $response = $this->get_custom_post('sd_facilitator', $requested_facilitator_id);
+        $response = $this->get_custom_post('sd_cpt_facilitator', $requested_facilitator_id);
 
         return rest_ensure_response($response);
     }

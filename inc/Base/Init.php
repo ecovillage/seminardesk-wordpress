@@ -24,7 +24,7 @@ final class Init
             new \Inc\Controllers\AdminController(),
             new \Inc\Controllers\SettingsLinksController(),
             new \Inc\Controllers\RestController(),
-            new \Inc\Controllers\EnqueueController(),
+            // new \Inc\Controllers\EnqueueController(),
             new \Inc\Controllers\TemplateController(),
             new \Inc\Controllers\CptController(),
             new \Inc\Controllers\TaxonomyController(),

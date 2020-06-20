@@ -6,7 +6,7 @@
  
     $myposts = get_posts( array(
         'numberposts' => -1, // all events
-        'post_type' => 'sd_event',
+        'post_type' => 'sd_cpt_event',
         'post_status' => 'any',
     ) );
  

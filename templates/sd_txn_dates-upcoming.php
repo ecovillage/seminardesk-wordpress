@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for taxonomy dates with upcoming event dates
+ * The template for taxonomy sd_txn_dates with upcoming event dates
  * 
  * @package SeminardeskPlugin
  */
@@ -23,7 +23,7 @@ if ( get_query_var( 'paged' ) ) {
 
 $wp_query = new WP_Query(
      array(
-        'post_type'        => 'sd_date',
+        'post_type'        => 'sd_cpt_date',
         'post_status'      => 'publish',
         'posts_per_page'   => '5',
         'paged'            => $paged,
@@ -59,7 +59,7 @@ get_header();
             ?>
             <div class="entry-header-inner section-inner small">
                 <?php
-                $term = get_the_terms( $post, 'dates' );
+                $term = get_the_terms( $post, 'sd_txn_dates' );
                 if ($term['0']->description != $term_set ){
                     $term_set = $term['0']->description;
                     echo '<h4>' . $term_set . '</h4>';

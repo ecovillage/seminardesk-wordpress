@@ -16,7 +16,7 @@ class AdminCallbacks
      */
 	public function adminGeneral()
 	{
-		return require_once( SD_PLUGIN_PATH . '/templates/admin.php' );
+		return require_once( SD_DIR['path'] . '/templates/admin.php' );
 	}
 
 	/**
@@ -26,6 +26,6 @@ class AdminCallbacks
      */
 	public function adminEventList()
 	{
-		return require_once( SD_PLUGIN_PATH . '/templates/eventlist.php' );
+		return require_once( SD_DIR['path'] . '/templates/eventlist.php' );
 	}
 }

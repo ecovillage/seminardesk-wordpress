@@ -80,7 +80,7 @@ Content-Type: {{content}}
             "onlyBoardAndLodging": false,
             "allowBookingForMultipleDates": false,
             "showExtras": true,
-            "showFacilitators": true,
+            "showFacik0litators": true,
             "showNewsletterCheckbox": true,
             "allowVoucher": false,
             "mandatoryFieldsBooker": {

@@ -43,32 +43,95 @@ if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php') ) {
     require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 }
 
-// global constant variables
-define( 'SD_PLUGIN_FILE', __FILE__ );
-define( 'SD_PLUGIN_PATH', plugin_dir_path( SD_PLUGIN_FILE ) );
-define( 'SD_PLUGIN_URL', plugin_dir_url( SD_PLUGIN_FILE ) );
-define( 'SD_PLUGIN', plugin_basename( SD_PLUGIN_FILE ) );
-// constant variables for default slugs
-// define( 'SD_SLUGS', array(
-//     'cpt_events'            => 'events',
-// 	'cpt_dates'             => 'dates',
-// 	'cpt_facilitators'      => 'facilitator',
-// 	'txn_dates'             => 'schedule',
-// 	'txn_dates_upcoming'    => 'upcoming',
-//     'txn_dates_past'        => 'past',
-// ));
-define( 'SD_SLUG_CPT_EVENTS', 'events' );
-define( 'SD_SLUG_CPT_DATES', 'dates' );
-define( 'SD_SLUG_CPT_FACILITATORS', 'facilitators' );
-define( 'SD_SLUG_TXN_DATES', 'schedule' );
-define( 'SD_SLUG_TXN_DATES_UPCOMING', 'upcoming' );
-define( 'SD_SLUG_TXN_DATES_PAST', 'past' );
+/**
+ * global constant variables for directories
+ */
+define( 'SD_DIR', array(
+    'file' => __FILE__,
+    'path'  => plugin_dir_path( __FILE__ ),
+    'url'   => plugin_dir_url( __FILE__ ),
+    'base'  => plugin_basename( __FILE__ )
+));
+
+/**
+ * constant variables for options
+ */
+define( 'SD_OPTION', array(
+    'slugs'  => 'seminardesk_slugs',
+    'debug' => 'seminardesk_debug',
+) );
+
+/**
+ * constant to define custom post type
+ */
+define( 'SD_CPT', array(
+    'sd_cpt_event'         => array( // don't rename this key
+        'name'              => 'Event',
+        'names'             => 'Events',
+        'title'             => 'CPT Events',
+        'menu_position'     => 1, // position in submenu
+        'taxonomies'        => array (),
+        'slug_default'      => 'events',
+        'slug_option_key'   => 'sd_slugs_cpt_events',
+    ),
+    'sd_cpt_date'          => array( // don't rename this key 
+        'name'              => 'Date',
+        'names'             => 'Dates',
+        'title'             => 'CPT Dates',
+        'menu_position'     => 2,
+        'taxonomies'        => array ( 'sd_txn_dates' ),
+        'slug_default'      => 'dates',
+        'slug_option_key'   => 'sd_slugs_cpt_dates',
+    ),
+    'sd_cpt_facilitator'   => array( // don't rename this key
+        'name'              => 'Facilitator',
+        'names'             => 'Facilitators',
+        'title'             => 'CPT Facilitators',
+        'menu_position'     => 3,
+        'taxonomies'        => array (),
+        'slug_default'      => 'facilitators',
+        'slug_option_key'   => 'sd_slugs_cpt_facilitator',
+    ),
+));
+
+/**
+ * Constant define custom taxonomies
+ */
+define( 'SD_TXN', array(
+    'sd_txn_dates' => array( // don't rename this key
+        'name'              => 'Date',
+        'names'             => 'Dates',
+        'title'             => 'TXN Dates',
+        'menu_position'     => 4,
+        'object_type'       => array( 'sd_cpt_date' ),
+        'slug_default'      => 'schedule',
+        'slug_option_key'   => 'sd_slug_txn_dates',
+    ),
+));
+
+/**
+ * Constant define special terms of custom taxonomies
+ */
+define( 'SD_TXN_TERM', array(
+    'upcoming'  => array( // don't rename this key
+        'title'             => 'Term upcoming',
+        'taxonomy'          => 'sd_txn_dates',
+        'slug_default'      => 'upcoming',
+        'slug_option_key'   => 'sd_slug_txn_dates_upcoming',
+    ),
+    'past'      => array( // don't rename this key
+        'title'             => 'Term past',
+        'taxonomy'          => 'sd_txn_dates',
+        'slug_default'      => 'past',
+        'slug_option_key'   => 'sd_slug_txn_dates_past',
+    ),
+));
 
 // activation hook for plugin
-register_activation_hook( SD_PLUGIN_FILE, array( 'Inc\Base\Activate', 'activate' ) );
+register_activation_hook( SD_DIR['file'], array( 'Inc\Base\Activate', 'activate' ) );
 
 // deactivation hook for plugin
-register_deactivation_hook( SD_PLUGIN_FILE, array( 'Inc\Base\Deactivate', 'deactivate' ) );
+register_deactivation_hook( SD_DIR['file'], array( 'Inc\Base\Deactivate', 'deactivate' ) );
 
 // register services utilizing the init class
 if ( class_exists ( 'Inc\\Base\\Init' ) ) {

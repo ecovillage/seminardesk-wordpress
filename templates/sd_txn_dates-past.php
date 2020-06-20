@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for taxonomy dates
+ * The template for taxonomy sd_txn_dates
  * 
  * @package SeminardeskPlugin
  */
@@ -22,7 +22,7 @@ if ( get_query_var( 'paged' ) ) {
 
 $wp_query = new WP_Query(
     array(
-        'post_type'         => 'sd_date',
+        'post_type'         => 'sd_cpt_date',
         'post_status'       => 'publish',
         'posts_per_page'    => '5',
         'paged'             => $paged,

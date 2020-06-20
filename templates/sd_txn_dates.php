@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for taxonomy dates by year or month
+ * The template for taxonomy sd_txn_dates by year or month
  * 
  * @package SeminardeskPlugin
  */

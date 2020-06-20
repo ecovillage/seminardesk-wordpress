@@ -13,10 +13,10 @@ use Inc\Utils\OptionUtils;
  */
 class CptController
 {
-    public $cpts = array();
+    // public $cpts = array();
 
     /**
-     * Register cpts via controller
+     * Register cpts via controller class
      *
      * @return void
      */
@@ -33,36 +33,13 @@ class CptController
      */
     public function create_cpts( )
     {
-        $this->cpts = array(
-            array(
-                'name' => 'Event',
-                'names' => 'Events',
-                'menu_position' => 1,
-                'slug' => OptionUtils::get_option_or_default( 'sd_slug_cpt_events', SD_SLUG_CPT_EVENTS ),
-                'taxonomies' => array (),
-            ),
-            array(
-                'name' => 'Date',
-                'names' => 'Dates',
-                'menu_position' => 2,
-                'slug' => OptionUtils::get_option_or_default( 'sd_slug_cpt_dates', SD_SLUG_CPT_DATES ),
-                'taxonomies' => array ( 'dates' ),
-            ),
-            array(
-                'name' => 'Facilitator',
-                'names' => 'Facilitators',
-                'menu_position' => 3,
-                'slug' => OptionUtils::get_option_or_default( 'sd_slug_cpt_facilitators', SD_SLUG_CPT_FACILITATORS ),
-                'taxonomies' => array (),
-            ),
-        );
-
-        foreach ($this->cpts as $cpt){
-            $name = ucfirst($cpt['name']);
-            $names= ucfirst($cpt['names']);
-            $name_lower = strtolower($cpt['name']);
-            $names_lower = strtolower($cpt['names']);
-            $public = OptionUtils::get_option_or_default( 'sd_debug', false );
+        foreach (SD_CPT as $key => $value){
+            $name = ucfirst($value['name']);
+            $names= ucfirst($value['names']);
+            $name_lower = strtolower($value['name']);
+            $names_lower = strtolower($value['names']);
+            $public = OptionUtils::get_option_or_default( SD_OPTION['debug'], false );
+            $slug = OptionUtils::get_option_or_default( SD_OPTION['slugs'] , $value['slug_default'], $value['slug_option_key'] );
 
             /**
              * array to configure labels for the CPT 
@@ -94,7 +71,7 @@ class CptController
              * array to set rewrite rules for the CPT (sub CPT option)
              */
             $rewrite = [
-                'slug' => $cpt['slug'],
+                'slug' => $slug,
             ];
 
             /**
@@ -123,23 +100,23 @@ class CptController
                 'labels'            => $labels,
                 'description'       => __( $name . ' post type for SeminarDesk.', 'seminardesk' ),
                 'has_archive'       => true, // false,
-                'show_in_rest'      => true,  //enable rest api
+                'show_in_rest'      => false, // true,  //enable rest api
                 'rest_base'         => 'sd_' . $names_lower,
                 // 'rest_controller_class' => 'Inc\Base\RestController', // use custom WP_REST_Controller for custom post type ... CPT will not be within the wp/v2 namespace
                 'public'            => $public,
                 'show_in_menu'      => 'seminardesk_plugin', // add post type to the seminardesk menu
-                'menu_position'     => $cpt['menu_position'],
+                'menu_position'     => $value['menu_position'],
                 // 'hierarchical'      => true, // hierarchical must be true for parent option
                 'supports'          => $supports,
                 'capability_type'   => 'post',
                 'rewrite'           => $rewrite,
-                'taxonomies'        => array( 'dates' ),
+                'taxonomies'        => array( 'sd_txn_dates' ),
             ];
 
-            register_post_type( 'sd_' . $name_lower, $cptOptions ); 
+            register_post_type( $key, $cptOptions ); 
 
             // for debugging custom post type features... expensive operation. should usually only be called when activate and deactivate the plugin
-            //flush_rewrite_rules();
+            // flush_rewrite_rules();
         } 
 
     }
