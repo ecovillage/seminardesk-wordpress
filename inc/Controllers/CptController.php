@@ -38,7 +38,7 @@ class CptController
             $names= ucfirst($value['names']);
             $name_lower = strtolower($value['name']);
             $names_lower = strtolower($value['names']);
-            $public = OptionUtils::get_option_or_default( SD_OPTION['debug'], false );
+            $show_ui = OptionUtils::get_option_or_default( SD_OPTION['debug'], false );
             $slug = OptionUtils::get_option_or_default( SD_OPTION['slugs'] , $value['slug_default'], $value['slug_option_key'] );
 
             /**
@@ -97,20 +97,19 @@ class CptController
             // TODO: handle scheme and it's callbacks proper
             // FIXME: load RestController class directly as rest_controller_class breaks the WordPress editor
             $cptOptions =  [
-                'labels'            => $labels,
-                'description'       => __( $name . ' post type for SeminarDesk.', 'seminardesk' ),
-                'has_archive'       => true, // false,
-                'show_in_rest'      => false, // true,  //enable rest api
-                'rest_base'         => 'sd_' . $names_lower,
-                // 'rest_controller_class' => 'Inc\Base\RestController', // use custom WP_REST_Controller for custom post type ... CPT will not be within the wp/v2 namespace
-                'public'            => $public,
-                'show_in_menu'      => 'seminardesk_plugin', // add post type to the seminardesk menu
-                'menu_position'     => $value['menu_position'],
-                // 'hierarchical'      => true, // hierarchical must be true for parent option
-                'supports'          => $supports,
-                'capability_type'   => 'post',
-                'rewrite'           => $rewrite,
-                'taxonomies'        => array( 'sd_txn_dates' ),
+                'labels'                => $labels,
+                'description'           => __( $name . ' post type for SeminarDesk.', 'seminardesk' ),
+                'has_archive'           => $value['has_archive'],
+                'show_in_rest'          => false,
+                'public'                => $value['public'],
+                'exclude_from_search'   => $value['exclude_from_search'],
+                'show_ui'               => $show_ui,
+                'show_in_menu'          => 'seminardesk_plugin', // add post type to the seminardesk menu
+                'menu_position'         => $value['menu_position'],
+                'supports'              => $supports,
+                'capability_type'       => 'post',
+                'rewrite'               => $rewrite,
+                'taxonomies'            => $value['taxonomies'],
             ];
 
             register_post_type( $key, $cptOptions ); 

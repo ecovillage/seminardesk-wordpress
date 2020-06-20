@@ -91,7 +91,7 @@ class TaxonomyController
             $names = ucfirst($value['names']);
             $name_lower = strtolower($value['name']);
             $names_lower = strtolower($value['names']);
-            $public = OptionUtils::get_option_or_default( SD_OPTION['debug'], false );
+            $show_ui = OptionUtils::get_option_or_default( SD_OPTION['debug'], false );
             $slug = OptionUtils::get_option_or_default( SD_OPTION['slugs'], $value['slug_default'], $value['slug_option_key'] );
 
             // Add new taxonomy, make it hierarchical (like categories)
@@ -114,11 +114,11 @@ class TaxonomyController
             $args = array(
                 'hierarchical'      => true,
                 'labels'            => $labels,
-                'public'            => $public,
+                // 'public'            => $value['public'],
+                'show_ui'           => $show_ui,
                 'show_admin_column' => true,
                 'query_var'         => true,
-                'show_in_rest'      => false, // true, // http://localhost/wpsdp/wp-json/wp/v2/sd_txn_dates
-                //'rest_base'         => 'txn',
+                'show_in_rest'      => false,
                 'hierarchical'      => true,
                 'rewrite'           => array( 
                     'slug'              => $slug, 
