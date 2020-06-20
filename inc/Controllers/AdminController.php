@@ -85,7 +85,30 @@ class AdminController
      * @return void
      */
     public function set_admin_pages() {
-        // add SeminarDesk to the Admin pages 
+		// sd logo used as menu icon
+		$sd_icon = 'data:image/svg+xml;base64,' . base64_encode(
+			'<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+			width="300.000000pt" height="300.000000pt" viewBox="0 0 300.000000 300.000000"
+			preserveAspectRatio="xMidYMid meet">
+		
+			<g transform="translate(-120.000000,450.000000) scale(0.200000,-0.200000)"
+			fill="black" stroke="none">
+			<path d="M1768 1768 c-3 -151 -3 -153 -20 -121 -22 40 -71 57 -163 57 -159 0
+			-275 -114 -292 -286 l-6 -65 -23 24 c-28 28 -85 53 -176 77 -36 10 -75 26 -87
+			37 -38 36 -21 79 31 79 22 0 33 -8 46 -30 l17 -30 103 0 c102 0 103 0 97 23
+			-38 126 -164 193 -318 168 -142 -24 -207 -85 -207 -196 0 -57 11 -84 50 -122
+			33 -32 66 -47 186 -82 80 -23 97 -37 92 -77 -6 -56 -113 -47 -140 10 -11 25
+			-13 26 -115 26 l-103 0 6 -27 c34 -142 212 -216 399 -168 80 21 132 57 154
+			106 l18 40 18 -28 c60 -95 120 -127 235 -127 99 0 146 17 175 67 l20 32 3 -42
+			3 -43 105 0 104 0 0 425 0 425 -105 0 -104 0 -3 -152z m-68 -223 c48 -25 65
+			-68 65 -165 -1 -129 -36 -180 -126 -180 -54 0 -88 22 -113 74 -21 45 -21 153
+			1 207 28 70 106 99 173 64z"/>
+			<path d="M2085 1276 c-55 -24 -81 -80 -64 -139 27 -97 160 -115 212 -28 34 57
+			10 138 -48 165 -40 19 -60 20 -100 2z"/>
+			</g>
+			</svg>'
+		);
+		// add SeminarDesk to the Admin pages 
         $this->pages = array(
 			array(
 				'page_title' 	=> 'SeminarDesk Plugin', 
@@ -93,7 +116,7 @@ class AdminController
 				'capability' 	=> 'manage_options', 
 				'menu_slug' 	=> 'seminardesk_plugin', 
 				'callback'		=> array( $this->callbacks, 'adminGeneral' ), 
-				'icon_url'		=> 'dashicons-calendar', 
+				'icon_url'		=> $sd_icon, // 'dashicons-calendar', 
 				'position' 		=> 110
 			)
 		);
