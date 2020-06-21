@@ -4,7 +4,6 @@
  */
 namespace Inc\Callbacks;
 
-// TODO: review includes
 use WP_Error;
 use WP_REST_Response;
 use Inc\Utils\WebhookHandler;
@@ -80,7 +79,6 @@ class RestCallbacks{
 
         foreach ( $posts as $current ) {
             // get event attributes and add to $response of the endpoint
-            // TODO: get_event review
             $post_attr = $this->get_custom_post_attr( $current );
             array_push( $response, $post_attr );
         }

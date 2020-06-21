@@ -6,16 +6,9 @@
 
 namespace Inc\Controllers;
 
-// TODO: review includes
 use WP_REST_Controller;
 use WP_REST_Server;
 use Inc\Callbacks\RestCallbacks;
-
-// TODO: error handling, implementation of WP_Error
-//         - return client error 400, if payload doesn't include required fields
-// TODO: permission check
-// TODO: handle scheme and it's callbacks proper
-// TODO: guaranty unique IDs ... evaluate ids before executing POST, update and delete request request_id, event_id, date_id, facilitator_id
 
 /**
  * SeminarDesk's HTTP client supporting Webhooks

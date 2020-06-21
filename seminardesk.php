@@ -33,8 +33,6 @@ Text Domain: seminardesk
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-// TODO: security checks to handel errors and return error messages
-
 // security check if plugin tricked by WordPress
 defined( 'ABSPATH' ) or die ('not allowed to access this file');
 

@@ -30,7 +30,6 @@ get_header();
     </header><!-- .archive-header -->
 
     <?php
-    // TODO: include template part for repeating code
 	if ( have_posts() ) {
 		while ( have_posts() ) {
             the_post();

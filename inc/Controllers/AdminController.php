@@ -153,8 +153,6 @@ class AdminController
     
     public function set_settings()
 	{
-		// TODO: optimize database entries - serialized array to speed up database and not blow it up 
-
 		$args = array(
 			array(
 				'option_group'	=> SD_ADMIN['group_settings'],

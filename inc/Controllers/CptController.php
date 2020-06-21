@@ -93,9 +93,6 @@ class CptController
             /**
              * array to configure CPT options
              */
-            // TODO: register custom capabilities
-            // TODO: handle scheme and it's callbacks proper
-            // FIXME: load RestController class directly as rest_controller_class breaks the WordPress editor
             $cptOptions =  [
                 'labels'                => $labels,
                 'description'           => __( $name . ' post type for SeminarDesk.', 'seminardesk' ),
@@ -107,7 +104,6 @@ class CptController
                 'show_in_menu'          => SD_ADMIN['page'], // add post type to the seminardesk menu
                 'menu_position'         => $value['menu_position'],
                 'supports'              => $supports,
-                'capability_type'       => 'post',
                 'rewrite'               => $rewrite,
                 'taxonomies'            => $value['taxonomies'],
             ];
