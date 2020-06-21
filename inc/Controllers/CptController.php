@@ -104,7 +104,7 @@ class CptController
                 'public'                => $value['public'],
                 'exclude_from_search'   => $value['exclude_from_search'],
                 'show_ui'               => $show_ui,
-                'show_in_menu'          => 'seminardesk_plugin', // add post type to the seminardesk menu
+                'show_in_menu'          => SD_ADMIN['page'], // add post type to the seminardesk menu
                 'menu_position'         => $value['menu_position'],
                 'supports'              => $supports,
                 'capability_type'       => 'post',

@@ -54,6 +54,16 @@ define( 'SD_DIR', array(
 ));
 
 /**
+ * constant variables for admin page
+ */
+
+ define( 'SD_ADMIN', array(
+    'page' => 'seminardesk_plugin',
+    'position' => 65, // below Plugins
+    'group_settings' => 'seminardesk_plugin_settings',
+ ) );
+
+/**
  * constant variables for options
  */
 define( 'SD_OPTION', array(

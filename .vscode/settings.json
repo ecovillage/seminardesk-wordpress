@@ -8,25 +8,15 @@
         "absint",
         "cpts",
         "dashicons",
+        "eventlist",
         "mngr",
         "numberposts",
-        "sdscript",
-        "sdstyle",
+        "sdadminscript",
+        "sdadminstyle",
         "seminardesk",
         "sideload",
         "submenu",
         "subpage",
         "subpages"
-    ],
-    "sqltools.connections": [
-        {
-            "database": "wpsdp_db",
-            "dialect": "MySQL",
-            "name": "wpsdp",
-            "password": "poeHpf9CJEcx",
-            "port": 3306,
-            "server": "localhost",
-            "username": "root"
-        }
     ]
 }

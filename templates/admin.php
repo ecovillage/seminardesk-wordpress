@@ -22,8 +22,8 @@
         <div id="tab-1" class="tab-pane active">
             <form method="post" action="options.php">
                 <?php
-                settings_fields('seminardesk_plugin_settings');
-                do_settings_sections('seminardesk_plugin');
+                settings_fields(SD_ADMIN['group_settings']);
+                do_settings_sections(SD_ADMIN['page']);
                 submit_button(__('Save Settings', 'seminardesk'));
                 ?>
             </form>

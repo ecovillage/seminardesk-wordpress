@@ -62,8 +62,8 @@ class AdminController
 	 */
 	public function enqueue_assets()
     {
-        wp_enqueue_style( 'sdstyle', SD_DIR['url'] . 'assets/sd-admin-style.css' );
-        wp_enqueue_script( 'sdscript', SD_DIR['url'] . 'assets/sd-admin-script.js' );
+        wp_enqueue_style( 'sdadminstyle', SD_DIR['url'] . 'assets/sd-admin-style.css' );
+        wp_enqueue_script( 'sdadminscript', SD_DIR['url'] . 'assets/sd-admin-script.js' );
     }
 
 	/**
@@ -75,7 +75,7 @@ class AdminController
 	public function set_submenu( $parent_file )
 	{
 		//global $submenu_file, $current_screen, $pagenow;
-		$parent_file = 'seminardesk_plugin';
+		$parent_file = SD_ADMIN['page'];
 		return $parent_file;
 	}
 
@@ -114,10 +114,10 @@ class AdminController
 				'page_title' 	=> 'SeminarDesk Plugin', 
 				'menu_title' 	=> 'SeminarDesk', 
 				'capability' 	=> 'manage_options', 
-				'menu_slug' 	=> 'seminardesk_plugin', 
+				'menu_slug' 	=> SD_ADMIN['page'], 
 				'callback'		=> array( $this->callbacks, 'adminGeneral' ), 
 				'icon_url'		=> $sd_icon, // 'dashicons-calendar', 
-				'position' 		=> 110
+				'position' 		=> SD_ADMIN['position'],
 			)
 		);
     }
@@ -127,7 +127,7 @@ class AdminController
 		if ( OptionUtils::get_option_or_default( SD_OPTION['debug'], false) !== false ){
 			$this->subpages = array(
 				// array(
-				// 	'parent_slug' => 'seminardesk_plugin', 
+				// 	'parent_slug' => SD_ADMIN['page'], 
 				// 	'page_title' => 'Show all events in one list', 
 				// 	'menu_title' => 'Event List', 
 				// 	'capability' => 'manage_options', 
@@ -139,7 +139,7 @@ class AdminController
 
 			foreach ( SD_TXN as $txn => $value ) {
 				$this->subpages[] = array(
-					'parent_slug' 	=> 'seminardesk_plugin', 
+					'parent_slug' 	=> SD_ADMIN['page'], 
 					'page_title' 	=> $value['title'], 
 					'menu_title' 	=> $value['title'], 
 					'capability' 	=> 'manage_options', 
@@ -157,12 +157,12 @@ class AdminController
 
 		$args = array(
 			array(
-				'option_group'	=> 'seminardesk_plugin_settings',
+				'option_group'	=> SD_ADMIN['group_settings'],
 				'option_name' 	=> SD_OPTION['slugs'],
 				// 'callback' 	=> array( $this->callbacks_mngr, 'sanitize_slug' ),
 			),
 			array(
-				'option_group' 	=> 'seminardesk_plugin_settings',
+				'option_group' 	=> SD_ADMIN['group_settings'],
 				'option_name' 	=> SD_OPTION['debug'],
 			'callback' 			=> array( $this->callbacks_mngr, 'sanitize_checkbox' )
 			),
@@ -179,13 +179,13 @@ class AdminController
 				'id' 		=> 'sd_admin_slugs',
 			'title' 		=> __('Slugs', 'seminardesk'),
 				'callback'	=> array( $this->callbacks_mngr, 'admin_section_slugs' ),
-				'page' 		=> 'seminardesk_plugin'
+				'page' 		=> SD_ADMIN['page'],
 			),
 			array(
 				'id' 		=> 'sd_admin_debug',
 				'title' 	=> __('Developing', 'seminardesk'),
 				'callback' 	=> array( $this->callbacks_mngr, 'admin_section_debug' ),
-				'page' 		=> 'seminardesk_plugin'
+				'page' 		=> SD_ADMIN['page'],
 			),
 		);
 
@@ -199,7 +199,7 @@ class AdminController
 				'id' 		=> SD_OPTION['debug'],
 				'title' 	=> __('Debug:', 'seminardesk'),
 				'callback' 	=> array( $this->callbacks_mngr, 'checkbox_field' ),
-				'page' 		=> 'seminardesk_plugin',
+				'page' 		=> SD_ADMIN['page'],
 				'section' 	=> 'sd_admin_debug',
 				'args' 		=> array(
 					'option' 	=> SD_OPTION['debug'],
@@ -214,7 +214,7 @@ class AdminController
 				'id' 		=> $type['slug_option_key'],
 				'title' 	=> __( $type['title'] . ':', 'seminardesk'),
 				'callback' 	=> array( $this->callbacks_mngr, 'text_field' ),
-				'page' 		=> 'seminardesk_plugin',
+				'page' 		=> SD_ADMIN['page'],
 				'section' 	=> 'sd_admin_slugs',
 				'args' 		=> array(
 					'option'		=> SD_OPTION['slugs'],
