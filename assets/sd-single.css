@@ -26,10 +26,8 @@ css styles for single template of CPT sd_cpt_event
     transform: translate(-50%, -50%);
     background-color: white;
     padding: 1rem 1.5rem;
-    /* padding: 50px; */
     height: 80%;
     width: 80%;
-    /* margin-bottom: -2em; */
     background-color: rgb(235, 231, 231);
 }
 .sd-modal-title{

@@ -1,3 +1,12 @@
+<?php
+/**
+ * defines event list for admin are of the seminardesk plugin (deprecated)
+ * 
+ * @package SeminardeskPlugin
+ */
+
+ ?>
+
 <h1>Event List</h1>
 
 <ul>

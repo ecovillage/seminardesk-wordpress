@@ -17,12 +17,24 @@ class TemplateController
      */
     public function register()
     {
+        add_action( 'init', array( $this, 'add_endpoint' ) );
+        add_filter( 'request', array( $this, 'customize_request' ));
+        add_filter( 'single_template', array( $this, 'custom_post_template' ));
+        add_filter( 'taxonomy_template', array( $this, 'custom_taxonomy_template' ));
+        add_filter( 'template_include', array( $this, 'custom_all_template'));  
+        
+        add_action( 'template_redirect', array( $this, 'template_redirect' ) );
+    }
 
-        // register a custom templates
-        add_filter('request', array( $this, 'customize_request' ));
-        add_filter('single_template', array( $this, 'custom_post_template' ));
-        add_filter('taxonomy_template', array( $this, 'custom_taxonomy_template' ));
-        add_filter('template_include', array( $this, 'custom_all_template'));
+    public function template_redirect( $template )
+    {
+        global $wp_query;
+    }
+
+    public function add_endpoint()
+    {
+        $name = 'blub';
+        add_rewrite_endpoint( $name, EP_ROOT );
     }
 
     public function enqueue_taxonomy_assets()
@@ -34,7 +46,7 @@ class TemplateController
     public function enqueue_single_assets()
     {
         wp_enqueue_style( 'sd-single-style', SD_DIR['url'] . 'assets/sd-single.css' );
-        wp_enqueue_script( 'sd-single-script', SD_DIR['url'] . 'assets/sd-single.js', array( 'jquery' ), '1.0.0', true );
+        wp_enqueue_script( 'sd-single-script', SD_DIR['url'] . 'assets/sd-single.js', array(), '1.0.0', true );
     }
 
     public function customize_request( $vars )
@@ -43,6 +55,12 @@ class TemplateController
         $slug_txn_dates_past = OptionUtils::get_option_or_default( SD_OPTION['slugs'], SD_TXN_TERM['past']['slug_default'], SD_TXN_TERM['past']['slug_option_key'] );
         $slug_txn_dates_upcoming = OptionUtils::get_option_or_default( SD_OPTION['slugs'], SD_TXN_TERM['upcoming']['slug_default'], SD_TXN_TERM['upcoming']['slug_option_key'] );
 
+        if ( isset($vars['blub']) ){
+            $vars += [ 'upcoming' => true ];
+            if ( strpos($vars['blub'], 'page') !== false ){
+                $vars += [ 'page' => trim($vars['blub'], 'page/') ];
+            }
+        }
         // set base taxonomy link to upcoming
         if ( isset($vars['name']) && $vars['name'] === $slug_txn_dates ){
             $vars += [ 'upcoming' => true ];
@@ -87,8 +105,8 @@ class TemplateController
             if ( file_exists( SD_DIR['path'] . 'templates/' . $post_type . '.php' ) ) {
                 return SD_DIR['path'] . 'templates/' . $post_type . '.php';
             }
-            if ( file_exists( SD_DIR['path'] . 'templates/sd-single.php') ) {
-                return SD_DIR['path'] . 'templates/sd-single.php';
+            if ( file_exists( SD_DIR['path'] . 'templates/sd_cpt.php') ) {
+                return SD_DIR['path'] . 'templates/sd_cpt.php';
             }
         }
         return $template;
@@ -96,16 +114,12 @@ class TemplateController
 
     public function custom_taxonomy_template( $template )
     {
-        $object = get_queried_object()->to_array();
         if ( empty($template)){
-            add_action('wp_enqueue_scripts', array($this, 'enqueue_taxonomy_assets'));
-            if (file_exists(SD_DIR['path'] . 'templates/' . get_query_var( 'taxonomy' ) . '-' . $object['name'] .  '.php')){
-                return SD_DIR['path'] . 'templates/' . get_query_var( 'taxonomy' ) . '-' . $object['name'] .  '.php';
-            }
             if ( file_exists(SD_DIR['path'] . 'templates/' . get_query_var( 'taxonomy' ) . '.php')){
+                add_action('wp_enqueue_scripts', array($this, 'enqueue_taxonomy_assets'));
                 return SD_DIR['path'] . 'templates/' . get_query_var( 'taxonomy' ) . '.php';
             }
-            return SD_DIR['path'] . 'templates/sd-taxonomy.php';
+            return SD_DIR['path'] . 'templates/sd_txn.php';
         }
         return $template;
     }

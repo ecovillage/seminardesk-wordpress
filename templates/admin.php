@@ -1,3 +1,12 @@
+<?php
+/**
+ * defines admin page of the seminardesk plugin  
+ * 
+ * @package SeminardeskPlugin
+ */
+
+ ?>
+
 <div class="wrap">
     <h1>SeminarDesk Plugin</h1>
     <?php settings_errors(); ?>

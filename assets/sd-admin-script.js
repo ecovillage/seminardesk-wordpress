@@ -25,7 +25,6 @@ window.addEventListener("load", function() {
 
 		clickedTab.classList.add("active");
 		document.querySelector(activePaneID).classList.add("active");
-
 	}
 
 });
