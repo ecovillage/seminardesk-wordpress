@@ -89,7 +89,6 @@ class CptController
                 //'post-formats',
             ];
 
-
             /**
              * array to configure CPT options
              */

@@ -61,5 +61,11 @@ class ManagerCallbacks
 	{
 		_e('Manage the settings for development.', 'seminardesk');
 	
+	
+	}
+	public function admin_section_uninstall()
+	{
+		_e('Manage the settings for WP uninstaller of the SeminarDesk plugin.', 'seminardesk');
+	
 	}
 }

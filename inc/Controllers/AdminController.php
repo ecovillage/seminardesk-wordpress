@@ -164,7 +164,11 @@ class AdminController
 				'option_name' 	=> SD_OPTION['debug'],
 			'callback' 			=> array( $this->callbacks_mngr, 'sanitize_checkbox' )
 			),
-
+			array(
+				'option_group' 	=> SD_ADMIN['group_settings'],
+				'option_name' 	=> SD_OPTION['delete'],
+			'callback' 			=> array( $this->callbacks_mngr, 'sanitize_checkbox' )
+			),
 		);
 
 		$this->settings->set_settings( $args );
@@ -185,6 +189,12 @@ class AdminController
 				'callback' 	=> array( $this->callbacks_mngr, 'admin_section_debug' ),
 				'page' 		=> SD_ADMIN['page'],
 			),
+			array(
+				'id' 		=> 'sd_admin_uninstall',
+				'title' 	=> __('Uninstall', 'seminardesk'),
+				'callback' 	=> array( $this->callbacks_mngr, 'admin_section_uninstall' ),
+				'page' 		=> SD_ADMIN['page'],
+			),
 		);
 
 		$this->settings->set_sections( $args );
@@ -202,8 +212,19 @@ class AdminController
 				'args' 		=> array(
 					'option' 	=> SD_OPTION['debug'],
 					'class' 	=> 'ui-toggle'
-				)
-			)
+				),
+			),
+			array(
+				'id' 		=> SD_OPTION['delete'],
+				'title' 	=> __('Delete all:', 'seminardesk'),
+				'callback' 	=> array( $this->callbacks_mngr, 'checkbox_field' ),
+				'page' 		=> SD_ADMIN['page'],
+				'section' 	=> 'sd_admin_uninstall',
+				'args' 		=> array(
+					'option' 	=> SD_OPTION['delete'],
+					'class' 	=> 'ui-toggle'
+				),
+			),
 		);
 
 		$types = array_merge(SD_CPT, SD_TXN, SD_TXN_TERM);

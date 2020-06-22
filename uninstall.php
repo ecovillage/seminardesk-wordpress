@@ -6,22 +6,39 @@
 * @package SeminardeskPlugin
 */
 
-// security check if unistall is trickered by wordpress
+use Inc\Utils\OptionUtils;
+
+// WP security check when uninstall
 defined( 'WP_UNINSTALL_PLUGIN' ) or die ('not allowed to access this file');
 
 // Clear database data
-// Get all sd events
-$sd_cpt_events = get_posts( array( 'post_type' => 'sd_cpt_event', 'numberposts' => -1 ) );
-// delete all sd_cpt_events CTP
-foreach ( $sd_cpt_events as $sd_cpt_event ) {
-    wp_delete_post( $sd_cpt_event->ID, true );
+$delete_all = OptionUtils::get_option_or_default(SD_OPTION['delete'], false);
+if ( $delete_all == true ) {
+    // Get all cpts and delete them
+    foreach ( SD_CPT as $key => $value ){
+        $cpts = get_posts( array (
+            'post_type'     => $key,
+            'numberposts'   => -1
+        ));
+        foreach ( $cpts as $cpt){
+            wp_delete_post( $cpt->ID, true);
+        }
+    }
+    // Get all terms of the txn and delete them
+    foreach ( SD_TXN as $key => $value){
+        get_taxonomies();
+        $terms = get_terms( array(
+            'taxonomy' => $key,
+            'hide_empty' => false,
+        ) );
+        foreach ( $terms as $term ){
+            wp_delete_term( $term, $key );
+        }
+    }
+    // Get all options and delete them
+    foreach( SD_OPTION as $key => $value ){
+        delete_option( $value );
+    }    
 }
 
-// // Access directly the DB via SQL and delete sd event entries
-// // more disruptive...
-// global $wpdb;
-// // delete all CPT sd_cpt_event
-// $wpdb->query( *DELETE FROM wp_posts WHERE post_type     = 'sd_cpt_   event'* );
-// // delete all post metadata, which is not associalted with a post
-// $wpdb->query( *DELETE FROM wp_postmeta WHERE post_id NOT IN (SELECT id FROM wp_posts)* );
-// $wpdb->query( *DELETE FROM wp_term_relationships WHERE opject_id NOT IN (SELECT id FROM wp_posts)* );
+flush_rewrite_rules();

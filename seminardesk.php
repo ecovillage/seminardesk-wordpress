@@ -67,6 +67,7 @@ define( 'SD_DIR', array(
 define( 'SD_OPTION', array(
     'slugs'  => 'seminardesk_slugs',
     'debug' => 'seminardesk_debug',
+    'delete' => 'seminardesk_delete',
 ) );
 
 /**
