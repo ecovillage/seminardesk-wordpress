@@ -21,10 +21,10 @@ final class Init
     public static function get_services() 
     {
         return [
+            new \Inc\Controllers\BasicAuthController(),
             new \Inc\Controllers\AdminController(),
             new \Inc\Controllers\SettingsLinksController(),
             new \Inc\Controllers\RestController(),
-            // new \Inc\Controllers\EnqueueController(),
             new \Inc\Controllers\TemplateController(),
             new \Inc\Controllers\CptController(),
             new \Inc\Controllers\TaxonomyController(),
