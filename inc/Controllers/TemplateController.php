@@ -7,6 +7,7 @@
 namespace Inc\Controllers;
 
 use Inc\Utils\OptionUtils;
+use Inc\Utils\TemplateUtils;
 
 class TemplateController
 {
@@ -26,8 +27,6 @@ class TemplateController
         // add_action( 'init', array( $this, 'add_endpoint' ) );
         // add_action( 'template_redirect', array( $this, 'template_redirect' ) );
         add_filter( 'request', array( $this, 'customize_request' ));
-        add_filter( 'single_template', array( $this, 'custom_post_template' ));
-        add_filter( 'taxonomy_template', array( $this, 'custom_taxonomy_template' ));
         add_filter( 'template_include', array( $this, 'custom_all_template'));  
     }
 
@@ -60,11 +59,19 @@ class TemplateController
     {
         if ( !empty( $style ) )
         {
-            wp_enqueue_style( $style, $url . $style );
+            $exists = TemplateUtils::url_exists( $url . $style );
+            if ( $exists ){
+                wp_register_style( $style, $url . $style );
+                wp_enqueue_style( $style );
+            }
         }
         if ( !empty( $script ) )
         {
-            wp_enqueue_script( $script, $url . $script, array(), '1.0.0', true  );
+            $exists = TemplateUtils::url_exists( $url . $script );
+            if ( $exists ){
+                wp_register_script( $script, $url . $script, array(), '1.0.0', true );
+                wp_enqueue_script( $script );
+            }
         }
     }
 
@@ -102,7 +109,7 @@ class TemplateController
         //         $vars += [ 'page' => trim($vars['blub'], 'page/') ];
         //     }
         // }
-        // set base taxonomy link to upcoming
+        // set base taxonomy link to upcoming4
         if ( isset($vars['name']) && $vars['name'] === $slug_txn_dates ){
             $vars += [ 'upcoming' => true ];
         }
@@ -122,51 +129,48 @@ class TemplateController
 
     public function custom_all_template( $template )
     {
+        // term upcoming
         if ( get_query_var('upcoming') === true) {
             $templates = array( 
                 'sd_txn_dates-upcoming-custom',
                 'sd_txn_dates-upcoming',
                 'sd_txn', // fallback template
             );
-            $template = $this->set_template_enqueue_assets( $templates );
+            return $this->set_template_enqueue_assets( $templates );
         }
+        // term past
         if ( get_query_var('past') === true ) {
             $templates = array( 
                 'sd_txn_dates-past-custom',
                 'sd_txn_dates-past',
                 'sd_txn', // fallback template
             );
-            $template = $this->set_template_enqueue_assets( $templates );
+            return $this->set_template_enqueue_assets( $templates );
         }
-        return $template;
-    }
-
-    public function custom_post_template( $template )
-    {
-        $post_type = get_post_type();
-        // checks for custom template by given (custom) post type if $single not defined
-        if ( empty( $template ) && strpos($post_type, 'sd_cpt' ) !== false)
-        {
-            $templates = array(
-                $post_type . '-custom',
-                $post_type,
-                'sd_cpt.php'
-            );
-            $template = $this->set_template_enqueue_assets( $templates );
-        }
-        return $template;
-    }
-
-    public function custom_taxonomy_template( $template )
-    {
-        add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets_test' ) );
-        if ( empty( $template ) ){
+        // taxonomies
+        if ( is_tax() === true ){
+            // all other terms of taxono
             $templates = array( 
                 get_query_var( 'taxonomy' ) . '-custom',
                 get_query_var( 'taxonomy' ),
                 'sd_txn', // fallback template
             );
-            $template = $this->set_template_enqueue_assets( $templates );
+            return $this->set_template_enqueue_assets( $templates );
+        };
+        // custom post types
+        $test = is_single();
+        if ( is_single() === true) {
+            $post_type = get_post_type();
+            // checks for custom template by given (custom) post type if $single not defined
+            if ( strpos($post_type, 'sd_cpt' ) !== false)
+            {
+                $templates = array(
+                    $post_type . '-custom',
+                    $post_type,
+                    'sd_cpt'
+                );
+                return $this->set_template_enqueue_assets( $templates );
+            }
         }
         return $template;
     }

@@ -15,6 +15,40 @@ use Inc\Utils\TemplateUtils as Utils;
 class TemplateUtils
 {
     /**
+     * Escape URL and check if remote file exists
+     * 
+     * @param string $url 
+     * @return bool
+     */
+    public static function url_exists( $url )
+    {
+        // TODO: perhaps since wait for response increases the loading time of the page
+        $url = esc_url( $url );
+        // via wp http api
+        $args = array(
+            'method' => 'HEAD',
+        );
+        $response = wp_remote_get( $url, $args );
+        if ( $response['response']['code'] === 200 ){
+            return true;
+        }
+        return false;
+
+        // via curl
+        // $ch = curl_init( $url );
+        // curl_setopt($ch, CURLOPT_NOBODY, true);
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // curl_setopt($ch, CURLOPT_HEADER, true);
+        // curl_exec ( $ch );
+        // $retcode = curl_getinfo( $ch, CURLINFO_HTTP_CODE );
+        // // $retcode >= 400 -> not found, $retcode = 200, found.
+        // curl_close($ch);
+        // return $retcode === 200 ? true : false; 
+    }
+
+
+
+    /**
      * Get value by parsing and stripe (kses) a l10n array received in a payload generated and formatted by seminardesk
      *
      * @param array $array l10n formatted array by seminardesk
@@ -60,9 +94,8 @@ class TemplateUtils
      */
     public static function get_img_remote( $url, $width = '', $height = '', $alt = "remote image failed", $before = '', $after = '', $echo = false )
     {
-        global $post;
-
-        if ( $url ){
+        if ( is_string( $url ) ){
+            $url = esc_url( $url );
             $response = $before . '<img src="' . $url . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '"/>' . $after;
         }else{
             $response = null;

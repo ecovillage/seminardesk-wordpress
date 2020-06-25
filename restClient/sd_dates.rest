@@ -6,8 +6,7 @@
 @timestamp = "{{$timestamp}}"
 @guid = "{{$guid}}"
 
-### 709 - 927cd29a247a4cfdba3fad6b3335a430 - Market Garden System - Nachhaltig & Regenerativ
-POST {{url}}
+### 709 - 927cd29a247a4cfdba3fad6b3335a430 - Market Garden System - Nachhaltig & Regenerativk0POST {{url}}
 Authorization: {{auth}}
 Content-Type: {{content}}
 
@@ -1594,6 +1593,78 @@ Content-Type: {{content}}
         "detailpageAvailable": true,
         "beginDate": "1591858800000",
         "endDate": "1591885800000",
+        "title": [
+            {
+                "language": "DE",
+                "value": "Historische Fahrzeuge"
+            }
+        ],
+        "titleSlug": [
+            {
+                "language": "DE",
+                "value": "historische-fahrzeuge"
+            }
+        ],
+        "subtitle": [
+            {
+                "language": "DE",
+                "value": "Substanzerhaltende Restaurierung, originale Materialien und Patina"
+            }
+        ],
+        "teaser": [
+            {
+                "language": "DE",
+                "value": "<div></div><div><span style=\"font-size: 12pt;\">So genannte „unrestaurierte“ Fahrzeuge in historischem Erhaltungszustand stellen neue Anforderungen an die Gutachter. Hier werden veränderte Herangehensweisen an die Beschreibung und Bewertung wichtig, etwa bei Fragen wie: „Ist das noch Patina, oder nur ein vergammelter Zustand?“ Frau Dr. Gundula Tutt kann’s erläutern und gibt Unterstützung bei der Einordnung, Begutachtung und restaurierungsbegleitenden Betreuung solcher Fälle. </span></div><p style=\"text-align: left; margin: 0pt;\"><span style=\"font-size: 12pt;\"><span style=\"font-family: Arial;\"><span><strong><br /></strong></span></span></span></p><p style=\"text-align: left; margin: 0pt;\"><span style=\"font-size: 12pt;\"><span style=\"font-family: Arial;\"><span><strong>Das Seminar findet im Umfeld der <a href=\"https://bavaria-historic.de/\" target=\"_blank\" title=\"33. ADAC Bavaria Historic\">33. ADAC Bavaria Historic</a> statt. </strong><br /></span></span></span></p><p style=\"text-align: left; margin: 0pt;\"><span style=\"font-family: Arial; font-size: 12pt;\"><span>An diesem Wochenende findet nebenan im Schloß Maxlrain und in Bad Aibling die legendäre Rallye und Oldtimer-Show \"Bavaria Historic\" statt. Wir sind mitten im Geschehen. Unser Seminarhotel liegt direkt an der Strecke.<br /></span></span></p>"
+            }
+        ],
+        "teaserPictureUrl": [
+            {
+                "language": "DE",
+                "value": "https://mas-ev.seminardesk.de/Content/Extern/1506164329.jpg"
+            }
+        ],
+        "priceInfo": [
+            {
+                "language": "DE",
+                "value": "Nicht-Mitglieder 400 Euro\r\n, MAS-Mitglieder 360 Euro\r\n"
+            }
+        ],
+        "facilitators": [
+            220
+        ],
+        "venue": {
+            "name": "B&O Parkhotel",
+            "street1": "Dietrich-Bonhoeffer-Straße 31",
+            "street2": "",
+            "zip": "83043",
+            "city": "Bad Aibling",
+            "country": "",
+            "weblink": "https://www.bo-parkhotel.de/tagungen/tagen-im-parkhotel/index.html"
+        },
+        "contactInfo": null,
+        "eventType": "",
+        "eventTopic": "",
+        "showAttendanceFees": true
+    }
+}
+### 20 - 89f6560ac535450188b5da3b529f9493 - Historische Fahrzeuge
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
+{
+    "action": "eventDate.create",
+    "timestamp": 1583509808000,
+    "requestId": "3b27fe327ae240bf838a3fb6693e9feb",
+    "payload": {
+        "id": 21,
+        "eventId": "89f6560ac535450188b5da3b529f9493",
+        "status": "available",
+        "registrationAvailable": true,
+        "detailpageAvailable": true,
+        "beginDate": "1596272400000",
+        "endDate": "1596301200000",
         "title": [
             {
                 "language": "DE",
