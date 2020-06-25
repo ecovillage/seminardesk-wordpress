@@ -1,7 +1,7 @@
-@host = http://localhost
-@path = /wpsdp/wp-json/seminardesk/v1/webhooks HTTP/1.1
+@host = http://localhost/wpsdp
+@path = /wp-json/seminardesk/v1/webhooks HTTP/1.1
 @url = {{host}}{{path}}
-@auth = Basic c2VtaW5hcmRlc2s6XlQ0cWVNNHYkTjhuRWRVVWRGbTJUdjRj
+@auth = Basic seminardesk:^T4qeM4v$N8nEdUUdFm2Tv4c
 @content = application/json
 @timestamp = "{{$timestamp}}"
 @guid = "{{$guid}}"

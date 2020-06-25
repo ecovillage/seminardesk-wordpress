@@ -61,9 +61,11 @@ get_header();
                             <?php 
                             echo Utils::get_value_by_language($post->sd_data['teaser']) 
                             ?>
-                            <a class="button sd-event-more-link" href="<?php echo esc_url(get_permalink($post->wp_event_id)); ?>" class="sd-event-more">
-                                <?php esc_html_e('More', 'seminardesk')?>
-                            </a>
+                            <div class="sd-event-more-link">
+                                <a class="button" href="<?php echo esc_url(get_permalink($post->wp_event_id)); ?>">
+                                    <?php esc_html_e('More', 'seminardesk')?>
+                                </a>
+                            </div> 
                         </div>
                     </div>
                     

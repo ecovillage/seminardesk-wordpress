@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dc47ba3cf25e1caffef89a0b4ea94f2b",
+    "content-hash": "902e0769dff6d91a865ba35eed5ca7a1",
     "packages": [],
     "packages-dev": [
         {
@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-stubs/wordpress-stubs.git",
-                "reference": "ebc6cd8f3efdc3e2f57c4a86a4cb0e5bca6a0427"
+                "reference": "38b0963698ca5858658a5b09198062411f22932a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-stubs/wordpress-stubs/zipball/ebc6cd8f3efdc3e2f57c4a86a4cb0e5bca6a0427",
-                "reference": "ebc6cd8f3efdc3e2f57c4a86a4cb0e5bca6a0427",
+                "url": "https://api.github.com/repos/php-stubs/wordpress-stubs/zipball/38b0963698ca5858658a5b09198062411f22932a",
+                "reference": "38b0963698ca5858658a5b09198062411f22932a",
                 "shasum": ""
             },
             "replace": {
@@ -45,7 +45,7 @@
                 "static analysis",
                 "wordpress"
             ],
-            "time": "2020-03-23T17:44:53+00:00"
+            "time": "2020-06-11T14:56:54+00:00"
         }
     ],
     "aliases": [],

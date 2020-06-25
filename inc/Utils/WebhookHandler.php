@@ -165,7 +165,7 @@ class WebhookHandler
             'sd_event_id'   => $payload['eventId'],
             'wp_event_id'   => $event_post_id,
             'sd_data'       => self::kses_array_values($payload),
-            'sd_webhook'       => $sd_webhook,
+            'sd_webhook'    => $sd_webhook,
         ];
         $date_attr = [
             'post_type'     => 'sd_cpt_date',

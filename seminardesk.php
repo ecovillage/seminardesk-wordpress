@@ -90,7 +90,7 @@ define( 'SD_CPT', array(
         'name'                  => 'Date',
         'names'                 => 'Dates',
         'title'                 => 'CPT Dates',
-        'public'                =>  false,
+        'public'                => false,
         'exclude_from_search'   => false,
         'has_archive'           => true,
         'menu_position'         => 2,

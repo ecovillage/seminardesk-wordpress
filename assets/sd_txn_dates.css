@@ -46,9 +46,7 @@ css styles for template of taxonomy sd_txn_dates
 	margin-bottom: 2em;
 }
 .sd-event-more-link {
-	font-size: 12px;
-	padding: 10px 30px 11px;
-	margin: 1.5em 0 0 0;
+	margin: 1em 0 0 0;
 }
 .sd-event-more-link:hover {
 	color: #000;

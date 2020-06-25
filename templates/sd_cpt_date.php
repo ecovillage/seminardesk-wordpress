@@ -14,14 +14,14 @@ if (have_posts()) {
         ?>
         <main id="site-content" role="main">
             
-            <header class="archive-header has-text-align-center header-footer-group">
-                <div class="archive-header-inner section-inner medium">
+            <header class="entry-header has-text-align-center">
+                <div class="entry-header-inner section-inner medium">
                     <?php 
                     Utils::get_value_by_language( $post->sd_data['title'], 'DE', '<h1 class="archive-title">', '</h1>', true); 
                     ?>
-                </div><!-- .archive-header-inner -->
-            </header><!-- .archive-header -->
-            <div class="entry-header-inner section-inner small">
+                </div>
+            </header>
+            <div class="post-meta-wrapper post-meta-single post-meta-single-top">
                 <p></p>
                 <?php
                 Utils::get_date( $post->sd_date_begin, $post->sd_date_end, '<p><strong>' . __('Date: ', 'seminardesk') . '</strong>', '</p>', true);
@@ -36,7 +36,7 @@ if (have_posts()) {
                 </a>
                 <p></p>
             </div>
-        </main><!-- #site-content -->
+        </main>
         <?php
     }
 } else {

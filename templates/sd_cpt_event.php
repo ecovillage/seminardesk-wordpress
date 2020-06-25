@@ -15,7 +15,7 @@ get_header();
         while (have_posts()) {
             the_post();
             ?>
-            <header class="entry-header has-text-align-center<?php echo esc_attr( $entry_header_classes ); ?>">
+            <header class="entry-header has-text-align-center">
                 <div class="entry-header-inner section-inner medium">
                     <?php 
                     Utils::get_value_by_language( $post->sd_data['title'], 'DE', '<h1 class="archive-title">', '</h1>', true); 
@@ -75,7 +75,7 @@ get_header();
                 <div class="sd-modal-content">
                     <span class="sd-modal-close-btn">&times;</span>
                     <h4 class="sd-modal-title"><?php _e('Booking', 'seminardesk');?></h4>
-                    <iframe class="sd-modal-booking" src="https://booking.seminardesk.de/de/schloss-tempelhof/<?php echo $post->sd_data['id']; ?>/<?php echo $post->sd_data['titleSlug']; ?>/embed" title="Seminardesk Booking"></iframe>
+                    <iframe class="sd-modal-booking" src="https://booking.seminardesk.de/de/schloss-tempelhof/<?php echo $post->sd_data['id']; ?>/<?php echo Utils::get_value_by_language( $post->sd_data['titleSlug'] ); ?>/embed" title="Seminardesk Booking"></iframe>
                 </div>
             </div>
             <!-- END modal content -->
