@@ -21,7 +21,7 @@ final class Init
     public static function get_services() 
     {
         return [
-            new \Inc\Controllers\BasicAuthController(),
+            // new \Inc\Controllers\BasicAuthController(),
             new \Inc\Controllers\AdminController(),
             new \Inc\Controllers\SettingsLinksController(),
             new \Inc\Controllers\RestController(),
