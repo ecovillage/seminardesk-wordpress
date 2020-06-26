@@ -8,6 +8,8 @@
 
 use Inc\Utils\OptionUtils;
 
+// TODO: untested. needs debugging 
+
 // WP security check when uninstall
 defined( 'WP_UNINSTALL_PLUGIN' ) or die ('not allowed to access this file');
 

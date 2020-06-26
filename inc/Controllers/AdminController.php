@@ -5,7 +5,7 @@
 
 namespace Inc\Controllers;
 
-use Inc\Api\SettingsApi;
+use Inc\API\SettingsAPI;
 use Inc\Callbacks\AdminCallbacks;
 use Inc\Callbacks\ManagerCallbacks;
 use Inc\Utils\OptionUtils;
@@ -31,7 +31,7 @@ class AdminController
      */
     public function register() 
     {
-        $this->settings = new SettingsApi(); 
+        $this->settings = new SettingsAPI(); 
 		$this->callbacks = new AdminCallbacks();
 		$this->callbacks_mngr = new ManagerCallbacks();
         
