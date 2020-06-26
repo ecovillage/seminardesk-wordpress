@@ -28,7 +28,7 @@ class WebhookHandler
         unset($sd_webhook['payload']);
         // checks if event_id exists and sets corresponding post_id
         $query = self::get_query_by_meta( 'sd_cpt_event', 'sd_event_id', $payload['id']);
-        $post_id = $query->post->ID;
+        $post_id = $query->post->ID ?? null;
         $event_count = $query->post_count;
 
         // define metadata of the event
@@ -139,7 +139,7 @@ class WebhookHandler
 
         // check if with event date associated event exists and get its WordPress ID
         $event_query = self::get_query_by_meta( 'sd_cpt_event', 'sd_event_id', $payload['eventId']);
-        $event_post_id = $event_query->post->ID;
+        $event_post_id = $event_query->post->ID ?? null;
         if (!isset($event_post_id)){
             return new WP_Error('not_found' ,'Event date not created. Associated event with the ID ' . $payload['eventId'] . ' does not exist', array( 
                 'status'        => 404,
@@ -153,7 +153,7 @@ class WebhookHandler
 
         // check if event date exists and sets corresponding date_post_id
         $date_query = self::get_query_by_meta( 'sd_cpt_date', 'sd_date_id', $payload['id']);
-        $date_post_id = $date_query->post->ID;
+        $date_post_id = $date_query->post->ID ?? null;
         $date_count = $date_query->post_count;
 
         // define attributes of the new event date using request data of the webhook
@@ -269,7 +269,7 @@ class WebhookHandler
         unset($sd_webhook['payload']);
 
         $query = self::get_query_by_meta( 'sd_cpt_facilitator', 'sd_facilitator_id', $payload['id'] );
-        $post_id = $query->post->ID;
+        $post_id = $query->post->ID ?? null;
         
         // define metadata of the new sd_cpt_facilitator
         $meta_input = [
@@ -401,7 +401,7 @@ class WebhookHandler
     public static function trash_post_by_meta( $post_type, $meta_key, $meta_value )
     {
         $query = self::get_query_by_meta( $post_type, $meta_key, $meta_value );
-        $post_id = $query->post->ID;
+        $post_id = $query->post->ID ?? 0;
         $post_deleted = wp_trash_post($post_id);
         return $post_deleted;
     }
