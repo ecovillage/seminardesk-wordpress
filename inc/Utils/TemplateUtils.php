@@ -23,27 +23,27 @@ class TemplateUtils
     public static function url_exists( $url )
     {
         // TODO: perhaps since wait for response increases the loading time of the page
-        $url = esc_url( $url );
-        // via wp http api
-        $args = array(
-            'method' => 'HEAD',
-        );
-        $response = wp_remote_get( $url, $args );
-        if ( $response['response']['code'] === 200 ){
-            return true;
-        }
-        return false;
+        // $url = esc_url( $url );
+        // // via wp http api
+        // $args = array(
+        //     'method' => 'HEAD',
+        // );
+        // $response = wp_remote_get( $url, $args );
+        // if ( $response['response']['code'] === 200 ){
+        //     return true;
+        // }
+        // return false;
 
         // via curl
-        // $ch = curl_init( $url );
-        // curl_setopt($ch, CURLOPT_NOBODY, true);
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        // curl_setopt($ch, CURLOPT_HEADER, true);
-        // curl_exec ( $ch );
-        // $retcode = curl_getinfo( $ch, CURLINFO_HTTP_CODE );
-        // // $retcode >= 400 -> not found, $retcode = 200, found.
-        // curl_close($ch);
-        // return $retcode === 200 ? true : false; 
+        $ch = curl_init( $url );
+        curl_setopt($ch, CURLOPT_NOBODY, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, true);
+        curl_exec ( $ch );
+        $retcode = curl_getinfo( $ch, CURLINFO_HTTP_CODE );
+        // $retcode >= 400 -> not found, $retcode = 200, found.
+        curl_close($ch);
+        return $retcode === 200 ? true : false; 
     }
 
 

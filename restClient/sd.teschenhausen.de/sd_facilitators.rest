@@ -1,0 +1,168 @@
+@host = https://sd.teschenhausen.de
+@path = /wp-json/seminardesk/v1/webhooks HTTP/1.1
+@url = {{host}}{{path}}
+@auth = Basic seminardesk:^T4qeM4v$N8nEdUUdFm2Tv4c
+@content = application/json
+@timestamp = "{{$timestamp}}"
+@guid = "{{$guid}}"
+
+### 123 - Maya Heilmann
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
+{
+    "action": "facilitator.create",
+    "timestamp": 1583509807000,
+    "requestId": "5b27fe327ae240bf838a3fb6693e9fed",
+    "payload": {
+        "id": 123,
+        "name": "Maya Heilmann",
+        "about": [
+            {
+                "language": "DE",
+                "value": "Ihre gärtnerische Reise begann beim Studium der Anthropologischen Landwirtschaft, wofür sie drei Jahre in Bolivien lebte, um die lebendigen Weisheiten der einheimischen Aymara-Landwirtschaft kennen zu lernen. Um geschlossene Kreisläufe und Verlebendigung des Bodennahrungsnetz im westlichen Kontext zu verstehen, hat sie die Freie Ausbildung für biologisch-dynamischen Gemüsebau in Deutschland absolviert. Seit 2014 lebt sie in der Gemeinschaft Schloss Tempelhof, wo sie ihrer Leidenschaft für die Landwirtschaft im gemeinschaftlichen Kontext nachgehen kann. Hier beschäftigt sie sich intensiver mit den Biointensiven Anbau, Mischkulturen, Komposttees."
+            }
+        ],
+        "pictureUrl": "https://schloss-tempelhof.seminardesk.de/Content/Extern/Maya%20Lukoff.jpg"
+    }
+}
+
+### 124 - Sebastian Heilmann
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
+{
+    "action": "facilitator.create",
+    "timestamp": 1583509807000,
+    "requestId": "5b27fe327ae240bf838a3fb6693e9fed",
+    "payload": {
+        "id": 124,
+        "name": "Sebastian Heilmann",
+        "about": [
+            {
+                "language": "DE",
+                "value": "Durch eine längere Zeit in Indien und in der biologisch-dynamischen Bewegung dort, sowie dem Absolvieren der Freien Ausbildung im Norden, hat Sebastian in der Landwirtschaft die Inspiration gefunden, eine aufbauende Landwirtschaft mit zu entwickeln. Erfahrungen sammelte er bisher mit Mutterkühen, Legehennen, Milchziegen, kleingliedrigem Ackerbau, und immer stärker im Gemüsebau, mit Weiterbildungen zum Bodenmikrobiologie, Kompostieren, Komposttees und Mikroskopie. In der Gemeinschaft Schloss Tempelhof geht er seinem starken Anliegen nach, eine vielfältige und regenerative, kleinbäuerliche Landwirtschaft zu fördern und mit zu formen."
+            }
+        ],
+        "pictureUrl": "https://schloss-tempelhof.seminardesk.de/Content/Extern/Sebastian%20Heilmann.jpg"
+    }
+}
+
+### 125 - Urs Mauk
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
+{
+    "action": "facilitator.create",
+    "timestamp": 1583509807000,
+    "requestId": "5b27fe327ae240bf838a3fb6693e9fed",
+    "payload": {
+        "id": 125,
+        "name": "Urs Mauk",
+        "about": [
+            {
+                "language": "DE",
+                "value": "Ich bin ausgebildeter Gemüsegärtner mit abgeschlossenem Studium der ökologischen Agrarwissenschaft. Da der Mensch und seine Interaktionen einer der entscheidenden Erfolgsfaktoren darstellt, wird meine Ausbildung mit dem Master in Coaching, Organisationsberatung und Supervision abgerundet. Von 2013 bis 2018 war ich Betriebsleiter in der Gärtnerei Schloss Tempelhof. Dort und durch Weiterbildungen, eignete ich mir Kompetenzen in Bereichen wie „Market Gardening“, Mulch im Gemüsebau, regenerativer Landwirtschaft, „Holistic Management“, Key Line Design, Soil Food Web (Bodenbiologie), uvw. an.\nMeine Vision ist ein fruchtbarer, lebendiger Planet. Hierzu möchte ich durch meine Beratung einen Beitrag leisten. Ich bin als Referent, freier Berater, Coach und Supervisor tätig.\nKontakt: <a href=\"https://relawi.net\">relavisio.de</a> <a href=\"https://www.facebook.com/urs.mauk.1\">Facebook</a> <a href=\"https://www.youtube.com/channel/UCwArHtkG7EQ8avH3D2lGyQA\">Youtube</a>"
+            }
+        ],
+        "pictureUrl": "https://schloss-tempelhof.seminardesk.de/Content/Extern/Urs_Mauk_P.jpg"
+    }
+}
+
+### 111 - Martina Jacobson
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
+{
+    "action": "facilitator.create",
+    "timestamp": 1583509807000,
+    "requestId": "5b27fe327ae240bf838a3fb6693e9fed",
+    "payload": {
+        "id": 111,
+        "name": "Martina Jacobson",
+        "about": [
+            {
+                "language": "DE",
+                "value": "Jg.1979, Trainerin und Moderatorin,  dynamische Prozessbegleitung, integrale Ansätze für Körper, Geist und  Seele, Gemeinschaftsaufbau am Tempelhof, Wir-Prozesse & WIR in  Aktion <a href=\"http://www.martinajacobson.net\" target=\"_blank\">www.martinajacobson.net</a>"
+            }
+        ],
+        "pictureUrl": "https://schloss-tempelhof.seminardesk.de/Content/Extern/Martina-Jacobson-150x150.jpg"
+    }
+}
+
+### 112
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
+{
+    "action": "facilitator.create",
+    "timestamp": 1583509807000,
+    "requestId": "5b27fe327ae240bf838a3fb6693e9fed",
+    "payload": {
+        "id": 112,
+        "name": "Agnes Schuster",
+        "about": [
+            {
+                "language": "DE",
+                "value": "Jg. 1954, Dipl. Sozialpädagogin,&nbsp;Mitinitiatorin der Gemeinschaft Tempelhof, lebt seit 40 Jahren in Gemeinschaft. Gemeinschaftsvernetzung, Mehr Generationen Leben, Jugend- und altersgerechte Lebensräume, Begleitung von Wir-Prozessen."
+            }
+        ],
+        "pictureUrl": "https://schloss-tempelhof.seminardesk.de/Content/Extern/agnes-schuster.jpg"
+    }
+}
+
+### 321 - Hans Kurz
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
+{
+    "action": "facilitator.create",
+    "timestamp": 1583509807000,
+    "requestId": "5b27fe327ae240bf838a3fb6693e9fed",
+    "payload": {
+        "id": 321,
+        "name": "Hans Kurz",
+        "about": [
+            {
+                "language": "DE",
+                "value": "**** Ihre gärtnerische Reise begann beim Studium der Anthropologischen Landwirtschaft, wofür sie drei Jahre in Bolivien lebte, um die lebendigen Weisheiten der einheimischen Aymara-Landwirtschaft kennen zu lernen. Um geschlossene Kreisläufe und Verlebendigung des Bodennahrungsnetz im westlichen Kontext zu verstehen, hat sie die Freie Ausbildung für biologisch-dynamischen Gemüsebau in Deutschland absolviert. Seit 2014 lebt sie in der Gemeinschaft Schloss Tempelhof, wo sie ihrer Leidenschaft für die Landwirtschaft im gemeinschaftlichen Kontext nachgehen kann. Hier beschäftigt sie sich intensiver mit den Biointensiven Anbau, Mischkulturen, Komposttees."
+            }
+        ],
+        "pictureUrl": "https://schloss-tempelhof.seminardesk.de/Content/Extern/Maya Lukoff.jpg"
+    }
+}
+
+### 220 - Dr. Gundula Tutt
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
+{
+    "action": "facilitator.create",
+    "timestamp": 1583509807000,
+    "requestId": "5b27fe327ae240bf838a3fb6693e9fed",
+    "payload": {
+        "id": 220,
+        "name": "Dr. Gundula Tutt",
+        "about": [
+            {
+                "language": "DE",
+                "value": "<p style=\"text-align: left; margin: 0pt 0pt 8pt; line-height: 1.07917;\"><span style=\"font-family: Arial; font-size: 10pt;\">Diplomrestauratorin und Autorin</span></p>"
+            }
+        ],
+        "pictureUrl": "https://mas-ev.seminardesk.de/Content/Extern/index.jpg"
+    }
+}
