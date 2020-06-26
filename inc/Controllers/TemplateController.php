@@ -59,19 +59,19 @@ class TemplateController
     {
         if ( !empty( $style ) )
         {
-            $exists = TemplateUtils::url_exists( $url . $style );
-            if ( $exists ){
+            // $exists = TemplateUtils::url_exists( $url . $style );
+            // if ( $exists ){
                 wp_register_style( $style, $url . $style );
                 wp_enqueue_style( $style );
-            }
+            // }
         }
         if ( !empty( $script ) )
         {
-            $exists = TemplateUtils::url_exists( $url . $script );
-            if ( $exists ){
+            // $exists = TemplateUtils::url_exists( $url . $script );
+            // if ( $exists ){
                 wp_register_script( $script, $url . $script, array(), '1.0.0', true );
                 wp_enqueue_script( $script );
-            }
+            // }
         }
     }
 
