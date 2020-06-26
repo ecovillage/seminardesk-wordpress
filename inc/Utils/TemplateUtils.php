@@ -22,7 +22,9 @@ class TemplateUtils
      */
     public static function url_exists( $url )
     {
-        // TODO: perhaps since wait for response increases the loading time of the page
+        // TODO: since wait for response increases the loading time of the page
+
+        // via wp_remote_get HEAD
         // $url = esc_url( $url );
         // // via wp http api
         // $args = array(
