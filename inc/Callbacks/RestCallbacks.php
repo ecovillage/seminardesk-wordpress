@@ -21,8 +21,8 @@ class RestCallbacks{
      */
     public function check_permissions($request)
     {
-        return current_user_can( 'edit_posts' );
-        // return true;
+        //  return current_user_can( 'edit_posts' );
+        return true;
     }
 
     /**
