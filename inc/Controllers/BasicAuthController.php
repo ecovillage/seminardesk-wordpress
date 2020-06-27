@@ -6,6 +6,8 @@
 
 namespace Inc\Controllers;
 
+use WP_Rewrite;
+
 class BasicAuthController
 {
     /**
@@ -14,8 +16,28 @@ class BasicAuthController
      * @return void
      */
     public function register(){
+        add_filter( 'mod_rewrite_rules', array( $this, 'add_htaccess_rules' ) );
         add_filter( 'determine_current_user', array( $this, 'json_basic_auth_handler'), 20 );
         add_filter( 'rest_authentication_errors', array( $this, 'json_basic_auth_error' ) );
+    }
+
+    /**
+     * Add rules to .htaccess
+     * 
+     * @param string $rules 
+     * @return string 
+     */
+    public function add_htaccess_rules( $rules )
+    {
+        $pos = strpos( $rules, 'RewriteRule' );
+        $custom_rules = <<<EOD
+        # BEGIN Additional rules by SeminarDesk Plugin
+        # for basic auth 
+        RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+        # END Additional rules by SeminarDesk Plugin\n
+        EOD;
+        $rules = substr_replace( $rules, $custom_rules, $pos, 0);
+        return $rules;
     }
 
     public function json_basic_auth_handler( $user ) {
