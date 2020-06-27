@@ -1,7 +1,7 @@
 @host = https://sd.teschenhausen.de
 @path = /wp-json/seminardesk/v1/webhooks HTTP/1.1
 @url = {{host}}{{path}}
-@auth = Basic seminardesks:^T4qeM4v$N8nEdUUdFm2Tv4c
+@auth = Basic seminardesk:^T4qeM4v$N8nEdUUdFm2Tv4c
 @content = application/json
 @timestamp = "{{$timestamp}}"
 @guid = "{{$guid}}"

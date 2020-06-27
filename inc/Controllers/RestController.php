@@ -61,7 +61,7 @@ class RestController extends WP_REST_Controller
             array(
                 'methods'             => WP_REST_Server::CREATABLE,
                 'callback'            => array($rest, 'create_webhooks'),
-                'permission_callback' => array($rest, 'check_permissions'),
+                'permission_callback' => array($rest, 'post_check_permissions'),
                 // 'args'                => $this->get_endpoint_args_for_item_schema( true ),
             ),
         ));
@@ -71,7 +71,7 @@ class RestController extends WP_REST_Controller
             array(
                 'methods'             => WP_REST_Server::READABLE,
                 'callback'            => array($rest, 'get_cpt_events'),
-                'permission_callback' => array($rest, 'check_permissions'),
+                'permission_callback' => array($rest, 'get_check_permissions'),
                 // 'args'                => array(),
             ),
         ));
@@ -81,7 +81,7 @@ class RestController extends WP_REST_Controller
             array(
                 'methods'             => WP_REST_Server::READABLE,
                 'callback'            => array($rest, 'get_cpt_event'),
-                'permission_callback' => array($rest, 'check_permissions'),
+                'permission_callback' => array($rest, 'get_check_permissions'),
                 // 'args'                => $this->get_endpoint_args_for_item_schema( true ),
             ),
         ));
@@ -91,7 +91,7 @@ class RestController extends WP_REST_Controller
             array(
                 'methods'             => WP_REST_Server::READABLE,
                 'callback'            => array($rest, 'get_cpt_dates'),
-                'permission_callback' => array($rest, 'check_permissions'),
+                'permission_callback' => array($rest, 'get_check_permissions'),
                 // 'args'                => array(),
             ),
         ));
@@ -101,7 +101,7 @@ class RestController extends WP_REST_Controller
             array(
                 'methods'             => WP_REST_Server::READABLE,
                 'callback'            => array($rest, 'get_cpt_date'),
-                'permission_callback' => array($rest, 'check_permissions'),
+                'permission_callback' => array($rest, 'get_check_permissions'),
                 // 'args'                => $this->get_endpoint_args_for_item_schema( true ),
             ),
         ));
@@ -111,7 +111,7 @@ class RestController extends WP_REST_Controller
             array(
                 'methods'             => WP_REST_Server::READABLE,
                 'callback'            => array($rest, 'get_cpt_facilitators'),
-                'permission_callback' => array($rest, 'check_permissions'),
+                'permission_callback' => array($rest, 'get_check_permissions'),
                 // 'args'                => array(),
             ),
         ));
@@ -121,7 +121,7 @@ class RestController extends WP_REST_Controller
             array(
                 'methods'             => WP_REST_Server::READABLE,
                 'callback'            => array($rest, 'get_cpt_facilitator'),
-                'permission_callback' => array($rest, 'check_permissions'),
+                'permission_callback' => array($rest, 'get_check_permissions'),
                 // 'args'                => $this->get_endpoint_args_for_item_schema( true ),
             ),
         ));

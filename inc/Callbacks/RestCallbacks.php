@@ -14,15 +14,28 @@ use Inc\Utils\WebhookHandler;
 class RestCallbacks{
 
     /**
-     * Check if a given request has access to interact with endpoint
+     * Check if a POST request has access to interact with endpoint
      *
      * @param WP_REST_Request $request Full data about the request.
      * @return WP_Error|bool
      */
-    public function check_permissions($request)
+    public function post_check_permissions($request)
     {
         return current_user_can( 'edit_posts' );
         // return true;
+    
+    }
+
+    /**
+     * Check if a GET request has access to interact with endpoint
+     *
+     * @param WP_REST_Request $request Full data about the request.
+     * @return WP_Error|bool
+     */
+    public function get_check_permissions($request)
+    {
+        // return current_user_can( 'edit_posts' );
+        return true;
     }
 
     /**
