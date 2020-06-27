@@ -64,7 +64,7 @@ class RestController extends WP_REST_Controller
                 'permission_callback' => array($rest, 'check_permissions'),
                 // 'args'                => $this->get_endpoint_args_for_item_schema( true ),
             ),
-        ),);
+        ));
 
         // Event route registration to get all events
         register_rest_route($this->namespace, '/' . $this->base_cpt_event, array(
@@ -74,7 +74,7 @@ class RestController extends WP_REST_Controller
                 'permission_callback' => array($rest, 'check_permissions'),
                 // 'args'                => array(),
             ),
-        ),);
+        ));
 
         // Event route registration to get specific event
         register_rest_route($this->namespace, '/' . $this->base_cpt_event . '/(?P<event_id>[0-9]+)', array(
@@ -84,7 +84,7 @@ class RestController extends WP_REST_Controller
                 'permission_callback' => array($rest, 'check_permissions'),
                 // 'args'                => $this->get_endpoint_args_for_item_schema( true ),
             ),
-        ),);
+        ));
 
         // Event date route registration to get all event dates
         register_rest_route($this->namespace, '/' . $this->base_cpt_date, array(
@@ -94,7 +94,7 @@ class RestController extends WP_REST_Controller
                 'permission_callback' => array($rest, 'check_permissions'),
                 // 'args'                => array(),
             ),
-        ),);
+        ));
 
         // Event date route registration to get specific event date
         register_rest_route($this->namespace, '/' . $this->base_cpt_date . '/(?P<date_id>[0-9]+)', array(
@@ -104,7 +104,7 @@ class RestController extends WP_REST_Controller
                 'permission_callback' => array($rest, 'check_permissions'),
                 // 'args'                => $this->get_endpoint_args_for_item_schema( true ),
             ),
-        ),);
+        ));
 
         // Facilitator route registration to get all facilitators
         register_rest_route($this->namespace, '/' . $this->base_cpt_facilitator, array(
@@ -114,7 +114,7 @@ class RestController extends WP_REST_Controller
                 'permission_callback' => array($rest, 'check_permissions'),
                 // 'args'                => array(),
             ),
-        ),);
+        ));
 
         // Facilitator route registration to get specific facilitator
         register_rest_route($this->namespace, '/' . $this->base_cpt_facilitator . '/(?P<facilitator_id>[a-z0-9]+)', array(
@@ -124,6 +124,6 @@ class RestController extends WP_REST_Controller
                 'permission_callback' => array($rest, 'check_permissions'),
                 // 'args'                => $this->get_endpoint_args_for_item_schema( true ),
             ),
-        ),);
+        ));
     }
 }
