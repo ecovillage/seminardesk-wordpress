@@ -39,8 +39,8 @@ class RestController extends WP_REST_Controller
     {
         $this->namespace = 'seminardesk/v1';
         $this->base_webhook = 'webhooks';
-        $this->base_cpt_event = 'cpt_dates';
-        $this->base_cpt_date = 'cpt_events';
+        $this->base_cpt_event = 'cpt_events';
+        $this->base_cpt_date = 'cpt_dates';
         $this->base_cpt_facilitator = 'cpt_facilitators';
 
         // add custom REST API for sd_cpt_events

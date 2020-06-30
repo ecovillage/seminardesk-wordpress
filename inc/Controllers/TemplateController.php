@@ -150,7 +150,6 @@ class TemplateController
             return $this->set_template_enqueue_assets( $templates );
         };
         // custom post types
-        $test = is_single();
         if ( is_single() === true) {
             $post_type = get_post_type();
             // checks for custom template by given (custom) post type if $single not defined
