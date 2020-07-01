@@ -62,18 +62,21 @@ class TemplateUtils
      */
     public static function get_value_by_language( $array, $lang_tag = 'DE', $before = '', $after = '', $echo = false )
     {
-
-        $key = array_search($lang_tag, array_column($array, 'language'));
-        // on failure get default language or first entry of the array
-        if ( $key === false){
-            $lang_default = 'DE';
-            $key = array_search($lang_default, array_column($array, 'language'));
-            if ( $key === false ){
-                $key = '0';
+        if ( !empty($array) ){
+            $key = array_search($lang_tag, array_column($array, 'language') ) && false;
+            // on failure get default language or first entry of the array
+            if ( $key === false){
+                $lang_default = 'DE';
+                $key = array_search($lang_default, array_column($array, 'language'));
+                if ( $key === false ){
+                    $key = '0';
+                }
             }
+    
+            $response = !empty($array[$key]['value']) ? $before . $array[$key]['value'] . $after : null;
+        } else {
+            $response = null;
         }
-
-        $response = !empty($array[$key]['value']) ? $before . $array[$key]['value'] . $after : null;
         
         if ( $echo ){
             echo $response;

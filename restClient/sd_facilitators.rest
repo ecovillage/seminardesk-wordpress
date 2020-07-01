@@ -134,12 +134,7 @@ Content-Type: {{content}}
     "payload": {
         "id": 321,
         "name": "Hans Kurz",
-        "about": [
-            {
-                "language": "DE",
-                "value": "**** Ihre gärtnerische Reise begann beim Studium der Anthropologischen Landwirtschaft, wofür sie drei Jahre in Bolivien lebte, um die lebendigen Weisheiten der einheimischen Aymara-Landwirtschaft kennen zu lernen. Um geschlossene Kreisläufe und Verlebendigung des Bodennahrungsnetz im westlichen Kontext zu verstehen, hat sie die Freie Ausbildung für biologisch-dynamischen Gemüsebau in Deutschland absolviert. Seit 2014 lebt sie in der Gemeinschaft Schloss Tempelhof, wo sie ihrer Leidenschaft für die Landwirtschaft im gemeinschaftlichen Kontext nachgehen kann. Hier beschäftigt sie sich intensiver mit den Biointensiven Anbau, Mischkulturen, Komposttees."
-            }
-        ],
+        "about": null,
         "pictureUrl": "https://schloss-tempelhof.seminardesk.de/Content/Extern/Maya Lukoff.jpg"
     }
 }
