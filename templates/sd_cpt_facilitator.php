@@ -24,9 +24,9 @@ get_header();
             </header>
             <div class="post-meta-wrapper post-meta-single post-meta-single-top">
                 <?php
-                echo '<p>' . Utils::get_img_remote($post->sd_data['pictureUrl'], '100') . '</p>';
+                echo !empty( $post->sd_data['pictureUrl'] ) ? '<p>' . Utils::get_img_remote($post->sd_data['pictureUrl'], '100') . '</p>' : null;
                 $about = Utils::get_value_by_language( $post->sd_data['about'] );
-                echo (!empty($about)) ? '<p>' . $about . '</p>' : null;
+                echo !empty($about) ? '<p>' . $about . '</p>' : null;
                 ?>
             </div>
             <?php
