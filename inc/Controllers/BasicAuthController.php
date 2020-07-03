@@ -30,12 +30,14 @@ class BasicAuthController
     public function add_htaccess_rules( $rules )
     {
         $pos = strpos( $rules, 'RewriteRule' );
-        $custom_rules = <<<EOD
-        # BEGIN Additional rules by SeminarDesk Plugin
-        # for basic auth 
-        RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-        # END Additional rules by SeminarDesk Plugin\n
-        EOD;
+        // Heredoc - closing identifier is not "clean", PHP will continue looking for one -> parse error result error of autoload
+        // https://www.php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc
+        $custom_rules = <<<EOT
+# BEGIN Additional rules by SeminarDesk Plugin
+# Set BasicAuth for PHP with FastCGI
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+# END Additional rules by SeminarDesk Plugin\n
+EOT;
         $rules = substr_replace( $rules, $custom_rules, $pos, 0);
         return $rules;
     }
