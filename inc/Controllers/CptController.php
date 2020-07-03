@@ -44,7 +44,7 @@ class CptController
             /**
              * array to configure labels for the CPT 
              */
-            $labels = [
+            $labels = array(
                 'name'                  => _x( $names, 'post type general name', 'seminardesk' ),
                 'singular_name'         => _x( $name, 'post type singular name', 'seminardesk'),
                 'name_admin_bar'        => _x( $name, 'add new on admin bar', 'seminardesk' ),
@@ -65,19 +65,19 @@ class CptController
                 'attributes'            => __( $name . ' Attributes', 'seminardesk' ),
                 'insert_into_item'      => __( 'Insert into ' . $name_lower, 'seminardesk' ),
                 'uploaded_to_this_item' => __( 'Uploaded to this ' . $name_lower, 'seminardesk' ),
-            ];
+            );
 
             /**
              * array to set rewrite rules for the CPT (sub CPT option)
              */
-            $rewrite = [
+            $rewrite = array(
                 'slug' => $slug,
-            ];
+            );
 
             /**
              * array to registers supported features for the CPT (sub CPT option)
              */
-            $supports = [
+            $supports = array(
                 'title', 
                 'editor', 
                 'author', 
@@ -87,12 +87,12 @@ class CptController
                 'custom-fields', // enable support of Meta API
                 'page-attributes', // template and parent, hierarchical must be true for parent option
                 //'post-formats',
-            ];
+            );
 
             /**
              * array to configure CPT options
              */
-            $cptOptions =  [
+            $cptOptions =  array(
                 'labels'                => $labels,
                 'description'           => __( $name . ' post type for SeminarDesk.', 'seminardesk' ),
                 'has_archive'           => $value['has_archive'],
@@ -105,7 +105,7 @@ class CptController
                 'supports'              => $supports,
                 'rewrite'               => $rewrite,
                 'taxonomies'            => $value['taxonomies'],
-            ];
+            );
 
             register_post_type( $key, $cptOptions ); 
 

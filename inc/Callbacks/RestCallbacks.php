@@ -46,11 +46,13 @@ class RestCallbacks{
      */
     public function get_custom_post($post_type, $sd_id)
     { 
-        $posts = get_posts([
-            'numberposts' => -1,
-            'post_type' => $post_type,
-            'post_status' => 'publish',
-        ],);
+        $args = array(
+            'numberposts'   => -1,
+            'post_type'     => $post_type,
+            'post_status'   => 'publish',
+        );
+        $posts = get_posts( $args );
+
         $get_sd_id = str_replace('sd_', '', $post_type) . '_id'; // variable variable names
         foreach ($posts as $current) {
             $current_id = $current->$get_sd_id;
@@ -76,19 +78,18 @@ class RestCallbacks{
     */
     public function get_custom_posts($post_type)
     {
-        $args = [
+        $args = array(
             'numberposts' => -1, // all events
             'post_type' => $post_type,
             'post_status' => 'any',
-        ];
-
+        );
         $posts = get_posts($args);
 
         if (empty($posts)) {
             return new WP_Error('no_event', 'No event available', array('status' => 404));
         }
 
-        $response = [];
+        $response = array();
 
         foreach ( $posts as $current ) {
             // get event attributes and add to $response of the endpoint
@@ -108,7 +109,7 @@ class RestCallbacks{
     {
         switch ($post->post_type) {
             case 'sd_cpt_event':
-                $event_attr = [
+                $event_attr = array(
                     'wp_event_id'       => $post->ID,
                     'sd_event_id'       => $post->sd_event_id,
                     'title'             => $post->post_title,
@@ -118,10 +119,10 @@ class RestCallbacks{
                     'author'            => get_the_author_meta( 'display_name', $post->post_author),
                     'sd_data'           => $post->sd_data,
                     'sd_webhook'        => $post->sd_webhook, // get metadata 'json_dump'
-                ];
+                );
                 break;
             case 'sd_cpt_date':
-                $event_attr = [
+                $event_attr = array(
                     'wp_date_id'        => $post->ID,
                     'sd_date_id'        => $post->sd_date_id,
                     'sd_date_begin'     => $post->sd_date_begin,
@@ -134,10 +135,10 @@ class RestCallbacks{
                     'status'            => $post->post_status,
                     'sd_data'           => $post->sd_data,
                     'sd_webhook'           => $post->sd_webhook,
-                ];
+                );
                 break;
             case 'sd_cpt_facilitator':
-                $event_attr = [
+                $event_attr = array(
                     'wp_facilitator_id' => $post->ID,
                     'sd_facilitator_id' => $post->sd_facilitator_id,
                     'title'             => $post->post_title,
@@ -146,7 +147,7 @@ class RestCallbacks{
                     'status'            => $post->post_status,
                     'sd_data'           => $post->sd_data,
                     'sd_webhook'        => $post->sd_webhook,
-                ];
+                );
                 break;
             default:
                 $event_attr = null;

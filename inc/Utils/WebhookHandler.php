@@ -33,23 +33,23 @@ class WebhookHandler
         $event_count = $query->post_count;
 
         // define metadata of the event
-        $meta_input = [
+        $meta_input = array(
             'sd_event_id'  => $payload['id'],
             'sd_data'      => $payload,
             // 'sd_data'      => Utils::kses_array_values($payload),
             // 'sd_data'      => Utils::strip_array_values($payload),
             'sd_webhook'    => $sd_webhook,
-        ];
+        );
 
         // set attributes of the new event
-        $event_attr = [
+        $event_attr = array(
             'post_type'     => 'sd_cpt_event',
             'post_title'    => Utils::get_value_by_language( $payload['title'] ),
             // 'post_title'    => Utils::strip_get_value_by_language( $payload['title'] ),
             'post_author'   => get_current_user_id(),
             'post_status'   => 'publish',
             'meta_input'    => $meta_input,
-        ];
+        );
         
         // create new post or update post with existing post id
         if ( isset($post_id) ) {
@@ -161,7 +161,7 @@ class WebhookHandler
 
         // define attributes of the new event date using request data of the webhook
         $txn_input = self::set_event_date_taxonomy($payload);
-        $meta_input = [
+        $meta_input = array(
             'sd_date_id'    => $payload['id'],
             'sd_date_begin' => $payload['beginDate'],
             'sd_date_end'   => $payload['endDate'],
@@ -170,15 +170,15 @@ class WebhookHandler
             'sd_data'       => $payload,
             // 'sd_data'       => Utils::kses_array_values($payload),
             'sd_webhook'    => $sd_webhook,
-        ];
-        $date_attr = [
+        );
+        $date_attr = array(
             'post_type'     => 'sd_cpt_date',
             'post_title'    => $payload['title']['0']['value'],
             'post_author'   => get_current_user_id(),
             'post_status'   => 'publish',
             'meta_input'    => $meta_input,
             'tax_input'     => $txn_input,
-        ];
+        );
         
         // create new post or update post with existing post id
         if ( isset($date_post_id) ) {
@@ -194,7 +194,7 @@ class WebhookHandler
         if (is_wp_error($date_post_id)){
             return $date_post_id;
         }
-        return new WP_REST_Response( [
+        return new WP_REST_Response( array(
             'message'           => $message,
             'requestId'         => $request_json['requestId'],
             'action'            => $request_json['action'],
@@ -204,7 +204,7 @@ class WebhookHandler
             'eventId'           => $payload['eventId'],
             'eventWpId'         => $event_post_id,
             'eventWpCount'      => $event_count,
-        ], 200);
+        ), 200);
     }
 
     /**
@@ -250,13 +250,13 @@ class WebhookHandler
                 'eventDateId'   => $payload['id'],
             ));
         }
-        return new WP_REST_Response( [
+        return new WP_REST_Response( array(
             'message'       => 'Event date deleted',
             'requestId'     => $request_json['requestId'],
             'action'        => $request_json['action'],
             'eventDateId'   => $payload['id'],
             'eventDateWpId' => $post_deleted->ID,
-        ], 200);
+        ), 200);
     }
     
     /**
@@ -276,20 +276,20 @@ class WebhookHandler
         $post_id = $query->post->ID ?? null;
         
         // define metadata of the new sd_cpt_facilitator
-        $meta_input = [
+        $meta_input = array(
             'sd_facilitator_id' => $payload['id'],
             'sd_data'           => $payload,
             // 'sd_data'           => Utils::kses_array_values($payload),
             'sd_webhook'           => $sd_webhook,
-        ];
+        );
         // define attributes of the new facilitator using $payload of the 
-        $facilitator_attr = [
+        $facilitator_attr = array(
             'post_type'         => 'sd_cpt_facilitator',
             'post_title'        => $payload['name'],
             'post_author'       => get_current_user_id(),
             'post_status'       => 'publish',
             'meta_input'        => $meta_input,
-        ];
+        );
 
         // create new post or update post with existing post id
         if ( isset($post_id) ) {
@@ -306,13 +306,13 @@ class WebhookHandler
             return $post_id;
         }
 
-        return new WP_REST_Response( [
+        return new WP_REST_Response( array(
             'message'           => $message,
             'requestId'         => $request_json['requestId'],
             'action'            => $request_json['action'],
             'facilitatorId'     => $payload['id'],
             'facilitatorWpId'   => $post_id,
-        ], 200);
+        ), 200);
     }
 
     /**
@@ -358,13 +358,13 @@ class WebhookHandler
                 'eventDateId'   => $payload['id'],
             ));
         }
-        return new WP_REST_Response( [
+        return new WP_REST_Response( array(
             'message'           => 'Facilitator deleted',
             'requestId'         => $request_json['requestId'],
             'action'            => $request_json['action'],
             'facilitatorId'     => $payload['id'],
             'facilitatorWpId'   => $post_deleted->ID,
-        ], 200);
+        ), 200);
     }
 
     /**

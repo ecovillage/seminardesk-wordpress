@@ -20,7 +20,7 @@ final class Init
      */
     public static function get_services() 
     {
-        return [
+        return array(
             new \Inc\Controllers\BasicAuthController(),
             new \Inc\Controllers\AdminController(),
             new \Inc\Controllers\SettingsLinksController(),
@@ -28,7 +28,7 @@ final class Init
             new \Inc\Controllers\TemplateController(),
             new \Inc\Controllers\CptController(),
             new \Inc\Controllers\TaxonomyController(),
-        ];
+        );
     }
 
     /**
