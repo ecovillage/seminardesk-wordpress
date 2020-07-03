@@ -21,7 +21,9 @@ function windowOnClick(event) {
 }
 
 // click events listener
-btnBooking.addEventListener("click", sdModalToggle);
-btnClose.addEventListener("click", sdModalToggle);
-window.addEventListener("click", windowOnClick);
+if ( btnBooking !== null && modal !== null ){
+    btnBooking.addEventListener("click", sdModalToggle);
+    btnClose.addEventListener("click", sdModalToggle);
+    window.addEventListener("click", windowOnClick);
+}
 
