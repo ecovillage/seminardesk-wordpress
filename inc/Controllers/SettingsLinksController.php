@@ -14,7 +14,7 @@ class SettingsLinksController
      */
     public function register() {
         // add settings link to the plugin menu
-        add_filter( "plugin_action_links_" . SD_DIR['base'], array( $this, 'create_settings_link'));
+        add_filter( "plugin_action_links_" . SD_ENV['base'], array( $this, 'create_settings_link'));
      }
 
     /**

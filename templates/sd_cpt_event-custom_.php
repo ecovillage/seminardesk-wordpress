@@ -1,7 +1,7 @@
 <?php
 /**
- * The fallback template for custom post type defined by seminardesk
- * used when specific single post template for CPT doesn't exist.
+ * The placeholder template for custom post type defined by seminardesk
+ * remove last underscore to use this template
  * 
  * @package SeminardeskPlugin
  */

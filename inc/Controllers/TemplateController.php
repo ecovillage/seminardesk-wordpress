@@ -55,13 +55,13 @@ class TemplateController
      * @param string $url base url of the assets
      * @return void 
      */
-    public function enqueue_assets( $style = null, $script = null, $url = SD_DIR['url'] . 'assets/' )
+    public function enqueue_assets( $style = null, $script = null, $url = SD_ENV['url'] . 'assets/' )
     {
-        if ( !empty( $style ) && file_exists( SD_DIR['path'] . 'assets/' . $style ) ){
+        if ( !empty( $style ) && file_exists( SD_ENV['path'] . 'assets/' . $style ) ){
             wp_register_style( $style, $url . $style );
             wp_enqueue_style( $style );
         }
-        if ( !empty( $script ) && file_exists( SD_DIR['path'] . 'assets/' . $script ) ){
+        if ( !empty( $script ) && file_exists( SD_ENV['path'] . 'assets/' . $script ) ){
             wp_register_script( $script, $url . $script, array(), '1.0.0', true );
             wp_enqueue_script( $script );
         }
@@ -74,15 +74,32 @@ class TemplateController
      * @param string $dir directory of template files
      * @return string template path or empty string if not exists
      */
-    public function set_template_enqueue_assets( $templates, $dir = SD_DIR['path'] . 'templates/' )
+    public function set_template_enqueue_assets( $templates)
     {
-        foreach ( $templates as $template ){
-            $template_path = $dir . $template . '.php';
-            if ( file_exists( $template_path ) ){
-                $style = $template . '.css';
-                $script = $template . '.js';
-                $this->enqueue_assets( $style, $script);
-                return $template_path;
+        // check for template in folder 'seminardesk_custom'
+        $dir_custom = str_replace('seminardesk/', 'seminardesk_custom/', SD_ENV['path']) . 'templates/';
+        if ( file_exists($dir_custom)){
+            foreach ( $templates as $template ){
+                $template_path = $dir_custom . $template . '.php';
+                if ( file_exists( $template_path ) ){
+                    $style = $template . '.css';
+                    $script = $template . '.js';
+                    $this->enqueue_assets( $style, $script);
+                    return $template_path;
+                }
+            }
+        }
+        // check for template in plugin folder
+        $dir = SD_ENV['path'] . 'templates/';
+        if ( file_exists($dir)){
+            foreach ( $templates as $template ){
+                $template_path = $dir . $template . '.php';
+                if ( file_exists( $template_path ) ){
+                    $style = $template . '.css';
+                    $script = $template . '.js';
+                    $this->enqueue_assets( $style, $script);
+                    return $template_path;
+                }
             }
         }
         return '';
@@ -141,7 +158,7 @@ class TemplateController
         }
         // taxonomies
         if ( is_tax() === true ){
-            // all other terms of taxono
+            // all other terms of taxonomy
             $templates = array( 
                 get_query_var( 'taxonomy' ) . '-custom',
                 get_query_var( 'taxonomy' ),

@@ -62,8 +62,8 @@ class AdminController
 	 */
 	public function enqueue_assets()
     {
-        wp_enqueue_style( 'sdadminstyle', SD_DIR['url'] . 'assets/sd-admin-style.css' );
-        wp_enqueue_script( 'sdadminscript', SD_DIR['url'] . 'assets/sd-admin-script.js' );
+        wp_enqueue_style( 'sdadminstyle', SD_ENV['url'] . 'assets/sd-admin-style.css' );
+        wp_enqueue_script( 'sdadminscript', SD_ENV['url'] . 'assets/sd-admin-script.js' );
     }
 
 	/**

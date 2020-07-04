@@ -42,9 +42,9 @@ if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php') ) {
 }
 
 /**
- * global constant variables for directories
+ * global constant variables to define environment
  */
-define( 'SD_DIR', array(
+define( 'SD_ENV', array(
     'file' => __FILE__,
     'path'  => plugin_dir_path( __FILE__ ),
     'url'   => plugin_dir_url( __FILE__ ),
@@ -52,7 +52,7 @@ define( 'SD_DIR', array(
 ));
 
 /**
- * constant variables for admin page
+ * constant variables to define admin page
  */
 
  define( 'SD_ADMIN', array(
@@ -62,7 +62,7 @@ define( 'SD_DIR', array(
  ) );
 
 /**
- * constant variables for options
+ * constant variables to define options
  */
 define( 'SD_OPTION', array(
     'slugs'  => 'seminardesk_slugs',
@@ -71,7 +71,7 @@ define( 'SD_OPTION', array(
 ) );
 
 /**
- * constant to define custom post type
+ * constant variables to define custom post type
  */
 define( 'SD_CPT', array(
     'sd_cpt_event'         => array( // don't rename this key
@@ -113,7 +113,7 @@ define( 'SD_CPT', array(
 ));
 
 /**
- * Constant define custom taxonomies
+ * Constant variables define custom taxonomies
  */
 define( 'SD_TXN', array(
     'sd_txn_dates' => array( // don't rename this key
@@ -129,7 +129,7 @@ define( 'SD_TXN', array(
 ));
 
 /**
- * Constant define special terms of custom taxonomies
+ * Constant variables define special terms of custom taxonomies
  */
 define( 'SD_TXN_TERM', array(
     'upcoming'  => array( // don't rename this key
@@ -147,13 +147,13 @@ define( 'SD_TXN_TERM', array(
 ));
 
 // activation hook for plugin
-register_activation_hook( SD_DIR['file'], array( 'Inc\Base\Activate', 'activate' ) );
+register_activation_hook( SD_ENV['file'], array( 'Inc\Base\Activate', 'activate' ) );
 
 // deactivation hook for plugin
-register_deactivation_hook( SD_DIR['file'], array( 'Inc\Base\Deactivate', 'deactivate' ) );
+register_deactivation_hook( SD_ENV['file'], array( 'Inc\Base\Deactivate', 'deactivate' ) );
 
 // uninstall hook for plugin
-register_uninstall_hook( SD_DIR['file'], array( 'Inc\Base\Uninstall', 'uninstall' ));
+register_uninstall_hook( SD_ENV['file'], array( 'Inc\Base\Uninstall', 'uninstall' ));
 
 // register services utilizing the init class
 if ( class_exists ( 'Inc\\Base\\Init' ) ) {
