@@ -152,6 +152,9 @@ register_activation_hook( SD_DIR['file'], array( 'Inc\Base\Activate', 'activate'
 // deactivation hook for plugin
 register_deactivation_hook( SD_DIR['file'], array( 'Inc\Base\Deactivate', 'deactivate' ) );
 
+// uninstall hook for plugin
+register_uninstall_hook( SD_DIR['file'], array( 'Inc\Base\Uninstall', 'uninstall' ));
+
 // register services utilizing the init class
 if ( class_exists ( 'Inc\\Base\\Init' ) ) {
     $services = new Inc\Base\Init();
