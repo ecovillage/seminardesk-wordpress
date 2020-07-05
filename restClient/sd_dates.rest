@@ -60,9 +60,15 @@ Content-Type: {{content}}
             }
         ],
         "facilitators": [
-            123,
-            124,
-            125
+            { 
+                "id": 123
+            },
+            { 
+                "id": 124
+            },
+            { 
+                "id": 125
+            }
         ],
         "venue": {
             "name": "An der Sonne",
@@ -134,9 +140,15 @@ Content-Type: {{content}}
             }
         ],
         "facilitators": [
-            123,
-            124,
-            125
+            { 
+                "id": 123
+            },
+            { 
+                "id": 124
+            },
+            { 
+                "id": 125
+            }
         ],
         "venue": {
             "name": "An der Sonne",
@@ -208,9 +220,15 @@ Content-Type: {{content}}
             }
         ],
         "facilitators": [
-            123,
-            124,
-            125
+            { 
+                "id": 123
+            },
+            { 
+                "id": 124
+            },
+            { 
+                "id": 125
+            }
         ],
         "venue": {
             "name": "An der Sonne",
@@ -283,9 +301,15 @@ Content-Type: {{content}}
             }
         ],
         "facilitators": [
-            123,
-            124,
-            125
+            { 
+                "id": 123
+            },
+            { 
+                "id": 124
+            },
+            { 
+                "id": 125
+            }
         ],
         "venue": null,
         "contactInfo": null,
@@ -350,9 +374,15 @@ Content-Type: {{content}}
             }
         ],
         "facilitators": [
-            123,
-            124,
-            125
+            { 
+                "id": 123
+            },
+            { 
+                "id": 124
+            },
+            { 
+                "id": 125
+            }
         ],
         "venue": null,
         "contactInfo": null,
@@ -417,9 +447,15 @@ Content-Type: {{content}}
             }
         ],
         "facilitators": [
-            123,
-            124,
-            125
+            { 
+                "id": 123
+            },
+            { 
+                "id": 124
+            },
+            { 
+                "id": 125
+            }
         ],
         "venue": null,
         "contactInfo": null,
@@ -484,9 +520,15 @@ Content-Type: {{content}}
             }
         ],
         "facilitators": [
-            123,
-            124,
-            125
+            { 
+                "id": 123
+            },
+            { 
+                "id": 124
+            },
+            { 
+                "id": 125
+            }
         ],
         "venue": null,
         "contactInfo": null,
@@ -551,9 +593,15 @@ Content-Type: {{content}}
             }
         ],
         "facilitators": [
-            123,
-            124,
-            125
+            { 
+                "id": 123
+            },
+            { 
+                "id": 124
+            },
+            { 
+                "id": 125
+            }
         ],
         "venue": null,
         "contactInfo": null,
@@ -618,9 +666,15 @@ Content-Type: {{content}}
             }
         ],
         "facilitators": [
-            111,
-            112,
-            113
+            { 
+                "id": 111
+            },
+            { 
+                "id": 112
+            },
+            { 
+                "id": 113
+            }
         ],
         "venue": null,
         "contactInfo": null,
@@ -685,9 +739,15 @@ Content-Type: {{content}}
             }
         ],
         "facilitators": [
-            111,
-            112,
-            113
+            { 
+                "id": 111
+            },
+            { 
+                "id": 112
+            },
+            { 
+                "id": 113
+            }
         ],
         "venue": null,
         "contactInfo": null,
@@ -752,9 +812,15 @@ Content-Type: {{content}}
             }
         ],
         "facilitators": [
-            111,
-            112,
-            113
+            { 
+                "id": 111
+            },
+            { 
+                "id": 112
+            },
+            { 
+                "id": 113
+            }
         ],
         "venue": null,
         "contactInfo": null,
@@ -1631,7 +1697,9 @@ Content-Type: {{content}}
             }
         ],
         "facilitators": [
-            220
+            { 
+                "id": 220
+            }
         ],
         "venue": {
             "name": "B&O Parkhotel",
@@ -1703,7 +1771,9 @@ Content-Type: {{content}}
             }
         ],
         "facilitators": [
-            220
+            { 
+                "id": 220
+            }
         ],
         "venue": {
             "name": "B&O Parkhotel",
