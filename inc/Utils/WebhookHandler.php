@@ -17,15 +17,83 @@ use Inc\Utils\TemplateUtils as Utils;
 class WebhookHandler
 {
     /**
+     * Process request and its notifications
+     * 
+     * @param array $request_json 
+     * @return WP_REST_Response 
+     */
+    public static function batch_request( $request_json )
+    {
+        $response_notifications = array();
+        $notifications = $request_json['notifications'];     
+        foreach ( $notifications as $notification ){
+            switch ( $notification['action'] ){
+                case 'event.create':
+                    $response = WebhookHandler::create_event($notification);
+                    array_push( $response_notifications, $response );
+                    break;
+                case 'event.update':
+                    $response = WebhookHandler::update_event($notification);
+                    array_push( $response_notifications, $response );
+                    break;
+                case 'event.delete':
+                    $response = WebhookHandler::delete_event($notification);
+                    array_push( $response_notifications, $response );
+                    break;
+                case 'eventDate.create':
+                    $response = WebhookHandler::create_event_date($notification);
+                    array_push( $response_notifications, $response );
+                    break;
+                case 'eventDate.update':
+                    $response = WebhookHandler::update_event_date($notification);
+                    array_push( $response_notifications, $response );
+                    break;
+                case 'eventDate.delete':
+                    $response = WebhookHandler::delete_event_date($notification);
+                    array_push( $response_notifications, $response );
+                    break;
+                case 'facilitator.create':
+                    $response = WebhookHandler::create_facilitator($notification);
+                    array_push( $response_notifications, $response );
+                    break;
+                case 'facilitator.update':
+                    $response = WebhookHandler::update_facilitator($notification);
+                    array_push( $response_notifications, $response );
+                    break;
+                case 'facilitator.delete':
+                    $response = WebhookHandler::delete_facilitator($notification);
+                    array_push( $response_notifications, $response );
+                    break;
+                default:
+                    $response = array(
+                        'status'    => 400,
+                        'message'   => 'action ' . $notification['action'] . ' not supported',
+                        'action'    => $notification['action'],
+                        'id'        => $notification['payload']['id'],
+                    );
+                    array_push( $response_notifications, $response );
+            }
+        }
+
+        return new WP_REST_Response( [
+            'message'       => 'webhook response',
+            'requestId'     => $request_json['id'],
+            'attempt'       => $request_json['attempt'],
+            'notifications' => $response_notifications,
+        ], 200);
+    }
+
+
+    /**
      * Create or update event via webhook from SeminarDesk
      *
-     * @param array $request_json 
+     * @param array $notification 
      * @return WP_REST_Response|WP_Error
      */
-    public static function put_event( $request_json )
+    public static function put_event( $notification )
     {
-        $payload = (array)$request_json['payload']; // payload of the request in JSON
-        $sd_webhook = $request_json;
+        $payload = (array)$notification['payload']; // payload of the request in JSON
+        $sd_webhook = $notification;
         unset($sd_webhook['payload']);
         // checks if event_id exists and sets corresponding post_id
         $query = self::get_query_by_meta( 'sd_cpt_event', 'sd_event_id', $payload['id']);
@@ -65,92 +133,98 @@ class WebhookHandler
         if (is_wp_error($post_id)){
             return $post_id;
         }
-        
-        return new WP_REST_Response( [
+
+        return array(
+            'status'        => 200,
             'message'       => $message,
-            'requestId'     => $request_json['requestId'],
-            'action'        => $request_json['action'],
+            'action'        => $notification['action'],
             'eventId'       => $payload['id'],
             'eventWpId'     => $post_id,
             'eventWpCount'  => $event_count,
-        ], 200);
+        );
     }
 
     /**
      * Create event via webhook from SeminarDesk utilizing put_event
      * Incase event id already exists, it will update existing event
      *
-     * @param array $request_json 
+     * @param array $notification 
      * @return WP_REST_Response|WP_Error
      */
-    public static function create_event($request_json)
+    public static function create_event($notification)
     {
-       return self::put_event($request_json);
+       return self::put_event($notification);
     }
 
     /**
      * Update event via webhook from SeminarDesk utilizing put_event
      * Incase event id doesn't exists, it will create the event
      *
-     * @param array $request_json
+     * @param array $notification
      * @return WP_REST_Response|WP_Error
      */
-    public static function update_event($request_json)
+    public static function update_event($notification)
     {
-        return self::put_event($request_json);
+        return self::put_event($notification);
     }
 
     /**
      * Delete event via event id
      *
-     * @param array $request_json
+     * @param array $notification
      * @return WP_REST_Response|WP_Error
      */
-    public static function delete_event($request_json) 
+    public static function delete_event($notification) 
     {
-        $payload = (array)$request_json['payload'];
+        $payload = (array)$notification['payload'];
         $post_deleted = self::trash_post_by_meta('sd_cpt_event', 'sd_event_id', $payload['id']);
         if ( !isset($post_deleted) ){
+            return array(
+                'status'        => 404,
+                'message'       => 'Nothing to delete. Event ID ' . $payload['id'] . ' does not exists',
+                'action'        => $notification['action'],
+                'eventId'   => $payload['id'],
+            );
             return new WP_Error('not_found', 'Nothing to delete. Event ID ' . $payload['id'] . ' does not exists', array(
                 'status'        => 404,
-                'requestId'     => $request_json['requestId'],
-                'action'        => $request_json['action'],
+                'action'        => $notification['action'],
                 'eventId'   => $payload['id'],
             ));
         }
-        return new WP_REST_Response( [
+        return array(
+            'status'        => 200,
             'message'       => 'Event deleted',
-            'requestId'     => $request_json['requestId'],
-            'action'        => $request_json['action'],
+            'action'        => $notification['action'],
             'eventId'       => $payload['id'],
             'eventWpId'     => $post_deleted->ID,
-        ], 200);
+        );
     }
 
     /**
      * Create or update event date via webhook from SeminarDesk
      *
-     * @param array $request_json 
+     * @param array $notification 
      * @return WP_REST_Response|WP_Error
      */
-    public static function put_event_date( $request_json )
+    public static function put_event_date( $notification )
     {
-        $payload = (array)$request_json['payload'];
+        $payload = (array)$notification['payload'];
 
-        $sd_webhook = $request_json;
+        $sd_webhook = $notification;
         unset($sd_webhook['payload']);
 
         // check if with event date associated event exists and get its WordPress ID
         $event_query = self::get_query_by_meta( 'sd_cpt_event', 'sd_event_id', $payload['eventId']);
         $event_post_id = $event_query->post->ID ?? null;
         if (!isset($event_post_id)){
-            return new WP_Error('not_found' ,'Event date not created. Associated event with the ID ' . $payload['eventId'] . ' does not exist', array( 
+
+            return array(
                 'status'        => 404,
-                'requestId'     => $request_json['requestId'],
-                'action'        => $request_json['action'],
+                'message'       => 'Event date not created. Associated event with the ID ' . $payload['eventId'] . ' does not exist',
+                'action'        => $notification['action'],
                 'eventDateId'   => $payload['id'],
                 'eventId'       => $payload['eventId'],
-            ));
+            );
         }
         $event_count = $event_query->post_count;
 
@@ -194,82 +268,85 @@ class WebhookHandler
         if (is_wp_error($date_post_id)){
             return $date_post_id;
         }
-        return new WP_REST_Response( array(
+
+        return array(
+            'status'            => 200,
             'message'           => $message,
-            'requestId'         => $request_json['requestId'],
-            'action'            => $request_json['action'],
+            'action'            => $notification['action'],
             'eventDateId'       => $payload['id'],
             'eventDateWpId'     => $date_post_id,
             'EventDateWpCount'  => $date_count,
             'eventId'           => $payload['eventId'],
             'eventWpId'         => $event_post_id,
             'eventWpCount'      => $event_count,
-        ), 200);
+        );
     }
 
     /**
      * Create event date via webhook from SeminarDesk utilizing put_event_date
      * Incase event date id already exists, it will update existing event date
      *
-     * @param array $request_json
+     * @param array $notification
      * @return WP_REST_Response|WP_Error
      */
-    public static function create_event_date($request_json)
+    public static function create_event_date($notification)
     {   
-        return self::put_event_date( $request_json );
+        return self::put_event_date( $notification );
     }
 
     /**
      * Update event date via webhook from SeminarDesk utilizing put_event_date
      * Incase event date id doesn't exists, it will create the event date
      *
-     * @param array $request_json
+     * @param array $notification
      * @return WP_REST_Response|WP_Error
      */
-    public static function update_event_date($request_json)
+    public static function update_event_date($notification)
     {   
-        return self::put_event_date( $request_json );
+        return self::put_event_date( $notification );
     }
 
     /**
      * Delete event date via webhook from SeminarDesk
      *
-     * @param array $request_json
+     * @param array $notification
      * @return WP_REST_Response|WP_Error
      */
-    public static function delete_event_date($request_json)
+    public static function delete_event_date($notification)
     {   
-        $payload = (array)$request_json['payload'];
+        $payload = (array)$notification['payload'];
         $post_deleted = self::trash_post_by_meta('sd_cpt_date', 'sd_date_id', $payload['id']);
         
         if ( !isset($post_deleted) ){
-            return new WP_Error('not_found', 'Nothing to delete. Event date ID ' . $payload['id'] . ' does not exists', array(
+
+            return array(
                 'status'        => 404,
-                'requestId'     => $request_json['requestId'],
-                'action'        => $request_json['action'],
+                'message'       => 'Nothing to delete. Event date ID ' . $payload['id'] . ' does not exists',
+                'action'        => $notification['action'],
                 'eventDateId'   => $payload['id'],
-            ));
+            );
         }
-        return new WP_REST_Response( array(
+        
+        return array(
+            'status'        => 200,
             'message'       => 'Event date deleted',
-            'requestId'     => $request_json['requestId'],
-            'action'        => $request_json['action'],
+            'action'        => $notification['action'],
             'eventDateId'   => $payload['id'],
             'eventDateWpId' => $post_deleted->ID,
-        ), 200);
+        );
     }
-    
+        
     /**
      * Create or update facilitator via webhook from SeminarDesk
      *
-     * @param array $request_json 
+     * @param array $notification 
      * @return WP_REST_Response|WP_Error
      */
-    public static function put_facilitator( $request_json )
+    public static function put_facilitator( $notification )
     {
-        $payload = (array)$request_json['payload'];
+        $payload = (array)$notification['payload'];
 
-        $sd_webhook = $request_json;
+        $sd_webhook = $notification;
         unset($sd_webhook['payload']);
 
         $query = self::get_query_by_meta( 'sd_cpt_facilitator', 'sd_facilitator_id', $payload['id'] );
@@ -306,65 +383,65 @@ class WebhookHandler
             return $post_id;
         }
 
-        return new WP_REST_Response( array(
+        return array(
+            'status'            => 200,
             'message'           => $message,
-            'requestId'         => $request_json['requestId'],
-            'action'            => $request_json['action'],
+            'action'            => $notification['action'],
             'facilitatorId'     => $payload['id'],
             'facilitatorWpId'   => $post_id,
-        ), 200);
+        );
     }
 
     /**
      * Create facilitator event via webhook from SeminarDesk
      * Incase facilitator id already exists, it will update existing facilitator
      *
-     * @param array $request_json
+     * @param array $notification
      * @return WP_REST_Response|WP_Error
      */
-    public static function create_facilitator($request_json)
+    public static function create_facilitator($notification)
     {
-        return self::put_facilitator( $request_json );
+        return self::put_facilitator( $notification );
     }
 
     /**
      * Update facilitator event via webhook from SeminarDesk
      * Incase facilitator id doesn't exists, it will create the facilitator
      *
-     * @param array $request_json
+     * @param array $notification
      * @return WP_REST_Response|WP_Error
      */
-    public static function update_facilitator($request_json)
+    public static function update_facilitator($notification)
     {
-        return self::put_facilitator( $request_json );
+        return self::put_facilitator( $notification );
     }
 
     /**
      * Delete facilitator event via webhook from SeminarDesk
      *
-     * @param array $request_json
+     * @param array $notification
      * @return WP_REST_Response|WP_Error
      */
-    public static function delete_facilitator($request_json)
+    public static function delete_facilitator($notification)
     {
-        $payload = (array)$request_json['payload'];
+        $payload = (array)$notification['payload'];
         $post_deleted = self::trash_post_by_meta('sd_cpt_facilitator', 'sd_facilitator_id', $payload['id']);
 
         if ( !isset($post_deleted) ){
-            return new WP_Error('not_found', 'Nothing to delete. Facilitator ID ' . $payload['id'] . ' does not exists', array(
+            return array(
                 'status'        => 404,
-                'requestId'     => $request_json['requestId'],
-                'action'        => $request_json['action'],
+                'message'       => 'Nothing to delete. Facilitator ID ' . $payload['id'] . ' does not exists',
+                'action'        => $notification['action'],
                 'eventDateId'   => $payload['id'],
-            ));
+            );
         }
-        return new WP_REST_Response( array(
+        return array(
+            'status'            => 200,
             'message'           => 'Facilitator deleted',
-            'requestId'         => $request_json['requestId'],
-            'action'            => $request_json['action'],
+            'action'            => $notification['action'],
             'facilitatorId'     => $payload['id'],
             'facilitatorWpId'   => $post_deleted->ID,
-        ), 200);
+        );
     }
 
     /**

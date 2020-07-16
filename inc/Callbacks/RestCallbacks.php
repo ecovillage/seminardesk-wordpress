@@ -63,7 +63,7 @@ class RestCallbacks{
         }
  
         if ( empty( $post ) ) {
-            return new WP_Error('no_post', 'Requested ID ' .$sd_id . ' does not exist', array('status' => 404));
+            return new WP_Error('no_posgt', 'Requested ID ' .$sd_id . ' does not exist', array('status' => 404));
         }
 
         $response = $this->get_custom_post_attr($post);
@@ -166,36 +166,11 @@ class RestCallbacks{
     public function create_webhooks($request)
     {
         $request_json = (array)$request->get_json_params(); // complete JSON data of the request#
-        switch ($request_json['action']) {
-            case 'event.create':
-                $response = WebhookHandler::create_event($request_json);
-                break;
-            case 'event.update':
-                $response = WebhookHandler::update_event($request_json);
-                break;
-            case 'event.delete':
-                $response = WebhookHandler::delete_event($request_json);
-                break;
-            case 'eventDate.create':
-                $response = WebhookHandler::create_event_date($request_json);
-                break;
-            case 'eventDate.update':
-                $response = WebhookHandler::update_event_date($request_json);
-                break;
-            case 'eventDate.delete':
-                $response = WebhookHandler::delete_event_date($request_json);
-                break;
-            case 'facilitator.create':
-                $response = WebhookHandler::create_facilitator($request_json);
-                break;
-            case 'facilitator.update':
-                $response = WebhookHandler::update_facilitator($request_json);
-                break;
-            case 'facilitator.delete':
-                $response = WebhookHandler::delete_facilitator($request_json);
-                break;
-            default:  
-                $response = new WP_Error('not_supported', 'action ' . $request_json['action'] . ' not supported', array('status' => 400));
+        $test = $request_json['notifications'] ?? false;
+        if ( !empty( $request_json['notifications'] ) ){
+            $response = WebhookHandler::batch_request($request_json);
+        } else{
+            $response = new WP_Error('not_supported', 'notifications of the request is empty', array('status' => 400));
         }
         return rest_ensure_response($response);
     }

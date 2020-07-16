@@ -1,0 +1,538 @@
+@host = http://localhost/wpsdp
+# @host = https://sd.teschenhausen.de
+@path = /wp-json/seminardesk/v1/webhooks HTTP/1.1
+@url = {{host}}{{path}}
+@auth = Basic seminardesk:^T4qeM4v$N8nEdUUdFm2Tv4c
+@content = application/json
+@timestamp = "{{$timestamp}}"
+@guid = "{{$guid}}"
+
+### batch - create
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
+{
+	"id": "3b27fe327ae240bf838a3fb6693e9feb",
+	"attempt": 1,
+	"properties": {
+		"timestamp": "1583509807000"
+	},
+	"notifications": [
+		// event.create - 927cd29a247a4cfdba3fad6b3335a430 - Market Garden System - Nachhaltig & Regenerativ
+		{
+			"action": "event.create",
+			"payload": {
+				"tenant": {
+					"id": "schloss-tempelhof",
+					"name": [
+						{
+							"language": "DE",
+							"value": "Schloss Tempelhof"
+						}
+					],
+					"logoUrl": [
+						{
+							"language": "DE",
+							"value": "https://schloss-tempelhof.seminardesk.de/Content/Extern/logo_140.jpg"
+						}
+					],
+					"affiliateCode": "SHTE",
+					"termsAndConditionsUrl": [
+						{
+							"language": "DE",
+							"value": "https://www.schloss-tempelhof.de/veranstaltungen/teilnahmebedingungen-agb"
+						}
+					],
+					"legalNoticeUrl": [
+						{
+							"language": "DE",
+							"value": "https://www.schloss-tempelhof.de/service/impressum/"
+						}
+					],
+					"privacyUrl": [
+						{
+							"language": "DE",
+							"value": "https://www.schloss-tempelhof.de/service/datenschutz"
+						}
+					],
+					"websiteUrl": [
+						{
+							"language": "DE",
+							"value": "https://www.schloss-tempelhof.de"
+						}
+					],
+					"pricesInfo": {
+						"currency": {
+							"code": "EUR",
+							"symbol": "€",
+							"name": "Euro"
+						}
+					},
+					"languages": {
+						"available": [
+							"DE"
+						],
+						"defaultFallback": "DE"
+					}
+				},
+				"id": "927cd29a247a4cfdba3fad6b3335a430",
+				"settings": {
+					"childrenAllowed": false,
+					"datesAreCoherent": false,
+					"registrationAvailable": true,
+					"showAttendanceFees": true,
+					"showTotalPrices": true,
+					"onlyBoardAndLodging": false,
+					"allowBookingForMultipleDates": false,
+					"showExtras": true,
+					"showFacik0litators": true,
+					"showNewsletterCheckbox": true,
+					"allowVoucher": false,
+					"mandatoryFieldsBooker": {
+						"gender": true,
+						"birthdate": false,
+						"address": false,
+						"phone": false,
+						"guestType": true
+					},
+					"mandatoryFieldsAdult": {
+						"gender": true,
+						"birthdate": false,
+						"email": false,
+						"guestType": true
+					},
+					"mandatoryFieldsChild": {
+						"gender": true,
+						"birthdate": false,
+						"guestType": false
+					}
+				},
+				"title": [
+					{
+						"language": "DE",
+						"value": "Market Garden System - Nachhaltig & Regenerativ"
+					}
+				],
+				"titleSlug": [
+					{
+						"language": "DE",
+						"value": "market-garden-system---nachhaltig--regenerativ"
+					}
+				],
+				"subtitle": [
+					{
+						"language": "DE",
+						"value": "3-Tages-Kurs mit einzeln buchbaren Modulen"
+					}
+				],
+				"teaser": [
+					{
+						"language": "DE",
+						"value": "Kann Market Gardening (MG) als intensives System dennoch nachhaltig und regenerativ sein? <br /><br />Wir  sind der Meinung: grundsätzlich ja! Jedoch braucht es dazu ein  Verständnis über die Zusammenhänge im Boden und geeignete Methoden bzw.  Werkzeuge, um die Bodenfruchtbarkeit zu erhalten und zu verbessern. Am  Freitag werden wir diese Grundlagen legen, auf die dann in den folgenden  Tagen die eher technischen Details des MG aufbauen.<br />"
+					}
+				],
+				"description": [
+					{
+						"language": "DE",
+						"value": "<img src=\"https://schloss-tempelhof.seminardesk.de/Content/Extern/feld2.jpg\" alt=\"\" width=\"100%\"/>\r\n<div class=\"card\">\r\n<div class=\"card-header\"><h3>Teil 1: Grundlagen des regenerativen Gemüsebaus</h3>\r\n</div>\r\n<div class=\"card-block\">\r\n<div class=\"card-body text-justify\"><p>Gemüsebau ist ein sehr intensives System. Viel Bodenbewegung und schneller Fruchtwechsel machen den Humusaufbau in vielen Gemüsebaubetrieben zu einer Herausforderung. Kann er trotzdem gelingen?</p><p>Wenn unser Anspruch ist, gesundes, nahrhaftes Gemüse anzubauen, brauchen wir einen fruchtbaren Boden. Market Gardening wird nur dann eine nachhaltige Alternative zu klassischen Systemen, wenn es gelingt, bei voller Produktion Boden aufzubauen, sprich: die Bodenfruchtbarkeit zu steigern, statt auf ihre Kosten Ertrag zu erzeugen. Wir arbeiten mit einem lebenden System, Bodenbiologie und Bodenstruktur sind maßgeblich für seinen Erfolg verantwortlich. </p><p>Wie dieser gelingen kann und die dafür notwendigen Grundlagen werden am Freitag behandelt.</p><p>In diesem Teil geht es um Grundlagenwissen, um erfolgreich Gemüse anzubauen und gleichzeitig die Produktionsgrundlage Boden zu verbessern.</p><p>Wir behandeln die Zusammenhänge zwischen Bodenphysik, Bodenchemie, der Bodenbiologie und die Rolle der Pflanzen in diesem Zusammenspiel.</p><ul><li>Wie funktionieren Nährstoffkreisläufe im Boden und welche Nährstoffpools gibt es?</li><li>Was kann ich tun, um den Gehalt an organischer Substanz in meinem Boden dauerhaft zu erhöhen?</li><li>Was ist bei der Bodenchemie zu beachten?</li></ul><p>Nach dem wir die theoretischen Grundlagen gelegt haben, lernt Ihr einfache Werkzeuge, um Euren Boden zu beurteilen und dadurch für Euren Betrieb geeignete Handlungsstrategien abzuleiten. Zusätzlich werden Hilfsmittel wie Fermente, Komposttee, Zwischenfrüchte und Mulch behandelt. </p>\r\n<table class=\"table\" style=\"border-width: 0px; border-color: #000000; border-collapse: collapse;\" cellspacing=\"0\" cellpadding=\"0\" align=\"left\"><tbody>\r\n<tr><td style=\"border-color: #000000;\"><h4>Kursleiter:</h4></td><td style=\"border-color: #000000; text-align: left;\"><strong>Urs Mauk</strong><br /></td></tr></tbody></table></div></div></div><br />\r\n<div class=\"card\"><div class=\"card-header\"><h3>Teil 2: Das Market Garden System - Umstellung, Aufbau & Betrieb</h3></div></div><div class=\"card\">\r\n<div class=\"card-block\">\r\n<div class=\"card-body text-justify\">\r\n<p>Um einen nachhaltigen Wandel in unserer Lebensmittelproduktion voran zu treiben, brauchen wir dezentrale und regionale Strukturen im Anbau, um frische Lebensmittel in hoher Qualität für eine gesunde Ernährung zu anzubauen.</p><p>Die Ressourcenverschwendung unserer derzeitigen zentralisierten, industriellen und transportintensiven Systeme lässt sich nicht ignorieren und es braucht einen Wandel.</p><p>Wir haben die Vision eines Netzwerks von regenerativen & produktiven Kleinst-Gärtnereien für eine regionale und saisonale Lebensmittelversorgung.</p><p>Als kompaktes, traktorloses Anbausystem mit der Ausrichtung auf hohe Erträge auf kleiner Fläche, konsequenten Komposteinsatz, hoher Bodenschonung und geringer Startinvestition, sehen wir im Market Garden System das Potential, zentraler Baustein dieses Wandels zu sein.</p><p>Seit 4 Jahren sammeln wir daher praktische Erfahrungen und Erfolge mit dem Aufbau des Market Garden der Gärtnerei Schloss Tempelhof.<br /></p><p>Begleite uns für zwei intensive Tage durch Theorie und Praxis und erfahre mehr über den Aufbau und den Betrieb dieses kompakten und effizienten Anbausystems. Lerne über Anbau, Flächenplanung, die Möglichkeiten des Bodenschutzes & -aufbaus, uvm.</p><p>In diesem Kurs bekommt ihr einen Überblick, über die notwendigen Werkzeuge & Techniken, die einen erfolgreichen Market Garden ausmachen:</p><ul>\r\n<li>Aufbau eines Market Garden </li><li>Anbauplanung & Fruchtfolge</li><li>Notwendige & sinnvolle Infrastruktur </li><li>Geräte & Werkzeuge</li><li>Vorbereitung permanenter Beete & Bodenpflege</li><li>Intelligentes Beikrautmanagement</li><li>Geschützter Anbau & Anzucht</li><li>Werkzeuge des regenerativen Gemüsebaus:<ul>\r\n<li>Grüne Brücken, Mulch, Mischkultur, Untersaaten</li><li>Fermente und Komposttees</li></ul>\r\n</li></ul><p>Für mehr Informationen & weitere Veranstaltungen: <a href=\"http://www.diezukunftsbauern.de\">www.diezukunftsbauern.de</a> <br /></p><table class=\"table\" style=\"border-width: 0px; border-color: #000000; border-collapse: collapse;\" cellspacing=\"0\" cellpadding=\"0\" align=\"left\"><tbody>\r\n<tr><td style=\"border-color: #000000;\"><h4>Kursleiter:</h4></td><td style=\"border-color: #000000; text-align: left;\"><strong>Sebastian Heilmann & Maya Heilmann</strong></td></tr>\r\n</tbody></table></div></div></div><br />"
+					}
+				],
+				"headerPictureUrl": [
+					{
+						"language": "DE",
+						"value": "https://schloss-tempelhof.seminardesk.de/Content/Extern/DSC00235-638x300[1].jpg"
+					}
+				],
+				"teaserPictureUrl": [
+					{
+						"language": "DE",
+						"value": "https://schloss-tempelhof.seminardesk.de/Content/Extern/DSC00235-638x300[1].jpg"
+					}
+				],
+				"infoDatesPrices": [
+					{
+						"language": "DE",
+						"value": ""
+					}
+				],
+				"infoBoardLodging": [
+					{
+						"language": "DE",
+						"value": "Unser Gästehaus ist ein schöner Altbau mit hohen Räumen und großen  Fenstern mit Blick auf die Felder oder den Schloss-Innenhof. Zur Auswahl  stehen 50 Betten in Einzel-, Doppel- und Mehrbettzimmern in individuell  eingerichteten Zimmern. Gemeinschaftsbäder und Toiletten sind auf jeder  Etage, in einigen Zimmern sind Waschbecken vorhanden. Drei weitere  Zimmer befinden sich im angrenzenden Fachwerkhaus. Bettzeug und  Handtücher werden gestellt (außer im Schlafsaal und im Campingbereich).<p>Haustiere können, aus Rücksicht auf Gäste, die an Allergien leiden, leider nicht mitgebracht werden.</p>Wir  bieten unseren Seminargästen vegetarische, saisonale Gerichte,  liebevoll zubereitet von unserem Küchenteam. Die Lebensmittel stammen  überwiegend aus unserer eigenen solidarischen Landwirtschaft, mit viel  Handarbeit und Boden schonend produziert, hochwertig und garantiert  frisch. Darüber hinaus kaufen wir biologisch und möglichst regional,  bzw. aus fairem Handel ein. Unser Küchenteam verarbeitet die  Lebensmittel zu eigenen Brotaufstrichen und Pestos. Das Brot wird  überwiegend selbst gebacken. <br /><p>Die Vollverpflegung beinhaltet  Frühstück, Mittagessen und Abendessen, sowie Pausensnacks (frisches Obst  und Gebäck, Wasser, Tee und Kaffee). </p><p>Besondere Diätwünsche (z.B.  vegan, glutenfrei, laktosefrei) können wir auf Wunsch zu einem kleinen  Aufpreis (5€/ Tag) erfüllen. Bitte tragen Sie Ihren Wunsch entsprechend  bei der Anmeldung ein. <br /></p><p>Wenn nichts anderes vereinbart ist,  sind die üblichen Zeiten für Frühstück von 8.00 - 9.00 Uhr, Mittagessen  12.30 - 13.30 Uhr (sonntags 13.00 - 14.00 Uhr), Abendessen 18:30 - 19.30  Uhr.</p><p>Die untenstehenden Preise beziehen sich jeweils auf Unterkunft und Verpflegung für den gesamten Veranstaltungszeitraum. </p><p>Die  Kategorie \"Übernachtung außerhalb\" beinhaltet die Vollpension inkl.  Gästepauschale für die Infrastrukturnutzung. Eine Unterkunft muss  selbständig außerhalb gebucht werden.</p><p> </p>"
+					}
+				],
+				"infoMisc": [
+					{
+						"language": "DE",
+						"value": ""
+					}
+				],
+				"facilitators": [
+					{
+						"id": 123
+					},
+					{
+						"id": 124
+					},
+					{
+						"id": 125
+					}
+				],
+				"contactInfo": "// Kontaktinfos - zur Zeit noch immer leer"
+			}
+		},
+		// event.create - 50c7db655df54e0d8c03c851eb9a5ca8 - Kennenlernwochenende für Gemeinschaftsinteressierte
+		{
+			"action": "event.create",
+			"payload": {
+				"id": "50c7db655df54e0d8c03c851eb9a5ca8",
+				"settings": {
+					"childrenAllowed": true,
+					"datesAreCoherent": false,
+					"registrationAvailable": true,
+					"showAttendanceFees": true,
+					"showTotalPrices": true,
+					"onlyBoardAndLodging": false,
+					"allowBookingForMultipleDates": false,
+					"showExtras": true,
+					"showFacilitators": true,
+					"showNewsletterCheckbox": true,
+					"allowVoucher": false,
+					"showPriceAsTotal": false,
+					"showBoardAndLodgingAndMiscSummarized": false,
+					"mandatoryFieldsBooker": {
+						"gender": true,
+						"birthdate": false,
+						"address": false,
+						"phone": false,
+						"guestType": true
+					},
+					"mandatoryFieldsAdult": {
+						"gender": true,
+						"birthdate": false,
+						"email": false,
+						"guestType": true
+					},
+					"mandatoryFieldsChild": {
+						"gender": true,
+						"birthdate": false,
+						"guestType": false
+					}
+				},
+				"title": [
+					{
+						"language": "DE",
+						"value": "Kennenlernwochenende für Gemeinschaftsinteressierte"
+					}
+				],
+				"titleSlug": [
+					{
+						"language": "DE",
+						"value": "kennenlernwochenende-fur-gemeinschaftsinteressierte"
+					}
+				],
+				"subtitle": [
+					{
+						"language": "DE",
+						"value": "Veranstalter: Schloss Tempelhof eG mit verschiedenen Begleitern aus der Gemeinschaft"
+					}
+				],
+				"teaser": [
+					{
+						"language": "DE",
+						"value": "<div id=\"Teaser\"><p helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" font-size:=\"\" 14px;=\"\" background-color:=\"\" #ffffff;=\"\" text-decoration-style:=\"\" initial;=\"\" text-decoration-color:=\"\" initial;\"=\"\" style=\"color: #333333;\">Über  Projektinfos, Workshops, Vorstellung unserer Werte und Visionen, sowie  über die praktische Mitarbeit in kleinen Arbeitsgruppen können die  TeilnehmerInnen unsere Gemeinschaft kennenlernen. Themen wie  Gemeinschaftsbildung, Transformation der Ökonomie, Kommunikationskultur,  Konsensentscheidungen werden vorgestellt und im Gruppenprozess erlebt</p></div><br />"
+					}
+				],
+				"description": [
+					{
+						"language": "DE",
+						"value": "<p>Über Projektinfos, Workshops, Vorstellung unserer Werte und Visionen,  sowie die praktische Mitarbeit in verschiedenen Arbeitsgruppen können  die TeilnehmerInnen unsere Gemeinschaft Schloss Tempelhof in diesen  Tagen kennen lernen.<br /> Themen wie Gemeinschaftsbildung, Transformation  der Ökonomie, Kommunikationskultur, Konsensentscheidungen werden  vorgestellt und im Gruppenprozess erlebt. Am Samstagabend werden wir  zusammen singen und feiern und freuen uns über Beiträge von Euch.<br />  Das Seminar wendet sich an Menschen, die erkunden wollen, ob diese Art  des Zusammenlebens für sie in Frage kommt und die eventuell selbst eine  Gemeinschaft aufbauen wollen.</p> <p><strong>Obwohl wir langfristig am  Tempelhof noch anwachsen wollen, können wir aktuell nur wenige Menschen  aufnehmen, da wir erst wieder neuen Wohnraum schaffen und  gemeinschaftlich zusammenwachsen müssen.</strong></p><p>Für Kinder im  Alter von drei bis 14 Jahren gibt es eine Kinderbetreuung. Die Kosten  hierfür sind 50€ für das erste Kind / 25€ für das Zweite / ab dem 3.  Kind frei. Bitte gebt im Bemerkungsfeld die Anmeldung dazu an. <br /></p>"
+					}
+				],
+				"headerPictureUrl": [
+					{
+						"language": "DE",
+						"value": "https://schloss-tempelhof.seminardesk.de/Content/Extern/DSC00235-638x300[1].jpg"
+					}
+				],
+				"infoDatesPrices": [
+					{
+						"language": "DE",
+						"value": ""
+					}
+				],
+				"infoBoardLodging": [
+					{
+						"language": "DE",
+						"value": "Unser Gästehaus ist ein schöner Altbau mit hohen Räumen und großen  Fenstern mit Blick auf die Felder oder den Schloss-Innenhof. Zur Auswahl  stehen 50 Betten in Einzel-, Doppel- und Mehrbettzimmern in individuell  eingerichteten Zimmern. Gemeinschaftsbäder und Toiletten sind auf jeder  Etage, in einigen Zimmern sind Waschbecken vorhanden. Drei weitere  Zimmer befinden sich im angrenzenden Fachwerkhaus. Bettzeug und  Handtücher werden gestellt (außer im Schlafsaal und im Campingbereich).<p>Haustiere können, aus Rücksicht auf Gäste, die an Allergien leiden, leider nicht mitgebracht werden.</p>Wir  bieten unseren Seminargästen vegetarische, saisonale Gerichte,  liebevoll zubereitet von unserem Küchenteam. Die Lebensmittel stammen  überwiegend aus unserer eigenen solidarischen Landwirtschaft, mit viel  Handarbeit und Boden schonend produziert, hochwertig und garantiert  frisch. Darüber hinaus kaufen wir biologisch und möglichst regional,  bzw. aus fairem Handel ein. Unser Küchenteam verarbeitet die  Lebensmittel zu eigenen Brotaufstrichen und Pestos. Das Brot wird  überwiegend selbst gebacken. <br /><p>Die Vollverpflegung beinhaltet  Frühstück, Mittagessen und Abendessen, sowie Pausensnacks (frisches Obst  und Gebäck, Wasser, Tee und Kaffee). </p><p>Besondere Diätwünsche (z.B.  vegan, glutenfrei, laktosefrei) können wir auf Wunsch zu einem kleinen  Aufpreis (5€/ Tag) erfüllen. Bitte tragen Sie Ihren Wunsch entsprechend  bei der Anmeldung ein. <br /></p><p>Wenn nichts anderes vereinbart ist,  sind die üblichen Zeiten für Frühstück von 8.00 - 9.00 Uhr, Mittagessen  12.30 - 13.30 Uhr (sonntags 13.00 - 14.00 Uhr), Abendessen 18:30 - 19.30  Uhr.</p><p>Die untenstehenden Preise beziehen sich jeweils auf Unterkunft und Verpflegung für den gesamten Veranstaltungszeitraum.Die Preise für die Kinder sind gestaffelt und werden bei Bestätigung der Anmeldung detailliert aufgeschlüsselt.<br /></p><p>Die  Kategorie \"Übernachtung außerhalb\" beinhaltet die Vollpension inkl.  Gästepauschale für die Infrastrukturnutzung. Eine Unterkunft muss  selbständig außerhalb gebucht werden.</p><p> </p>"
+					}
+				],
+				"infoMisc": [
+					{
+						"language": "DE",
+						"value": "<p><span style=\"color: #333333; font-family: \">Für Kinderbetreuung sind die Kosten 50 Euro für das erste Kind; 25 Euro für das zweite Kind. Bitte gebt im Bemerkungsfeld die Anmeldung dazu an.</span></p><p>Die Verpflegungs-/ und Unterbringungskosten pro Tag für Kinder:</p>\r\n<div class=\"card-deck\">\r\n<div class=\"card\">\r\n<div class=\"card-body\">\r\n<table class=\"table table-sm\">\r\n<thead class=\"thead-light\"><tr>\r\n<th scope=\"col\" style=\"text-align: left;\">Alter</th>\r\n<th scope=\"col\">Tages-Verpflegung</th></tr></thead>\r\n<tbody><tr>\r\n<td>ab 5 Jahre</td><td>9 €</td></tr>\r\n<tr><td>ab 10 Jahre</td><td>17 €</td></tr>\r\n<tr><td>ab 16 Jahre</td><td>34 €</td></tr></tbody></table></div></div>\r\n<div class=\"card\">\r\n<div class=\"card-body\">\r\n<table class=\"table table-sm\">\r\n<thead class=\"thead-light\"><tr>\r\n<th scope=\"col\" style=\"text-align: left;\">Alter</th>\r\n<th scope=\"col\">Unterbringung</th><th scope=\"col\">Preis</th></tr></thead>\r\n<tbody><tr>\r\n<td>unabhängig<br /></td><td>im Bett der Eltern</td><td>frei</td></tr>\r\n<tr><td>unabhängig<br /></td><td>zusätzliche Matratze/ Bettwäsche</td><td>10 €</td></tr>\r\n<tr><td>ab 14 Jahre</td><td>Zelt / Bus</td><td>5 €</td></tr></tbody></table></div>\r\n</div></div><br />"
+					}
+				],
+				"facilitators": [
+					{
+						"id": 111
+					},
+					{
+						"id": 112
+					},
+					{
+						"id": 113
+					}
+				],
+				"contactInfo": "// Kontaktinfos - zur Zeit noch immer leer",
+				"tenant": {
+					"name": [
+						{
+							"language": "DE",
+							"value": "Schloss Tempelhof"
+						}
+					],
+					"logoUrl": [
+						{
+							"language": "DE",
+							"value": "https://schloss-tempelhof.seminardesk.de/Content/Extern/logo_140.jpg"
+						}
+					],
+					"affiliateCode": "SHTE",
+					"termsAndConditionsUrl": [
+						{
+							"language": "DE",
+							"value": "https://www.schloss-tempelhof.de/veranstaltungen/teilnahmebedingungen-agb"
+						}
+					],
+					"legalNoticeUrl": [
+						{
+							"language": "DE",
+							"value": "https://www.schloss-tempelhof.de/service/impressum/"
+						}
+					],
+					"privacyUrl": [
+						{
+							"language": "DE",
+							"value": "https://www.schloss-tempelhof.de/service/datenschutz"
+						}
+					],
+					"websiteUrl": [
+						{
+							"language": "DE",
+							"value": "https://www.schloss-tempelhof.de"
+						}
+					],
+					"pricesInfo": {
+						"currency": {
+							"code": "EUR",
+							"symbol": "€",
+							"name": "Euro"
+						}
+					},
+					"languages": {
+						"available": [
+							"DE"
+						],
+						"defaultFallback": "DE"
+					}
+				}
+			}
+		},
+		// eventDate.create - 709 - 927cd29a247a4cfdba93fad6b3335a430 - Market Garden System - Nachhaltig & Regenerativk
+		{
+			"action": "eventDate.create",
+			"payload": {
+				"id": 709,
+				"eventId": "927cd29a247a4cfdba3fad6b3335a430",
+				"status": "wait_list",
+				"registrationAvailable": true,
+				"detailpageAvailable": true,
+				"beginDate": "1599755400000",
+				"endDate": "1599998400000",
+				"title": [
+					{
+						"language": "DE",
+						"value": "Market Garden System - Nachhaltig & Regenerativ"
+					}
+				],
+				"titleSlug": [
+					{
+						"language": "DE",
+						"value": "market-garden-system---nachhaltig--regenerativ"
+					}
+				],
+				"subtitle": [
+					{
+						"language": "DE",
+						"value": "3-Tages-Kurs mit einzeln buchbaren Modulen, Veranstalter: Sebastian Heilmann, Maya Lukoff und Urs Mauk"
+					}
+				],
+				"teaser": [
+					{
+						"language": "DE",
+						"value": "Kann Market Gardening (MG) als intensives System dennoch nachhaltig und regenerativ sein? <br /><br />Wir  sind der Meinung: grundsätzlich ja! Jedoch braucht es dazu ein  Verständnis über die Zusammenhänge im Boden und geeignete Methoden bzw.  Werkzeuge, um die Bodenfruchtbarkeit zu erhalten und zu verbessern. Am  Freitag werden wir diese Grundlagen legen, auf die dann in den folgenden  Tagen die eher technischen Details des MG aufbauen.<br />"
+					}
+				],
+				"teaserPictureUrl": [
+					{
+						"language": "DE",
+						"value": "https://schloss-tempelhof.seminardesk.de/Content/Extern/MarketGarden32.jpg"
+					}
+				],
+				"priceInfo": [
+					{
+						"language": "DE",
+						"value": "Ab 18 Jahren 320 Euro\r\n"
+					}
+				],
+				"facilitators": [
+					{ 
+						"id": 123
+					},
+					{ 
+						"id": 124
+					},
+					{ 
+						"id": 125
+					}
+				],
+				"venue": {
+					"name": "An der Sonne",
+					"street1": "",
+					"street2": "",
+					"zip": "",
+					"city": "",
+					"country": "",
+					"weblink": "https://www.seminardesk.de"
+				},
+				"contactInfo": null,
+				"eventType": "",
+				"eventTopic": "Ökologie",
+				"showAttendanceFees": true
+			}
+		},
+		// eventDate.create - 721 - 927cd29a247a4cfdba93fad6b3335a430 - Market Garden System - Nachhaltig & Regenerativk
+		{
+			"action": "eventDate.create",
+			"payload": {
+				"id": 721,
+				"eventId": "927cd29a247a4cfdba3fad6b3335a430",
+				"status": "available",
+				"registrationAvailable": true,
+				"detailpageAvailable": true,
+				"beginDate": "1599755400000",
+				"endDate": "1599998400000",
+				"title": [
+					{
+						"language": "DE",
+						"value": "Market Garden System - Nachhaltig & Regenerativ"
+					}
+				],
+				"titleSlug": [
+					{
+						"language": "DE",
+						"value": "market-garden-system---nachhaltig--regenerativ"
+					}
+				],
+				"subtitle": [
+					{
+						"language": "DE",
+						"value": "3-Tages-Kurs mit einzeln buchbaren Modulen, Veranstalter: Sebastian Heilmann, Maya Lukoff und Urs Mauk"
+					}
+				],
+				"teaser": [
+					{
+						"language": "DE",
+						"value": "Kann Market Gardening (MG) als intensives System dennoch nachhaltig und regenerativ sein? <br /><br />Wir  sind der Meinung: grundsätzlich ja! Jedoch braucht es dazu ein  Verständnis über die Zusammenhänge im Boden und geeignete Methoden bzw.  Werkzeuge, um die Bodenfruchtbarkeit zu erhalten und zu verbessern. Am  Freitag werden wir diese Grundlagen legen, auf die dann in den folgenden  Tagen die eher technischen Details des MG aufbauen.<br />"
+					}
+				],
+				"teaserPictureUrl": [
+					{
+						"language": "DE",
+						"value": "https://schloss-tempelhof.seminardesk.de/Content/Extern/MarketGarden32.jpg"
+					}
+				],
+				"priceInfo": [
+					{
+						"language": "DE",
+						"value": "Ab 18 Jahren 320 Euro\r\n"
+					}
+				],
+				"facilitators": [
+					{ 
+						"id": 123
+					},
+					{ 
+						"id": 124
+					},
+					{ 
+						"id": 125
+					}
+				],
+				"venue": {
+					"name": "An der Sonne",
+					"street1": "Sonnenstr. 1",
+					"street2": "",
+					"zip": "01234",
+					"city": "Sonnenland",
+					"country": "",
+					"weblink": "https://www.seminardesk.de"
+				},
+				"contactInfo": null,
+				"eventType": "",
+				"eventTopic": "Ökologie",
+				"showAttendanceFees": true
+			}
+		},
+		// facilitator.create - 321 - Hans Kurz
+		{
+			"action": "facilitator.create",
+			"payload": {
+				"id": 321,
+				"name": "Hans Kurz",
+				"about": null,
+				"pictureUrl": "https://schloss-tempelhof.seminardesk.de/Content/Extern/Maya Lukoff.jpg"
+			}
+		}
+	]
+}
+
+### batch - delete
+
+POST {{url}}
+Authorization: {{auth}}
+Content-Type: {{content}}
+
+{
+	"id": "3b27fe327ae240bf838a3fb6693e9feb",
+	"attempt": 1,
+	"properties": {
+		"timestamp": "1583509807000"
+	},
+	"notifications": [
+		// event.delete - 927cd29a247a4cfdba3fad6b3335a430 - Market Garden System - Nachhaltig & Regenerativ
+		{
+			"action": "event.delete",
+			"payload": {
+				"id": "927cd29a247a4cfdba3fad6b3335a430"
+			}
+		},
+		// eventDate.delete - 709 - 927cd29a247a4cfdba93fad6b3335a430 - Market Garden System - Nachhaltig & Regenerativk
+		{
+			"action": "eventDate.delete",
+			"payload": {
+				"id": "709"
+			}
+		},
+		// facilitator.delete - 321 - Hans Kurz
+		{
+			"action": "facilitator.delete",
+			"payload": {
+				"id": "321"
+			}
+		}
+]
+}

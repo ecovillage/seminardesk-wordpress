@@ -1,4 +1,5 @@
 @host = http://localhost/wpsdp
+# @host = https://sd.teschenhausen.de
 @path = /wp-json/seminardesk/v1/webhooks HTTP/1.1
 @url = {{host}}{{path}}
 @auth = Basic seminardesk:^T4qeM4v$N8nEdUUdFm2Tv4c
