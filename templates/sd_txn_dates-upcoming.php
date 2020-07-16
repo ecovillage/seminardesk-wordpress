@@ -56,6 +56,7 @@ get_header();
 	if ( have_posts() ) {
 		while ( have_posts() ) {
             the_post();
+            $post_event = get_post( $post->wp_event_id );
             ?>
             <div class="entry-header-inner section-inner small">
                 <?php
@@ -70,11 +71,11 @@ get_header();
                 </a>
                 <?php
                 Utils::get_date( $post->sd_data['beginDate'], $post->sd_data['endDate'], '<p><strong>' . __('Date: ', 'seminardesk') . '</strong>', '</p>', true);
-                Utils::get_facilitators( $post->sd_data['facilitators'], '<p><strong>' . __('Facilitator: ', 'seminardesk') . '</strong>', '</p>', true );
+                Utils::get_facilitators( $post_event->sd_data['facilitators'], '<p><strong>' . __('Facilitator: ', 'seminardesk') . '</strong>', '</p>', true );
                 echo Utils::get_value_by_language( $post->sd_data['priceInfo'], 'DE', '<p><strong>' . __('Price: ', 'seminardesk') . '</strong>', '</p>' );
                 Utils::get_venue( $post->sd_data['venue'], '<p><strong>' . __('Venue: ', 'seminardesk') . '</strong>', '</p>', true);
-                Utils::get_img_remote( Utils::get_value_by_language($post->sd_data['teaserPictureUrl']), '300', '', $alt = "remote image load failed", '<p>', '</p>', true );
-                Utils::get_value_by_language( $post->sd_data['teaser'], 'DE',  '<p>', '</p>', true );
+                Utils::get_img_remote( Utils::get_value_by_language($post_event->sd_data['teaserPictureUrl']), '300', '', $alt = "remote image load failed", '<p>', '</p>', true );
+                Utils::get_value_by_language( $post_event->sd_data['teaser'], 'DE',  '<p>', '</p>', true );
                 ?>
                 <a href="<?php echo esc_url(get_permalink($post->wp_event_id)); ?>">
                     <?php esc_html_e('More ...', 'seminardesk')?>

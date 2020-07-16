@@ -33,13 +33,14 @@ get_header();
 	if ( have_posts() ) {
 		while ( have_posts() ) {
             the_post();
+            $post_event = get_post( $post->wp_event_id );
             ?>
             <div class="sd-event">
                 <div class="entry-header-inner section-inner small">
                     <div class="sd-event-title">
                         <a href="<?php echo esc_url(get_permalink($post->wp_event_id)); ?>">
                             <?php 
-                            Utils::get_value_by_language( $post->sd_data['title'], 'DE', '<h3>', '</h3>', true); 
+                            Utils::get_value_by_language( $post_event->sd_data['title'], 'DE', '<h3>', '</h3>', true); 
                             ?>
                         </a>
                     </div>
@@ -47,19 +48,19 @@ get_header();
                         <div class="sd-event-props">
                             <?php
                             Utils::get_date( $post->sd_date_begin, $post->sd_date_end, '<div class="sd-event-date">' . __('<strong>Date: </strong>', 'seminardesk'), '</div>', true);
-                            Utils::get_facilitators($post->sd_data['facilitators'], '<div class="sd-event-facilitators"><strong>' . __('Facilitator: ', 'seminardesk') . '</strong>', '</div>', true);
+                            Utils::get_facilitators($post_event->sd_data['facilitators'], '<div class="sd-event-facilitators"><strong>' . __('Facilitator: ', 'seminardesk') . '</strong>', '</div>', true);
                             Utils::get_value_by_language($post->sd_data['priceInfo'], 'DE', '<div class="sd-event-price"><strong>' . __('Price: ', 'seminardesk') . '</strong>', '</div>', true );
                             Utils::get_venue($post->sd_data['venue'], '<div class="sd-event-venue"><strong>' . __('Venue: ', 'seminardesk') . '</strong>', '</div>', true);
                             ?>
                         </div>
                         <div class=sd-event-image>
                             <?php
-                            Utils::get_img_remote(  Utils::get_value_by_language($post->sd_data['teaserPictureUrl']), '300', '', $alt = __('remote image failed', 'seminardesk'), '', '', true);
+                            Utils::get_img_remote(  Utils::get_value_by_language($post_event->sd_data['teaserPictureUrl']), '300', '', $alt = __('remote image failed', 'seminardesk'), '', '', true);
                             ?>
                         </div>
                         <div class=sd-event-teaser>
                             <?php 
-                            echo Utils::get_value_by_language($post->sd_data['teaser']) 
+                            echo Utils::get_value_by_language($post_event->sd_data['teaser']) 
                             ?>
                             <div class="sd-event-more-link">
                                 <a class="button" href="<?php echo esc_url(get_permalink($post->wp_event_id)); ?>">
