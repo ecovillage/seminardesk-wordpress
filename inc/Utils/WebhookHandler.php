@@ -22,46 +22,46 @@ class WebhookHandler
      * @param array $request_json 
      * @return WP_REST_Response 
      */
-    public static function batch_request( $request_json )
+    public function batch_request( $request_json )
     {
         $response_notifications = array();
         $notifications = $request_json['notifications'];     
         foreach ( $notifications as $notification ){
             switch ( $notification['action'] ){
                 case 'event.create':
-                    $response = WebhookHandler::create_event($notification);
+                    $response = $this->create_event($notification);
                     array_push( $response_notifications, $response );
                     break;
                 case 'event.update':
-                    $response = WebhookHandler::update_event($notification);
+                    $response = $this->update_event($notification);
                     array_push( $response_notifications, $response );
                     break;
                 case 'event.delete':
-                    $response = WebhookHandler::delete_event($notification);
+                    $response = $this->delete_event($notification);
                     array_push( $response_notifications, $response );
                     break;
                 case 'eventDate.create':
-                    $response = WebhookHandler::create_event_date($notification);
+                    $response = $this->create_event_date($notification);
                     array_push( $response_notifications, $response );
                     break;
                 case 'eventDate.update':
-                    $response = WebhookHandler::update_event_date($notification);
+                    $response = $this->update_event_date($notification);
                     array_push( $response_notifications, $response );
                     break;
                 case 'eventDate.delete':
-                    $response = WebhookHandler::delete_event_date($notification);
+                    $response = $this->delete_event_date($notification);
                     array_push( $response_notifications, $response );
                     break;
                 case 'facilitator.create':
-                    $response = WebhookHandler::create_facilitator($notification);
+                    $response =$this->create_facilitator($notification);
                     array_push( $response_notifications, $response );
                     break;
                 case 'facilitator.update':
-                    $response = WebhookHandler::update_facilitator($notification);
+                    $response = $this->update_facilitator($notification);
                     array_push( $response_notifications, $response );
                     break;
                 case 'facilitator.delete':
-                    $response = WebhookHandler::delete_facilitator($notification);
+                    $response = $this->delete_facilitator($notification);
                     array_push( $response_notifications, $response );
                     break;
                 default:
@@ -90,13 +90,13 @@ class WebhookHandler
      * @param array $notification 
      * @return WP_REST_Response|WP_Error
      */
-    public static function put_event( $notification )
+    public function put_event( $notification )
     {
         $payload = (array)$notification['payload']; // payload of the request in JSON
         $sd_webhook = $notification;
         unset($sd_webhook['payload']);
         // checks if event_id exists and sets corresponding post_id
-        $query = self::get_query_by_meta( 'sd_cpt_event', 'sd_event_id', $payload['id']);
+        $query = $this->get_query_by_meta( 'sd_cpt_event', 'sd_event_id', $payload['id']);
         $post_id = $query->post->ID ?? null;
         $event_count = $query->post_count;
 
@@ -151,9 +151,9 @@ class WebhookHandler
      * @param array $notification 
      * @return WP_REST_Response|WP_Error
      */
-    public static function create_event($notification)
+    public function create_event($notification)
     {
-       return self::put_event($notification);
+       return $this->put_event($notification);
     }
 
     /**
@@ -163,9 +163,9 @@ class WebhookHandler
      * @param array $notification
      * @return WP_REST_Response|WP_Error
      */
-    public static function update_event($notification)
+    public function update_event($notification)
     {
-        return self::put_event($notification);
+        return $this->put_event($notification);
     }
 
     /**
@@ -174,10 +174,10 @@ class WebhookHandler
      * @param array $notification
      * @return WP_REST_Response|WP_Error
      */
-    public static function delete_event($notification) 
+    public function delete_event($notification) 
     {
         $payload = (array)$notification['payload'];
-        $post_deleted = self::trash_post_by_meta('sd_cpt_event', 'sd_event_id', $payload['id']);
+        $post_deleted = $this->trash_post_by_meta('sd_cpt_event', 'sd_event_id', $payload['id']);
         if ( !isset($post_deleted) ){
             return array(
                 'status'        => 404,
@@ -206,7 +206,7 @@ class WebhookHandler
      * @param array $notification 
      * @return WP_REST_Response|WP_Error
      */
-    public static function put_event_date( $notification )
+    public function put_event_date( $notification )
     {
         $payload = (array)$notification['payload'];
 
@@ -214,7 +214,7 @@ class WebhookHandler
         unset($sd_webhook['payload']);
 
         // check if with event date associated event exists and get its WordPress ID
-        $event_query = self::get_query_by_meta( 'sd_cpt_event', 'sd_event_id', $payload['eventId']);
+        $event_query = $this->get_query_by_meta( 'sd_cpt_event', 'sd_event_id', $payload['eventId']);
         $event_post_id = $event_query->post->ID ?? null;
         if (!isset($event_post_id)){
 
@@ -229,12 +229,12 @@ class WebhookHandler
         $event_count = $event_query->post_count;
 
         // check if event date exists and sets corresponding date_post_id
-        $date_query = self::get_query_by_meta( 'sd_cpt_date', 'sd_date_id', $payload['id']);
+        $date_query = $this->get_query_by_meta( 'sd_cpt_date', 'sd_date_id', $payload['id']);
         $date_post_id = $date_query->post->ID ?? null;
         $date_count = $date_query->post_count;
 
         // define attributes of the new event date using request data of the webhook
-        $txn_input = self::set_event_date_taxonomy($payload);
+        $txn_input = $this->set_event_date_taxonomy($payload);
         $meta_input = array(
             'sd_date_id'    => $payload['id'],
             'sd_date_begin' => $payload['beginDate'],
@@ -289,9 +289,9 @@ class WebhookHandler
      * @param array $notification
      * @return WP_REST_Response|WP_Error
      */
-    public static function create_event_date($notification)
+    public function create_event_date($notification)
     {   
-        return self::put_event_date( $notification );
+        return $this->put_event_date( $notification );
     }
 
     /**
@@ -301,9 +301,9 @@ class WebhookHandler
      * @param array $notification
      * @return WP_REST_Response|WP_Error
      */
-    public static function update_event_date($notification)
+    public function update_event_date($notification)
     {   
-        return self::put_event_date( $notification );
+        return $this->put_event_date( $notification );
     }
 
     /**
@@ -312,10 +312,10 @@ class WebhookHandler
      * @param array $notification
      * @return WP_REST_Response|WP_Error
      */
-    public static function delete_event_date($notification)
+    public function delete_event_date($notification)
     {   
         $payload = (array)$notification['payload'];
-        $post_deleted = self::trash_post_by_meta('sd_cpt_date', 'sd_date_id', $payload['id']);
+        $post_deleted = $this->trash_post_by_meta('sd_cpt_date', 'sd_date_id', $payload['id']);
         
         if ( !isset($post_deleted) ){
 
@@ -342,14 +342,14 @@ class WebhookHandler
      * @param array $notification 
      * @return WP_REST_Response|WP_Error
      */
-    public static function put_facilitator( $notification )
+    public function put_facilitator( $notification )
     {
         $payload = (array)$notification['payload'];
 
         $sd_webhook = $notification;
         unset($sd_webhook['payload']);
 
-        $query = self::get_query_by_meta( 'sd_cpt_facilitator', 'sd_facilitator_id', $payload['id'] );
+        $query = $this->get_query_by_meta( 'sd_cpt_facilitator', 'sd_facilitator_id', $payload['id'] );
         $post_id = $query->post->ID ?? null;
         
         // define metadata of the new sd_cpt_facilitator
@@ -399,9 +399,9 @@ class WebhookHandler
      * @param array $notification
      * @return WP_REST_Response|WP_Error
      */
-    public static function create_facilitator($notification)
+    public function create_facilitator($notification)
     {
-        return self::put_facilitator( $notification );
+        return $this->put_facilitator( $notification );
     }
 
     /**
@@ -411,9 +411,9 @@ class WebhookHandler
      * @param array $notification
      * @return WP_REST_Response|WP_Error
      */
-    public static function update_facilitator($notification)
+    public function update_facilitator($notification)
     {
-        return self::put_facilitator( $notification );
+        return $this->put_facilitator( $notification );
     }
 
     /**
@@ -422,10 +422,10 @@ class WebhookHandler
      * @param array $notification
      * @return WP_REST_Response|WP_Error
      */
-    public static function delete_facilitator($notification)
+    public function delete_facilitator($notification)
     {
         $payload = (array)$notification['payload'];
-        $post_deleted = self::trash_post_by_meta('sd_cpt_facilitator', 'sd_facilitator_id', $payload['id']);
+        $post_deleted = $this->trash_post_by_meta('sd_cpt_facilitator', 'sd_facilitator_id', $payload['id']);
 
         if ( !isset($post_deleted) ){
             return array(
@@ -452,7 +452,7 @@ class WebhookHandler
      * @param string $meta_value
      * @return WP_Query
      */
-    public static function get_query_by_meta( $post_type, $meta_key, $meta_value )
+    public function get_query_by_meta( $post_type, $meta_key, $meta_value )
     {
         $query = new WP_Query(
             array(
@@ -480,9 +480,9 @@ class WebhookHandler
      * @param string $meta_value
      * @return WP_post|false
      */
-    public static function trash_post_by_meta( $post_type, $meta_key, $meta_value )
+    public function trash_post_by_meta( $post_type, $meta_key, $meta_value )
     {
-        $query = self::get_query_by_meta( $post_type, $meta_key, $meta_value );
+        $query = $this->get_query_by_meta( $post_type, $meta_key, $meta_value );
         $post_id = $query->post->ID ?? 0;
         $post_deleted = wp_trash_post($post_id);
         return $post_deleted;
@@ -494,7 +494,7 @@ class WebhookHandler
      * @param array $payload payload send form seminardesk via webhook
      * @return array custom taxonomy for the event date
      */
-    public static function set_event_date_taxonomy($payload)
+    public function set_event_date_taxonomy($payload)
     {
         $txn_dates = 'sd_txn_dates';
         $year = wp_date('Y', $payload['beginDate']/1000);

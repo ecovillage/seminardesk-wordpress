@@ -166,9 +166,9 @@ class RestCallbacks{
     public function create_webhooks($request)
     {
         $request_json = (array)$request->get_json_params(); // complete JSON data of the request#
-        $test = $request_json['notifications'] ?? false;
         if ( !empty( $request_json['notifications'] ) ){
-            $response = WebhookHandler::batch_request($request_json);
+            $webhook = new WebhookHandler;
+            $response = $webhook->batch_request($request_json);
         } else{
             $response = new WP_Error('not_supported', 'notifications of the request is empty', array('status' => 400));
         }
