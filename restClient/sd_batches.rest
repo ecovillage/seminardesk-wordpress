@@ -121,6 +121,12 @@ Content-Type: {{content}}
 						"value": "market-garden-system---nachhaltig--regenerativ"
 					}
 				],
+				 "bookingPageUrl": [
+					{
+						"language": "DE",
+						"value": "https://booking.seminardesk.de/de/schloss-tempelhof/927cd29a247a4cfdba3fad6b3335a430/market-garden-system---nachhaltig--regenerativ"
+					}
+				],
 				"subtitle": [
 					{
 						"language": "DE",
@@ -348,8 +354,6 @@ Content-Type: {{content}}
 				"id": 709,
 				"eventId": "927cd29a247a4cfdba3fad6b3335a430",
 				"status": "wait_list",
-				"registrationAvailable": true,
-				"detailpageAvailable": true,
 				"beginDate": "1599755400000",
 				"endDate": "1599998400000",
 				"title": [
@@ -358,45 +362,10 @@ Content-Type: {{content}}
 						"value": "Market Garden System - Nachhaltig & Regenerativ"
 					}
 				],
-				"titleSlug": [
-					{
-						"language": "DE",
-						"value": "market-garden-system---nachhaltig--regenerativ"
-					}
-				],
-				"subtitle": [
-					{
-						"language": "DE",
-						"value": "3-Tages-Kurs mit einzeln buchbaren Modulen, Veranstalter: Sebastian Heilmann, Maya Lukoff und Urs Mauk"
-					}
-				],
-				"teaser": [
-					{
-						"language": "DE",
-						"value": "Kann Market Gardening (MG) als intensives System dennoch nachhaltig und regenerativ sein? <br /><br />Wir  sind der Meinung: grundsätzlich ja! Jedoch braucht es dazu ein  Verständnis über die Zusammenhänge im Boden und geeignete Methoden bzw.  Werkzeuge, um die Bodenfruchtbarkeit zu erhalten und zu verbessern. Am  Freitag werden wir diese Grundlagen legen, auf die dann in den folgenden  Tagen die eher technischen Details des MG aufbauen.<br />"
-					}
-				],
-				"teaserPictureUrl": [
-					{
-						"language": "DE",
-						"value": "https://schloss-tempelhof.seminardesk.de/Content/Extern/MarketGarden32.jpg"
-					}
-				],
 				"priceInfo": [
 					{
 						"language": "DE",
 						"value": "Ab 18 Jahren 320 Euro\r\n"
-					}
-				],
-				"facilitators": [
-					{ 
-						"id": 123
-					},
-					{ 
-						"id": 124
-					},
-					{ 
-						"id": 125
 					}
 				],
 				"venue": {
@@ -407,11 +376,7 @@ Content-Type: {{content}}
 					"city": "",
 					"country": "",
 					"weblink": "https://www.seminardesk.de"
-				},
-				"contactInfo": null,
-				"eventType": "",
-				"eventTopic": "Ökologie",
-				"showAttendanceFees": true
+				}
 			}
 		},
 		// eventDate.create - 721 - 927cd29a247a4cfdba93fad6b3335a430 - Market Garden System - Nachhaltig & Regenerativk
@@ -431,45 +396,10 @@ Content-Type: {{content}}
 						"value": "Market Garden System - Nachhaltig & Regenerativ"
 					}
 				],
-				"titleSlug": [
-					{
-						"language": "DE",
-						"value": "market-garden-system---nachhaltig--regenerativ"
-					}
-				],
-				"subtitle": [
-					{
-						"language": "DE",
-						"value": "3-Tages-Kurs mit einzeln buchbaren Modulen, Veranstalter: Sebastian Heilmann, Maya Lukoff und Urs Mauk"
-					}
-				],
-				"teaser": [
-					{
-						"language": "DE",
-						"value": "Kann Market Gardening (MG) als intensives System dennoch nachhaltig und regenerativ sein? <br /><br />Wir  sind der Meinung: grundsätzlich ja! Jedoch braucht es dazu ein  Verständnis über die Zusammenhänge im Boden und geeignete Methoden bzw.  Werkzeuge, um die Bodenfruchtbarkeit zu erhalten und zu verbessern. Am  Freitag werden wir diese Grundlagen legen, auf die dann in den folgenden  Tagen die eher technischen Details des MG aufbauen.<br />"
-					}
-				],
-				"teaserPictureUrl": [
-					{
-						"language": "DE",
-						"value": "https://schloss-tempelhof.seminardesk.de/Content/Extern/MarketGarden32.jpg"
-					}
-				],
 				"priceInfo": [
 					{
 						"language": "DE",
 						"value": "Ab 18 Jahren 320 Euro\r\n"
-					}
-				],
-				"facilitators": [
-					{ 
-						"id": 123
-					},
-					{ 
-						"id": 124
-					},
-					{ 
-						"id": 125
 					}
 				],
 				"venue": {
@@ -525,6 +455,13 @@ Content-Type: {{content}}
 			"action": "eventDate.delete",
 			"payload": {
 				"id": "709"
+			}
+		},
+		// eventDate.delete - 709 - 927cd29a247a4cfdba93fad6b3335a430 - Market Garden System - Nachhaltig & Regenerativk
+		{
+			"action": "eventDate.delete",
+			"payload": {
+				"id": "721"
 			}
 		},
 		// facilitator.delete - 321 - Hans Kurz

@@ -1,4 +1,4 @@
-<?php
+ALL<?php
 /**
  * The template for single post of CPT sd_cpt_event
  * 
@@ -45,6 +45,7 @@ get_header();
                 <?php
                     // get list of all dates for this event
                     $booking_list = Utils::get_event_dates_list( $post->sd_event_id );
+                    $booking_url = esc_url( Utils::get_value_by_language( $post->sd_data['bookingPageUrl'] ?? null ) );
                     if ( $booking_list ){
                         ?>
                         <h4>
@@ -55,14 +56,17 @@ get_header();
                         <p>
                         <?php
                         echo $booking_list;
-                        ?>
-                        <br><p><button class="sd-modal-booking-btn">
-                            <?php 
-                            _e('Booking', 'seminardesk');
+                        
+                        if ( !empty($booking_url) ) {
                             ?>
-                        </button></p>
-                        </p>
-                        <?php
+                            <br><p><button class="sd-modal-booking-btn">
+                                <?php 
+                                _e('Booking', 'seminardesk');
+                                ?>
+                            </button></p>
+                            </p>
+                            <?php
+                        }
                     } else {
                         echo '<h4>';
                         _e('No dates for this event available :(', 'seminardesk');
@@ -75,7 +79,7 @@ get_header();
                 <div class="sd-modal-content">
                     <span class="sd-modal-close-btn">&times;</span>
                     <h4 class="sd-modal-title"><?php _e('Booking', 'seminardesk');?></h4>
-                    <iframe class="sd-modal-booking" src="https://booking.seminardesk.de/de/schloss-tempelhof/<?php echo $post->sd_data['id']; ?>/<?php echo Utils::get_value_by_language( $post->sd_data['titleSlug'] ); ?>/embed" title="Seminardesk Booking"></iframe>
+                    <iframe class="sd-modal-booking" src="<?php echo $booking_url ?>/embed" title="Seminardesk Booking"></iframe>
                 </div>
             </div>
             <!-- END modal content -->
