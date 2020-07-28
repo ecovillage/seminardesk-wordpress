@@ -36,7 +36,23 @@
 
         <div id="tab-3" class="tab-pane">
             <h3>Contacts</h3>
-            <p class='regular-text'></p>
+            <div  class='regular-text'>
+                <p>
+                        <span style="font-size: 1.1em; font-weight:600;">SeminarDesk</span> - Danker, Smaluhn & Tammer GbR
+                        <br /> 
+                        Borsteler Weg 26 D
+                        <br />
+                        31595 Steyerberg
+                </p>
+                <p>
+                    <b>Gesellschafter</b>: Christoph Danker (geb. Mühlich), Simon Smaluhn und Jan Tammen
+                </p>
+                <p>
+                    <b>Telefon</b>: <a href="tel:+495764942806">+49 5764 942806</a><br />
+                    <b>Web</b>: <a href="https://www.seminardesk.de/" target="_blank">https://www.seminardesk.de</a><br />
+                    <b>E-Mail</b>: info [at] seminardesk.de
+                </p>
+            </div>
         </div>
 
     </div>
