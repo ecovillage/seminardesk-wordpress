@@ -1,4 +1,4 @@
-ALL<?php
+<?php
 /**
  * The template for single post of CPT sd_cpt_event
  * 
