@@ -74,8 +74,12 @@ class AdminController
 	 */
 	public function set_submenu( $parent_file )
 	{
-		//global $submenu_file, $current_screen, $pagenow;
-		$parent_file = SD_ADMIN['page'];
+		// global $current_screen, $pagenow;
+		// $screen = get_current_screen();
+		global $submenu_file;
+		if (strpos($submenu_file, 'sd_') !== false) {
+			$parent_file = SD_ADMIN['page'];
+		}
 		return $parent_file;
 	}
 
