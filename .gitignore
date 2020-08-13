@@ -1,2 +1,9 @@
 /vendor/
 .vscode/*
+.idea/
+*.idea
+*.iml
+release
+node_modules/
+npm-debug.log
+.grunt

@@ -1,0 +1,27 @@
+{
+  "name": "de.seminardesk.wordpress",
+  "title": "SeminarDesk WordPress Plugin",
+  "version": "1.0.0",
+  "author": {
+    "name": "SeminarDesk Team",
+    "url": "https://www.seminardesk.com/wordpress"
+  },
+  "license": "GPL-2.0+",
+  "devDependencies": {
+    "@floatwork/grunt-po2mo": "0.3.0",
+    "grunt": "1.2.1",
+    "grunt-cli": "1.3.2",
+    "grunt-contrib-clean": "2.0.0",
+    "grunt-contrib-compress": "1.6.0",
+    "grunt-contrib-copy": "1.0.0",
+    "grunt-contrib-watch": "1.1.0",
+    "grunt-text-replace": "0.4.0",
+    "grunt-wp-deploy": "2.1.2",
+    "grunt-wp-i18n": "1.0.3",
+    "load-grunt-tasks": "5.1.0"
+  },
+  "scripts": {
+    "preversion": "npm test",
+    "version": "grunt version && git add ."
+  }
+}
