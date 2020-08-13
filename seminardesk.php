@@ -7,7 +7,7 @@
 /**
  * Plugin Name: SeminarDesk for WordPress
  * Plugin URI: https://www.seminardesk.com/wordpress
- * Description: Allows connecting your SeminarDesk s
+ * Description: Allows you to connect your SeminarDesk to your WordPress site in order to create posts for events, dates and facilitators.
  * Version: 1.0.0
  * Requires at least: 5.2
  * Tested up to: 5.4.2
@@ -15,8 +15,9 @@
  * Author: SeminarDesk – Danker, Smaluhn & Tammen GbR
  * Author URI: https://www.seminardesk.com/
  * License: GPLv2 or later
- * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: seminardesk
+ * Domain Path: /languages
  */
 
 /*

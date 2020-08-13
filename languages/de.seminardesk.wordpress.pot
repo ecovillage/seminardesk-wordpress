@@ -1,0 +1,178 @@
+# Copyright (C) 2020 SeminarDesk – Danker, Smaluhn & Tammen GbR
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: SeminarDesk for WordPress 1.0.0\n"
+"Report-Msgid-Bugs-To: "
+"https://wordpress.org/support/plugin/seminardesk-wordpress\n"
+"POT-Creation-Date: 2020-08-13 08:10:41+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2020-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: grunt-wp-i18n 1.0.3\n"
+
+#: inc/Callbacks/ManagerCallbacks.php:57
+msgid ""
+"Customize the slugs of this plugin. Use with caution, might have unintended "
+"effects on a deployed WordPress instance."
+msgstr ""
+
+#: inc/Callbacks/ManagerCallbacks.php:62
+msgid "Manage the settings for development."
+msgstr ""
+
+#: inc/Callbacks/ManagerCallbacks.php:68
+msgid "Manage the settings for WP uninstaller of the SeminarDesk plugin."
+msgstr ""
+
+#: inc/Controllers/AdminController.php:186
+msgid "Slugs"
+msgstr ""
+
+#: inc/Controllers/AdminController.php:192
+msgid "Developing"
+msgstr ""
+
+#: inc/Controllers/AdminController.php:198
+msgid "Uninstall"
+msgstr ""
+
+#: inc/Controllers/AdminController.php:212
+msgid "Debug:"
+msgstr ""
+
+#: inc/Controllers/AdminController.php:223
+msgid "Delete all:"
+msgstr ""
+
+#: inc/Utils/TemplateUtils.php:218
+msgid "Booking Available"
+msgstr ""
+
+#: inc/Utils/TemplateUtils.php:219
+msgid "Fully Booked"
+msgstr ""
+
+#: inc/Utils/TemplateUtils.php:220
+msgid "Limited Booking"
+msgstr ""
+
+#: inc/Utils/TemplateUtils.php:221
+msgid "Waiting List"
+msgstr ""
+
+#: templates/admin.php:27
+msgid "Save Settings"
+msgstr ""
+
+#: templates/sd_cpt_date.php:28 templates/sd_txn_dates-past.php:63
+#: templates/sd_txn_dates-upcoming.php:73
+msgid "Date: "
+msgstr ""
+
+#: templates/sd_cpt_date.php:29 templates/sd_cpt_event.php:34
+#: templates/sd_txn_dates-past.php:64 templates/sd_txn_dates-upcoming.php:74
+#: templates/sd_txn_dates.php:51
+msgid "Facilitator: "
+msgstr ""
+
+#: templates/sd_cpt_date.php:30 templates/sd_txn_dates-past.php:65
+#: templates/sd_txn_dates-upcoming.php:75 templates/sd_txn_dates.php:52
+msgid "Price: "
+msgstr ""
+
+#: templates/sd_cpt_date.php:31 templates/sd_txn_dates-past.php:66
+#: templates/sd_txn_dates-upcoming.php:76 templates/sd_txn_dates.php:53
+msgid "Venue: "
+msgstr ""
+
+#: templates/sd_cpt_date.php:36 templates/sd_txn_dates-past.php:71
+#: templates/sd_txn_dates-upcoming.php:81
+msgid "More ..."
+msgstr ""
+
+#: templates/sd_cpt_date.php:44
+msgid "<strong>Sorry, no posts matched your criteria.</strong>"
+msgstr ""
+
+#: templates/sd_cpt_event.php:24 templates/sd_txn_dates.php:58
+msgid "remote image failed"
+msgstr ""
+
+#: templates/sd_cpt_event.php:53
+msgid "List of available dates:"
+msgstr ""
+
+#: templates/sd_cpt_event.php:64 templates/sd_cpt_event.php:81
+msgid "Booking"
+msgstr ""
+
+#: templates/sd_cpt_event.php:72
+msgid "No dates for this event available :("
+msgstr ""
+
+#: templates/sd_cpt_event.php:93 templates/sd_cpt_facilitator.php:39
+msgid "<strong>Sorry, event does not exist.</strong>"
+msgstr ""
+
+#: templates/sd_txn_dates-past.php:10
+msgid "Past Events Dates"
+msgstr ""
+
+#: templates/sd_txn_dates-past.php:97 templates/sd_txn_dates-upcoming.php:107
+msgid "« Previous"
+msgstr ""
+
+#: templates/sd_txn_dates-past.php:98 templates/sd_txn_dates-upcoming.php:108
+msgid "Next »"
+msgstr ""
+
+#: templates/sd_txn_dates-past.php:109 templates/sd_txn_dates-upcoming.php:119
+msgid "<strong>Sorry, no events for this date.</strong>"
+msgstr ""
+
+#: templates/sd_txn_dates-upcoming.php:10
+msgid "Upcoming Event Dates"
+msgstr ""
+
+#: templates/sd_txn_dates.php:50
+msgid "<strong>Date: </strong>"
+msgstr ""
+
+#: templates/sd_txn_dates.php:67
+msgid "More"
+msgstr ""
+
+#: templates/sd_txn_dates.php:86
+msgid "Sorry, no events for this date."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "SeminarDesk for WordPress"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://www.seminardesk.com/wordpress"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Allows you to connect your SeminarDesk to your WordPress site in order to "
+"create posts for events, dates and facilitators."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "SeminarDesk – Danker, Smaluhn & Tammen GbR"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://www.seminardesk.com/"
+msgstr ""
+
+#: inc/Controllers/CptController.php:51
+msgctxt "event"
+msgid "Add New"
+msgstr ""
