@@ -4,16 +4,20 @@
  * @package SeminardeskPlugin
  */
 
-/*
-Plugin Name: SeminarDesk for WordPress
-Plugin URI: https://www.seminardesk.com/wordpress
-Description: First Prototype of the SeminarDesk Plugin
-Version: 1.0.0
-Author: SeminarDesk – Danker, Smaluhn & Tammen GbR
-Author URI: https://www.seminardesk.com/
-License: GPLv2 or later
-Text Domain: seminardesk
-*/
+/**
+ * Plugin Name: SeminarDesk for WordPress
+ * Plugin URI: https://www.seminardesk.com/wordpress
+ * Description: Allows connecting your SeminarDesk s
+ * Version: 1.0.0
+ * Requires at least: 5.2
+ * Tested up to: 5.4.2
+ * Requires PHP: 7.3
+ * Author: SeminarDesk – Danker, Smaluhn & Tammen GbR
+ * Author URI: https://www.seminardesk.com/
+ * License: GPLv2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: seminardesk
+ */
 
 /*
 * Copyright 2020 by SeminarDesk and the contributors
@@ -86,7 +90,7 @@ define( 'SD_CPT', array(
         'slug_default'          => 'events',
         'slug_option_key'       => 'sd_slugs_cpt_events',
     ),
-    'sd_cpt_date'          => array( // don't rename this key 
+    'sd_cpt_date'          => array( // don't rename this key
         'name'                  => 'Date',
         'names'                 => 'Dates',
         'title'                 => 'CPT Dates',

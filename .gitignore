@@ -1,2 +1,2 @@
-/vendor/php-stubs/
-/vendor/bin/
+/vendor/
+.vscode/*
