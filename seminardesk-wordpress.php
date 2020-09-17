@@ -10,7 +10,7 @@
  * Plugin Name: SeminarDesk for WordPress
  * Plugin URI: https://www.seminardesk.com/wordpress-plugin
  * Description: Allows you to connect SeminarDesk to your WordPress site in order to create posts for events, dates and facilitators.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Requires at least: 5.2
  * Tested up to: 5.4.2
  * Requires PHP: 7.3
