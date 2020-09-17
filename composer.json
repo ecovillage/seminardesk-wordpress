@@ -1,20 +1,22 @@
 {
-    "name": "seminardesk/seminardesk",
-    "description": "WordPress Plugin that brings SeminarDesk to WordPress",
-    "type": "project",
-    "license": "GPLv2",
-    "authors": [
-        {
-            "name": "SeminarDesk",
-            "email": "info@seminardesk.de"
-        }
-    ],
-    "minimum-stability": "dev",
-    "require": {},
-    "autoload": {
-        "psr-4": {"Inc\\": "./inc"}
-    },
-    "require-dev": {
-        "php-stubs/wordpress-stubs": "dev-master"
+  "name": "seminardesk/seminardesk",
+  "description": "WordPress plugin that allows you to connect SeminarDesk to your WordPress site in order to create posts for events, dates and facilitators.",
+  "type": "project",
+  "license": "GPLv2",
+  "authors": [
+    {
+      "name": "SeminarDesk",
+      "email": "info@seminardesk.de"
     }
+  ],
+  "minimum-stability": "dev",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Inc\\": "./inc"
+    }
+  },
+  "require-dev": {
+    "php-stubs/wordpress-stubs": "dev-master"
+  }
 }
