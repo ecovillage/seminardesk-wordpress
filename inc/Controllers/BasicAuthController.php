@@ -51,6 +51,14 @@ EOT;
         if ( ! empty( $user ) ) {
             return $user;
         }
+
+        // Digest non-'default' authorization params (used e.g. in 1und1 shared
+        // hosting setups).
+        if ( isset( $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ) ) {
+          list($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']) =
+            explode(':', base64_decode(substr(
+              $_SERVER['REDIRECT_HTTP_AUTHORIZATION'], 6)));
+        }
     
         // Check that we're trying to authenticate
         if ( !isset( $_SERVER['PHP_AUTH_USER'] ) ) {
